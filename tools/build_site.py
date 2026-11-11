@@ -19,7 +19,7 @@ RACINE = pathlib.Path(__file__).resolve().parent.parent
 EXTENSIONS = ["tables", "fenced_code", "toc", "sane_lists"]
 TITRE_SITE = "Dossier Kiroween — Hackathon 2026"
 ACCROCHE = (
-    "1 850 idées générées, quatre classements successifs, "
+    "2 400 idées générées, quatre classements successifs, "
     "quatorze cahiers des charges complets."
 )
 
@@ -32,7 +32,7 @@ PAGES = [
     ("src/idees-usage.md", "idees-usage", "Idées · usage réel (250)"),
     ("src/idees-2mois.md", "idees-2mois", "Idées · horizon 2 mois (400)"),
     ("src/idees-semaine.md", "idees-semaine", "Idées · 15 filons (750)"),
-    ("src/idees-devs.md", "idees-devs", "Idées · développeurs (450)"),
+    ("src/idees-devs.md", "idees-devs", "Idées · développeurs (1 000)"),
     ("src/classement-devs.md", "classement-devs", "Classement devs — 50"),
     ("src/cahiers-developpeurs.md", "cahiers-devs", "Cahiers devs — 10"),
     ("src/DISQUETTE-cahier.md", "disquette", "Cahier · Disquette"),

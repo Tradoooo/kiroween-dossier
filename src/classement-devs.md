@@ -119,3 +119,31 @@ le palier 2.
 **Une seule : Chemin-fantôme** (95) — résoudre les hallucinations de fichiers/API d'un agent est à la
 fois le problème le plus reconnu, le plus mesurable et le plus aligné sur le jury. **Deux : Chemin-fantôme
 + Ver** (94) — l'un couvre la sûreté, l'autre la preuve, deux catégories, zéro cannibalisation.
+---
+
+## Complément — les onze filons arrivés après le premier classement
+
+Les onze derniers filons (données, sécurité, performance, Git, frontend, local d'abord, mesure de
+l'ingénierie, diagnostic, déploiement, architecture, outillage du quotidien) portent le corpus
+développeurs à **1 000 idées**. Douze d'entre elles atteignent ou dépassent le palier 2 du classement
+ci-dessus, et **deux entreraient dans le top 10** si le classement était refait à froid :
+
+| Note | Idée | Catég. | Le nerf | v1 / total |
+|---|---|---|---|---|
+| **90** | **Graphmantle** (D04\|45) | Skeleton | Une CVE est publiée : est-elle **réellement atteignable** dans ton code ? Graphe d'appel statique du symbole vulnérable jusqu'à tes points d'entrée. Fin des mises à jour paniques. | 9 j / 34 |
+| **89** | **Shrink** (D16\|01) | Resurrection | Un test plante sur un jeu de 8 000 lignes : réduction automatique (delta debugging) jusqu'au plus petit cas qui déclenche encore l'échec. | 9 j / 32 |
+| 88 | **ImportSpy** (D05\|33) | Costume | Un `import` anodin te coûte 400 Ko à cause d'un barrel : le coût réel de chaque import, module par module. | 7 j / 28 |
+| 88 | **Envparity** (D16\|37) | Costume | « Ça marche chez moi » : comparaison systématique CI/poste (versions, variables, locale, fuseau, permissions). | 7 j / 28 |
+| 87 | **yaml-trapfinder** (D03\|38) | Costume | Le problème de la Norvège : `no` devient `false`, `3.10` devient `3.1`. Détecte chaque piège YAML avant l'exécution. | 6 j / 24 |
+| 87 | **Reprobuild** (D04\|38) | Resurrection | Builds reproductibles : compile deux fois, compare octet à octet, nomme la source de la divergence. | 9 j / 34 |
+| 86 | **Couche-fantôme** (D20\|04) | Costume | Les traversées de couches interdites rendues visibles : une couche fantôme apparaît là où le domaine appelle l'infrastructure. | 8 j / 30 |
+| 86 | **NPlusOne** (D05\|15) | Costume | Les requêtes en cascade invisibles dans le code : comptées, localisées, chiffrées en millisecondes. | 8 j / 30 |
+| 85 | **schema-arbiter** (D03\|07) | Frankenstein | Différence deux schémas et classe chaque changement : cassant, sûr, ou à double écriture. | 8 j / 30 |
+| 85 | **Fuzz O'Lantern** (D04\|19) | Resurrection | Fuzzer sans écrire de harnais : rejoue les entrées réelles observées comme corpus de départ. | 9 j / 32 |
+| 84 | **Typo Trap** (D04\|10) | Skeleton | Typosquatting : distance d'édition contre les paquets légitimes, avant l'installation. | 7 j / 26 |
+| 84 | **Type-invincible** (D20\|08) | Resurrection | Vérifie que les états invalides sont devenus **impossibles à représenter**, pas seulement interdits par convention. | 8 j / 32 |
+
+**Graphmantle** et **Shrink** sont les deux seuls qui disputeraient une place du top 10 déjà écrit :
+le premier parce que « cette CVE me concerne-t-elle vraiment ? » est la question la plus posée et la
+moins bien outillée de 2026 ; le second parce que réduire un cas d'échec est le geste que tout
+développeur fait à la main, péniblement, chaque semaine.

@@ -1,4 +1,4 @@
-# Dossier Kiroween — 1 850 idées, quatre classements, quatorze cahiers
+# Dossier Kiroween — 2 400 idées, quatre classements, quatorze cahiers
 
 Dossier de travail ouvert du hackathon **Kiroween 2026** (Kiro, clôture des soumissions le
 4 décembre 2026, fin du jugement le 29 janvier 2027). Il contient tout ce qui a servi à choisir
@@ -17,7 +17,7 @@ charges complets dans **[Cahiers devs — 10](cahiers-devs.html)**.
 |---|---|
 | **[Classement devs — 50](classement-devs.html)** | Les 50 meilleures idées pour un public 100 % développeur, notées sur la reconnaissance immédiate du problème, la profondeur technique, le chiffre mesuré et la démonstration. |
 | **[Cahiers devs — 10](cahiers-devs.html)** | Les dix premières développées en cahier des charges complet : problème exact, mécanique, exigences EARS, propriétés à tester, architecture, stratégie Kiro, plan de réalisation, script vidéo minuté, recette. |
-| [Idées · développeurs (450)](idees-devs.html) | Neuf filons techniques : agents, tests et correction, exploitation, langages, documentation, legacy, API, CLI, coût. Chaque idée est marquée **[T]** technique ou **[S]** simple. |
+| [Idées · développeurs (1 000)](idees-devs.html) | Vingt filons techniques : outillage du quotidien, agents IA, données, sécurité, performance, tests, exploitation, langages, legacy, API, Git, interface, local d'abord, mesure, documentation, diagnostic, déploiement, architecture, CLI, coût. Chaque idée est marquée **[T]** technique ou **[S]** simple. |
 | [Classement usage — 39](classement-usage.html) | Le classement précédent : 75 points sur 100 venaient de la réalité de l'usage (obligations légales, argent, fréquence). Toujours valable pour un public non développeur. |
 | [Classement 2 mois — 39](classement-2mois.html) | L'étape intermédiaire, à l'horizon deux mois mais encore dominée par l'élégance technique. |
 | [Classement technique — 39](classement-technique.html) | Le premier classement, à l'échelle d'une semaine. Conservé pour la traçabilité. |
@@ -69,8 +69,8 @@ partie la plus utile du dossier : on y voit ce que le changement de critère fai
 - **Vague 1** — 15 sous-agents, 15 filons de technologies mortes et de squelettes : **750 idées**.
 - **Vague 2** — horizon porté à deux mois, v1 avant le 4 décembre : **400 idées**.
 - **Vague 3** — recentrage sur les obligations légales des publics non développeurs : **250 idées**.
-- **Vague 4** — recentrage sur le public réel du concours, les développeurs : **450 idées** sur neuf
-  filons techniques, plus les dix cahiers des charges des dix premières.
+- **Vague 4** — recentrage sur le public réel du concours, les développeurs : **1 000 idées** sur vingt
+  filons techniques, plus les dix cahiers des charges des dix premières, et douze nouveaux entrants relevés après coup.
 
 Chaque idée tient en une ligne avec son utilisateur, sa douleur, le chiffre mesuré et sa charge estimée
 en jours-agent. Les doublons avec les sept projets déjà soumis au concours sont écartés à la génération.

@@ -52,4 +52,4 @@ jobs:
           n=$(grep -o '</li>' docs/idees-semaine.html | wc -l)
           test "$n" -ge 750 || { echo "idées mal rendues : $n <li> au lieu de 750"; exit 1; }
           n=$(grep -o '</li>' docs/idees-devs.html | wc -l)
-          test "$n" -ge 450 || { echo "idées mal rendues : $n <li> au lieu de 450"; exit 1; }
+          test "$n" -ge 1000 || { echo "idées mal rendues : $n <li> au lieu de 1000"; exit 1; }
