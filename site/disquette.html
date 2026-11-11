@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cahier · Disquette — Dossier Kiroween — Hackathon 2026</title>
+<style>
+:root{--fg:#e8e6e3;--bg:#111014;--card:#1b1a20;--acc:#e08b3c;--acc2:#8fd3c7;
+ --mut:#9b968f;--bd:#2c2a33}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+ font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+header{padding:1.4rem 1.2rem;border-bottom:1px solid var(--bd);background:var(--card)}
+header h1{margin:0;font-size:1.25rem}
+header p{margin:.3rem 0 0;color:var(--mut);font-size:.9rem}
+nav{display:flex;flex-wrap:wrap;gap:.4rem;padding:.8rem 1.2rem;border-bottom:1px solid var(--bd)}
+nav a{color:var(--mut);text-decoration:none;font-size:.85rem;padding:.3rem .6rem;
+ border:1px solid var(--bd);border-radius:999px}
+nav a:hover{color:var(--fg)}
+nav a.actif{color:#111014;background:var(--acc);border-color:var(--acc);font-weight:600}
+main{padding:1.2rem;max-width:64rem;margin:0 auto}
+main h1{font-size:1.6rem;border-bottom:1px solid var(--bd);padding-bottom:.4rem}
+main h2{font-size:1.25rem;margin-top:2rem;color:var(--acc)}
+main h3{font-size:1.05rem;margin-top:1.6rem;color:var(--acc2)}
+a{color:var(--acc2)}
+code{background:#0c0b0f;padding:.1rem .35rem;border-radius:4px;font-size:.88em}
+pre{background:#0c0b0f;padding:.9rem;border-radius:8px;overflow-x:auto;border:1px solid var(--bd)}
+pre code{background:none;padding:0}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.9rem;display:block;overflow-x:auto}
+th,td{border:1px solid var(--bd);padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{background:var(--card);white-space:nowrap}
+blockquote{border-left:3px solid var(--acc);margin:1rem 0;padding:.2rem 1rem;color:var(--mut)}
+hr{border:0;border-top:1px solid var(--bd);margin:2rem 0}
+footer{padding:1.2rem;color:var(--mut);font-size:.85rem;border-top:1px solid var(--bd);text-align:center}
+@media (prefers-reduced-motion:no-preference){nav a{transition:color .15s,background .15s}}
+</style>
+</head>
+<body>
+<header>
+<h1>Dossier Kiroween — Hackathon 2026</h1>
+<p>1 350 idées générées, classées par cas d'usage réel, et quatre cahiers des charges complets.</p>
+</header>
+<nav>
+<a href="index.html">Accueil</a>
+<a href="classement-usage.html">Classement usage — 39</a>
+<a href="classement-2mois.html">Classement 2 mois — 39</a>
+<a href="classement-technique.html">Classement technique — 39</a>
+<a href="idees-usage.html">Idées · usage réel (200)</a>
+<a href="idees-2mois.html">Idées · horizon 2 mois (400)</a>
+<a href="idees-semaine.html">Idées · 15 filons (750)</a>
+<a href="disquette.html" class="actif">Cahier · Disquette</a>
+<a href="rota.html">Cahier · Rota</a>
+<a href="partie-double.html">Cahier · Partie double</a>
+<a href="seance.html">Cahier · Séance</a>
+<a href="cadre.html">Cadre du concours</a>
+<a href="consigne.html">Consigne de génération</a>
+<a href="grille.html">Grille de notation</a>
+</nav>
+<main>
+<h1 id="projet-f-disquette">Projet F — Disquette</h1>
+<p>Cahier des charges pour la soumission <strong>Kiroween 2026</strong>, catégorie <strong>Resurrection</strong>.
+Trigramme d'identifiants : <code>DIS</code>. Dépôt cible : <code>disquette</code>. Rédigé le 11 novembre 2026.
+Format des exigences : EARS (§ 0.8 du contexte partagé). Prose en français, code en anglais.</p>
+<h2 id="f-disquette-la-disquette-revient-comme-budget-du-web">F. Disquette — la disquette revient comme budget du web</h2>
+<h3 id="f1-fiche-didentite">F.1 Fiche d'identité</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nom de travail</td>
+<td><strong>Disquette</strong>. Nom de soumission en anglais : « Disquette — your web app must fit on a disk ».</td>
+</tr>
+<tr>
+<td>Catégorie</td>
+<td><strong>Resurrection</strong></td>
+</tr>
+<tr>
+<td>En une phrase</td>
+<td>On ressuscite la disquette 3,5 pouces (1 440 Kio) comme <strong>unité d'expédition</strong> : un site web se compte en disquettes, le disque 1 est le chemin critique du premier rendu, et un plan de défragmentation dit quoi déplacer pour tenir sur moins de disquettes.</td>
+</tr>
+<tr>
+<td>Public</td>
+<td>Le développeur front-end qui livre un bundle trop lourd ; le lead technique d'une petite structure (agence, startup, association) qui arbitre le poids ; secondairement, le responsable produit qui reçoit le rapport.</td>
+</tr>
+<tr>
+<td>Idée centrale</td>
+<td>Le support a disparu, pas la <strong>discipline de la pénurie</strong> : une unité d'expédition dure, qu'on tient dans la main, qui rend le poids des octets concret. Cette unité entre dans la chaîne de build (CLI + garde CI) au lieu de rester un slogan.</td>
+</tr>
+<tr>
+<td>Ce qui existe déjà</td>
+<td>Les budgets de performance Lighthouse (<code>budget.json</code>), <code>size-limit</code>, <code>bundlesize</code> (archivé), bundlephobia, <code>webpack-bundle-analyzer</code>, les clubs « 512 KB » et « 1 MB », HTTP Archive (statistiques de crawl), CO2.js et Website Carbon (empreinte carbone).</td>
+</tr>
+<tr>
+<td>Ce qui est différent</td>
+<td>Aucun de ces outils n'utilise une <strong>unité d'expédition avec spanning</strong> (les disques se remplissent, les suivants sont différés), <strong>aucun n'est HAR-first et hors ligne</strong>, et <strong>aucun ne transforme un budget en objet mémorable</strong> qu'on peut coller dans une pull request.</td>
+</tr>
+<tr>
+<td>Preuve opposable</td>
+<td>L'outil mesure lui-même : nombre de disquettes, Kio par disquette, secondes au profil 1,6 Mbit/s, grammes de CO2e. Sur la page d'accueil médiane du web : <strong>1,78 disquette</strong> (2 559 Kio) et <strong>13,1 s</strong> de transfert.</td>
+</tr>
+<tr>
+<td>Prix visés</td>
+<td>Best Resurrection, prix globaux, Best Demo.</td>
+</tr>
+<tr>
+<td>Charge</td>
+<td>Périmètre minimal <strong>8 jours-agent</strong> ; options <strong>+2,5 j</strong> ; texte et vidéo <strong>+1,5 j</strong>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="f2-ce-que-la-categorie-demande-et-la-reponse">F.2 Ce que la catégorie demande, et la réponse</h3>
+<table>
+<thead>
+<tr>
+<th>Ce que dit le règlement</th>
+<th>Réponse de Disquette</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>« Bring your favorite dead technology back to life »</td>
+<td>La disquette 3,5" 1,44 Mo, morte comme support (dernières productions de masse au début des années 2000), vivante comme icône « enregistrer ». Elle revient <strong>dans la chaîne de build</strong>, pas dans un musée.</td>
+</tr>
+<tr>
+<td>« Reimagine obsolete tech with today's innovations »</td>
+<td>Trois surfaces modernes : un CLI + une garde CI, une application web statique qui analyse un fichier HAR, un worker edge optionnel.</td>
+</tr>
+<tr>
+<td>« Solving tomorrow's problems »</td>
+<td>Le poids des pages est une facture (bande passante), une émission (carbone) et une exclusion (réseau lent, forfait plafonné). La pénurie est le problème ; la disquette en est l'unité.</td>
+</tr>
+<tr>
+<td>« Not only nostalgia »</td>
+<td>Le format 720 Kio est un <strong>mode brutal</strong> : il transforme « alléger un peu » en « tenir sur une disquette ». Le plan de défragmentation est chiffré en Kio gagnés.</td>
+</tr>
+<tr>
+<td>Le dépôt doit montrer l'usage de Kiro</td>
+<td>Specs, steering de domaine (<code>disk-myth.md</code>, <code>privacy.md</code>), hooks <code>disk-budget</code> / <code>no-network-guard</code> / <code>plan-determinism</code>, agent personnalisé <code>defrag-planner</code> en lecture seule, skill <code>fit-on-one-disk</code>, tests par propriétés sur l'allocateur, journal <code>KIRO_JOURNAL.md</code>.</td>
+</tr>
+<tr>
+<td>La technologie doit être vraiment morte</td>
+<td>Plus aucun lecteur 3,5" n'est vendu en volume depuis les années 2000 ; le format ne survit que comme icône « enregistrer ». Ce qui ressuscite est la <strong>discipline</strong> du budget, pas le périphérique.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="f3-probleme-public-et-pourquoi-maintenant">F.3 Problème, public et pourquoi maintenant</h3>
+<p><strong>Le chiffre, vérifié</strong> (HTTP Archive, <em>Web Almanac 2025</em>, chapitre « Page Weight », publié le 15/01/2026, consulté le 11/11/2026) :</p>
+<table>
+<thead>
+<tr>
+<th>Mesure</th>
+<th>Valeur</th>
+<th>Ce que ça dit en disquettes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Page d'accueil médiane, mobile (juillet 2025)</td>
+<td>2 559 Kio</td>
+<td><strong>1,78</strong> → 2 disquettes</td>
+</tr>
+<tr>
+<td>Page d'accueil médiane, desktop</td>
+<td>2 862 Kio</td>
+<td>1,99 → 2 disquettes</td>
+</tr>
+<tr>
+<td>Page intérieure médiane, mobile</td>
+<td>1 769 Kio</td>
+<td>1,23 → 2 disquettes</td>
+</tr>
+<tr>
+<td>JavaScript médian d'une page d'accueil mobile</td>
+<td>632 Kio</td>
+<td>0,44 disquette</td>
+</tr>
+<tr>
+<td>Images médianes d'une page d'accueil mobile</td>
+<td>911 Kio</td>
+<td>0,63 disquette</td>
+</tr>
+<tr>
+<td>Croissance annuelle du poids de la page d'accueil</td>
+<td>+7,8 %</td>
+<td>+44 Kio par an, soit une disquette de plus tous les 3 ans</td>
+</tr>
+<tr>
+<td>Page d'accueil mobile : juillet 2015 → juillet 2025</td>
+<td>845 Kio → 2 362 Kio</td>
+<td><strong>+202,8 %</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Les conséquences, calculées par l'outil lui-même</strong> (constantes sourcées, voir F.6) :</p>
+<ul>
+<li><strong>Temps</strong> : au profil mobile de Lighthouse (1,6 Mbit/s descendant, 150 ms de latence, <em>docs/throttling.md</em> de Lighthouse, consulté le 11/11/2026), la page médiane mobile représente <strong>13,1 s</strong> de transfert pur. Un site de 12 disquettes (17 694 720 octets) : <strong>88,5 s</strong>.</li>
+<li><strong>Carbone</strong> : modèle Sustainable Web Design v4 — intensités opérationnelles 0,055 + 0,059 + 0,080 kWh/Go et incorporées 0,012 + 0,013 + 0,081 kWh/Go, intensité du réseau mondial 494 gCO2e/kWh (Ember) — soit <strong>148,2 gCO2e par Go transféré</strong>. Page médiane : <strong>0,39 g</strong> par visite. Site de 12 disquettes : <strong>2,62 g</strong> par visite, donc <strong>262 kg par mois</strong> et <strong>3,15 t par an</strong> à 100 000 visites/mois.</li>
+<li><strong>Exclusion</strong> : le même rapport note que le poids est « un obstacle physique et cognitif » pour les appareils modestes, et que l'écart de performance croît avec le poids (TBT médian mobile : 1 835 ms ; au 90ᵉ centile : 7,1 s).</li>
+</ul>
+<p><strong>Pourquoi maintenant</strong> : (a) le poids est redevenu un sujet de fond — le chapitre 14 de l'Almanac 2025 s'intitule « Page Weight » et le rapport CrUX montre une corrélation directe entre poids et Core Web Vitals ; (b) le coût de la bande passante est redevenu visible pour les équipes qui paient un CDN ; (c) les garde-fous de build (CI, budgets Lighthouse, <code>size-limit</code>) sont maintenant connus — mais ils tombent tous dans la même catégorie que « la page fait 2,5 Mo » : <strong>personne ne sent ce poids</strong>.</p>
+<p><strong>Personas et situations datées</strong></p>
+<table>
+<thead>
+<tr>
+<th>Persona</th>
+<th>Situation datée</th>
+<th>Ce que l'outil lui donne</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Awa, dev front-end</strong> d'une place de marché mid-market.</td>
+<td>18 novembre 2026, revue de sprint : « le bundle a encore grossi de 180 ko, personne ne sait de quoi ».</td>
+<td><code>disquette check</code> en CI : le disque 1 déborde, la pull request est refusée, la sortie dit quel module pose problème.</td>
+</tr>
+<tr>
+<td><strong>Marc, lead technique</strong> d'une agence de 12 personnes.</td>
+<td>Budget d'hébergement renewé le 1er décembre : la facture de CDN a triplé en un an.</td>
+<td>Le rapport Markdown : « 9 disquettes, 4,1 Mo, 22 s en 3G, 0,61 gCO2e/visite ».</td>
+</tr>
+<tr>
+<td><strong>Sonia, responsable produit</strong> d'une petite association, non technique.</td>
+<td>20 novembre : elle reçoit une pull request « +600 ko de police et de script tiers ».</td>
+<td>Elle comprend « +600 ko = +0,4 disquette = +3 s sur le terrain » sans être développeuse.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="f4-objectifs-non-objectifs-indicateurs">F.4 Objectifs, non-objectifs, indicateurs</h3>
+<p><strong>Objectifs</strong></p>
+<ul>
+<li><strong>O1</strong> — Toute construction web peut être exprimée en disquettes ; l'objectif par défaut est de <strong>tenir sur un disque</strong> (1 440 Kio).</li>
+<li><strong>O2</strong> — Un verdict en moins de 30 secondes, sans compte, sans installation, et <strong>fonctionnant hors ligne</strong> (mode hors ligne total, service worker).</li>
+<li><strong>O3</strong> — L'allocateur est <strong>déterministe</strong> : même entrée, même graine → même plan, hash compris.</li>
+<li><strong>O4</strong> — L'outil produit ses propres chiffres : disquettes, Kio, secondes, grammes de CO2e.</li>
+<li><strong>O5</strong> — La mesure est une <strong>porte</strong> : <code>disquette check</code> sort en code 1 quand le disque 1 déborde.</li>
+<li><strong>O6</strong> — L'outil s'applique à lui-même : l'application web de démonstration doit passer son propre <code>disquette check</code> (elle tient sur une disquette).</li>
+</ul>
+<p><strong>Non-objectifs</strong></p>
+<ul>
+<li>Pas de minifieur, pas de bundler, pas de rewriter de code : Disquette <strong>mesure et propose</strong>, elle ne réécrit pas le code.</li>
+<li>Pas de surveillance de production, pas de télémétrie, pas de compte.</li>
+<li>Pas de certification carbone : une estimation sourcée, avec sa constante visible.</li>
+<li>Pas d'optimum garanti : le plan est « bon, déterministe, stable », pas « optimal ».</li>
+<li>Pas de format exotique supplémentaire : trois formats (720 Kio, 1 440 Kio, 100 Mio).</li>
+</ul>
+<p><strong>Indicateurs (tous mesurés par l'outil, pas déclaratifs)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Indicateur</th>
+<th>Cible</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nombre de disquettes du site médian</td>
+<td>2 (format HD)</td>
+</tr>
+<tr>
+<td>Octets du disque 1 (chemin critique)</td>
+<td>≤ 1 474 560</td>
+</tr>
+<tr>
+<td>Secondes au profil 1,6 Mbit/s</td>
+<td>≤ 4,0 s pour le disque 1</td>
+</tr>
+<tr>
+<td>CO2e par visite (SWDM v4)</td>
+<td>≤ 0,25 g</td>
+</tr>
+<tr>
+<td>Temps de verdict sur un HAR de 5 Mo</td>
+<td>&lt; 800 ms sur un portable moyen</td>
+</tr>
+<tr>
+<td>Requêtes réseau sortantes pendant l'analyse</td>
+<td>0 (vérifié par un test Playwright)</td>
+</tr>
+<tr>
+<td>Déterminisme</td>
+<td>hash du plan identique sur 100 exécutions</td>
+</tr>
+<tr>
+<td>Poids de l'application de démonstration</td>
+<td>≤ 1 474 560 octets (elle tient sur une disquette)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="f5-le-concept-en-profondeur">F.5 Le concept en profondeur</h3>
+<p><strong>La géométrie, qui est la métaphore.</strong> Une disquette 3,5" haute densité : 2 880 secteurs × 512 octets = <strong>1 474 560 octets</strong> = 1 440 Kio. Double densité : 1 440 secteurs = <strong>737 280 octets</strong> (720 Kio). Un Zip de 100 Mo : 104 857 600 octets. Ces trois nombres ne sont pas des quotas arbitraires : ce sont des <strong>capacités de support</strong>, donc des contraintes dures, ce qui transforme « je voudrais alléger » en « ça rentre ou ça ne rentre pas ».</p>
+<p><strong>Le disque 1 est le chemin critique.</strong> C'est la pièce centrale de la mécanique. Le disque 1 contient <strong>exactement</strong> ce que le navigateur a demandé avant le premier rendu : le document, la CSS critique, le JS d'entrée, la police au-dessus de la pliure, l'image LCP. Ce qui reste (routes paresseuses, chunks différés, images sous la pliure, scripts tiers) part sur les disques 2..n. La conséquence est immédiate et vérifiable : <strong>on ne peut pas « remplir » le disque 1 avec du confort</strong> — chaque octet qui n'est pas sur le chemin critique paie deux fois (transfert + CPU sur un téléphone modeste).</p>
+<p><strong>Le spanning, c'est du code splitting, pas une décoration.</strong> Le découpage multi-disques des années 90 (<code>INSTALL.EXE</code> sur disque 1, <code>DATA.001</code>, <code>DATA.002</code>…) impose une contrainte de <strong>regroupement atomique</strong> : un fichier ne peut pas être coupé en deux, et deux fichiers qui doivent être lus ensemble ne peuvent pas être dispersés sur deux disques. Traduction en code splitting : <strong>une route est un groupe atomique</strong>. Si <code>/admin</code> doit être un chunk, ce chunk est entier sur un disque. L'algorithme n'est donc pas un simple bin packing : c'est un bin packing <strong>avec groupes indivisibles</strong> et <strong>une contrainte de priorité</strong> (tout groupe critique doit tenir dans le disque 1).</p>
+<p><strong>L'algorithme, précisément.</strong></p>
+<pre><code>1. Normaliser l'entrée en Unités (Unit) — groupes atomiques :
+   - mode build  : une unité = une route du manifeste Vite / une chunk de stats webpack
+   - mode HAR    : une unité = un groupe d'URL par origine (une origine tierce est toujours
+                   une unité séparée : elle se charge indépendamment)
+2. Trier les unités : (critique d'abord, puis premierRequestMs croissant, puis taille décroissante,
+   puis id croissant) — le tri par id est la clé du déterminisme.
+3. Disque 1 : placer les unités critiques dans l'ordre, en s'arrêtant à la capacité du format.
+   Si une unité critique ne tient pas → erreur « disk 1 overflow », avec le nom de l'unité.
+4. Unités surdimensionnées : SI une unité dépasse la capacité du format, ALORS elle est scindée
+   par fichier (ses membres deviennent des unités `file`), la scission est signalée dans le
+   verdict (`splitUnits: [...]`), et l'allocation reprend. C'est le seul cas où l'atomicité
+   d'une unité est levée — il rend le format 720 Kio utilisable sur un vrai site.
+5. Disques 2..n : First-Fit-Decreasing sur les unités restantes, en conservant l'ordre des
+   groupes atomiques ; une unité ouvre un nouveau disque si elle ne tient dans aucun
+   disque ouvert.
+6. Bornes affichées : borne inférieure = ceil(total / capacité) ; l'algorithme peut faire
+   mieux ou pire de 1 unité de la borne (il n'est pas optimal, et ne le prétend pas).
+</code></pre>
+<p><strong>Le plan de défragmentation.</strong> Ce n'est pas une liste de conseils : c'est un <strong>plan de découpage de routes</strong>, chiffré. Le plan propose des actions ordonnées, chacune avec ses octets gagnés et le nombre de disquettes avant/après.</p>
+<table>
+<thead>
+<tr>
+<th>Type d'action</th>
+<th>Ce qu'elle dit</th>
+<th>Exemple chiffré</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>defer-route</code></td>
+<td>« Cette route n'est pas sur le chemin critique : charge-la en différé. »</td>
+<td><code>/admin</code> (218 Kio) sort du disque 1</td>
+</tr>
+<tr>
+<td><code>split-route-chunk</code></td>
+<td>« Ce chunk mélange deux routes : sépare-les. »</td>
+<td><code>routes-chunk-8f2a.js</code> (312 Kio) = <code>/settings</code> (41 Kio) + <code>/reports</code> (271 Kio)</td>
+</tr>
+<tr>
+<td><code>drop-third-party</code></td>
+<td>« Ce script tiers coûte N Kio et n'est pas critique : retire-le ou charge-le après. »</td>
+<td><code>analytics-widget.js</code> (96 Kio)</td>
+</tr>
+<tr>
+<td><code>replace-library</code> (<strong>optionnel, non vérifié</strong>)</td>
+<td>« Cette dépendance pèse N Kio ; un substitut plus léger existe peut-être. » — l'outil ne vérifie pas le substitut</td>
+<td><code>moment</code> (231 Kio) → <code>date-fns/day</code> (12 Kio)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Le compteur qui fond.</strong> L'octet du disque 1 descend en continu pendant que l'on simule le plan : c'est une bougie qui fond. C'est le seul effet non fonctionnel du produit, et il est là pour une raison précise : il rend visible le <strong>gain</strong>, pas l'effort. <code>prefers-reduced-motion</code> transforme la bougie en changement de nombre instantané.</p>
+<p><strong>Exemple de verdict (jeu de démonstration intégré, <code>fixtures/har/kitchen-sink.har</code>)</strong> :</p>
+<table>
+<thead>
+<tr>
+<th>Disque</th>
+<th>Contenu</th>
+<th>Octets</th>
+<th>Remplissage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 — HD 1 440 Kio</td>
+<td><code>index.html</code> 18 Kio, <code>app-entry.js</code> 96 Kio, <code>critical.css</code> 24 Kio, <code>Inter-Regular.woff2</code> 42 Kio, <code>hero.avif</code> 210 Kio</td>
+<td>390 Kio</td>
+<td>27 %</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>react-dom.js</code> 132 Kio, <code>router.js</code> 22 Kio, <code>charts.js</code> 388 Kio, <code>date-i18n.js</code> 61 Kio</td>
+<td>603 Kio</td>
+<td>42 %</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>routes/admin.js</code> 218 Kio, <code>routes/settings.js</code> 41 Kio, <code>routes/reports.js</code> 271 Kio</td>
+<td>530 Kio</td>
+<td>37 %</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>analytics-widget.js</code> 96 Kio, <code>chat-widget.js</code> 54 Kio, <code>locale-fr.js</code> 118 Kio, 14 polices</td>
+<td>331 Kio</td>
+<td>23 %</td>
+</tr>
+<tr>
+<td>5</td>
+<td>41 images sous la pliure, 2 vidéos courtes</td>
+<td>892 Kio</td>
+<td>62 %</td>
+</tr>
+</tbody>
+</table>
+<p>Verdict affiché : <strong>5 disquettes · 2 746 Kio · 14,1 s en 1,6 Mbit/s · 0,42 gCO2e/visite</strong>. Après application du plan : <strong>3 disquettes</strong>, disque 1 ramené à <strong>318 Kio</strong> (−72 Kio, soit −0,4 s sur le profil 1,6 Mbit/s).</p>
+<p>Au format DD 720 Kio, le même site donne <strong>6 disquettes</strong> et signale <strong>2 unités scindées</strong> (le groupe d'images de 892 Kio et le groupe de polices de 118 Kio dépassent la capacité du format) : c'est la seule levée d'atomicité, et elle est affichée comme telle.</p>
+<p><strong>Les trois surfaces, et pourquoi la principale est hors ligne.</strong></p>
+<ol>
+<li><strong>CLI + garde CI</strong> (<code>disquette check|plan|explain</code>) : lit un rapport de build (<code>stats.json</code> de webpack, le manifeste Vite, ou un dossier <code>dist/</code>), alloue les unités aux disquettes, sort un rapport Markdown et un code de sortie. C'est la surface qui <strong>reste en place</strong> après le concours.</li>
+<li><strong>Application web statique</strong> (voie principale) : on dépose <strong>un fichier HAR</strong>. Aucun serveur, aucune donnée envoyée, aucun compte. Elle marche en navigation privée et hors ligne. L'option <code>--url</code> passe par un petit worker edge, jamais par la voie principale.</li>
+<li><strong>L'explorateur de disquettes</strong> : chaque disquette est dessinée (coquille, fenêtre du métal, étiquette) avec son remplissage réel ; chaque module est un fichier sur le disque ; un clic affiche qui l'importe, ce qu'il coûte, et son appartenance au chemin critique ; la vue « défragmenteur » superpose l'avant/après.</li>
+</ol>
+<h3 id="f6-formats-et-donnees">F.6 Formats et données</h3>
+<p><strong>Schéma des formats de disquette</strong> (<code>packages/core/src/formats.ts</code>)</p>
+<pre><code class="language-ts">import { z } from &quot;zod&quot;;
+
+export const DiskFormatId = z.enum([&quot;dd&quot;, &quot;hd&quot;, &quot;zip&quot;]);
+
+export const DiskFormat = z.object({
+  id: DiskFormatId,
+  label: z.string(),          // &quot;3.5\&quot; HD 1.44 MB&quot; | &quot;3.5\&quot; DD 720 KB&quot; | &quot;Zip 100 MB&quot;
+  capacityBytes: z.number().int().positive(),
+  sectors: z.number().int().positive(),
+  sectorBytes: z.literal(512),
+  default: z.boolean(),
+});
+
+export const FORMATS: Record&lt;DiskFormatId, DiskFormat&gt; = {
+  dd:  { id: &quot;dd&quot;,  label: &quot;3.5\&quot; DD 720 KB&quot;,  capacityBytes:  737_280, sectors: 1440, sectorBytes: 512, default: false },
+  hd:  { id: &quot;hd&quot;,  label: &quot;3.5\&quot; HD 1.44 MB&quot;, capacityBytes: 1_474_560, sectors: 2880, sectorBytes: 512, default: true  },
+  zip: { id: &quot;zip&quot;, label: &quot;Zip 100 MB&quot;,        capacityBytes: 104_857_600, sectors: 204_800, sectorBytes: 512, default: false },
+};
+</code></pre>
+<p><strong>Modèle normalisé</strong> (<code>packages/core/src/model.ts</code>)</p>
+<pre><code class="language-ts">export type UnitKind = &quot;route&quot; | &quot;origin&quot; | &quot;file&quot;;
+
+export interface Module {
+  id: string;                 // &quot;assets/app-entry-8f2a.js&quot; — identifiant stable, trié lexicographiquement
+  bytes: number;              // octets sur disque
+  transferBytes?: number;     // octets transférés (gzip/brotli) si connus
+  kind: &quot;html&quot; | &quot;css&quot; | &quot;js&quot; | &quot;font&quot; | &quot;image&quot; | &quot;media&quot; | &quot;other&quot;;
+  url?: string;               // présent en mode HAR
+  requestStartMs?: number;    // début de la requête, relatif au début de la navigation
+}
+
+export interface Unit {
+  id: string;                 // &quot;route:/admin&quot; | &quot;origin:cdn.example.com&quot; | &quot;file:app.js&quot;
+  kind: UnitKind;
+  bytes: number;              // somme des modules
+  members: Module[];
+  critical: boolean;          // demandé avant le premier rendu
+  firstRequestMs?: number;
+}
+
+export interface Disk {
+  index: number;              // 1..n
+  units: Unit[];
+  usedBytes: number;
+  freeBytes: number;
+  fillRatio: number;          // 0..1
+}
+
+export interface Verdict {
+  formatId: DiskFormatId;
+  disks: Disk[];
+  diskCount: number;
+  lowerBoundDisks: number;    // ceil(totalBytes / capacity)
+  siteBytes: number;
+  criticalBytes: number;      // octets du disque 1
+  firstRenderSeconds: number; // profil réseau choisi
+  carbonGrams: number;        // SWDM v4
+  planHash: string;           // sha256 du plan, pour le déterminisme
+}
+
+export interface DefragAction {
+  id: string;
+  kind: &quot;defer-route&quot; | &quot;split-route-chunk&quot; | &quot;drop-third-party&quot; | &quot;replace-library&quot;;
+  target: string;             // id d'unité ou de module
+  bytesMoved: number;
+  bytesSavedOnDisk1: number;
+  disksBefore: number;
+  disksAfter: number;
+  verified: boolean;          // false pour &quot;replace-library&quot;
+  note: string;               // une phrase, en anglais dans l'UI
+}
+</code></pre>
+<p><strong>Entrée HAR</strong> — sous-ensemble utile de HAR 1.2, validé par Zod (<code>packages/har/src/schema.ts</code>) :</p>
+<pre><code class="language-json">{
+  &quot;log&quot;: {
+    &quot;version&quot;: &quot;1.2&quot;,
+    &quot;creator&quot;: { &quot;name&quot;: &quot;Chrome DevTools&quot;, &quot;version&quot;: &quot;131.0&quot; },
+    &quot;pages&quot;: [
+      { &quot;id&quot;: &quot;page_1&quot;, &quot;title&quot;: &quot;https://example.test/&quot;,
+        &quot;pageTimings&quot;: { &quot;onContentLoad&quot;: 812, &quot;onLoad&quot;: 2480, &quot;_startRender&quot;: 640 } }
+    ],
+    &quot;entries&quot;: [
+      { &quot;pageref&quot;: &quot;page_1&quot;, &quot;startedDateTime&quot;: &quot;2026-11-11T10:00:00.000Z&quot;,
+        &quot;request&quot;: { &quot;method&quot;: &quot;GET&quot;, &quot;url&quot;: &quot;https://example.test/assets/app-entry.js&quot;,
+                     &quot;headers&quot;: [{ &quot;name&quot;: &quot;Cookie&quot;, &quot;value&quot;: &quot;session=REDACTED&quot; }] },
+        &quot;response&quot;: { &quot;status&quot;: 200, &quot;bodySize&quot;: 98304, &quot;headersSize&quot;: 320,
+                      &quot;content&quot;: { &quot;size&quot;: 98304, &quot;mimeType&quot;: &quot;application/javascript&quot; } } }
+    ]
+  }
+}
+</code></pre>
+<p>Règles d'ingestion :</p>
+<ul>
+<li>Le premier rendu est lu dans <code>pages[].pageTimings._startRender</code> (export Chrome). Repli : <code>onContentLoad</code>. Si les deux manquent, toutes les entrées sont « critiques » et le verdict le signale (<code>criticalPath: "unknown"</code>).</li>
+<li><strong>Assainissement obligatoire</strong> à l'ingestion : <code>request.headers</code> de type <code>cookie</code>, <code>authorization</code>, <code>set-cookie</code>, <code>x-api-key</code> et le champ <code>postData</code> sont supprimés. L'UI affiche « 3 credentials removed ».</li>
+<li>Le poids retenu est <code>response.bodySize</code> s'il est &gt; 0, sinon <code>response.content.size</code>, sinon <code>response._transferSize</code> (extension Chrome).</li>
+<li>Les entrées dont le <code>status</code> est ≥ 400 ou le <code>mimeType</code> vaut <code>text/html</code> pour une navigation sont ignorées pour le poids mais comptées dans les métadonnées.</li>
+<li>Plafond : 100 Mo par fichier, lecture en flux, refus au-delà avec un message qui dit quoi faire.</li>
+</ul>
+<p><strong>Entrée build</strong> (<code>packages/build/src/normalize.ts</code>) : accepte <code>stats.json</code> (webpack), le manifeste Vite (<code>dist/.vite/manifest.json</code>) ou un dossier <code>dist/</code> (dans ce dernier cas, un graphe d'imports est reconstruit depuis les sources de chunks, et les routes sont déduites des clés <code>src/routes/**</code>). Une unité = une route ; le chunk vendor est une unité <code>file</code> rattachée au disque 1 si critique.</p>
+<p><strong>Constantes de mesure</strong> (<code>packages/core/src/constants.ts</code>) — toutes sourcées et affichables dans l'UI :</p>
+<pre><code class="language-ts">export const NETWORK_PROFILES = {
+  &quot;lighthouse-mobile-slow4g&quot;: { downBps: 200_000, upBps: 93_750, rttMs: 150 }, // 1,6 Mbit/s
+  &quot;webpagetest-3g-fast&quot;:       { downBps: 200_000, upBps: 93_750, rttMs: 150 },
+  &quot;wifi-fast&quot;:                 { downBps: 2_500_000, upBps: 1_250_000, rttMs: 10 },
+} as const;
+
+export const CO2 = {
+  model: &quot;SWDM v4&quot;,
+  operationalKwhPerGb: { dataCenter: 0.055, network: 0.059, userDevice: 0.080 },
+  embodiedKwhPerGb:     { dataCenter: 0.012, network: 0.013, userDevice: 0.081 },
+  gridIntensityGPerKwh: 494,   // Ember, moyenne mondiale
+  get gramsPerGb() { /* 0,300 kWh/Go × 494 g/kWh = 148,2 gCO2e/Go */ },
+};
+</code></pre>
+<p><strong>Sources de données publiques nommées</strong></p>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Usage</th>
+<th>Licence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTTP Archive — <em>Web Almanac 2025</em>, chap. 14 « Page Weight »</td>
+<td>chiffres de référence du README et de la vidéo</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td>HTTP Archive — rapports <code>state-of-the-web</code>, <code>page-weight</code></td>
+<td>comparaison de formats</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td>Sustainable Web Design Model v4</td>
+<td>facteur CO2e (148,2 g/Go)</td>
+<td>méthode ouverte — <strong>licence exacte À vérifier</strong></td>
+</tr>
+<tr>
+<td>Lighthouse <code>docs/throttling.md</code></td>
+<td>profil réseau 1,6 Mbit/s / 150 ms</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td>WebPageTest <code>connectivity.ini.sample</code></td>
+<td>profil « Mobile 3G – Fast » (profil identique)</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td>Ember — Data Explorer</td>
+<td>intensité carbone 494 gCO2e/kWh</td>
+<td>CC BY 4.0 — <strong>à vérifier</strong></td>
+</tr>
+<tr>
+<td>Chrome DevTools (export HAR 1.2)</td>
+<td>format d'entrée</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fixtures embarqués</strong> : <code>fixtures/har/kitchen-sink.har</code>, <code>fixtures/har/heavy-site.har</code> (hôte masqué en <code>site-01.test</code>), <code>fixtures/har/with-credentials.har</code>, <code>fixtures/har/malformed.har</code>, <code>fixtures/build/webpack-stats.json</code>. Aucun HAR tiers n'est commité avec les octets d'actifs d'un tiers : seules les métadonnées et les tailles, avec des hôtes réécrits.</p>
+<h3 id="f7-exigences-fonctionnelles">F.7 Exigences fonctionnelles</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Priorité</th>
+<th>Exigence (EARS)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DIS-F-01</td>
+<td>I</td>
+<td>QUAND un fichier HAR valide est déposé, ALORS l'application affiche un verdict (nombre de disquettes, Kio par disquette, secondes, grammes de CO2e) en moins de 3 s, sans aucune requête réseau sortante.</td>
+</tr>
+<tr>
+<td>DIS-F-02</td>
+<td>I</td>
+<td>QUAND le HAR contient <code>pages[].pageTimings._startRender</code>, ALORS le disque 1 contient exactement les entrées dont <code>startedDateTime</code> précède ce marqueur.</td>
+</tr>
+<tr>
+<td>DIS-F-03</td>
+<td>I</td>
+<td>SI le fichier déposé n'est pas un HAR 1.2 conforme au schéma Zod, ALORS l'application affiche l'erreur nommant le chemin du champ fautif et propose le HAR de démonstration.</td>
+</tr>
+<tr>
+<td>DIS-F-04</td>
+<td>I</td>
+<td>QUAND le format choisi est <code>hd</code>, ALORS aucune disquette du plan ne dépasse 1 474 560 octets et aucune unité n'est coupée.</td>
+</tr>
+<tr>
+<td>DIS-F-05</td>
+<td>I</td>
+<td>QUAND le format ou la graine changent, ALORS le plan est recalculé de façon déterministe et le <code>planHash</code> ne dépend que de l'entrée, du format et de la graine.</td>
+</tr>
+<tr>
+<td>DIS-F-06</td>
+<td>I</td>
+<td>TANT QUE l'analyse d'un HAR est en cours, ALORS l'interface reste interactive : l'analyse s'exécute dans un Web Worker et l'interface affiche une progression en octets traités.</td>
+</tr>
+<tr>
+<td>DIS-F-07</td>
+<td>I</td>
+<td>QUAND un module est sélectionné dans l'explorateur, ALORS le panneau affiche son chemin, son poids brut et transféré, son appartenance au chemin critique, et la liste des modules qui l'importent.</td>
+</tr>
+<tr>
+<td>DIS-F-08</td>
+<td>I</td>
+<td>OÙ la vue défragmenteur est active, ALORS l'application propose un plan ordonné d'actions, chacune chiffrée en octets gagnés et en disquettes gagnées.</td>
+</tr>
+<tr>
+<td>DIS-F-09</td>
+<td>I</td>
+<td>SI aucune action du plan ne réduit le nombre de disquettes, ALORS l'application le dit explicitement et affiche le gain en Kio du disque 1.</td>
+</tr>
+<tr>
+<td>DIS-F-10</td>
+<td>I</td>
+<td>QUAND un rapport est exporté, ALORS le fichier produit porte le format, le nombre de disquettes, l'horodatage et le <code>planHash</code>, et ne contient aucune donnée personnelle.</td>
+</tr>
+<tr>
+<td>DIS-F-11</td>
+<td>S</td>
+<td>QUAND un rapport de build (<code>stats.json</code>, manifeste Vite ou dossier <code>dist/</code>) est fourni, ALORS la CLI alloue les routes aux disquettes et écrit <code>artifacts/disquette-report.md</code>.</td>
+</tr>
+<tr>
+<td>DIS-F-12</td>
+<td>I</td>
+<td>QUAND <code>disquette check</code> s'exécute, ALORS il sort avec le code 1 si le chemin critique dépasse le format, et le message nomme l'unité fautive.</td>
+</tr>
+<tr>
+<td>DIS-F-13</td>
+<td>S</td>
+<td>OÙ <code>disquette.config.json</code> existe à la racine du dépôt, ALORS la CLI lit le format, la graine, le profil réseau et le seuil de budget, et les valeurs par défaut s'appliquent sinon.</td>
+</tr>
+<tr>
+<td>DIS-F-14</td>
+<td>O</td>
+<td>QUAND l'option <code>--url</code> est fournie, ALORS l'analyse passe par le worker edge, qui ne renvoie que des tailles agrégées et aucun contenu de page.</td>
+</tr>
+<tr>
+<td>DIS-F-15</td>
+<td>I</td>
+<td>TANT QUE l'onglet de l'application est ouvert, ALORS aucun octet du HAR déposé ne quitte le navigateur ; un test Playwright échoue si une requête sort vers un autre origine.</td>
+</tr>
+<tr>
+<td>DIS-F-16</td>
+<td>S</td>
+<td>QUAND le plan de défragmentation est simulé, ALORS l'application affiche l'avant/après côte à côte (disques et Kio du disque 1) et la bougie fond en temps réel.</td>
+</tr>
+<tr>
+<td>DIS-F-17</td>
+<td>I</td>
+<td>SI le graphe d'imports contient un cycle, ALORS l'explorateur l'affiche avec le cycle signalé et ne boucle pas.</td>
+</tr>
+<tr>
+<td>DIS-F-18</td>
+<td>S</td>
+<td>QUAND le format <code>zip</code> est choisi, ALORS l'application affiche le badge « Zip 100 MB » et n'applique pas la contrainte de 1 440 Kio.</td>
+</tr>
+<tr>
+<td>DIS-F-19</td>
+<td>S</td>
+<td>QUAND l'utilisateur change de profil réseau, ALORS les secondes du disque 1 et du site sont recalculées immédiatement et la constante du profil est rappelée sous le chiffre.</td>
+</tr>
+<tr>
+<td>DIS-F-20</td>
+<td>I</td>
+<td>QUAND un HAR contient des ressources d'origines tierces, ALORS elles sont comptées dans le poids du site, signalées comme tierces, et le plan propose de les différer ou de les retirer.</td>
+</tr>
+<tr>
+<td>DIS-F-21</td>
+<td>I</td>
+<td>QUAND le même HAR est analysé deux fois dans le même navigateur, ALORS le verdict et le <code>planHash</code> sont identiques.</td>
+</tr>
+<tr>
+<td>DIS-F-22</td>
+<td>O</td>
+<td>OÙ le mode démonstration est activé, ALORS l'application charge le HAR embarqué et joue le verdict complet sans aucune action de l'utilisateur.</td>
+</tr>
+<tr>
+<td>DIS-F-23</td>
+<td>S</td>
+<td>QUAND l'application est hors ligne (service worker actif), ALORS le dépôt de HAR, le verdict et l'explorateur fonctionnent intégralement.</td>
+</tr>
+<tr>
+<td>DIS-F-24</td>
+<td>X</td>
+<td>Le système NE DOIT PAS modifier, minifier ou réécrire le code du projet analysé.</td>
+</tr>
+<tr>
+<td>DIS-F-25</td>
+<td>X</td>
+<td>Le système NE DOIT PAS envoyer de données à un modèle de langage ; aucune fonction n'est conditionnée à un appel de modèle.</td>
+</tr>
+<tr>
+<td>DIS-F-26</td>
+<td>S</td>
+<td>SI une unité dépasse la capacité du format choisi, ALORS l'allocateur la scinde par fichier, poursuit l'allocation et liste les unités scindées dans le verdict (<code>splitUnits</code>).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="f8-exigences-non-fonctionnelles">F.8 Exigences non fonctionnelles</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Priorité</th>
+<th>Exigence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DIS-N-01</td>
+<td>I</td>
+<td>Verdict sur un HAR de 5 Mo en moins de 800 ms sur un portable moyen ; budget CI : 1 200 ms.</td>
+</tr>
+<tr>
+<td>DIS-N-02</td>
+<td>I</td>
+<td>Le shell de l'application pèse au plus 200 Kio compressés ; le lecteur HAR et l'allocateur sont chargés à la demande (+150 Kio compressés) et l'ensemble du build de démonstration passe son propre <code>disquette check</code> (≤ 1 474 560 octets).</td>
+</tr>
+<tr>
+<td>DIS-N-03</td>
+<td>I</td>
+<td>Fonctionnement hors ligne : service worker qui précharge le shell et les fixtures ; la démonstration complète est jouable avec le réseau coupé.</td>
+</tr>
+<tr>
+<td>DIS-N-04</td>
+<td>I</td>
+<td>Accessibilité AA : contraste 4,5:1 minimum, navigation clavier complète dans l'explorateur de disquettes, information jamais portée par la seule couleur (le remplissage est aussi une trame de hachures), <code>prefers-reduced-motion</code> respecté.</td>
+</tr>
+<tr>
+<td>DIS-N-05</td>
+<td>I</td>
+<td>Vie privée : aucune télémétrie, aucun envoi, aucun cookie ; le HAR n'est jamais écrit sur disque par l'application (pas d'IndexedDB, pas de <code>localStorage</code>).</td>
+</tr>
+<tr>
+<td>DIS-N-06</td>
+<td>I</td>
+<td>Déterminisme : <code>planHash</code> stable sur 100 exécutions, seeds de fast-check consignées dans le rapport de test.</td>
+</tr>
+<tr>
+<td>DIS-N-07</td>
+<td>S</td>
+<td>Robustesse : un HAR de 50 000 entrées est analysé en moins de 5 s, avec moins de 400 Mo de mémoire ; le message d'erreur nomme le champ en cause.</td>
+</tr>
+<tr>
+<td>DIS-N-08</td>
+<td>I</td>
+<td>Règle de la maison : moins de 500 lignes par fichier, moins de 50 lignes par fonction ; garde automatique <code>loc-budget</code> en CI, sans exception.</td>
+</tr>
+<tr>
+<td>DIS-N-09</td>
+<td>I</td>
+<td>Dépendances runtime : <code>zod</code> uniquement pour le cœur et le HAR ; la CLI s'installe en moins de 10 s. Pas de copyleft fort (AGPL/GPLv3 écartés).</td>
+</tr>
+<tr>
+<td>DIS-N-10</td>
+<td>S</td>
+<td>Interface en anglais (soumission), français en seconde langue ; toutes les chaînes passent par un catalogue, aucune chaîne en dur dans les composants.</td>
+</tr>
+<tr>
+<td>DIS-N-11</td>
+<td>I</td>
+<td>Aucun son par défaut : le seul son imaginable (le claquement du volet) est derrière un réglage désactivé, et le respect de <code>prefers-reduced-motion</code> le neutralise.</td>
+</tr>
+<tr>
+<td>DIS-N-12</td>
+<td>I</td>
+<td>CI : <code>timeout-minutes: 5</code>, <code>concurrency</code>, <code>fetch-depth: 1</code> ; E2E et bancs longs hors PR.</td>
+</tr>
+<tr>
+<td>DIS-N-13</td>
+<td>S</td>
+<td>Licence MIT dès le premier commit, tableau des dépendances et de leurs licences dans le README, <code>.kiro/</code> jamais ignoré.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="f9-architecture-technique">F.9 Architecture technique</h3>
+<p><strong>Arborescence du dépôt</strong></p>
+<pre><code>disquette/
+├── .kiro/
+│   ├── steering/          product.md · tech.md · structure.md · testing.md
+│   │                      disk-myth.md (fileMatch packages/core) · privacy.md (fileMatch packages/har)
+│   ├── specs/
+│   │   ├── core-allocator/     requirements.md · design.md · tasks.md
+│   │   ├── har-reader/         requirements.md · design.md · tasks.md
+│   │   ├── disk-explorer/      requirements.md · design.md · tasks.md
+│   │   ├── defrag-planner/     requirements.md · design.md · tasks.md
+│   │   └── cli-guard/          requirements.md · design.md · tasks.md
+│   ├── hooks/             disk-budget.json · loc-budget.json · no-network-guard.json · plan-determinism.json
+│   ├── agents/            defrag-planner.md (lecture seule) · reviewer.md
+│   ├── skills/            fit-on-one-disk/SKILL.md · har-scrub/SKILL.md
+│   └── settings/          mcp.json
+├── packages/
+│   ├── core/              types, formats, Zod, allocateur, mesures, plan de défrag
+│   ├── har/               lecture HAR, assainissement, extraction du premier rendu
+│   ├── build/             normalisation stats.json / manifeste Vite / dist/
+│   ├── cli/               commandes check · plan · explain · report
+│   └── ui/               composants React : verdict, explorateur, défrag, exports
+├── apps/
+│   ├── web/               application statique (Vite + React) — la voie principale
+│   └── worker/            worker edge optionnel pour l'analyse par URL
+├── fixtures/har/          HAR de démonstration (hôtes réécrits)
+├── fixtures/build/        stats.json d'exemple
+├── scripts/recette.mjs    recette exécutable
+├── docs/                  METHOD.md · FORMATS.md · CARBON.md · CHANGELOG.md
+└── KIRO_JOURNAL.md
+</code></pre>
+<p><strong>Budgets de lignes par paquet</strong> (source seulement, tests exclus ; plafond maison : 500 lignes par fichier, 50 par fonction)</p>
+<table>
+<thead>
+<tr>
+<th>Paquet</th>
+<th>Budget</th>
+<th>Contenu</th>
+<th>Fichiers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>packages/core</code></td>
+<td>900 l.</td>
+<td><code>model.ts</code> 140, <code>formats.ts</code> 70, <code>allocate.ts</code> 180, <code>metrics.ts</code> 130, <code>defrag.ts</code> 220, <code>constants.ts</code> 60, <code>planHash.ts</code> 60, <code>index.ts</code> 40</td>
+<td>8</td>
+</tr>
+<tr>
+<td><code>packages/har</code></td>
+<td>430 l.</td>
+<td><code>schema.ts</code> 120, <code>parse.ts</code> 150, <code>scrub.ts</code> 90, <code>criticalPath.ts</code> 70</td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>packages/build</code></td>
+<td>380 l.</td>
+<td><code>webpackStats.ts</code> 140, <code>viteManifest.ts</code> 110, <code>distScan.ts</code> 130</td>
+<td>3</td>
+</tr>
+<tr>
+<td><code>packages/cli</code></td>
+<td>320 l.</td>
+<td><code>check.ts</code> 90, <code>plan.ts</code> 80, <code>explain.ts</code> 60, <code>report.ts</code> 60, <code>cli.ts</code> 30</td>
+<td>5</td>
+</tr>
+<tr>
+<td><code>packages/ui</code></td>
+<td>760 l.</td>
+<td><code>DiskShell.tsx</code> 140, <code>DiskExplorer.tsx</code> 190, <code>ModuleInspector.tsx</code> 120, <code>DefragPlanner.tsx</code> 160, <code>VerdictCard.tsx</code> 90, <code>DropZone.tsx</code> 60</td>
+<td>6</td>
+</tr>
+<tr>
+<td><code>apps/web</code></td>
+<td>380 l.</td>
+<td><code>main.tsx</code> 60, <code>App.tsx</code> 120, <code>workerBridge.ts</code> 90, <code>sw.ts</code> 60, <code>i18n.ts</code> 50</td>
+<td>5</td>
+</tr>
+<tr>
+<td><code>apps/worker</code></td>
+<td>120 l.</td>
+<td><code>index.ts</code> 120</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>Total source</strong></td>
+<td><strong>3 290 l.</strong></td>
+<td>fichiers ≤ 500 l., fonctions ≤ 50 l.</td>
+<td>32</td>
+</tr>
+</tbody>
+</table>
+<p>Les tests (Vitest + fast-check + Playwright) sont hors de ce budget, comme dans les autres projets de la maison.</p>
+<p><strong>Flux de données</strong></p>
+<pre><code>HAR déposé ─┐
+             ├─▶ scrub (credentials retirés) ─▶ Module[] ─▶ Unités ─▶ allocate ─▶ Disk[] ─▶ Verdict
+stats.json ─┤                                  ▲                                    │
+manifest ───┘                                  │                                    └─▶ defrag ─▶ DefragAction[]
+dist/ ──────┘
+                                                 │
+config (format, graine, profil réseau, budget) ┘
+</code></pre>
+<p><strong>Ce qui tourne où</strong></p>
+<table>
+<thead>
+<tr>
+<th>Élément</th>
+<th>Exécution</th>
+<th>Réseau</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>packages/core</code>, <code>packages/har</code>, <code>packages/build</code></td>
+<td>Node LTS (CLI) et Web Worker (navigateur) — même code, même résultat</td>
+<td>aucun</td>
+</tr>
+<tr>
+<td><code>packages/cli</code></td>
+<td>Node LTS, binaire <code>disquette</code> publié dans le dépôt</td>
+<td>aucun</td>
+</tr>
+<tr>
+<td><code>apps/web</code></td>
+<td>navigateur, statique (GitHub Pages), service worker</td>
+<td>aucun hors iframe d'options</td>
+</tr>
+<tr>
+<td><code>apps/worker</code></td>
+<td>edge (Cloudflare Workers ou équivalent), <strong>optionnel</strong></td>
+<td>sortante, bornée : 10 s, 5 Mo, schémas http/https, plages IP privées bloquées</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Contrat CLI</strong></p>
+<pre><code class="language-bash">disquette check --har fixtures/har/kitchen-sink.har --format hd --network lighthouse-mobile-slow4g
+# exit 0 | 1 (budget dépassé) ; écrit artifacts/disquette-report.md et stdout JSON
+
+disquette plan --stats fixtures/build/webpack-stats.json --format hd --out artifacts/plan.json
+disquette explain --har fixtures/har/heavy-site.har --module assets/charts.js   # qui l'importe, coût
+disquette report --har &lt;fichier&gt; --format md --out report.md
+</code></pre>
+<p><strong>Configuration</strong> (<code>disquette.config.json</code>)</p>
+<pre><code class="language-json">{
+  &quot;format&quot;: &quot;hd&quot;,
+  &quot;seed&quot;: 20261111,
+  &quot;networkProfile&quot;: &quot;lighthouse-mobile-slow4g&quot;,
+  &quot;budget&quot;: { &quot;disk1Bytes&quot;: 1474560, &quot;maxDisks&quot;: 12 },
+  &quot;carbon&quot;: { &quot;model&quot;: &quot;swdm-v4&quot;, &quot;gridIntensityGPerKwh&quot;: 494 },
+  &quot;criticalPath&quot;: { &quot;source&quot;: &quot;auto&quot;, &quot;fallback&quot;: &quot;onContentLoad&quot; }
+}
+</code></pre>
+<h3 id="f10-securite-et-modele-de-menace">F.10 Sécurité et modèle de menace</h3>
+<table>
+<thead>
+<tr>
+<th>Menace</th>
+<th>Surface</th>
+<th>Parade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Un HAR contient des identifiants (<code>Cookie</code>, <code>Authorization</code>, <code>postData</code>)</td>
+<td>ingestion</td>
+<td>Assainissement obligatoire à la lecture (<code>scrub.ts</code>), avant toute visualisation ; l'UI annonce le nombre d'éléments retirés ; rien n'est persisté (DIS-N-05).</td>
+</tr>
+<tr>
+<td>Un HAR contient une URL interne ou un secret dans le chemin</td>
+<td>ingestion</td>
+<td>Le mode démonstration masque l'hôte (<code>site-01.test</code>) ; le rapport exporté n'inclut les URL que sur option explicite <code>--include-urls</code>.</td>
+</tr>
+<tr>
+<td>XSS via un nom de fichier ou un en-tête</td>
+<td>interface</td>
+<td>React échappe tout ; aucun <code>dangerouslySetInnerHTML</code> ; un test vérifie l'absence de <code>innerHTML</code> dans <code>packages/ui</code>.</td>
+</tr>
+<tr>
+<td>Fichier immense (zip-bomb en <code>.har.gz</code>)</td>
+<td>ingestion</td>
+<td>Plafond 100 Mo, refus avant analyse complète, lecture en flux.</td>
+</tr>
+<tr>
+<td>Écriture hors du dépôt par la CLI</td>
+<td>CLI</td>
+<td>Le chemin de sortie est résolu et vérifié comme descendant du répertoire de travail ; pas de <code>..</code> accepté.</td>
+</tr>
+<tr>
+<td>SSRF par le worker d'URL</td>
+<td>worker</td>
+<td>Schémas http/https seulement, résolution DNS bloquée sur les plages privées, 10 s de délai, 5 Mo de réponse, aucun en-tête ni cookie transmis, seule la taille agrégée est retournée.</td>
+</tr>
+<tr>
+<td>Fuite par la dépendance de build</td>
+<td>CI</td>
+<td><code>pnpm-lock.yaml</code> commité, versions épinglées, licences auditées (MIT/Apache/BSD uniquement).</td>
+</tr>
+<tr>
+<td>Le plan de défrag appliqué automatiquement casse le site</td>
+<td>CLI</td>
+<td>Le plan est <strong>un fichier</strong>, jamais une modification du code ; <code>disquette plan</code> n'écrit que dans <code>--out</code>.</td>
+</tr>
+<tr>
+<td>Dérive du déterminisme (Map/Set, horloge)</td>
+<td>cœur</td>
+<td>Interdiction des <code>Date.now()</code> et des itérations non triées dans <code>core</code> ; garde <code>plan-determinism</code> qui rejoue 100 fois et compare les hashes.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="f11-interface-et-direction-artistique">F.11 Interface et direction artistique</h3>
+<p><strong>Le principe</strong> : l'objet physique porte la métaphore, mais l'interface reste un outil de mesure. Le décor est une <strong>coquille de disquette 3,5"</strong> en plastique nervuré bleu marine, avec la fenêtre du métal argenté, l'étiquette papier crème et la languette. Rien d'autre. Pas de manoir, pas de crânes : la catégorie est <em>Resurrection</em>, pas <em>Costume Contest</em>.</p>
+<p><strong>Écrans</strong></p>
+<ol>
+<li><strong>Dépôt</strong> (<code>DropZone</code>) : la coquille dessinée, la mention « Drop a HAR file (Chrome DevTools → Network → Export HAR) », un bouton « Use the demo HAR » et un lien « Install the CLI ».</li>
+<li><strong>Verdict</strong> (<code>VerdictCard</code>) : l'étiquette de la disquette 1, manuscrite, portant le verdict : « 5 disks · 2 746 KiB · 14.1 s on 1.6 Mbps · 0.42 g CO2e / visit ». C'est l'écran que le juge photographie.</li>
+<li><strong>Explorateur</strong> (<code>DiskExplorer</code>) : la rangée de disquettes, chacune dessinée avec son remplissage réel ; au clic sur un module, le panneau de droite (<code>ModuleInspector</code>) donne qui l'importe et ce qu'il coûte.</li>
+<li><strong>Défragmenteur</strong> (<code>DefragPlanner</code>) : la vue « avant / après », la bougie qui fond, et la liste des actions chiffrées.</li>
+<li><strong>Rapport</strong> : export Markdown, avec les constantes (format, profil réseau, facteur CO2e) imprimées dans le document.</li>
+</ol>
+<p><strong>États vides, erreurs, chargements</strong></p>
+<table>
+<thead>
+<tr>
+<th>État</th>
+<th>Traitement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Aucun HAR déposé</td>
+<td>La coquille vide avec une consigne ; le bouton de démonstration est visible (pas de page blanche).</td>
+</tr>
+<tr>
+<td>HAR invalide</td>
+<td>Message nommant le champ fautif, extrait du JSON, et proposition de déposer un autre fichier.</td>
+</tr>
+<tr>
+<td>HAR sans métadonnées de premier rendu</td>
+<td>Bandeau « critical path unknown — all entries counted as critical », le verdict est affiché quand même, marqué.</td>
+</tr>
+<tr>
+<td>Analyse en cours</td>
+<td>Progression en octets traités (le HAR est lu en flux) ; l'interface reste cliquable.</td>
+</tr>
+<tr>
+<td>Hors ligne</td>
+<td>Bandeau discret « offline mode — everything still works ».</td>
+</tr>
+<tr>
+<td>Plan sans gain</td>
+<td>« No route split saves a disk. Here is what it saves on disk 1: −72 KiB (−1.2 s). »</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Palette et typographie</strong></p>
+<table>
+<thead>
+<tr>
+<th>Rôle</th>
+<th>Valeur</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coquille</td>
+<td><code>#1B3A6B</code></td>
+<td>fond des cartes, 4,5:1 minimum sur texte clair</td>
+</tr>
+<tr>
+<td>Volet métallique</td>
+<td><code>#C9CDD3</code></td>
+<td>éléments inactifs, traits de la coque</td>
+</tr>
+<tr>
+<td>Étiquette</td>
+<td><code>#F2E9D0</code></td>
+<td>la surface du verdict, encre <code>#1A1A1A</code> (13:1)</td>
+</tr>
+<tr>
+<td>LED verte / rouge</td>
+<td><code>#2E7D32</code> / <code>#B3261E</code></td>
+<td>état de la garde, <strong>jamais seule</strong> : toujours doublée par un texte et une forme</td>
+</tr>
+<tr>
+<td>Trame de hachures</td>
+<td>2 densités</td>
+<td>le remplissage d'une disquette est lisible en niveaux de gris</td>
+</tr>
+</tbody>
+</table>
+<p>Typographie : pile système, chiffres tabulaires (<code>font-variant-numeric: tabular-nums</code>) — aucune police tierce, donc aucune marque à l'écran et aucune licence de police à vérifier. Les nombres sont toujours accompagnés de leur unité (Kio, s, g) et leur constante est rappelée au survol.</p>
+<p><strong>Mouvement</strong> : le compteur d'octets du disque 1 descend en <code>requestAnimationFrame</code> pendant la simulation du plan (400 ms). <code>prefers-reduced-motion: reduce</code> → changement de nombre instantané, sans animation. Aucun son.</p>
+<p><strong>Pourquoi chaque élément améliore la fonction</strong></p>
+<table>
+<thead>
+<tr>
+<th>Élément</th>
+<th>Ce qu'il améliore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>La rangée de disquettes</td>
+<td>Rend le nombre abstrait (« 2,5 Mo ») physique et comparable d'un site à l'autre : on lit « 5 disques » comme on lit « 12 pages ».</td>
+</tr>
+<tr>
+<td>Le disque 1 distinct</td>
+<td>Matérialise le chemin critique : « tout ce qui n'est pas sur le disque 1 ne coûte rien au premier écran ».</td>
+</tr>
+<tr>
+<td>La trame de hachures</td>
+<td>Le remplissage reste lisible en niveaux de gris, pour les daltoniens et pour l'impression.</td>
+</tr>
+<tr>
+<td>L'étiquette manuscrite</td>
+<td>C'est un objet collable dans une pull request ou une revue de sprint ; le format devient une unité de discussion.</td>
+</tr>
+<tr>
+<td>La bougie qui fond</td>
+<td>Rend le <strong>gain</strong> visible sans feedback de progression fastidieux ; elle s'arrête net en mouvement réduit.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="f12-proprietes-a-tester">F.12 Propriétés à tester</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Invariant exact</th>
+<th>Générateur fast-check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DIS-P-01</td>
+<td><strong>Conservation</strong> : la somme des octets des modules égale la somme des octets des unités, et la somme des <code>usedBytes</code> des disquettes égale le total du site (écart nul, octets entiers).</td>
+<td><code>arbHar(n)</code> → modules dérivés des entrées HAR avec tailles entières.</td>
+</tr>
+<tr>
+<td>DIS-P-02</td>
+<td><strong>Capacité</strong> : pour tout format, <code>disk.usedBytes ≤ format.capacityBytes</code>.</td>
+<td><code>arbFormat()</code> × <code>arbUnits(n)</code>.</td>
+</tr>
+<tr>
+<td>DIS-P-03</td>
+<td><strong>Atomicité</strong> : une unité n'apparaît jamais dans deux disquettes, et ses membres sont tous dans la même — sauf si elle figure dans <code>splitUnits</code> (cas où elle dépasse la capacité du format).</td>
+<td><code>arbUnits(n)</code> avec groupes de taille 1..200, dont certains surdimensionnés.</td>
+</tr>
+<tr>
+<td>DIS-P-04</td>
+<td><strong>Déterminisme</strong> : à entrée, format et graine identiques, <code>planHash</code> identique sur 100 tirages.</td>
+<td><code>arbHar(n)</code> avec graine fixe ; 100 exécutions.</td>
+</tr>
+<tr>
+<td>DIS-P-05</td>
+<td><strong>Stabilité</strong> : ajouter un module de taille ≤ 1 % du total ne change le nombre de disquettes que de 0 ou 1, et ne déplace aucun module critique hors du disque 1.</td>
+<td><code>arbHar(n)</code> + insertion d'un module minuscule à position aléatoire.</td>
+</tr>
+<tr>
+<td>DIS-P-06</td>
+<td><strong>Chemin critique</strong> : l'ensemble des modules du disque 1 est exactement l'ensemble des modules dont <code>requestStartMs ≤ firstRenderMs</code>.</td>
+<td><code>arbHar(n)</code> avec <code>firstRenderMs</code> tiré dans la plage des requêtes.</td>
+</tr>
+<tr>
+<td>DIS-P-07</td>
+<td><strong>Borne</strong> : <code>diskCount ≥ ceil(siteBytes / capacity)</code> et <code>diskCount ≤ lowerBound + nombre d'unités indivisibles non scindables</code>.</td>
+<td><code>arbUnits(n)</code> avec quelques unités surdimensionnées.</td>
+</tr>
+<tr>
+<td>DIS-P-08</td>
+<td><strong>Linéarité carbone</strong> : <code>carbonGrams = octets × 148,2 / 1e9</code>, à 1e-9 près ; un octet de plus augmente le résultat de 1,482e-7 g.</td>
+<td><code>arbBytes()</code>.</td>
+</tr>
+<tr>
+<td>DIS-P-09</td>
+<td><strong>Idempotence du plan</strong> : appliquer deux fois le plan de défragmentation donne le même résultat qu'une fois.</td>
+<td><code>arbPlan()</code> (arbitraire borné).</td>
+</tr>
+<tr>
+<td>DIS-P-10</td>
+<td><strong>Absence d'identifiants</strong> : après ingestion, le modèle normalisé ne contient aucune valeur de <code>cookie</code>, <code>authorization</code> ni <code>postData</code>.</td>
+<td><code>arbHar(n)</code> enrichi d'en-têtes sensibles.</td>
+</tr>
+<tr>
+<td>DIS-P-11</td>
+<td><strong>Aller-retour HAR</strong> : <code>parse → normalize → re-sérialiser</code> conserve le nombre d'entrées et le total d'octets.</td>
+<td><code>arbHar(n)</code>.</td>
+</tr>
+<tr>
+<td>DIS-P-12</td>
+<td><strong>Scission minimale</strong> : une unité n'est scindée que si <code>unit.bytes &gt; capacity</code> ; la scission conserve la somme des octets de ses membres et n'augmente jamais le nombre de disquettes au-delà de la borne + 1.</td>
+<td><code>arbUnits(n)</code> × <code>arbFormat()</code> avec capacités de 720 Kio à 100 Mio.</td>
+</tr>
+</tbody>
+</table>
+<p>Chaque propriété est rattachée à un critère d'acceptation de <code>core-allocator</code> ou <code>har-reader</code>, et le journal note les contre-exemples trouvés (au moins un contre-exemple est attendu sur DIS-P-05 : l'algorithme FFD naïf n'est pas stable, et le correctif — réordonner par <code>firstRequestMs</code> avant le tri par taille — doit être raconté dans <code>KIRO_JOURNAL.md</code>).</p>
+<h3 id="f13-strategie-kiro">F.13 Stratégie Kiro</h3>
+<p><strong>Specs</strong></p>
+<table>
+<thead>
+<tr>
+<th>Spec</th>
+<th>Parcours</th>
+<th>Contenu</th>
+<th>Sortie attendue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>core-allocator</code></td>
+<td>Exigences d'abord</td>
+<td>DIS-F-04, 05, 07, 08, 09 ; DIS-N-06, 08 ; DIS-P-01..08</td>
+<td><code>packages/core</code> + ses propriétés</td>
+</tr>
+<tr>
+<td><code>har-reader</code></td>
+<td>Exigences d'abord</td>
+<td>DIS-F-01, 02, 03, 17, 20, 23 ; DIS-N-01, 05, 07 ; DIS-P-06, 10, 11</td>
+<td><code>packages/har</code></td>
+</tr>
+<tr>
+<td><code>disk-explorer</code></td>
+<td>Conception d'abord</td>
+<td>DIS-F-07, 09, 16, 18, 19 ; DIS-N-04, 10</td>
+<td><code>packages/ui</code> + <code>apps/web</code></td>
+</tr>
+<tr>
+<td><code>defrag-planner</code></td>
+<td>Conception d'abord</td>
+<td>DIS-F-08, 09, 16 ; DIS-P-09</td>
+<td><code>packages/core/defrag.ts</code></td>
+</tr>
+<tr>
+<td><code>cli-guard</code></td>
+<td>Quick Spec</td>
+<td>DIS-F-11, 12, 13 ; DIS-N-09, 12</td>
+<td><code>packages/cli</code> + hook <code>disk-budget</code></td>
+</tr>
+<tr>
+<td><code>app-shell</code></td>
+<td>Quick Spec</td>
+<td>DIS-F-01, 22 ; DIS-N-02, 03</td>
+<td><code>apps/web</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Steering</strong></p>
+<table>
+<thead>
+<tr>
+<th>Fichier</th>
+<th>Inclusion</th>
+<th>Contenu</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>product.md</code>, <code>tech.md</code>, <code>structure.md</code>, <code>testing.md</code></td>
+<td>toujours</td>
+<td>fondations, dont les budgets de lignes et l'interdiction d'envoi réseau</td>
+</tr>
+<tr>
+<td><code>disk-myth.md</code></td>
+<td><code>fileMatch</code> sur <code>packages/core/**</code></td>
+<td>les trois formats, la géométrie (2 880 × 512), le vocabulaire disque/unité/module, et l'interdiction de parler d'« optimisation » sans nombre</td>
+</tr>
+<tr>
+<td><code>privacy.md</code></td>
+<td><code>fileMatch</code> sur <code>packages/har/**</code>, <code>apps/web/**</code></td>
+<td>l'assainissement des identifiants est une obligation, pas une option ; aucune requête sortante sur la voie principale</td>
+</tr>
+<tr>
+<td><code>har-scrub.md</code></td>
+<td>manuelle</td>
+<td>procédure pas à pas pour publier un HAR sans fuite</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Hooks</strong> (tous en action <strong>commande</strong> : ils ne consomment pas de crédits)</p>
+<table>
+<thead>
+<tr>
+<th>Hook</th>
+<th>Déclencheur</th>
+<th>Action</th>
+<th>Preuve attendue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>disk-budget</code></td>
+<td>après <code>build</code></td>
+<td>lance <code>disquette check</code> sur <code>dist/</code> ; échec si le disque 1 déborde</td>
+<td>journal d'un refus de PR</td>
+</tr>
+<tr>
+<td><code>loc-budget</code></td>
+<td>enregistrement dans <code>packages/**</code></td>
+<td>compte les lignes ; au-delà de 500, exige une découpe</td>
+<td>déclencheurs comptés dans <code>KIRO_JOURNAL.md</code></td>
+</tr>
+<tr>
+<td><code>no-network-guard</code></td>
+<td>enregistrement dans <code>apps/web/**</code></td>
+<td>refuse <code>fetch</code>, <code>XMLHttpRequest</code>, <code>axios</code>, <code>WebSocket</code> hors <code>apps/worker</code></td>
+<td>refus consigné</td>
+</tr>
+<tr>
+<td><code>plan-determinism</code></td>
+<td>fin de tâche de spec</td>
+<td>rejoue l'allocateur 100 fois et compare les <code>planHash</code></td>
+<td>graine consignée</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Agents personnalisés</strong></p>
+<table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>Rôle</th>
+<th>Permissions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>defrag-planner</code></td>
+<td>analyse un rapport de build et rédige un plan de défragmentation dans <code>.kiro/plans/&lt;date&gt;.md</code>, sans toucher au code</td>
+<td>lecture seule sur <code>packages/**</code> ; écriture limitée à <code>.kiro/plans/</code></td>
+</tr>
+<tr>
+<td><code>reviewer</code></td>
+<td>relecture des exigences EARS et des propriétés avant merge</td>
+<td>lecture seule</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Skills</strong></p>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>Quand</th>
+<th>Contenu</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fit-on-one-disk</code></td>
+<td>quand une route déborde du disque 1</td>
+<td>la procédure : identifier l'unité critique fautive, proposer <code>defer-route</code> / <code>split-route-chunk</code>, rejouer <code>disquette check</code></td>
+</tr>
+<tr>
+<td><code>har-scrub</code></td>
+<td>avant de commiter un HAR</td>
+<td>la procédure d'assainissement et de masquage d'hôte</td>
+</tr>
+</tbody>
+</table>
+<p><strong>MCP et autres surfaces</strong></p>
+<ul>
+<li><strong>MCP</strong> : un serveur de documentation (pour citer la doc Kiro et la doc Lighthouse dans le journal) et un serveur de navigateur (pour les traces Playwright) sont déclarés dans <code>.kiro/settings/mcp.json</code>. Le journal note ce qu'ils ont permis : inspecter une trace de throttling sans deviner.</li>
+<li><strong>CLI sans interface</strong> : relecture automatique du plan de défragmentation dans la CI (nécessite une clé d'API → optionnel, pas dans le périmètre minimal).</li>
+<li><strong>Exécution parallèle des tâches</strong> : <code>core-allocator</code> et <code>har-reader</code> sont lancées en parallèle (aucune dépendance), puis <code>disk-explorer</code> et <code>defrag-planner</code> ensemble.</li>
+<li><strong>Crew</strong> : non utilisé dans le périmètre minimal (une seule tâche longue).</li>
+<li><strong>Expérience « spec contre vibe coding »</strong> : l'allocateur est fait deux fois — une version écrite à la main en 40 minutes, une version pilotée par spec avec propriétés. Le journal consigne la durée, le nombre d'allers-retours, et le contre-exemple trouvé par fast-check (DIS-P-05) qui n'apparaissait pas dans les tests unitaires.</li>
+</ul>
+<h3 id="f14-plan-de-realisation">F.14 Plan de réalisation</h3>
+<table>
+<thead>
+<tr>
+<th>Lot</th>
+<th>Contenu</th>
+<th>Jours-agent</th>
+<th>Dépendances</th>
+<th>Fusionné avant le gel vidéo (28 nov.)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1</td>
+<td><code>packages/core</code> : modèle, formats, allocateur, mesures</td>
+<td>2,0</td>
+<td>—</td>
+<td>oui (12 nov.)</td>
+</tr>
+<tr>
+<td>F2</td>
+<td><code>packages/har</code> : schéma Zod, lecture, assainissement, chemin critique</td>
+<td>1,5</td>
+<td>F1</td>
+<td>oui (14 nov.)</td>
+</tr>
+<tr>
+<td>F3</td>
+<td><code>packages/build</code> : stats webpack, manifeste Vite, scan <code>dist/</code></td>
+<td>1,0</td>
+<td>F1</td>
+<td>oui (16 nov.)</td>
+</tr>
+<tr>
+<td>F4</td>
+<td><code>packages/cli</code> + hook <code>disk-budget</code> + garde <code>loc-budget</code></td>
+<td>1,0</td>
+<td>F1, F3</td>
+<td>oui (19 nov.)</td>
+</tr>
+<tr>
+<td>F5</td>
+<td><code>apps/web</code> : coquille, dépôt, verdict, exploration</td>
+<td>2,5</td>
+<td>F1, F2</td>
+<td>oui (23 nov.)</td>
+</tr>
+<tr>
+<td>F6</td>
+<td><code>defrag-planner</code> + vue défrag + bougie</td>
+<td>1,5</td>
+<td>F1, F5</td>
+<td>oui (25 nov.)</td>
+</tr>
+<tr>
+<td>F7</td>
+<td>Propriétés fast-check, fixtures, tests bout en bout, hors ligne</td>
+<td>1,0</td>
+<td>F1..F6</td>
+<td>oui (26 nov.)</td>
+</tr>
+<tr>
+<td>F8</td>
+<td>Dogfooding (l'app passe son propre <code>check</code>), a11y, i18n, README</td>
+<td>1,0</td>
+<td>F7</td>
+<td>oui (27 nov.)</td>
+</tr>
+<tr>
+<td>Options</td>
+<td>worker d'URL (0,5), plan de défragmentation appliqué au dépôt <code>disquette</code> lui-même (0,5), export image PNG (0,5), skill + agent (0,5), power (0,5)</td>
+<td>2,5</td>
+<td>—</td>
+<td>non (optionnel)</td>
+</tr>
+<tr>
+<td>Soumission</td>
+<td>vidéo, textes Devpost, billet de blog, publication sociale</td>
+<td>1,5</td>
+<td>gel code 27 nov.</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Périmètre minimal : 8 jours-agent</strong> (F1..F8), options +2,5 j, soumission +1,5 j.</p>
+<p><strong>Calendrier</strong> (11 nov. → 4 déc. 14 h PT)</p>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Jalon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12 nov.</td>
+<td><code>core-allocator</code> spec requirements.md revu ; <code>core</code> amorcé</td>
+</tr>
+<tr>
+<td>14 nov.</td>
+<td><code>har-reader</code> verte ; premier verdict sur un HAR de fixture</td>
+</tr>
+<tr>
+<td>16 nov.</td>
+<td><code>build</code> merged ; la CLI lit un <code>stats.json</code></td>
+</tr>
+<tr>
+<td>19 nov.</td>
+<td>garde CI <code>disk-budget</code> active sur le dépôt <code>disquette</code></td>
+</tr>
+<tr>
+<td>23 nov.</td>
+<td>l'application web affiche un verdict de bout en bout</td>
+</tr>
+<tr>
+<td>25 nov.</td>
+<td>plan de défragmentation : avant/après chiffrés</td>
+</tr>
+<tr>
+<td>26 nov.</td>
+<td>propriétés fast-check vertes, seeds consignées</td>
+</tr>
+<tr>
+<td>27 nov.</td>
+<td><strong>gel du code</strong> ; l'app passe son propre <code>disquette check</code> ; app déployée sur Pages</td>
+</tr>
+<tr>
+<td>28 nov.</td>
+<td><strong>gel de la vidéo</strong> : le plan fort est enregistré, tous les chiffres du script sont mesurés</td>
+</tr>
+<tr>
+<td>29 nov. – 2 déc.</td>
+<td>montage vidéo, textes Devpost, README, <code>KIRO_JOURNAL.md</code>, billet de blog</td>
+</tr>
+<tr>
+<td>3 déc.</td>
+<td>soumission (1 jour de marge avant le 4 déc. 14 h PT)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ce qui doit être mergé avant le gel vidéo du 28 novembre</strong> (liste de contrôle) : allocateur (<code>allocate.ts</code>) ; lecteur HAR + assainissement ; les trois formats ; le verdict (disques, Kio, secondes, CO2e) ; l'explorateur de disquettes ; la vue défragmenteur ; la CLI <code>check</code> ; le hook <code>disk-budget</code> ; les 12 propriétés ; l'application déployée sur Pages avec mode démo et mode hors ligne ; les fixtures HAR ; les chiffres du script vidéo mesurés et notés dans <code>docs/METHOD.md</code>.</p>
+<h3 id="f15-risques-et-parades">F.15 Risques et parades</h3>
+<table>
+<thead>
+<tr>
+<th>Risque</th>
+<th>Probabilité</th>
+<th>Impact</th>
+<th>Parade</th>
+<th>Plan B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>La métaphore est perçue comme de la nostalgie</td>
+<td>Moyenne</td>
+<td>Fort</td>
+<td>Le README et la vidéo ouvrent sur le nombre, pas sur la disquette ; la disquette n'apparaît qu'après le chiffre</td>
+<td>Vidéo réécrite : le chiffre d'abord, la métaphore ensuite</td>
+</tr>
+<tr>
+<td>L'allocateur n'est pas optimal et un juge le remarque</td>
+<td>Moyenne</td>
+<td>Moyen</td>
+<td>On ne prétend pas à l'optimum : la borne inférieure est affichée à côté du résultat, et l'optimum exact est réservé aux petits cas (≤ 12 unités)</td>
+<td>Ajouter un solveur exact pour les petits cas (option)</td>
+</tr>
+<tr>
+<td>Le plan de défragmentation ne réduit pas le nombre de disquettes sur un vrai site</td>
+<td>Élevée</td>
+<td>Moyen</td>
+<td>Le verdict distingue « disque 1 » (le vrai levier : −72 Kio, −1,2 s) et « nombre de disquettes » ; le message le dit explicitement (DIS-F-09)</td>
+<td>Vendre le gain en Kio du disque 1 et en secondes</td>
+</tr>
+<tr>
+<td>L'application de démonstration est elle-même trop lourde</td>
+<td>Moyenne</td>
+<td>Fort</td>
+<td>Budget dur : shell ≤ 200 Kio compressés, lectureur chargé à la demande ; le build passe son propre <code>disquette check</code></td>
+<td>Réduire la visualisation (pas de graphe de dépendances interactif)</td>
+</tr>
+<tr>
+<td>Un HAR de la démo contient des identifiants</td>
+<td>Moyenne</td>
+<td>Fort</td>
+<td>Assainissement obligatoire + test de propriété DIS-P-10 + option <code>--include-urls</code> par défaut désactivée</td>
+<td>HAR de démonstration re-fabriqué à la main</td>
+</tr>
+<tr>
+<td>Les juges ne testent pas l'application</td>
+<td>Élevée</td>
+<td>Fort</td>
+<td>La vidéo porte le message ; le mode démo se lance en un clic ; les chiffres sont dans la description Devpost</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Le chiffre « 12 disquettes » du script ne correspond pas à la mesure finale</td>
+<td>Moyenne</td>
+<td>Moyen</td>
+<td>Le nombre est mesuré le 27 nov. et la phrase est réécrite avec la valeur mesurée avant le gel du 28 nov.</td>
+<td>Reprendre la voix off (2 minutes de studio)</td>
+</tr>
+<tr>
+<td>Le facteur CO2 est contesté</td>
+<td>Moyenne</td>
+<td>Moyen</td>
+<td>La constante est affichée dans l'UI et documentée (SWDM v4, 148,2 g/Go) ; l'intensité du réseau est modifiable dans la config ; le mot « estimation » est dans l'UI</td>
+<td>Ne montrer que les disquettes et les secondes dans la vidéo</td>
+</tr>
+<tr>
+<td>Crédits Kiro épuisés</td>
+<td>Moyenne</td>
+<td>Moyen</td>
+<td>Hooks en action <strong>commande</strong> (0 crédit) ; l'agentic n'est utilisé que sur les specs cœur</td>
+<td>Construire à la main les lots non critiques</td>
+</tr>
+<tr>
+<td>Le temps manque (23 jours, plusieurs chantiers en parallèle)</td>
+<td>Élevée</td>
+<td>Fort</td>
+<td>Périmètre minimal à 8 j, options clairement séparées ; F1+F2+F4 sont suffisants pour un dépôt honorable (CLI seule)</td>
+<td>Soumettre la CLI seule avec la vidéo</td>
+</tr>
+</tbody>
+</table>
+<h3 id="f16-demonstration-et-soumission">F.16 Démonstration et soumission</h3>
+<p><strong>Vidéo — plan minuté 0:00 → 3:00.</strong> Pas de musique, pas de marque tierce à l'écran (les hôtes sont masqués), projet filmé à l'écran sur l'appareil visé.</p>
+<table>
+<thead>
+<tr>
+<th>Temps</th>
+<th>Image (ce qu'on voit)</th>
+<th>Voix off (mot pour mot, anglais)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0:00–0:06</td>
+<td>Une disquette 3,5" réelle, de notre stock, qu'on insère dans un lecteur USB. Écran noir ensuite.</td>
+<td><em>(silence, puis)</em> "In 1991, this was one point four four megabytes. Everything that mattered fit on it."</td>
+</tr>
+<tr>
+<td>0:06–0:18</td>
+<td>L'écran de l'app : une rangée de 12 disquettes dessinées, remplies. Le compteur « 12 disks · 17.7 MB » en gros. Aucun nom de site à l'écran.</td>
+<td>"Today the average home page on the web weighs two and a half megabytes. This one — a well-known, very heavy site — weighs twelve disks. Seventeen point seven megabytes. Thirteen seconds on a three-G connection."</td>
+</tr>
+<tr>
+<td>0:18–0:26</td>
+<td>Le curseur prend un fichier HAR et le dépose sur la coquille.</td>
+<td>"Now drop in your own. No account. No upload. Nothing leaves this tab."</td>
+</tr>
+<tr>
+<td>0:26–0:42</td>
+<td>L'analyse : la barre de progression en octets, puis le verdict : « 5 disks · 2 746 KiB · 14.1 s · 0.42 g CO2e ».</td>
+<td>"Five disks. Two thousand seven hundred and forty-six kibibytes. Fourteen point one seconds on a one point six megabit link — that is Lighthouse's mobile profile. And zero point four two grams of CO2 per visit."</td>
+</tr>
+<tr>
+<td>0:42–0:58</td>
+<td>L'explorateur : on clique sur <code>charts.js</code> ; le panneau de droite montre qui l'importe ; on voit le disque 2 se remplir.</td>
+<td>"Click a file. Here is who imports it, and what it costs. Disk one is the critical path — everything else is deferred."</td>
+</tr>
+<tr>
+<td>0:58–1:16</td>
+<td>La vue défrag : on active le plan ; la bougie fond ; « 5 → 3 disks » ; la liste des actions.</td>
+<td>"The defragmenter proposes a plan. Defer the admin route. Split a chunk that mixes two routes. Drop a third-party script. Three disks instead of five, and disk one drops by seventy-two kibibytes."</td>
+</tr>
+<tr>
+<td>1:16–1:30</td>
+<td>Un terminal : <code>disquette check --stats stats.json</code>, puis un <code>exit 1</code> avec le nom du module fautif.</td>
+<td>"In CI, one command. If the critical path overflows the first disk, the build fails, and it tells you which module did it."</td>
+</tr>
+<tr>
+<td>1:30–1:52</td>
+<td>Le dossier <code>.kiro/</code> : <code>specs/</code>, <code>hooks/</code>, <code>agents/</code>, <code>skills/</code>. Un contre-exemple fast-check affiché dans le journal.</td>
+<td>"Kiro wrote the allocator from a spec, wrote the property tests, and found a bug we would have shipped: adding three kibibytes moved forty files to another disk. The hook runs the check on every build."</td>
+</tr>
+<tr>
+<td>1:52–2:12</td>
+<td>Le mode hors ligne : on coupe le réseau (bandeau « offline mode ») ; l'app continue, on dépose un autre HAR.</td>
+<td>"It works with the network off. The file never leaves the browser — a test fails the build if anything is ever sent."</td>
+</tr>
+<tr>
+<td>2:12–2:34</td>
+<td>Retour sur le verdict, format 720 Kio : le même site passe à « 6 disks » avec le bandeau « 2 units split » ; puis retour au format HD. Le sélecteur de format.</td>
+<td>"Change the format. Double density is brutal: six disks, and two units had to be split because they are bigger than the disk itself. High density is the default. The format changes the difficulty, not the tool."</td>
+</tr>
+<tr>
+<td>2:34–2:52</td>
+<td>Le compteur de la bougie qui fond, plan appliqué, avant/après côte à côte ; les trois chiffres finaux.</td>
+<td>"One disk is the goal. Fit on one disk. The number is measured, not estimated — the tool is the measure."</td>
+</tr>
+<tr>
+<td>2:52–3:00</td>
+<td>Écran final : l'adresse de l'app, l'adresse du dépôt, le trigramme « DIS ».</td>
+<td>"Disquette. Your web app must fit on a disk. The app and the source are in the description. No account, no upload, no music. Thank you."</td>
+</tr>
+</tbody>
+</table>
+<p><em>(Le nombre « 12 » et « 17,7 MB » sont mesurés le 27 novembre sur la fixture ; la phrase est réécrite avec la valeur mesurée si elle diffère — </em><em>À vérifier</em><em>.)</em></p>
+<p><strong>Textes Devpost (en anglais)</strong></p>
+<ul>
+<li><strong>Titre</strong> : <code>Disquette — your web app must fit on a disk</code></li>
+<li><strong>Tagline</strong> : <code>A 1.44 MB floppy disk is back — as the unit of shipment for the web. Your build is counted in disks; disk one is your critical path; a defragmenter tells you what to move.</code></li>
+<li><strong>What it does</strong> : 120 mots. Dépôt d'un HAR (hors ligne, sans compte) → nombre de disquettes, Kio, secondes au profil 1,6 Mbit/s, grammes de CO2e (SWDM v4) ; explorateur de disquettes ; plan de défragmentation chiffré ; CLI <code>disquette check</code> en garde CI.</li>
+<li><strong>How we built it</strong> : 150 mots. Kiro : specs exigences-d'abord pour le cœur et le lecteur HAR, conception-d'abord pour l'explorateur et le défrag ; steering de domaine (<code>disk-myth.md</code>, <code>privacy.md</code>) ; hooks en action commande (<code>disk-budget</code>, <code>loc-budget</code>, <code>no-network-guard</code>, <code>plan-determinism</code>) ; agent <code>defrag-planner</code> en lecture seule ; skill <code>fit-on-one-disk</code> ; 12 propriétés fast-check, dont un contre-exemple qui a fait corriger l'algorithme ; journal <code>KIRO_JOURNAL.md</code>.</li>
+<li><strong>Why it's a Resurrection</strong> : 80 mots. La disquette est morte ; ce qu'on ressuscite est la discipline de la pénurie, et elle est reintroduite dans la chaîne de build, pas dans un décor.</li>
+<li><strong>Try it</strong> : l'adresse de l'app (un clic, HAR de démonstration préchargé), la commande <code>npx disquette check --har &lt;fichier&gt;</code>, et le HAR d'exemple.</li>
+<li><strong>Tests instructions for the judges</strong> : « Open the app. Click <em>Use the demo HAR</em>. You will see 5 disks, 2 746 KiB, 14.1 s on the 1.6 Mbps profile, 0.42 g CO2e per visit. Switch the format to <em>DD 720 KB</em> and watch the count go to 6, with two units flagged as split. Open the defrag view and apply the plan. Everything runs offline: turn off your network and repeat. »</li>
+</ul>
+<p><strong>Bonus</strong></p>
+<ul>
+<li><strong>Blog</strong> (pendant la période) : « The floppy disk was a shipping unit. We brought it back as a budget. » — avec les chiffres mesurés, la méthode SWDM, et le contre-exemple fast-check.</li>
+<li><strong>Social</strong> : publication commençant par <code>#KiroweenHackathon26</code>, disant ce que Kiro a changé (le hook qui bloque une PR, la spec qui a produit le contre-exemple de stabilité).</li>
+<li><strong>Best Demo</strong> : la vidéo des 30 premières secondes suffit.</li>
+</ul>
+<h3 id="f17-recette">F.17 Recette</h3>
+<p>Exécutable par <code>node scripts/recette.mjs</code> (uniquement local, aucun réseau requis).</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Vérification</th>
+<th>Résultat attendu</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>node scripts/recette.mjs demo</code> — verdict sur <code>fixtures/har/kitchen-sink.har</code>, format HD</td>
+<td><code>5 disks · 2746 KiB · 14.1 s · 0.42 gCO2e</code> (valeurs exactes figées dans le script, après mesure)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Même HAR, format DD puis Zip</td>
+<td><code>6 disks · splitUnits: 2</code> puis <code>1 disk (Zip 100 MB)</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>fixtures/har/with-credentials.har</code></td>
+<td><code>3 credentials removed</code> et <code>0</code> occurrences de <code>session=</code> dans le modèle</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Deux analyses successives du même HAR</td>
+<td><code>planHash</code> identiques, deux exécutions → hash <code>a3f1…</code> consigné</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Contrôle de capacité sur toutes les disquettes</td>
+<td><code>max used = 1409 KiB ≤ 1440 KiB</code> (aucune disquette ne dépasse le format)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Conservation du volume</td>
+<td><code>sum(modules) = sum(disks) = 2 811 904</code> (écart 0)</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>node scripts/recette.mjs determinism</code> — 100 exécutions</td>
+<td><code>100/100 identical planHash</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>node scripts/recette.mjs properties</code></td>
+<td><code>12 properties passed</code>, graines listées</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>node scripts/recette.mjs cli</code> — <code>disquette check</code> sur un fixture en débordement puis sur un bon fixture</td>
+<td><code>exit 1</code> puis <code>exit 0</code>, rapport Markdown écrit dans <code>artifacts/</code></td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>node scripts/recette.mjs offline</code> (Playwright, <code>context.setOffline(true)</code>)</td>
+<td><code>0 network requests</code>, la démo complète passe, verdict identique</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>node scripts/recette.mjs dogfood</code> — <code>disquette check</code> sur le build de <code>apps/web</code></td>
+<td><code>1 disk · ≤ 1 474 560 bytes</code> (l'app tient sur une disquette)</td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>node scripts/recette.mjs a11y</code> (Playwright + axe)</td>
+<td><code>0 violations</code> sur l'écran de verdict et sur l'explorateur</td>
+</tr>
+</tbody>
+</table>
+<h3 id="f18-questions-ouvertes">F.18 Questions ouvertes</h3>
+<ol>
+<li><strong>Format par défaut</strong> : 1 440 Kio (HD) retenu ; le 720 Kio est un mode « brutal » qui fait la vidéo. Confirmer ce choix, ou faut-il faire du DD le mode d'accueil du site public ?</li>
+<li><strong>Chiffre de la vidéo</strong> : « 12 disquettes » est mesuré le 27 novembre sur la fixture ; si la mesure diffère, on réécrit la voix off (ou on refait la prise). Quelle marge accepte-t-on ?</li>
+<li><strong>HAR de site tiers</strong> : on ne commite aucun HAR de site tiers ; la mesure « site célèbre » se fait en direct via le worker, avec l'hôte masqué à l'écran. Valider ce parti pris (il protège la règle « pas de marque tierce ») ou demander l'autorisation d'afficher le nom ?</li>
+<li><strong>Facteur carbone</strong> : on garde la constante mondiale SWDM v4 (148,2 g/Go) et on rend l'intensité du réseau configurable. Un mode « France » (≈ 56 gCO2e/kWh, <strong>À vérifier</strong>) est-il utile, ou noyerait-il le message ?</li>
+<li><strong>Agent <code>defrag-planner</code></strong> : il écrit dans <code>.kiro/plans/</code>. Autorise-t-on un droit d'écriture plus large (par exemple un rapport Markdown à la racine du dépôt analysé) ?</li>
+<li><strong>CLI</strong> : publiée sur npm (<code>npx disquette</code>) ou seulement dans le dépôt ? La publication ajoute une charge de maintenance jusqu'au 29 janvier 2027 ; le repo suffit pour les juges.</li>
+<li><strong>Format 100 Mio</strong> : garder Zip comme troisième format (fun, indulgent) ou le remplacer par « CD-ROM 700 Mio » ? Zip a l'avantage d'être une vraie disquette.</li>
+<li><strong>Anti-triche</strong> : le plan de défragmentation peut-il être appliqué automatiquement par un agent ? Pour l'instant, non (DIS-F-24 est exclu). Une option « apply with a PR » serait puissante mais risquée pour le temps disponible.</li>
+</ol>
+</main>
+<footer>Généré depuis les sources Markdown du dépôt, vérifié sans dérive en CI. Licence MIT.</footer>
+</body>
+</html>

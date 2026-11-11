@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cadre du concours — Dossier Kiroween — Hackathon 2026</title>
+<style>
+:root{--fg:#e8e6e3;--bg:#111014;--card:#1b1a20;--acc:#e08b3c;--acc2:#8fd3c7;
+ --mut:#9b968f;--bd:#2c2a33}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+ font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+header{padding:1.4rem 1.2rem;border-bottom:1px solid var(--bd);background:var(--card)}
+header h1{margin:0;font-size:1.25rem}
+header p{margin:.3rem 0 0;color:var(--mut);font-size:.9rem}
+nav{display:flex;flex-wrap:wrap;gap:.4rem;padding:.8rem 1.2rem;border-bottom:1px solid var(--bd)}
+nav a{color:var(--mut);text-decoration:none;font-size:.85rem;padding:.3rem .6rem;
+ border:1px solid var(--bd);border-radius:999px}
+nav a:hover{color:var(--fg)}
+nav a.actif{color:#111014;background:var(--acc);border-color:var(--acc);font-weight:600}
+main{padding:1.2rem;max-width:64rem;margin:0 auto}
+main h1{font-size:1.6rem;border-bottom:1px solid var(--bd);padding-bottom:.4rem}
+main h2{font-size:1.25rem;margin-top:2rem;color:var(--acc)}
+main h3{font-size:1.05rem;margin-top:1.6rem;color:var(--acc2)}
+a{color:var(--acc2)}
+code{background:#0c0b0f;padding:.1rem .35rem;border-radius:4px;font-size:.88em}
+pre{background:#0c0b0f;padding:.9rem;border-radius:8px;overflow-x:auto;border:1px solid var(--bd)}
+pre code{background:none;padding:0}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.9rem;display:block;overflow-x:auto}
+th,td{border:1px solid var(--bd);padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{background:var(--card);white-space:nowrap}
+blockquote{border-left:3px solid var(--acc);margin:1rem 0;padding:.2rem 1rem;color:var(--mut)}
+hr{border:0;border-top:1px solid var(--bd);margin:2rem 0}
+footer{padding:1.2rem;color:var(--mut);font-size:.85rem;border-top:1px solid var(--bd);text-align:center}
+@media (prefers-reduced-motion:no-preference){nav a{transition:color .15s,background .15s}}
+</style>
+</head>
+<body>
+<header>
+<h1>Dossier Kiroween — Hackathon 2026</h1>
+<p>1 350 idées générées, classées par cas d'usage réel, et quatre cahiers des charges complets.</p>
+</header>
+<nav>
+<a href="index.html">Accueil</a>
+<a href="classement-usage.html">Classement usage — 39</a>
+<a href="classement-2mois.html">Classement 2 mois — 39</a>
+<a href="classement-technique.html">Classement technique — 39</a>
+<a href="idees-usage.html">Idées · usage réel (200)</a>
+<a href="idees-2mois.html">Idées · horizon 2 mois (400)</a>
+<a href="idees-semaine.html">Idées · 15 filons (750)</a>
+<a href="disquette.html">Cahier · Disquette</a>
+<a href="rota.html">Cahier · Rota</a>
+<a href="partie-double.html">Cahier · Partie double</a>
+<a href="seance.html">Cahier · Séance</a>
+<a href="cadre.html" class="actif">Cadre du concours</a>
+<a href="consigne.html">Consigne de génération</a>
+<a href="grille.html">Grille de notation</a>
+</nav>
+<main>
+<h1 id="kiroween-2026-contexte-partage-pour-les-cinq-nouvelles-idees">Kiroween 2026 — contexte partagé pour les cinq nouvelles idées</h1>
+<p>Document de référence, écrit le 11 novembre 2026. <strong>À lire en entier avant d'écrire quoi que ce soit.</strong>
+Il contient : le règlement vérifié, la grille du jury, le portefeuille déjà soumis (à ne pas dupliquer),
+les conventions de la maison, et la structure imposée du livrable.</p>
+<p>Source : <code>https://kiroween.devpost.com/</code> consulté le 11/11/2026 à 15 h 30 (Paris).</p>
+<hr>
+<h2 id="1-les-quatre-categories-texte-officiel">1. Les quatre catégories, texte officiel</h2>
+<ul>
+<li><strong>Resurrection</strong> : « Bring your favorite dead technology back to life. Reimagine obsolete tech with
+  today's innovations or solving tomorrow's problems. »</li>
+<li><strong>Frankenstein</strong> : « Stitch together a chimera of technologies into one app. Bring together seemingly
+  incompatible elements to build something unexpectedly powerful. »</li>
+<li><strong>Skeleton Crew</strong> : « Build a skeleton code template lean enough to be clear but flexible enough to
+  support various use cases. Show us its versatility with two distinct applications from your foundation. »</li>
+<li><strong>Costume Contest</strong> : « Build any app but show us a haunting user interface that's polished and
+  unforgettable. Bring in spooky design elements that enhance your app's function. »</li>
+</ul>
+<p>Point décisif pour Costume Contest : le spooky doit <strong>améliorer la fonction</strong>, pas décorer.
+Point décisif pour Skeleton Crew : le dépôt doit contenir <strong>deux dossiers séparés</strong> pour les deux applications.
+Point décisif pour Resurrection : la technologie doit être <strong>vraiment morte</strong>, et la réinterprétation doit
+résoudre un problème d'aujourd'hui ou de demain — pas seulement faire de la nostalgie.</p>
+<h2 id="2-prix">2. Prix</h2>
+<p>1er 30 000 $ · 2e 20 000 $ · 3e 10 000 $ · Best Resurrection 5 000 $ · Best Frankenstein 5 000 $ ·
+Best Skeleton Crew 5 000 $ · Best Costume Contest 5 000 $ · Best Startup 10 000 $ ·
+Best Ghost of Kiroween Past 2 000 $ · Best Kiro Crew App 1 000 $ · Best Demo 1 000 $ ·
+Bonus Blog (100 gagnants, 2 000 crédits) · Social Blitz (5 gagnants).
+<strong>Un projet ne peut gagner qu'un prix global OU un prix de catégorie, pas les deux. Les bonus se cumulent.</strong></p>
+<h2 id="3-regles-de-soumission-qui-contraignent-la-conception">3. Règles de soumission qui contraignent la conception</h2>
+<table>
+<thead>
+<tr>
+<th>Règle</th>
+<th>Conséquence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Période de construction : 30 octobre 2026 → 4 décembre 2026, 14 h Pacifique (23 h Paris)</td>
+<td>Dépôt créé après le 30/10. Code antérieur réutilisé = déclaré dans le README.</td>
+</tr>
+<tr>
+<td>Construit avec Kiro, sinon disqualification à la discrétion des juges</td>
+<td>Traces visibles : <code>/.kiro</code> à la racine, specs, hooks, steering, journal.</td>
+</tr>
+<tr>
+<td>Dépôt GitHub <strong>public</strong>, licence open source détectable dans l'encart About, <code>/.kiro</code> non ignoré</td>
+<td>MIT dès le premier commit + garde CI qui vérifie.</td>
+</tr>
+<tr>
+<td>URL d'une app qui marche, gratuite, sans restriction jusqu'au <strong>29 janvier 2027</strong></td>
+<td>Hébergement à tenir ~2 mois. Mode démo sans compte ni installation.</td>
+</tr>
+<tr>
+<td>Les juges <strong>ne sont pas obligés de tester</strong> : ils peuvent juger sur vidéo + texte</td>
+<td>La vidéo et le texte portent l'essentiel de la note.</td>
+</tr>
+<tr>
+<td>Vidéo <strong>&lt; 3 min</strong>, publique sur YouTube, montrant le projet sur l'appareil visé, <strong>sans musique ni marque tierce</strong></td>
+<td>Script minuté obligatoire. Zéro logo tiers à l'écran, zéro musique sous droits.</td>
+</tr>
+<tr>
+<td>Tous les éléments de soumission en <strong>anglais</strong></td>
+<td>UI, README, specs, vidéo en anglais. Le français peut rester en seconde langue d'UI.</td>
+</tr>
+<tr>
+<td>Plusieurs soumissions autorisées si chacune est unique et substantiellement différente</td>
+<td>Dépôts indépendants, <strong>aucune dépendance d'un projet vers un autre</strong> ; un utilitaire commun est recopié.</td>
+</tr>
+<tr>
+<td>Crédits Kiro : 4 000 par participant, demande avant le 1er décembre</td>
+<td>Les actions de hook de type « agent » consomment des crédits, les actions « commande » non.</td>
+</tr>
+<tr>
+<td>Œuvre originale ; bibliothèques open source OK si licences respectées</td>
+<td>Écarter par défaut le copyleft fort (AGPL/GPLv3). Tableau des dépendances + licences dans le README.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-grille-du-jury-cinq-criteres-20-chacun">4. Grille du jury — cinq critères, 20 % chacun</h2>
+<table>
+<thead>
+<tr>
+<th>Critère</th>
+<th>Ce que le jury regarde</th>
+<th>Ce qu'il faut produire</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Potential Impact</strong></td>
+<td>Vrai problème, vrai public, solution utile, intuitive, accessible. « Est-ce que quelqu'un l'utiliserait ? »</td>
+<td>Un persona nommé + une situation datée ; <strong>un chiffre mesuré par l'outil lui-même</strong>.</td>
+</tr>
+<tr>
+<td><strong>Technological Implementation</strong></td>
+<td>Profondeur et variété de l'usage de Kiro, stratégie d'IA, expérimentation</td>
+<td>Plan d'usage de Kiro chiffré (specs, hooks, steering, agents, MCP, powers, PBT, Crew, CLI headless), journal au fil de l'eau, comparaison spec contre « vibe coding » sur une fonction précise.</td>
+</tr>
+<tr>
+<td><strong>Design</strong></td>
+<td>Produit complet et cohérent, pas une preuve de concept</td>
+<td>États vides, erreurs, chargements ; accessibilité AA ; mode démo soigné.</td>
+</tr>
+<tr>
+<td><strong>Innovation/Idea</strong></td>
+<td>Nouveauté du concept, différence avec l'existant, combinaison inhabituelle de technologies ou de <strong>données publiques</strong></td>
+<td>Nommer l'existant et dire en une phrase ce qui est différent.</td>
+</tr>
+<tr>
+<td><strong>Presentation</strong></td>
+<td>La vidéo montre le projet <strong>de bout en bout</strong>, le pitch est clair, mémorable</td>
+<td>Script minute par minute avec le plan fort dans les 20 premières secondes.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-portefeuille-deja-construit-a-ne-pas-dupliquer">5. Portefeuille déjà construit — à ne PAS dupliquer</h2>
+<table>
+<thead>
+<tr>
+<th>Dépôt</th>
+<th>Catégorie</th>
+<th>Idée en une phrase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bipeur</code></td>
+<td>Resurrection</td>
+<td>Le pager bidirectionnel (SNPP, RFC 1861) revient pour superviser des agents IA : une ligne, un code, un tap.</td>
+</tr>
+<tr>
+<td><code>packet-voyage</code></td>
+<td>Frankenstein</td>
+<td>Un diagnostic réseau de 1987 (traceroute) cousu à la géographie : suivre la route physique de ses paquets, bornée par la vitesse de la lumière.</td>
+</tr>
+<tr>
+<td><code>suture</code></td>
+<td>Frankenstein</td>
+<td>Git (plomberie réelle) × fichiers <code>.xlsx</code> : versionnage de tableur sans jamais dire « Git ».</td>
+</tr>
+<tr>
+<td><code>ghost-hours</code></td>
+<td>Frankenstein</td>
+<td>Commits Git × agenda iCal × notes Markdown → reconstituer les heures réellement travaillées et brouillonner la facture.</td>
+</tr>
+<tr>
+<td><code>thin-air</code></td>
+<td>Frankenstein</td>
+<td>La webcam transforme l'air en instrument de musique ; rien ne quitte le navigateur.</td>
+</tr>
+<tr>
+<td><code>bare-bones</code></td>
+<td>Skeleton Crew</td>
+<td>Squelette d'explorateur de données (import, filtres, graphiques, lien de partage) + budget d'association + résultats de club + recensement de bonbons.</td>
+</tr>
+<tr>
+<td><code>placard</code></td>
+<td>Costume Contest</td>
+<td>Audit des secrets et données perso dans l'historique Git, habillé en manoir hanté avec rituel de tri.</td>
+</tr>
+</tbody>
+</table>
+<p>Conséquences pour les nouvelles idées :
+- <strong>Éviter</strong> la supervision d'agents IA comme idée centrale en Resurrection (déjà <code>bipeur</code>).
+- <strong>Éviter</strong> l'exploration de fichiers/données en lecture seule en Skeleton Crew (déjà <code>bare-bones</code>).
+- <strong>Éviter</strong> le manoir hanté et les pièces à visiter en Costume Contest (déjà <code>placard</code>).
+- Le portefeuille est déjà très « outils pour développeurs ». Les nouvelles idées gagnent à viser
+  <strong>aussi</strong> des publics non développeurs (bénévoles, familles, petites structures), parce que le critère
+  « est-ce que quelqu'un l'utiliserait vraiment » se marque mieux avec un public large.</p>
+<h2 id="6-socle-technique-de-la-maison-reconduit-pour-chaque-projet">6. Socle technique de la maison (reconduit pour chaque projet)</h2>
+<ul>
+<li>TypeScript strict, Node LTS, pnpm workspaces, Vite + React, Zod pour toute donnée entrante.</li>
+<li>Tests : Vitest, <strong>fast-check</strong> pour les propriétés, Playwright pour le bout en bout et les captures vidéo.</li>
+<li>CI GitHub Actions : typecheck, lint, test, build, <strong>ci-budget (<code>timeout-minutes: 5</code>, <code>concurrency</code>, <code>fetch-depth: 1</code>)</strong>, garde de conformité concours (<code>.kiro</code> présent et non ignoré, licence présente). E2E et bancs longs hors PR.</li>
+<li>Hébergement : <strong>site statique d'abord</strong> (GitHub Pages), données dans le navigateur. Un petit worker serverless n'est accepté que s'il est indispensable, gratuit, sans compte, et s'il ne voit jamais de donnée en clair.</li>
+<li>Licence MIT ; dépendances à copyleft fort écartées.</li>
+<li>Appels à un modèle de langage : <strong>toujours optionnels, désactivés par défaut</strong>, derrière une interface de fournisseur, avec une voie sans modèle pour chaque fonction. Aucun secret ni donnée personnelle envoyé à un modèle.</li>
+<li>Vie privée : traitement local d'abord, aucun envoi sans action explicite.</li>
+<li>Accessibilité : contraste AA, navigation clavier complète, information jamais portée par la seule couleur, <code>prefers-reduced-motion</code> respecté.</li>
+<li><strong>Aucun son par défaut</strong> (règle de l'espace de travail) : tout son est derrière un réglage désactivé.</li>
+<li>Règles de code : <strong>&lt; 500 lignes par fichier, &lt; 50 lignes par fonction</strong>, zéro duplication, garde automatique en CI.</li>
+</ul>
+<h2 id="7-conventions-de-redaction-des-exigences">7. Conventions de rédaction des exigences</h2>
+<ul>
+<li>Identifiants : <code>TRI-F-nn</code> fonctionnelle, <code>TRI-N-nn</code> non fonctionnelle, <code>TRI-P-nn</code> propriété à tester,
+  où <code>TRI</code> est le trigramme donné dans le brief de l'idée.</li>
+<li>Priorités : <strong>I</strong> indispensable (périmètre minimal), <strong>S</strong> souhaitable, <strong>O</strong> optionnel, <strong>X</strong> exclu.</li>
+<li>Critères d'acceptation en <strong>notation EARS</strong> : « QUAND …, le système DOIT … », « TANT QUE …, le système DOIT … »,
+  « SI …, ALORS le système DOIT … », « OÙ une option est activée, le système DOIT … ».</li>
+<li>Identifiants de code, de fichier et d'API <strong>en anglais</strong> (prêts à reprendre), prose <strong>en français</strong>.</li>
+</ul>
+<h2 id="8-structure-kiro-attendue-verifiee-dans-la-documentation-kiro">8. Structure <code>.kiro/</code> attendue (vérifiée dans la documentation Kiro)</h2>
+<pre><code>.kiro/
+├── steering/     product.md · tech.md · structure.md · testing.md · &lt;domaine&gt;.md (fileMatch)
+├── specs/&lt;fn&gt;/   requirements.md · design.md · tasks.md
+├── hooks/        &lt;nom&gt;.json  (format v1 : trigger, matcher, action)
+├── agents/       &lt;nom&gt;.md    (relecteur en lecture seule, testeur, permissions restreintes)
+├── skills/&lt;nom&gt;/SKILL.md
+└── settings/mcp.json
+</code></pre>
+<p>Le texte de soumission pose précisément ces questions — le <code>KIRO_JOURNAL.md</code> du dépôt y répond :
+surfaces de Kiro utilisées et leurs différences ; agents personnalisés ; hooks et leur gain ;
+spec contre vibe coding (avec durée, allers-retours, défauts trouvés) ; le steering qui a fait la
+différence ; ce qu'a permis MCP ; ce que les tests par propriétés ont trouvé (chaque contre-exemple) ;
+quels powers.</p>
+<h2 id="9-structure-imposee-du-livrable">9. Structure imposée du livrable</h2>
+<p>Chaque brief suit les 18 sections du cahier des charges de la maison :</p>
+<ol>
+<li><strong>X.1 Fiche d'identité</strong> — tableau : nom de travail (français) + nom anglais de soumission, catégorie,
+   en une phrase, public, idée centrale, ce qui existe déjà, ce qui est différent, prix visés, charge en jours-agent.</li>
+<li><strong>X.2 Ce que la catégorie demande, et la réponse</strong> — tableau : chaque exigence du règlement citée, et la réponse précise.</li>
+<li><strong>X.3 Problème, public et pourquoi maintenant</strong> — personas nommés, situations datées, chiffres sourcés ou marqués <strong>À vérifier</strong>.</li>
+<li><strong>X.4 Objectifs, non-objectifs, indicateurs</strong> — avec un tableau d'indicateurs chiffrés et mesurables par l'outil.</li>
+<li><strong>X.5 Le concept en profondeur</strong> — la mécanique centrale expliquée jusqu'au détail qui prouve qu'on a compris le sujet.</li>
+<li><strong>X.6 Formats et données</strong> — schémas exacts (TypeScript/Zod), exemples réels, sources de données publiques nommées avec leur licence.</li>
+<li><strong>X.7 Exigences fonctionnelles</strong> — tableau EARS, identifiants, priorités.</li>
+<li><strong>X.8 Exigences non fonctionnelles</strong> — performance, taille, accessibilité, vie privée, robustesse, offline.</li>
+<li><strong>X.9 Architecture technique</strong> — arborescence du dépôt complète, paquets, budgets de lignes par paquet, flux de données, ce qui tourne où.</li>
+<li><strong>X.10 Sécurité et modèle de menace</strong> — ce qui peut mal tourner, et la parade.</li>
+<li><strong>X.11 Interface et direction artistique</strong> — écrans, états vides/erreurs/chargement, palette, typographie, mouvement, et <strong>pourquoi chaque élément effrayant améliore la fonction</strong>.</li>
+<li><strong>X.12 Propriétés à tester</strong> — liste <code>TRI-P-nn</code> avec l'invariant exact et le générateur fast-check.</li>
+<li><strong>X.13 Stratégie Kiro</strong> — tableau : fonction de Kiro → emploi précis → preuve produite dans le dépôt.</li>
+<li><strong>X.14 Plan de réalisation</strong> — lots, dépendances, jours-agent, ce qui est mergé avant le gel vidéo (28 novembre).</li>
+<li><strong>X.15 Risques et parades</strong> — tableau risque / probabilité / impact / parade / plan B.</li>
+<li><strong>X.16 Démonstration et soumission</strong> — script vidéo minuté 0:00 → 3:00 avec le plan de chaque séquence et la voix off ; textes Devpost ; bonus (blog, social).</li>
+<li><strong>X.17 Recette</strong> — liste de vérifications exécutables (<code>node scripts/recette.mjs</code>) avec le résultat attendu, 8 à 12 points.</li>
+<li><strong>X.18 Questions ouvertes</strong> — les arbitrages qui reviennent au user.</li>
+</ol>
+<h2 id="10-ce-qui-rend-une-idee-gagnante-ici-criteres-de-qualite-du-brief">10. Ce qui rend une idée gagnante ici — critères de qualité du brief</h2>
+<ul>
+<li><strong>Un chiffre opposable</strong> : l'outil produit lui-même une mesure (ko, disquettes, heures, euros, violations,
+  secondes gagnées) et la vidéo la montre. Pas d'adjectif sans nombre.</li>
+<li><strong>Le plan fort dans les 20 premières secondes</strong> de la vidéo.</li>
+<li><strong>Démo en 30 secondes sans compte</strong> : le juge comprend et voit un résultat avant la fin de la première minute.</li>
+<li><strong>Un seul concept par fichier, cinq points d'extension nommés au maximum.</strong></li>
+<li><strong>L'existant est nommé</strong> (outils concurrents réels, avec ce qu'ils font bien) et la différence tient en une phrase.</li>
+<li><strong>Honnêteté</strong> : ce qui n'est pas mesuré est marqué <strong>À vérifier</strong> ; un échec documenté vaut mieux qu'une promesse.</li>
+</ul>
+</main>
+<footer>Généré depuis les sources Markdown du dépôt, vérifié sans dérive en CI. Licence MIT.</footer>
+</body>
+</html>

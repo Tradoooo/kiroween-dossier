@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cahier · Partie double — Dossier Kiroween — Hackathon 2026</title>
+<style>
+:root{--fg:#e8e6e3;--bg:#111014;--card:#1b1a20;--acc:#e08b3c;--acc2:#8fd3c7;
+ --mut:#9b968f;--bd:#2c2a33}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+ font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+header{padding:1.4rem 1.2rem;border-bottom:1px solid var(--bd);background:var(--card)}
+header h1{margin:0;font-size:1.25rem}
+header p{margin:.3rem 0 0;color:var(--mut);font-size:.9rem}
+nav{display:flex;flex-wrap:wrap;gap:.4rem;padding:.8rem 1.2rem;border-bottom:1px solid var(--bd)}
+nav a{color:var(--mut);text-decoration:none;font-size:.85rem;padding:.3rem .6rem;
+ border:1px solid var(--bd);border-radius:999px}
+nav a:hover{color:var(--fg)}
+nav a.actif{color:#111014;background:var(--acc);border-color:var(--acc);font-weight:600}
+main{padding:1.2rem;max-width:64rem;margin:0 auto}
+main h1{font-size:1.6rem;border-bottom:1px solid var(--bd);padding-bottom:.4rem}
+main h2{font-size:1.25rem;margin-top:2rem;color:var(--acc)}
+main h3{font-size:1.05rem;margin-top:1.6rem;color:var(--acc2)}
+a{color:var(--acc2)}
+code{background:#0c0b0f;padding:.1rem .35rem;border-radius:4px;font-size:.88em}
+pre{background:#0c0b0f;padding:.9rem;border-radius:8px;overflow-x:auto;border:1px solid var(--bd)}
+pre code{background:none;padding:0}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.9rem;display:block;overflow-x:auto}
+th,td{border:1px solid var(--bd);padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{background:var(--card);white-space:nowrap}
+blockquote{border-left:3px solid var(--acc);margin:1rem 0;padding:.2rem 1rem;color:var(--mut)}
+hr{border:0;border-top:1px solid var(--bd);margin:2rem 0}
+footer{padding:1.2rem;color:var(--mut);font-size:.85rem;border-top:1px solid var(--bd);text-align:center}
+@media (prefers-reduced-motion:no-preference){nav a{transition:color .15s,background .15s}}
+</style>
+</head>
+<body>
+<header>
+<h1>Dossier Kiroween — Hackathon 2026</h1>
+<p>1 350 idées générées, classées par cas d'usage réel, et quatre cahiers des charges complets.</p>
+</header>
+<nav>
+<a href="index.html">Accueil</a>
+<a href="classement-usage.html">Classement usage — 39</a>
+<a href="classement-2mois.html">Classement 2 mois — 39</a>
+<a href="classement-technique.html">Classement technique — 39</a>
+<a href="idees-usage.html">Idées · usage réel (200)</a>
+<a href="idees-2mois.html">Idées · horizon 2 mois (400)</a>
+<a href="idees-semaine.html">Idées · 15 filons (750)</a>
+<a href="disquette.html">Cahier · Disquette</a>
+<a href="rota.html">Cahier · Rota</a>
+<a href="partie-double.html" class="actif">Cahier · Partie double</a>
+<a href="seance.html">Cahier · Séance</a>
+<a href="cadre.html">Cadre du concours</a>
+<a href="consigne.html">Consigne de génération</a>
+<a href="grille.html">Grille de notation</a>
+</nav>
+<main>
+<h1 id="kiroween-2026-projet-h-partie-double">Kiroween 2026 — Projet H · Partie double</h1>
+<p>Cahier des charges rédigé le 11 novembre 2026. Trigramme <strong>LED</strong>. Dépôt cible : <code>ledger</code>. Catégorie <strong>Skeleton Crew</strong>.
+Ce document est la matière première des specs Kiro : chaque exigence y est identifiée (<code>LED-F-nn</code>, <code>LED-N-nn</code>,
+<code>LED-P-nn</code>) et priorisée (<strong>I</strong>ndispensable, <strong>S</strong>ouhaitable, <strong>O</strong>ptionnel, e<strong>X</strong>clu). Prose en français,
+identifiants de code en anglais. Ce qui n'est pas mesuré est marqué <strong>À vérifier</strong>. Sources consultées le 11/11/2026 :
+règlement et grille Devpost (restitués dans <code>00-CONTEXTE-NOUVELLES-IDEES.md</code>), <code>actualbudget.org</code>, <code>hledger.org</code>,
+<code>beancount.github.io</code>, <code>firefly-iii.org</code>.</p>
+<h2 id="h-partie-double-un-squelette-de-grand-livre-immuable-et-ses-deux-applications">H. Partie double — un squelette de grand livre immuable et ses deux applications</h2>
+<h3 id="h1-fiche-didentite">H.1 Fiche d'identité</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nom de travail</td>
+<td>Partie double. Nom anglais de soumission : « Ledger — a double-entry skeleton ».</td>
+</tr>
+<tr>
+<td>Catégorie / trigramme / dépôt</td>
+<td>Skeleton Crew · <code>LED</code> · <code>ledger</code></td>
+</tr>
+<tr>
+<td>En une phrase</td>
+<td>Un noyau de comptabilité en partie double, maigre et immuable, dont chaque écriture est irréversible, chaque solde un pli sur le journal, et dont deux applications héritent des mêmes invariants prouvés : le budget privé d'un foyer et le grand livre public d'un fonds d'entraide.</td>
+</tr>
+<tr>
+<td>Public</td>
+<td>Le développeur qui part du squelette ; puis deux publics non développeurs aux antipodes de la vie privée — un foyer (Sarah) et un collectif solidaire de 6 bénévoles — et ceux qui lisent leurs liens.</td>
+</tr>
+<tr>
+<td>Idée centrale</td>
+<td>Le grand livre est le gabarit « maigre mais souple » canonique : ~4 200 lignes servent un foyer, une association, un fonds d'entraide, une banque du temps, un inventaire. Les invariants comptables donnent aux tests par propriétés une matière que peu de projets ont : <strong>la justesse n'est pas une opinion, c'est une équation.</strong></td>
+</tr>
+<tr>
+<td>Ce qui existe déjà</td>
+<td>Beancount, hledger, ledger-cli (texte, développeurs, aucune interface) ; Actual Budget (open source, local-first, enveloppes, à installer) ; GnuCash (bureau, lourd) ; Firefly III (serveur PHP auto-hébergé).</td>
+</tr>
+<tr>
+<td>Ce qui est différent</td>
+<td>Personne ne propose un squelette comptable maigre, hors ligne, dans le navigateur, dont les deux applications se situent aux deux extrémités du spectre de la vie privée — l'une cache tout, l'autre publie tout — avec une chaîne de hash vérifiable.</td>
+</tr>
+<tr>
+<td>Prix visés</td>
+<td>Best Skeleton Crew (5 000 $), prix globaux, bonus Blog, Best Kiro Crew App.</td>
+</tr>
+<tr>
+<td>Charge</td>
+<td>11 jours-agent de périmètre minimal + 3 jours d'options (H.14).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Non-duplication avec <code>bare-bones</code> (déjà soumis, Skeleton Crew).</strong> <code>bare-bones</code> contient une application
+<code>nonprofit-budget</code> qui <strong>explore un CSV en lecture seule</strong> : import, types de colonnes déduits, filtres, graphiques,
+lien de partage. Partie double <strong>tient un livre</strong> : modèle en écriture, invariants algébriques, contre-passation,
+chaîne de hash, enveloppes avec report, piste d'audit. La différence tient en un mot — <em>lire</em> contre <em>écrire</em> — et se
+vérifie mécaniquement : <code>bare-bones</code> n'a aucune notion de solde, de hash ni d'immutabilité ; <code>ledger</code> n'a ni grille
+exploratoire, ni déduction de types, ni adaptateur de partage par état. <strong>Aucun code partagé, aucun paquet commun,
+aucune dépendance d'un dépôt vers l'autre</strong> ; la CI de <code>ledger</code> interdit tout import croisé. Détail en H.3.</p>
+<h3 id="h2-ce-que-la-categorie-demande-et-la-reponse">H.2 Ce que la catégorie demande, et la réponse</h3>
+<table>
+<thead>
+<tr>
+<th>Ce que dit le règlement</th>
+<th>Réponse de Partie double</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>« lean enough to be clear »</td>
+<td>Budgets de lignes vérifiés par le hook <code>loc-budget</code> et la CI : <code>core</code> ≤ 2 200, <code>ui</code> ≤ 1 800, <code>skeleton</code> ≤ 200, chaque application ≤ 700 lignes propres. Un concept par fichier. README-carte d'une page.</td>
+</tr>
+<tr>
+<td>« flexible enough to support various use cases »</td>
+<td>Cinq points d'extension nommés — <code>defineChart</code>, <code>defineRules</code>, <code>defineEnvelopes</code>, <code>defineReports</code>, <code>definePresentation</code> — et un fichier déclaratif par application (<code>ledger.config.ts</code>). Le même noyau porte une devise (EUR) et une unité non monétaire (heures).</td>
+</tr>
+<tr>
+<td>« two distinct applications from your foundation »</td>
+<td><code>apps/envelopes</code> (foyer, tout privé, rien ne quitte le navigateur) et <code>apps/mutual-aid</code> (fonds, tout publié, chaîne vérifiable par un donateur). Tableau de comparaison en H.9.</td>
+</tr>
+<tr>
+<td>Deux dossiers séparés dans le dépôt</td>
+<td><code>apps/envelopes/</code> et <code>apps/mutual-aid/</code>, plus <code>apps/time-bank/</code> généré en direct pendant la vidéo (troisième preuve, H.13 et H.16).</td>
+</tr>
+<tr>
+<td>Construit avec Kiro, traces visibles</td>
+<td><code>/.kiro</code> non ignoré : 8 specs, 5 hooks, 5 steering dont <code>accounting.md</code> en <code>fileMatch</code> sur <code>packages/core/**</code>, 2 agents personnalisés, 1 power, <code>KIRO_JOURNAL.md</code> au fil de l'eau.</td>
+</tr>
+<tr>
+<td>Vidéo &lt; 3 min, sans musique ni marque tierce</td>
+<td>Script minuté 0:00 → 3:00 (H.16), voix off en anglais, aucun logo tiers à l'écran (relevés et bénéficiaires fictifs), aucune piste audio.</td>
+</tr>
+<tr>
+<td>URL d'app qui marche, gratuite, sans compte, tenue jusqu'au 29/01/2027</td>
+<td>Trois sites statiques GitHub Pages, aucun service, aucun compte, zéro requête réseau après chargement (LED-N-05).</td>
+</tr>
+<tr>
+<td>Dépôt public, licence open source</td>
+<td>MIT dès le premier commit, aucune dépendance à copyleft fort, tableau des licences dans le README, garde CI qui vérifie licence et présence de <code>/.kiro</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h3-probleme-public-et-pourquoi-maintenant">H.3 Problème, public et pourquoi maintenant</h3>
+<p>Le besoin est banal et très mal servi : <strong>tenir un livre</strong>. Pas explorer un fichier, pas regarder un graphique —
+<em>tenir</em> quelque chose dont on peut dire plus tard « c'est exact, et voici pourquoi ». Deux populations en ont besoin
+et n'ont rien : les foyers qui veulent un chiffre, et les petites structures qui doivent rendre des comptes sans
+comptable.</p>
+<p><strong>Sarah, 38 ans, deux enfants (7 et 11 ans), compte joint.</strong> Situation datée : jeudi 26 novembre 2026, 22 h 40. Elle
+ouvre son application bancaire sur le téléphone de la cuisine. Le relevé affiche <code>PRLV SEPA EDF ENERGIE</code>, <code>CARREFOUR
+MARKET PARIS 12</code>, <code>VIR M DUPONT</code> — et un solde. Pas un budget. Sa question tient en une phrase : <strong>« est-ce que je
+peux encore dépenser demain ? »</strong>. Paramètres de simulation du jeu de démonstration : revenu net du foyer 2 480
+€/mois, 3 ans de relevé (12 000 lignes), 9 enveloppes. Aucun outil actuel ne lui donne ce chiffre sans abonnement,
+sans compte, et sans que son relevé quitte sa machine. Statistiques de marché (part des ménages qui budgètent, coût
+moyen d'un abonnement) : <strong>À vérifier</strong> — rien n'est affirmé sans source dans la soumission.</p>
+<p><strong>Le collectif « Les Voisins Solidaires », 6 bénévoles, 40 000 € de dons par an.</strong> Situation datée : assemblée
+générale du 14 mars 2027. 180 donateurs récurrents, une soixantaine d'aides versées (bons alimentaires, cantine, une
+caution). Aucune compétence comptable dans le collectif ; la trésorière tient un tableur partagé et fabrique un PDF à
+la main. Un donateur pose la seule question qui compte : <strong>« où est passé l'argent ? »</strong> La réponse actuelle est un
+document non vérifiable. Le collectif ne peut ni payer un expert-comptable, ni héberger un serveur, ni demander à ses
+bénévoles d'apprendre la comptabilité en texte.</p>
+<p><strong>Le développeur (et l'agent) qui part du squelette.</strong> Il ne veut ni base de données ni serveur, et ne veut pas
+réapprendre la comptabilité. Il veut un contrat lisible en une heure, cinq points d'extension, et la garantie que le
+noyau ne peut pas produire une écriture déséquilibrée. Depuis que des agents écrivent du code, « un gabarit lisible »
+est devenu mesurable : si Kiro en tire une troisième application en moins de quinze minutes, la clarté est prouvée,
+pas affirmée (H.13).</p>
+<p><strong>Pourquoi maintenant.</strong> (1) Le navigateur sait tout faire : <code>WebCrypto</code> (SHA-256, AES-GCM), IndexedDB, service
+workers — un grand livre embarqué n'exige plus de serveur. (2) La demande de preuve traverse le champ associatif :
+fonds d'entraide, banques du temps, inventaires partagés. (3) Les outils de finances personnelles ont glissé vers «
+compte + synchronisation bancaire tierce », exactement ce que ce public refuse.</p>
+<table>
+<thead>
+<tr>
+<th>Outil</th>
+<th>Ce qu'il fait bien (vérifié sur son site le 11/11/2026)</th>
+<th>Ce qui manque pour notre public</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Beancount</td>
+<td>Partie double depuis fichiers texte, rigoureux, écosystème riche</td>
+<td>Fichiers texte, aucune interface, aucun partage public</td>
+</tr>
+<tr>
+<td>hledger</td>
+<td>Texte brut robuste et rapide, <code>hledger check --strict</code>, gère argent, titres et <strong>temps</strong>, <code>hledger web</code> en lecture seule</td>
+<td>Binaire à installer, pas d'enveloppes avec report, pas de page publique anonymisée</td>
+</tr>
+<tr>
+<td>ledger-cli</td>
+<td>Le format historique, minimal</td>
+<td>Encore plus technique, aucune interface</td>
+</tr>
+<tr>
+<td>Actual Budget</td>
+<td>Open source, rapide, local-first, enveloppes, chiffrement de bout en bout optionnel, imports QIF/OFX/QFX/CAMT.053/CSV</td>
+<td>Application à installer ou serveur de synchronisation à héberger ; synchro bancaire via des tiers (GoCardless, SimpleFIN) ; pas de squelette à dériver, pas de chaîne de hash</td>
+</tr>
+<tr>
+<td>GnuCash</td>
+<td>Bureautique, complet, éprouvé</td>
+<td>Lourd, poste de travail, pas de partage, pas de modèle à dériver</td>
+</tr>
+<tr>
+<td>Firefly III</td>
+<td>Partie double, multi-devises, moteur de règles, budgets, API JSON REST</td>
+<td>Serveur PHP auto-hébergé à maintenir ; aucune page publique vérifiable</td>
+</tr>
+</tbody>
+</table>
+<p><strong>La différence, en une phrase</strong> : personne ne propose un squelette comptable maigre, hors ligne, dans le navigateur,
+dont les deux applications se situent aux deux extrémités du spectre de la vie privée — l'une cache tout, l'autre
+publie tout — avec une chaîne de hash vérifiable.</p>
+<p><strong>La différence avec <code>bare-bones</code>, noir sur blanc.</strong> <code>bare-bones</code> est un explorateur : il lit un fichier, déduit des
+types, filtre, agrège, dessine, partage un état de vue — et n'a pas de mémoire. Partie double est un livre : il écrit,
+refuse une écriture déséquilibrée, rend toute correction visible comme une paire d'écritures, enchaîne ses entrées par
+hash, reporte les reliquats d'un mois sur l'autre, produit une piste d'audit. Aucun paquet commun, aucun import
+croisé, aucune ligne recopiée. Là où <code>bare-bones</code> prouve la polyvalence par <em>trois fichiers différents</em>, Partie double
+la prouve par <em>deux modèles de confiance opposés sur le même noyau algébrique</em>.</p>
+<h3 id="h4-objectifs-non-objectifs-indicateurs">H.4 Objectifs, non-objectifs, indicateurs</h3>
+<p><strong>Objectifs.</strong> O1 — un noyau dont la justesse est démontrée par la machine : 15 propriétés fast-check, dont « toute
+écriture somme à zéro » et « la chaîne de hash se vérifie après toute insertion et toute contre-passation ». O2 — un
+squelette lisible en une heure : ≤ 4 200 lignes hors tests (<code>core</code> 2 200, <code>ui</code> 1 800, <code>skeleton</code> 200). O3 — une
+nouvelle application de grand livre en &lt; 15 min avec Kiro et le power fourni, chronométrée par une personne qui ne
+connaît pas le dépôt. O4 — deux applications réelles aux antipodes de la vie privée, ≤ 700 lignes propres chacune. O5
+— zéro requête réseau par défaut, et un chiffre unique en haut de l'écran pour Sarah. O6 — une page publique qui
+répond à « où est passé l'argent ? » en &lt; 150 ko, vérifiable par un donateur sans outil ni compte.</p>
+<p><strong>Non-objectifs.</strong> Pas de synchronisation bancaire (aucun agrégateur, aucun PSD2) : import de fichiers seulement. Pas
+de comptes utilisateurs, de droits, de multi-utilisateur, de serveur. Pas de TVA, de liasse fiscale, de plan comptable
+réglementaire complet, de consolidation — c'est un livre, pas un logiciel d'expertise comptable. Pas de rapprochement
+bancaire automatique. Pas de devise hors ISO 4217 ni de taux de change automatique (les conversions sont des écritures
+explicites). Pas de modèle de langage dans le noyau : aucune fonctionnalité n'en dépend, les règles sont
+déterministes. Pas d'application mobile native.</p>
+<p><strong>Indicateurs — tous produits par l'outil lui-même, affichés dans la page <code>#/bench</code></strong></p>
+<table>
+<thead>
+<tr>
+<th>Indicateur</th>
+<th>Cible</th>
+<th>Où la mesure est produite</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Import de 3 ans de relevé (12 000 lignes)</td>
+<td>&lt; 1 s</td>
+<td><code>scripts/bench.mjs</code> + chronomètre affiché à l'écran</td>
+</tr>
+<tr>
+<td>Écritures déséquilibrées sur 10 000 journaux aléatoires</td>
+<td>0</td>
+<td><code>pnpm test:property</code> (compteur fast-check imprimé)</td>
+</tr>
+<tr>
+<td>Page publique <code>mutual-aid</code></td>
+<td>&lt; 150 ko gzip</td>
+<td><code>scripts/bundle-budget.mjs</code>, sortie CI</td>
+</tr>
+<tr>
+<td>Lignes du squelette</td>
+<td><code>core</code> ≤ 2 200 · <code>ui</code> ≤ 1 800 · <code>skeleton</code> ≤ 200</td>
+<td>hook <code>loc-budget</code> + CI</td>
+</tr>
+<tr>
+<td>Lignes propres par application</td>
+<td>≤ 700 chacune</td>
+<td>hook <code>loc-budget</code> + CI</td>
+</tr>
+<tr>
+<td>Vérification de la chaîne sur 12 000 entrées</td>
+<td>&lt; 150 ms</td>
+<td><code>scripts/bench.mjs</code></td>
+</tr>
+<tr>
+<td>Balance générale sur 10 000 entrées</td>
+<td>&lt; 50 ms</td>
+<td><code>scripts/bench.mjs</code></td>
+</tr>
+<tr>
+<td>Requêtes réseau après chargement</td>
+<td>0</td>
+<td>test Playwright qui intercepte tout trafic</td>
+</tr>
+<tr>
+<td>Nouvelle application tirée du squelette</td>
+<td>&lt; 15 min chronométrées</td>
+<td><code>docs/UNKNOWN-ROOM.md</code> (H.13)</td>
+</tr>
+<tr>
+<td>Temps jusqu'au chiffre unique (Sarah)</td>
+<td>&lt; 2 s après import</td>
+<td>mesure Playwright <code>performance.now()</code></td>
+</tr>
+<tr>
+<td>Défauts trouvés par les tests par propriétés</td>
+<td>≥ 3 contre-exemples consignés</td>
+<td>section dédiée du <code>KIRO_JOURNAL.md</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="h5-le-concept-en-profondeur">H.5 Le concept en profondeur</h3>
+<h4 id="h51-le-vocabulaire-en-une-page">H.5.1 Le vocabulaire, en une page</h4>
+<p>Un <strong>compte</strong> (<code>Account</code>) est une case du plan comptable : un type (actif, passif, capitaux propres, produit, charge),
+une unité (devise ISO 4217 ou quantité : heures, kilos) et un <strong>solde normal</strong>. Une <strong>écriture</strong> (<code>Posting</code>) est un
+montant signé qui tombe dans une case. Une <strong>entrée</strong> (<code>Entry</code>) est un paquet d'écritures qui <strong>somme à zéro</strong> : c'est
+la loi de la partie double et la seule loi du noyau. Le <strong>journal</strong> (<code>Journal</code>) est la liste en ajout seul des
+entrées, chacune portant le hash de la précédente. Un <strong>solde</strong> n'est jamais stocké : c'est un pli sur le journal.</p>
+<p>Solde normal par type (convention débit positif) : <code>asset</code> et <code>expense</code> → <strong>débit</strong>, solde typiquement
+positif (ce que l'on possède, ce que l'on a consommé) ; <code>liability</code>, <code>equity</code> et <code>income</code> → <strong>crédit</strong>,
+solde typiquement négatif (ce que l'on doit, ce qui appartient aux propriétaires, ce que l'on a reçu).</p>
+<p>L'équation que la machine vérifie à chaque entrée : pour toute devise, <code>Σ actifs + Σ charges = Σ passifs + Σ capitaux
++ Σ produits</code> (en soldes normaux), soit <code>Σ débits = Σ crédits</code>, soit encore, en convention signée brute, <code>Σ de tous
+les soldes = 0</code>. Exemple du jeu de démonstration (centimes) :</p>
+<pre><code>Entry 01JB3QK7X9M2P4R6T8V0W1Y3Z5  date 2026-11-03  kind transaction  unit EUR
+note  &quot;Groceries — Carrefour Market, rue de Charenton&quot;
+  expenses:food:groceries  +8420      assets:bank:joint  -8420      somme 0 ✓ accepté
+</code></pre>
+<h4 id="h52-la-regle-dor-on-ne-modifie-jamais-on-contre-passe">H.5.2 La règle d'or : on ne modifie jamais, on contre-passe</h4>
+<p>Le noyau <strong>n'expose aucune fonction qui modifie une entrée</strong>. Toute correction passe par <code>contra(entryId, reason)</code>,
+qui ajoute une entrée miroir (<code>kind: "reversal"</code>, <code>reverses: &lt;id&gt;</code>, montants strictement opposés, note en langage
+clair obligatoire). Le relevé du 4 novembre corrige le montant à 48,20 € :</p>
+<pre><code>1  01JB3QK7…Z5  2026-11-03  transaction  groceries +8420 / joint −8420
+2  01JB3QM0…A2  2026-11-04  reversal, reverses 01JB3QK7…Z5
+                            note &quot;Reversal: wrong amount, bank restated 48.20&quot;
+                            groceries −8420 / joint +8420
+3  01JB3QM1…B7  2026-11-04  transaction  groceries +4820 / joint −4820
+</code></pre>
+<p>Solde de <code>expenses:food:groceries</code> : <strong>48,20 €</strong>, exactement la vérité ; et la piste d'audit montre la correction
+comme une paire visible. Aucune ligne supprimée, aucune éditée. C'est ce que protège le hook <code>immutable-journal-guard</code>
+(H.13) et ce que prouve <code>LED-P-05</code>.</p>
+<h4 id="h53-la-chaine-de-hash-ce-quelle-prouve-et-ce-quelle-ne-prouve-pas">H.5.3 La chaîne de hash : ce qu'elle prouve, et ce qu'elle ne prouve pas</h4>
+<pre><code>canonical(entry) = &quot;ledger:v1\n&quot; + entry.prevHash + &quot;\n&quot;
+                 + canonicalJson({ id, date, kind, note, unit, tags, reverses, postings })
+canonicalJson    = clés triées, aucun espace, montants en entiers, dates &quot;YYYY-MM-DD&quot;, JSON strict
+hash(entry)      = hex(sha256(canonical(entry)))        genesis = &quot;0&quot;.repeat(64)
+</code></pre>
+<p>L'ordre des <code>postings</code> <strong>compte</strong> dans le hash (il fait partie de l'entrée telle qu'écrite) alors qu'il ne compte pas
+dans les soldes. Asymétrie volontaire et documentée : elle prouve l'intégrité de la saisie sans rendre les soldes
+dépendants de l'ordre. Ce que la chaîne prouve : rien n'a été <strong>édité</strong>, <strong>retiré</strong> ni <strong>réordonné</strong> depuis que la
+tête a été publiée. Ce qu'elle ne prouve <strong>pas</strong>, écrit noir sur blanc dans la page publique : (1) que les écritures
+sont sincères — la chaîne prouve la cohérence, pas la vérité ; (2) que le journal n'a pas été <strong>tronqué par la fin</strong> —
+qui possède le fichier peut couper la queue et republier une tête plus courte. Parade : la tête est ancrée dans le
+rapport annuel imprimable et dans un commit du dépôt ; le donateur compare. Cette section « what this chain proves /
+does not prove » fait partie du produit : l'honnêteté sur la limite est un argument, pas une faiblesse.</p>
+<p>Implémentation : SHA-256 en TypeScript pur (<code>packages/core/src/hash.ts</code>, ~90 lignes), <strong>synchrone</strong>. WebCrypto est
+écarté du noyau : <code>crypto.subtle</code> est asynchrone et empoisonnerait <code>append</code>, <code>verify</code>, les plis et toutes les
+propriétés. Un test unitaire confronte l'implémentation à <code>crypto.subtle.digest</code> pour garantir la conformité.</p>
+<h4 id="h54-les-soldes-sont-un-pli-pas-un-etat">H.5.4 Les soldes sont un pli, pas un état</h4>
+<pre><code>balances(journal, asOf, unit) = journal.records
+  .filter(r =&gt; r.date &lt;= asOf &amp;&amp; r.unit === unit)
+  .flatMap(r =&gt; r.postings)
+  .reduce((acc, p) =&gt; acc.set(p.accountId, (acc.get(p.accountId) ?? 0) + p.amountMinor), new Map())
+</code></pre>
+<p>Trois conséquences exploitées partout : (1) <strong>indépendance de l'ordre</strong> — l'addition est commutative et associative,
+donc permuter les entrées ne change aucun solde (<code>LED-P-03</code>) ; (2) <strong>rejeu</strong> — un instantané sérialisé puis rejoué
+redonne les mêmes soldes bit à bit (<code>LED-P-06</code>) ; (3) <strong>aucun cache à invalider</strong> — le seul état est le journal, donc
+la classe de bug « solde désynchronisé » n'existe pas. Coût : un parcours linéaire, borné par les cibles de H.4 (10
+000 entrées &lt; 50 ms) et par un index optionnel toujours recomputable, jamais persisté.</p>
+<h4 id="h55-enveloppes-et-report-conservatif">H.5.5 Enveloppes et report conservatif</h4>
+<p>Une enveloppe n'est pas une écriture : c'est une <strong>projection</strong> sur un compte de charges pour une période. Elle ne
+touche donc jamais l'invariant de somme nulle.</p>
+<pre><code>spent(env, p)      = −Σ postings du compte de l'enveloppe (et de ses enfants) datés dans p
+carriedIn(env, p₀) = 0
+carriedIn(env, p)  = clampReport(available(env, p−1), env.rollover, env.capMinor)
+                     none → 0 · carry → max(0, ·) · carry-deficit → · (le déficit suit)
+available(env, p)  = env.budgetMinor + carriedIn(env, p) − spent(env, p)
+</code></pre>
+<p>Invariant de conservation, testé sur 24 mois simulés (<code>LED-P-08</code>) : <code>Σ_p budget_p + report_initial = Σ_p spent_p +
+report_final + Σ_p abandoned_p</code>, où <code>abandoned_p</code> est <strong>explicitement</strong> ce que la politique de report abandonne (mode
+<code>none</code>, ou plafonnement <code>capMinor</code>). Rien n'apparaît ; tout ce qui disparaît est compté comme abandon de politique,
+jamais comme bug. C'est cette formulation qui rend le report testable au lieu d'être « probablement juste ».</p>
+<h4 id="h56-le-chiffre-unique-de-sarah">H.5.6 Le chiffre unique de Sarah</h4>
+<p>Une seule valeur en haut de l'écran, en gros, et rien d'autre au premier regard :</p>
+<pre><code>daysLeft  = jours restants du mois courant, aujourd'hui inclus
+available = Σ available(env, ceMois) pour les enveloppes dont le compte a daily: true
+committed = Σ montants des règles récurrentes (weekly/monthly) dont l'échéance tombe entre
+            aujourd'hui et la fin du mois et qui ne sont pas encore dans le journal
+reserve   = Σ montants des enveloppes daily: false explicitement réservées (Santé, Imprévus)
+leftToday = floor((available − committed − reserve) / daysLeft)   // euros, arrondi inférieur
+</code></pre>
+<p>L'arrondi inférieur n'est pas un détail : il garantit que dépenser exactement <code>leftToday</code> chaque jour restant ne met
+jamais le mois en déficit (<code>LED-P-13</code>, résidu final dans <code>[0, daysLeft)</code> centimes). Sous ce chiffre, et seulement sous
+lui, la projection de fin de mois est rendue <strong>en fourchette</strong> (médiane et écart des trois derniers mois par
+enveloppe), jamais comme un nombre unique : un budget n'est pas une prédiction, et l'afficher comme telle serait
+malhonnête.</p>
+<h4 id="h57-les-cinq-points-dextension">H.5.7 Les cinq points d'extension</h4>
+<table>
+<thead>
+<tr>
+<th>Point</th>
+<th>Ce qu'on y branche</th>
+<th>Signature</th>
+<th><code>envelopes</code></th>
+<th><code>mutual-aid</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>defineChart</code></td>
+<td>Plan comptable : comptes, types, unités</td>
+<td><code>(accounts: AccountInput[]) =&gt; Chart</code></td>
+<td>24 comptes, EUR</td>
+<td>18 comptes, EUR</td>
+</tr>
+<tr>
+<td><code>defineRules</code></td>
+<td>Affectation automatique et récurrente</td>
+<td><code>(rules: RuleInput[]) =&gt; RuleSet</code></td>
+<td>31 règles dont 12 apprises</td>
+<td>4 règles (dons, aides, frais)</td>
+</tr>
+<tr>
+<td><code>defineEnvelopes</code></td>
+<td>Budgets par période avec report</td>
+<td><code>(envs: EnvelopeInput[]) =&gt; EnvelopeSet</code></td>
+<td>9 enveloppes, report <code>carry</code></td>
+<td>0 — le fonds ne budgète pas, il rend compte</td>
+</tr>
+<tr>
+<td><code>defineReports</code></td>
+<td>Rapports publiés</td>
+<td><code>(defs: ReportDef[]) =&gt; ReportSet</code></td>
+<td>3 (enveloppes, balance, audit)</td>
+<td>4 (+ résultat, rapport annuel)</td>
+</tr>
+<tr>
+<td><code>definePresentation</code></td>
+<td>Thème, langue, libellés, colonnes</td>
+<td><code>(p: PresentationInput) =&gt; Presentation</code></td>
+<td><code>warm-paper</code>, fr</td>
+<td><code>ink-paper</code>, en, mise en page d'impression</td>
+</tr>
+</tbody>
+</table>
+<p>Tout le reste (journal, hash, plis, contre-passation, validation Zod, rapports de base, anonymisation) est dans le
+noyau et <strong>identique</strong> pour les deux applications. C'est la preuve de polyvalence : pas deux variantes d'un même cas,
+mais deux modèles de confiance opposés sur un noyau commun.</p>
+<h4 id="h58-ce-qui-nest-pas-dans-le-squelette-et-pourquoi">H.5.8 Ce qui n'est pas dans le squelette, et pourquoi</h4>
+<p>Pas d'authentification, de synchronisation, de connecteur bancaire, de fiscalité, de multi-utilisateur, de graphs
+au-delà d'une sparkline SVG, d'i18n au-delà de en/fr, de LLM. Chaque refus est consigné dans <code>.kiro/steering/lean.md</code>
+avec sa raison : un squelette qui dit oui à tout cesse d'être clair. Test d'admission dans <code>core</code> : <em>les deux
+applications en ont-elles besoin, et l'invariant est-il prouvable ?</em> Sinon la fonction reste dans l'application.</p>
+<h3 id="h6-formats-et-donnees">H.6 Formats et données</h3>
+<h4 id="h61-le-contrat-typescript-zod-a-figer-tel-quel-dans-la-spec-ledger-contract">H.6.1 Le contrat (TypeScript + Zod, à figer tel quel dans la spec <code>ledger-contract</code>)</h4>
+<pre><code class="language-ts">// packages/core/src/schema.ts
+import { z } from &quot;zod&quot;;
+/* primitives */
+export const UnitCode   = z.string().regex(/^[A-Z]{3}$/);                  // ISO 4217 ou quantité déclarée
+export const AccountId  = z.string().regex(/^[a-z][a-z0-9]*(?::[a-z0-9-]+)*$/);
+export const EntryId    = z.string().regex(/^[0-9A-HJKMNP-TV-Z]{26}$/);    // ULID, triable
+export const Hash       = z.string().regex(/^[0-9a-f]{64}$/);
+export const IsoDate    = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
+export const Period     = z.string().regex(/^\d{4}-\d{2}$/);
+export const MinorUnits = z.number().int().safe();                        // jamais de flottant
+export const AccountType = z.enum([&quot;asset&quot;,&quot;liability&quot;,&quot;equity&quot;,&quot;income&quot;,&quot;expense&quot;]);
+export const NormalSide  = z.enum([&quot;debit&quot;,&quot;credit&quot;]);
+export const Unit = z.union([
+  z.object({ kind: z.literal(&quot;currency&quot;), code: z.string().regex(/^[A-Z]{3}$/) }),
+  z.object({ kind: z.literal(&quot;quantity&quot;), label: z.string().min(1).max(24) }),  // &quot;hour&quot;, &quot;kg&quot;
+]);
+/* Account */
+export const Account = z.object({
+  id: AccountId, type: AccountType, normalBalance: NormalSide, unit: Unit,
+  label: z.string().min(1).max(120), parent: AccountId.nullable().default(null),
+  archived: z.boolean().default(false), daily: z.boolean().default(false),  // compte dans leftToday ?
+}).strict();
+/* Posting — immuable */
+export const PartyRef = z.object({
+  id: z.string().min(1),                 // interne, jamais publié
+  label: z.string().max(120),            // &quot;Mme K.&quot; — privé
+  publicLabel: z.string().max(120),      // &quot;a household, case 41&quot; — publié
+  disclosed: z.boolean().default(false), // la partie accepte d'être nommée
+}).strict();
+export const Posting = z.object({
+  id: z.string().min(1), accountId: AccountId, amountMinor: MinorUnits,     // signé : débit &gt; 0
+  unit: UnitCode, memo: z.string().max(200).optional(), party: PartyRef.optional(),
+  evidence: z.array(z.string()).readonly().optional(),                      // empreintes de lignes CSV
+}).strict();
+/* Entry — somme à zéro, datée, note en langage clair obligatoire */
+export const EntryKind = z.enum([&quot;transaction&quot;,&quot;opening&quot;,&quot;reversal&quot;,&quot;conversion&quot;]);
+export const Entry = z.object({
+  id: EntryId, date: IsoDate, note: z.string().min(1).max(200), unit: UnitCode,
+  kind: EntryKind.default(&quot;transaction&quot;), postings: z.array(Posting).min(2).readonly(),
+  reverses: EntryId.nullable().default(null), tags: z.array(z.string()).readonly().default([]),
+}).strict();
+/* Journal — ajout seul, chaîne vérifiable */
+export const JournalRecord = Entry.extend({ seq: z.number().int().nonnegative(), prevHash: Hash, hash: Hash });
+export const Journal = z.object({ version: z.literal(1), createdAt: IsoDate,
+  records: z.array(JournalRecord).readonly() }).strict();
+/* Rule — affectation automatique ou récurrente */
+export const Rule = z.object({
+  id: z.string().min(1),
+  when: z.object({ field: z.enum([&quot;memo&quot;,&quot;party&quot;,&quot;reference&quot;]).default(&quot;memo&quot;),
+    op: z.enum([&quot;contains&quot;,&quot;equals&quot;,&quot;startsWith&quot;,&quot;regex&quot;]), value: z.string().max(200),
+    amountBetween: z.tuple([MinorUnits, MinorUnits]).optional() }).strict(),
+  then: z.object({ accountId: AccountId, envelopeId: z.string().optional(), note: z.string().max(200).optional(),
+    split: z.array(z.object({ accountId: AccountId, weight: z.number().int().min(1) })).optional() }).strict(),
+  frequency: z.enum([&quot;on-import&quot;,&quot;weekly&quot;,&quot;monthly&quot;,&quot;once&quot;]).default(&quot;on-import&quot;),
+  origin: z.enum([&quot;authored&quot;,&quot;learned&quot;]), uses: z.number().int().nonnegative().default(0),
+  confidence: z.number().min(0).max(1).optional(),
+}).strict();
+/* Envelope — budget sur un compte pour une période, avec report */
+export const Envelope = z.object({
+  id: z.string().min(1), label: z.string().min(1).max(80), accountId: AccountId, period: Period,
+  budgetMinor: MinorUnits.nonnegative(), rollover: z.enum([&quot;none&quot;,&quot;carry&quot;,&quot;carry-deficit&quot;]).default(&quot;carry&quot;),
+  capMinor: MinorUnits.nonnegative().nullable().default(null), unit: UnitCode,
+}).strict();
+/* Report — union discriminée, sortie pure du noyau */
+const Row = z.object({ accountId: AccountId, label: z.string(), debit: MinorUnits, credit: MinorUnits, balance: MinorUnits }).strict();
+const EnvRow = z.object({ envelopeId: z.string(), label: z.string(), budgetMinor: MinorUnits, spentMinor: MinorUnits,
+  carriedMinor: MinorUnits, availableMinor: MinorUnits, leftTodayMinor: MinorUnits }).strict();
+const AuditRow = z.object({ seq: z.number().int(), date: IsoDate, note: z.string(), kind: EntryKind, hash: Hash, reverses: EntryId.nullable() }).strict();
+export const Report = z.discriminatedUnion(&quot;kind&quot;, [
+  z.object({ kind: z.literal(&quot;trial-balance&quot;), asOf: IsoDate, unit: UnitCode, rows: z.array(Row),
+    totals: z.object({ debit: MinorUnits, credit: MinorUnits }) }).strict(),
+  z.object({ kind: z.literal(&quot;income-statement&quot;), from: IsoDate, to: IsoDate, unit: UnitCode, rows: z.array(Row), netMinor: MinorUnits }).strict(),
+  z.object({ kind: z.literal(&quot;envelopes&quot;), period: Period, unit: UnitCode, totalLeftTodayMinor: MinorUnits, rows: z.array(EnvRow) }).strict(),
+  z.object({ kind: z.literal(&quot;audit-trail&quot;), from: IsoDate, to: IsoDate, headHash: Hash, rows: z.array(AuditRow) }).strict(),
+]);
+/* View — lecture seule, sérialisable, jamais de réseau */
+export const RedactionPolicy = z.object({
+  parties: z.enum([&quot;named&quot;,&quot;pseudonymised&quot;,&quot;aggregate&quot;]), dates: z.enum([&quot;exact&quot;,&quot;month&quot;]),
+  amounts: z.enum([&quot;exact&quot;,&quot;bucket10&quot;]), memo: z.enum([&quot;as-is&quot;,&quot;whitelist&quot;]),
+  minGroupSize: z.number().int().min(1).default(3),   // seuil d'agrégation (k-anonymat)
+}).strict();
+export const View = z.object({
+  v: z.literal(1), app: z.enum([&quot;envelopes&quot;,&quot;mutual-aid&quot;,&quot;skeleton&quot;]),
+  report: z.enum([&quot;trial-balance&quot;,&quot;income-statement&quot;,&quot;envelopes&quot;,&quot;audit-trail&quot;,&quot;public-ledger&quot;]),
+  params: z.object({ from: IsoDate.optional(), to: IsoDate.optional(), period: Period.optional(),
+    accounts: z.array(AccountId).default([]), tags: z.array(z.string()).default([]) }).strict(),
+  redaction: RedactionPolicy.optional(),
+}).strict();
+</code></pre>
+<p><strong>Invariants vérifiés à la construction</strong>, pas par convention : <code>Σ amountMinor = 0</code> par entrée ; <code>kind: "reversal"</code>
+exige <code>reverses</code> non nul et des montants exactement opposés à la cible ; <code>kind: "conversion"</code> est la seule à pouvoir
+porter deux unités, et exige alors deux groupes internement équilibrés plus un <code>rate</code> et une date ; <code>normalBalance</code>
+doit correspondre au <code>type</code> sauf déclaration explicite commentée.</p>
+<h4 id="h62-le-fichier-de-configuration-declaratif-un-par-application">H.6.2 Le fichier de configuration déclaratif (un par application)</h4>
+<pre><code class="language-ts">// apps/envelopes/ledger.config.ts — la seule chose qu'une application écrit
+import { defineLedger, defineChart, defineRules, defineEnvelopes, defineReports, definePresentation } from &quot;@ledger/core&quot;;
+const EUR = { kind: &quot;currency&quot;, code: &quot;EUR&quot; } as const;
+export default defineLedger({
+  name: &quot;Household envelopes&quot;, locale: &quot;fr&quot;, unit: EUR,
+  chart: defineChart([
+    { id: &quot;assets:bank:joint&quot;, type: &quot;asset&quot;, unit: EUR, label: &quot;Compte joint&quot;, daily: true },
+    { id: &quot;expenses:food:groceries&quot;, type: &quot;expense&quot;, unit: EUR, label: &quot;Courses&quot;, daily: true },
+    /* … 22 autres comptes … */ ]),
+  rules: defineRules([
+    { id: &quot;r-groceries&quot;, when: { field: &quot;memo&quot;, op: &quot;contains&quot;, value: &quot;CARREFOUR&quot; },
+      then: { accountId: &quot;expenses:food:groceries&quot;, envelopeId: &quot;env-groceries&quot; }, origin: &quot;authored&quot; },
+    { id: &quot;r-rent&quot;, when: { field: &quot;memo&quot;, op: &quot;contains&quot;, value: &quot;PRLV SEPA LOYER&quot; },
+      then: { accountId: &quot;expenses:housing:rent&quot; }, frequency: &quot;monthly&quot;, origin: &quot;authored&quot; } ]),
+  envelopes: defineEnvelopes([
+    { id: &quot;env-groceries&quot;, label: &quot;Courses&quot;, accountId: &quot;expenses:food:groceries&quot;, period: &quot;2026-11&quot;, budgetMinor: 45000, rollover: &quot;carry&quot; },
+    { id: &quot;env-energy&quot;, label: &quot;Énergie&quot;, accountId: &quot;expenses:housing:energy&quot;, period: &quot;2026-11&quot;, budgetMinor: 18000, rollover: &quot;carry-deficit&quot; } ]),
+  reports: defineReports([&quot;envelopes&quot;, &quot;trial-balance&quot;, &quot;audit-trail&quot;]),
+  presentation: definePresentation({ theme: &quot;warm-paper&quot;, columns: [&quot;date&quot;,&quot;label&quot;,&quot;amount&quot;,&quot;envelope&quot;] }),
+});
+</code></pre>
+<p>Côté <code>apps/mutual-aid</code>, le même fichier déclare 18 comptes, 4 règles, <strong>aucune enveloppe</strong>, un rapport de plus
+(<code>income-statement</code> + <code>public-ledger</code>) et une présentation d'impression. La différence entre les deux applications
+tient entièrement dans ce fichier et dans leurs écrans.</p>
+<h4 id="h63-import-csv-la-realite-europeenne">H.6.3 Import CSV : la réalité européenne</h4>
+<pre><code>Date;Libellé;Débit;Crédit;Devise
+03/11/2026;&quot;CARREFOUR MARKET PARIS 12&quot;;84,20;;EUR
+04/11/2026;&quot;PRLV SEPA EDF ENERGIE&quot;;112,47;;EUR
+05/11/2026;&quot;VIR M DUPONT SALAIRE&quot;;;2480,00;EUR
+</code></pre>
+<p>Encodage Windows-1252, séparateur <code>;</code>, virgule décimale, libellés entre guillemets, dates <code>jj/mm/aaaa</code>, deux colonnes
+de montant. Variante acceptée : une colonne <code>Montant</code> où le débit est négatif. <strong>Hors périmètre</strong> : QIF, OFX,
+CAMT.053, rapprochement. En-têtes exacts des banques françaises : <strong>À vérifier</strong> banque par banque au moment d'écrire
+les fixtures. Détection, dans cet ordre et <strong>affichée à l'utilisateur avant validation</strong> : (1) encodage — BOM UTF-8,
+sinon UTF-8 strict, sinon Windows-1252 ; (2) séparateur — celui qui donne le plus de champs constants sur 20 lignes ;
+(3) séparateur décimal — celui qui rend tous les montants analysables ; (4) colonne de date — première colonne
+analysable, format deviné par motif ; (5) mapping des colonnes par correspondance floue, puis écran de confirmation.
+Deux lignes identiques sont <strong>conservées toutes les deux</strong>, la seconde marquée « doublon possible » : le noyau ne
+supprime jamais seul. L'empreinte de la ligne source est gardée dans <code>Posting.evidence</code>, ce qui rend l'import
+idempotent (<code>LED-P-14</code>).</p>
+<h4 id="h64-serialisation">H.6.4 Sérialisation</h4>
+<table>
+<thead>
+<tr>
+<th>Artefact</th>
+<th>Format</th>
+<th>Destination</th>
+<th>Taille cible</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Journal</td>
+<td>JSON <code>Journal</code> v1</td>
+<td>fichier <code>.ledger.json</code>, IndexedDB</td>
+<td>12 000 entrées ≈ 3,4 Mo <strong>À vérifier</strong></td>
+</tr>
+<tr>
+<td>Instantané</td>
+<td>JSON + <code>headHash</code> + <code>asOf</code></td>
+<td>sauvegarde locale</td>
+<td>idem</td>
+</tr>
+<tr>
+<td>Vue</td>
+<td><code>View</code> compressé (deflate-raw) en <strong>fragment</strong> d'URL</td>
+<td>presse-papier, jamais un serveur</td>
+<td>&lt; 2 000 caractères</td>
+</tr>
+<tr>
+<td>Vue publique</td>
+<td><code>public/ledger-&lt;period&gt;.json</code> + page statique</td>
+<td>dépôt, servi en statique</td>
+<td>&lt; 150 ko gzip</td>
+</tr>
+<tr>
+<td>Reçu de donateur</td>
+<td><code>{ entryId, hash, amount, date }</code></td>
+<td>courriel ou papier</td>
+<td>&lt; 300 octets</td>
+</tr>
+</tbody>
+</table>
+<p>Le <strong>fragment</strong> (<code>#v=…</code>) et non la requête (<code>?v=…</code>) : un fragment n'est jamais envoyé au serveur, n'apparaît ni dans
+les journaux d'accès ni dans <code>Referer</code>. Toute vue lue depuis une URL est validée par Zod et bornée en taille ; une vue
+invalide ouvre la vue par défaut avec un message.</p>
+<h4 id="h65-fixtures-et-sources-de-donnees">H.6.5 Fixtures et sources de données</h4>
+<p><strong>Aucune donnée réelle n'est embarquée.</strong> Tous les jeux sont synthétiques, générés par <code>scripts/gen-fixtures.mjs</code> avec
+une graine fixe (<code>LEDGER_FIXTURE_SEED=20261103</code>), reproductibles bit à bit : <code>fixtures/household-3y.csv</code> (12 000
+lignes, 36 mois), <code>fixtures/mutual-aid-2026.csv</code> (214 écritures, 180 dons, 62 aides), <code>fixtures/messy-csv/*.csv</code> (6
+fichiers tordus : BOM absent, <code>;</code> et <code>,</code> mélangés, libellé avec retour à la ligne, montant entre guillemets, colonnes
+inversées, Windows-1252 accentué).</p>
+<table>
+<thead>
+<tr>
+<th>Source de référence</th>
+<th>Usage</th>
+<th>Licence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ISO 4217</td>
+<td>12 codes devise écrits à la main dans <code>core/src/units.ts</code></td>
+<td>Usage comme référence ; republication de la liste complète <strong>À vérifier</strong></td>
+</tr>
+<tr>
+<td>ISO 20022 / camt.053</td>
+<td>Lecture de la spécification pour comprendre les exports bancaires ; aucun fichier copié</td>
+<td>Spécification consultée, non redistribuée</td>
+</tr>
+<tr>
+<td>Plan comptable général (ANC)</td>
+<td>Inspiration de la nomenclature du plan par défaut ; aucun numéro officiel reproduit</td>
+<td><strong>À vérifier</strong> si des numéros officiels sont cités</td>
+</tr>
+<tr>
+<td>Aucun jeu de données public</td>
+<td>Volontaire : des données bancaires ou de bénéficiaires réelles sont hors de question</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Garde CI <code>fixture-privacy-guard</code> : refuse dans <code>fixtures/**</code> tout IBAN (<code>[A-Z]{2}\d{2}[A-Z0-9]{11,30}</code>), tout numéro
+de carte valide au test de Luhn, tout couple prénom+nom d'une liste de contrôle interne, et exige la première ligne <code>#
+FIXTURE: FICTIONAL DATA</code>.</p>
+<h3 id="h7-exigences-fonctionnelles">H.7 Exigences fonctionnelles</h3>
+<table>
+<thead>
+<tr>
+<th>Id</th>
+<th>P</th>
+<th>Exigence (EARS)</th>
+<th>Vérification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LED-F-01</td>
+<td>I</td>
+<td>QUAND une entrée est soumise, le système DOIT la refuser si ses écritures ne somment pas à zéro par devise, avec l'erreur typée <code>UnbalancedEntry</code> nommant le déséquilibre exact.</td>
+<td>LED-P-01</td>
+</tr>
+<tr>
+<td>LED-F-02</td>
+<td>I</td>
+<td>QUAND un compte est déclaré, le système DOIT valider type, solde normal, unité et parent, et DOIT rejeter un identifiant hors du motif <code>a:b:c</code>.</td>
+<td>unit</td>
+</tr>
+<tr>
+<td>LED-F-03</td>
+<td>I</td>
+<td>TANT QUE le journal existe, le système DOIT n'exposer aucune fonction publique qui modifie une entrée ; toute correction DOIT passer par <code>contra()</code>.</td>
+<td>LED-P-05</td>
+</tr>
+<tr>
+<td>LED-F-04</td>
+<td>I</td>
+<td>QUAND l'utilisateur contre-passe une entrée, le système DOIT ajouter une entrée <code>reversal</code> liée par <code>reverses</code>, aux montants strictement opposés, avec note obligatoire.</td>
+<td>LED-P-10</td>
+</tr>
+<tr>
+<td>LED-F-05</td>
+<td>I</td>
+<td>QUAND une entrée est ajoutée, le système DOIT calculer <code>hash</code> sur la forme canonique avec <code>prevHash</code> et DOIT incrémenter <code>seq</code>.</td>
+<td>LED-P-04</td>
+</tr>
+<tr>
+<td>LED-F-06</td>
+<td>I</td>
+<td>QUAND <code>verifyChain()</code> est demandé, le système DOIT répondre <code>ok</code> ou le premier index fautif avec sa raison (<code>broken-link</code>, <code>bad-hash</code>, <code>bad-seq</code>).</td>
+<td>LED-P-04</td>
+</tr>
+<tr>
+<td>LED-F-07</td>
+<td>I</td>
+<td>Le système DOIT calculer tout solde et tout rapport comme un pli sur le journal, sans état dérivé persistant.</td>
+<td>LED-P-03, LED-P-06</td>
+</tr>
+<tr>
+<td>LED-F-08</td>
+<td>I</td>
+<td>QUAND une entrée mélange deux unités sans <code>kind: "conversion"</code> explicite, le système DOIT la refuser (<code>MixedUnits</code>).</td>
+<td>LED-P-07</td>
+</tr>
+<tr>
+<td>LED-F-09</td>
+<td>I</td>
+<td>QUAND un relevé CSV est déposé, le système DOIT détecter encodage, séparateur, séparateur décimal et colonne de date, et DOIT afficher sa détection avant tout import.</td>
+<td><code>fixtures/messy-csv</code></td>
+</tr>
+<tr>
+<td>LED-F-10</td>
+<td>I</td>
+<td>SI une ligne importée produirait une écriture déséquilibrée, ALORS le système DOIT la refuser et la placer dans un rapport de rejets exportable.</td>
+<td>E2E</td>
+</tr>
+<tr>
+<td>LED-F-11</td>
+<td>I</td>
+<td>QUAND le même relevé est importé deux fois, le système DOIT ignorer les lignes déjà présentes (empreinte <code>evidence</code>) et le signaler.</td>
+<td>LED-P-14</td>
+</tr>
+<tr>
+<td>LED-F-12</td>
+<td>S</td>
+<td>QUAND une règle correspond à une opération importée, le système DOIT proposer l'affectation sans l'appliquer, sauf mode <code>auto</code> activé explicitement.</td>
+<td>unit</td>
+</tr>
+<tr>
+<td>LED-F-13</td>
+<td>S</td>
+<td>QUAND l'utilisateur corrige une affectation proposée, le système DOIT enregistrer une règle <code>learned</code> (motif → compte) avec son compteur d'usages.</td>
+<td>E2E</td>
+</tr>
+<tr>
+<td>LED-F-14</td>
+<td>S</td>
+<td>QUAND une règle à <code>split</code> est appliquée, le système DOIT répartir le montant sans perte ni création (le reliquat d'arrondi va à la première jambe).</td>
+<td>LED-P-12</td>
+</tr>
+<tr>
+<td>LED-F-15</td>
+<td>S</td>
+<td>Le système DOIT calculer <code>available = budget + carriedIn − spent</code> par enveloppe et reporter le reliquat selon <code>rollover</code> et <code>capMinor</code>.</td>
+<td>LED-P-08</td>
+</tr>
+<tr>
+<td>LED-F-16</td>
+<td>I</td>
+<td>QUAND l'utilisateur ouvre <code>envelopes</code>, le système DOIT afficher le chiffre unique <code>leftToday</code> avant toute autre donnée.</td>
+<td>E2E, LED-P-13</td>
+</tr>
+<tr>
+<td>LED-F-17</td>
+<td>S</td>
+<td>Le système DOIT rendre la projection de fin de mois en fourchette (médiane et écart des trois derniers mois), jamais en valeur unique.</td>
+<td>unit</td>
+</tr>
+<tr>
+<td>LED-F-18</td>
+<td>I</td>
+<td>Le système DOIT produire les quatre rapports comme fonctions pures du journal et de la configuration, sans effet de bord.</td>
+<td>LED-P-02</td>
+</tr>
+<tr>
+<td>LED-F-19</td>
+<td>I</td>
+<td>QUAND une vue est sérialisée dans l'URL, le système DOIT n'écrire que dans le fragment, validé par Zod et borné à 2 000 caractères.</td>
+<td>LED-P-15</td>
+</tr>
+<tr>
+<td>LED-F-20</td>
+<td>I</td>
+<td>QUAND une écriture est préparée pour publication, le système DOIT appliquer la <code>RedactionPolicy</code> et afficher côte à côte version privée et version publique avant validation.</td>
+<td>LED-P-09</td>
+</tr>
+<tr>
+<td>LED-F-21</td>
+<td>I</td>
+<td>Le système DOIT générer une page publique autonome, sans requête réseau, dont la chaîne de hash est recalculée sur les entrées <strong>rédigées</strong>.</td>
+<td>LED-P-09</td>
+</tr>
+<tr>
+<td>LED-F-22</td>
+<td>S</td>
+<td>QUAND un donateur saisit son reçu (<code>entryId</code> + <code>hash</code>), le système DOIT confirmer ou infirmer sa présence dans la chaîne, hors ligne.</td>
+<td>E2E</td>
+</tr>
+<tr>
+<td>LED-F-23</td>
+<td>S</td>
+<td>Le système DOIT produire un rapport annuel imprimable : A4, paginé, lisible sans couleur, totaux en toutes lettres.</td>
+<td>E2E</td>
+</tr>
+<tr>
+<td>LED-F-24</td>
+<td>O</td>
+<td>OÙ le chiffrement au repos est activé, le système DOIT chiffrer IndexedDB en AES-GCM avec clé dérivée par PBKDF2 (600 000 itérations, <strong>À vérifier</strong>) d'une phrase jamais stockée.</td>
+<td>unit</td>
+</tr>
+<tr>
+<td>LED-F-25</td>
+<td>O</td>
+<td>Le système DOIT exposer <code>#/bench</code> affichant en direct toutes les mesures de H.4.</td>
+<td>E2E</td>
+</tr>
+<tr>
+<td>LED-F-26</td>
+<td>X</td>
+<td>Multi-utilisateur, authentification, synchronisation bancaire, TVA, rapprochement automatique : exclus.</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h8-exigences-non-fonctionnelles">H.8 Exigences non fonctionnelles</h3>
+<table>
+<thead>
+<tr>
+<th>Id</th>
+<th>Domaine</th>
+<th>Exigence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LED-N-01</td>
+<td>Légèreté</td>
+<td>Budgets de H.4 vérifiés par le hook <code>loc-budget</code> et la CI ; &lt; 500 lignes par fichier, &lt; 50 lignes par fonction ; un concept par fichier.</td>
+</tr>
+<tr>
+<td>LED-N-02</td>
+<td>Poids</td>
+<td>Page publique &lt; 150 ko gzip ; chaque application &lt; 220 ko au démarrage ; polices système uniquement, aucune police web.</td>
+</tr>
+<tr>
+<td>LED-N-03</td>
+<td>Performance</td>
+<td>Import 12 000 lignes &lt; 1 s hors fil principal ; <code>verifyChain()</code> sur 12 000 entrées &lt; 150 ms ; balance sur 10 000 entrées &lt; 50 ms.</td>
+</tr>
+<tr>
+<td>LED-N-04</td>
+<td>Déterminisme</td>
+<td>Aucun <code>Date.now()</code> ni <code>Math.random()</code> dans <code>core</code> : horloge et fabrique d'identifiants injectées ; tests reproductibles par graine.</td>
+</tr>
+<tr>
+<td>LED-N-05</td>
+<td>Réseau</td>
+<td>Zéro requête réseau par défaut : CSP <code>connect-src 'none'</code>, grep CI sur <code>fetch\|XMLHttpRequest\|WebSocket\|sendBeacon</code> dans <code>packages/core</code> et <code>apps/**</code>, test Playwright qui échoue dès la première requête.</td>
+</tr>
+<tr>
+<td>LED-N-06</td>
+<td>Sécurité</td>
+<td>Aucune évaluation de code venant des données ; libellés rendus en texte ; expressions régulières bornées en longueur et exécutées avec délai (anti-ReDoS) ; export CSV neutralisé contre l'injection de formules.</td>
+</tr>
+<tr>
+<td>LED-N-07</td>
+<td>Accessibilité</td>
+<td>Niveau AA ; navigation clavier complète ; chiffres en <code>font-variant-numeric: tabular-nums</code> ; l'information n'est jamais portée par la seule couleur ; <code>prefers-reduced-motion</code> respecté ; aucun son.</td>
+</tr>
+<tr>
+<td>LED-N-08</td>
+<td>Langues</td>
+<td>en et fr livrés ; ajout d'une langue = un fichier ; identifiants de code en anglais.</td>
+</tr>
+<tr>
+<td>LED-N-09</td>
+<td>Hors ligne</td>
+<td>Service worker : utilisable après le premier chargement ; export/import <code>.ledger.json</code> comme seule sauvegarde requise.</td>
+</tr>
+<tr>
+<td>LED-N-10</td>
+<td>Robustesse</td>
+<td>Toute donnée entrante (fichier, URL, IndexedDB) est validée par Zod et produit une erreur typée, jamais une exception non gérée.</td>
+</tr>
+<tr>
+<td>LED-N-11</td>
+<td>Dépendances</td>
+<td>Runtime limité à <code>zod</code> (MIT) et React ; aucun copyleft fort ; lockfile committé ; licences vérifiées en CI.</td>
+</tr>
+<tr>
+<td>LED-N-12</td>
+<td>Confidentialité des fixtures</td>
+<td>Garde <code>fixture-privacy-guard</code> en CI ; aucune donnée réelle ; graine fixe.</td>
+</tr>
+<tr>
+<td>LED-N-13</td>
+<td>Tests par propriétés</td>
+<td>10 000 journaux aléatoires en &lt; 60 s (P95 &lt; 20 s) pour rester dans le budget CI de 5 minutes.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h9-architecture-technique">H.9 Architecture technique</h3>
+<pre><code>/
+├── .kiro/         steering/ (product · tech · structure · testing · accounting[fileMatch] · lean · apps)
+│                  specs/ (ledger-contract · ledger-journal · ledger-reports · ledger-envelopes ·
+│                          ledger-csv-import · ledger-ui · app-envelopes · app-mutual-aid)
+│                  hooks/ (loc-budget · immutable-journal-guard · property-guard ·
+│                          fixture-privacy-guard · bundle-budget) · agents/ (ledger-reviewer ·
+│                          property-tester) · skills/new-ledger-app/SKILL.md · settings/mcp.json
+├── packages/core/   ≤ 2 200 lignes — le noyau, aucune dépendance à React
+├── packages/ui/     ≤ 1 800 lignes — composants, aucun accès direct à IndexedDB
+├── skeleton/        ≤ 200 lignes — une application vide qui fonctionne
+├── apps/envelopes/  ≤ 700 lignes propres · apps/mutual-aid/ ≤ 700 lignes propres
+├── power/new-ledger-app/ · fixtures/ · scripts/ · docs/
+└── KIRO_JOURNAL.md · README.md · LICENSE (MIT)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Paquet</th>
+<th>Fichiers (lignes cibles)</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>packages/core</code></td>
+<td><code>schema.ts</code> 200 · <code>hash.ts</code> 90 · <code>journal.ts</code> 260 · <code>contra.ts</code> 90 · <code>ledger.ts</code> 140 · <code>reports.ts</code> 330 · <code>envelopes.ts</code> 250 · <code>rules.ts</code> 240 · <code>csv.ts</code> 320 · <code>units.ts</code> 80 · <code>view.ts</code> 120 · <code>index.ts</code> 80</td>
+<td>2 200</td>
+</tr>
+<tr>
+<td><code>packages/ui</code></td>
+<td><code>Shell</code> 180 · <code>NumberBand</code> 140 · <code>JournalTable</code> 220 · <code>EntryForm</code> 240 · <code>ImportWizard</code> 260 · <code>EnvelopeBoard</code> 200 · <code>ReportViews</code> 200 · <code>AuditTrace</code> 120 · <code>PrintReport</code> 100 · <code>a11y</code> 140</td>
+<td>1 800</td>
+</tr>
+<tr>
+<td><code>skeleton</code></td>
+<td><code>main.tsx</code> 80 · <code>ledger.config.ts</code> 60 · <code>spec-samples/</code> 60</td>
+<td>200</td>
+</tr>
+<tr>
+<td><code>apps/envelopes</code></td>
+<td><code>ledger.config.ts</code> 70 · <code>screens/</code> 280 · <code>domain/</code> 230 · <code>data/</code> 120</td>
+<td>700</td>
+</tr>
+<tr>
+<td><code>apps/mutual-aid</code></td>
+<td><code>ledger.config.ts</code> 60 · <code>screens/</code> 300 · <code>domain/</code> 220 · <code>publish/</code> 120</td>
+<td>700</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Flux de données</strong></p>
+<pre><code>CSV (fictif) ──▶ csv.ts (détection + validation Zod) ──▶ Entry[] proposées
+                     │                                        │
+                rules.ts (affectation, apprises)         rejets exportables
+                     ▼                                        ▼
+              journal.ts  ── append-only ──▶ hash.ts (chaîne) ──▶ verifyChain()
+                     │                              │
+        ┌────────────┼──────────────┐               └──▶ contra.ts (corrections)
+        ▼            ▼              ▼
+   ledger.ts    envelopes.ts    reports.ts  ──▶  view.ts (fragment d'URL)
+   (pli/soldes) (report, leftToday) (4 rapports)        │
+                                              apps/mutual-aid ──▶ redaction ──▶ page publique
+</code></pre>
+<p><strong>Ce qui tourne où.</strong> 100 % dans le navigateur : parsing, hash, plis, rapports, rendu, stockage (IndexedDB
+chiffrable). Hébergement = GitHub Pages statique pour les trois sites ; aucun worker serverless, aucun service tiers,
+aucune base. Les scripts <code>bench</code>, <code>recette</code>, <code>loc-budget</code> et la garde de confidentialité tournent en Node dans la CI,
+jamais dans l'application.</p>
+<p><strong>Preuve de polyvalence — les deux applications aux antipodes</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>apps/envelopes</code></th>
+<th><code>apps/mutual-aid</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Forme des données</td>
+<td>Journal privé dense : 12 000 lignes importées d'un relevé bancaire, 9 enveloppes</td>
+<td>Grand livre public clairsemé : 214 écritures saisies à la main, notes en langage clair obligatoires</td>
+</tr>
+<tr>
+<td>Logique métier</td>
+<td>Affectation par règles apprises, report d'enveloppe, <code>leftToday</code>, projection en fourchette</td>
+<td>Rédaction/anonymisation avant publication, chaîne publique, rapport annuel imprimable</td>
+</tr>
+<tr>
+<td>Modèle de confiance</td>
+<td><strong>Tout privé</strong> : la confiance vient du silence (zéro réseau, données chiffrables au repos)</td>
+<td><strong>Tout public</strong> : la confiance vient de la preuve (chaîne de hash vérifiable par un donateur)</td>
+</tr>
+<tr>
+<td>Rapports</td>
+<td><code>envelopes</code>, <code>trial-balance</code>, <code>audit-trail</code></td>
+<td><code>trial-balance</code>, <code>income-statement</code>, <code>audit-trail</code>, <code>public-ledger</code></td>
+</tr>
+<tr>
+<td>Mode de partage</td>
+<td>Aucun par défaut ; vue locale en fragment d'URL, export <code>.ledger.json</code> chiffrable</td>
+<td>Page publique statique + reçu <code>{entryId, hash}</code> remis à chaque donateur</td>
+</tr>
+<tr>
+<td>Public</td>
+<td>Sarah, un foyer de 4 personnes</td>
+<td>Un collectif de 6 bénévoles, 180 donateurs, une AG</td>
+</tr>
+<tr>
+<td>Lignes propres</td>
+<td>≤ 700 (cible 640) sur ~4 200 lignes de squelette réutilisées</td>
+<td>≤ 700 (cible 680) sur le même squelette</td>
+</tr>
+<tr>
+<td>Unité de compte</td>
+<td>EUR uniquement</td>
+<td>EUR, et <code>unit: quantity("hour")</code> activable pour une banque du temps</td>
+</tr>
+</tbody>
+</table>
+<p>À publier dans le README : pour chaque application, le nombre de lignes propres et le nombre de lignes du squelette
+qu'elle réutilise — la fraction réutilisée est l'argument de la catégorie.</p>
+<h3 id="h10-securite-et-modele-de-menace">H.10 Sécurité et modèle de menace</h3>
+<p>C'est le point sensible du projet : données bancaires d'un côté, données de bénéficiaires publiées de l'autre. Le
+modèle de confiance est donc double, et assumé comme tel.</p>
+<table>
+<thead>
+<tr>
+<th>Menace</th>
+<th>Scénario concret</th>
+<th>Parade</th>
+<th>Preuve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fuite par l'URL de partage</td>
+<td>Une vue collée dans une messagerie emporte des libellés privés</td>
+<td>La vue ne contient que des paramètres (rapport, période, filtres) — jamais d'écritures ; sérialisation en <strong>fragment</strong> (<code>#v=</code>), jamais en query : non envoyée au serveur, absente des logs et de <code>Referer</code></td>
+<td>LED-P-15, test de longueur ≤ 2 000 caractères</td>
+</tr>
+<tr>
+<td>Fuite par la vue publique</td>
+<td>Un donateur reconnaît un bénéficiaire</td>
+<td><code>RedactionPolicy</code> : pseudonymes stables (« a household, case 41 »), dates au mois, montants par palier de 10 €, notes sur liste blanche, seuil d'agrégation <code>minGroupSize: 3</code> (k-anonymat) ; prévisualisation privée/publique côte à côte avant publication</td>
+<td>LED-P-09, écran de comparaison obligatoire</td>
+</tr>
+<tr>
+<td>Ré-identification par le hash</td>
+<td>Un attaquant devine nom + montant + date, recalcule le hash et confirme sa présence dans la chaîne publique</td>
+<td>La chaîne publique est <strong>recalculée sur les entrées rédigées</strong> : le hash privé n'est jamais publié. Le sel de pseudonymisation reste local et n'est jamais exporté</td>
+<td>LED-P-09, revue de <code>redact.ts</code></td>
+</tr>
+<tr>
+<td>Troncature de la chaîne</td>
+<td>Couper la queue du journal et republier une tête plus courte</td>
+<td>Ancrage de la tête dans le rapport annuel imprimable et dans un commit du dépôt ; encart « what this chain proves / does not prove » sur la page publique</td>
+<td>H.5.3, page publique</td>
+</tr>
+<tr>
+<td>Vol du fichier local</td>
+<td>Ordinateur partagé, <code>.ledger.json</code> copié</td>
+<td>Chiffrement au repos optionnel : AES-GCM, clé dérivée PBKDF2 d'une phrase jamais stockée ; export chiffré par défaut dès qu'une phrase est définie</td>
+<td>LED-F-24, test de déchiffrement avec mauvaise clé</td>
+</tr>
+<tr>
+<td>Exfiltration silencieuse</td>
+<td>Une dépendance ou un script tiers envoie le relevé</td>
+<td>Zéro requête par défaut : CSP <code>connect-src 'none'</code>, grep CI sur <code>fetch\|XMLHttpRequest\|WebSocket\|sendBeacon</code>, test Playwright qui échoue dès la première requête sortante</td>
+<td>LED-N-05</td>
+</tr>
+<tr>
+<td>XSS par libellé bancaire</td>
+<td><code>"&gt;&lt;script&gt;</code> dans un libellé importé</td>
+<td>Rendu React en texte uniquement, aucun <code>dangerouslySetInnerHTML</code>, aucune évaluation de configuration venue d'un fichier</td>
+<td>LED-N-06, test E2E avec libellé hostile</td>
+</tr>
+<tr>
+<td>Injection de formule à l'export</td>
+<td>Un CSV exporté ouvert dans un tableur exécute <code>=cmd\|…</code></td>
+<td>Préfixe <code>'</code> sur toute cellule commençant par <code>=</code>, <code>+</code>, <code>-</code>, <code>@</code>, tabulation</td>
+<td>LED-P-11</td>
+</tr>
+<tr>
+<td>ReDoS par règle apprise</td>
+<td>Une regex utilisateur catastrophique bloque l'interface</td>
+<td>Longueur de motif bornée (200), opérateurs limités à <code>contains/equals/startsWith</code>, <code>regex</code> exécuté avec délai et repli</td>
+<td>LED-N-06</td>
+</tr>
+<tr>
+<td>Fixtures indiscrètes</td>
+<td>Un vrai relevé commité par erreur</td>
+<td>Garde CI <code>fixture-privacy-guard</code> (IBAN, Luhn, prénoms+noms) + en-tête obligatoire <code># FIXTURE: FICTIONAL DATA</code></td>
+<td>LED-N-12</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Risque résiduel assumé et écrit dans le README</strong> : l'anonymisation réduit le risque de ré-identification, elle ne
+l'annule pas. Un montant rare, une date précise et un contexte local peuvent suffire à identifier un ménage. C'est
+pourquoi le mode <code>aggregate</code> (totaux par catégorie et par mois, sans écriture individuelle) est proposé comme niveau
+par défaut recommandé pour les petits fonds, et que le choix est documenté comme un arbitrage entre transparence et
+protection.</p>
+<h3 id="h11-interface-et-direction-artistique">H.11 Interface et direction artistique</h3>
+<p>Le squelette est volontairement nu : typographie système, échelle d'espacement 4/8 px, traits fins, aucun ornement.
+Registre visuel : <strong>papier et encre</strong>, chiffres tabulaires, hashes en monospace. Ce projet n'est pas en Costume
+Contest : aucun registre fantastique. La règle équivalente — chaque élément visuel doit servir la fonction — est tenue
+à l'envers : tout ce qui n'aide pas à lire un solde est supprimé. Seule concession au thème, assumée : la
+contre-passation s'affiche en <strong>encre rouge barrée</strong>, comme dans un vrai grand livre, et ce rouge porte une
+information fonctionnelle (« cette ligne est annulée ») doublée d'un signe et d'un libellé.</p>
+<ul>
+<li><strong>Palette</strong> : <code>--ink #1c1b1a</code>, <code>--paper #fdfbf6</code>, <code>--rule #e3ded2</code>, <code>--red-ink #a4332b</code>, <code>--green-ink #2f6b4f</code> ; contrastes AA ≥ 4,5:1 sur papier, information jamais portée par la seule couleur (signe <code>−</code>/<code>+</code> et mention textuelle systématiques).</li>
+<li><strong>Écrans <code>envelopes</code></strong> : <code>Today</code> (chiffre unique plein cadre, <code>aria-live="polite"</code>, puis fourchette de projection et enveloppes) · <code>Journal</code> · <code>Import</code> (assistant en 4 étapes, détection affichée) · <code>Envelopes</code> (report mois par mois) · <code>Audit</code>.</li>
+<li><strong>Écrans <code>mutual-aid</code></strong> : <code>Book</code> (saisie d'une aide en langage clair) · <code>Publish</code> (comparaison privée/publique obligatoire avant export) · <code>Public</code> (répond à « où est passé l'argent ? », vérification de reçu, encart « what this chain proves ») · <code>Annual report</code> (A4).</li>
+<li><strong>États à soigner</strong> : livre vide · import en cours (progression par lignes) · écriture refusée (déséquilibre exact affiché, jamais un message générique) · chaîne rompue (index + raison) · phrase de passe erronée · vue invalide (retour au défaut + message) · rien à publier.</li>
+<li><strong>Mouvement, son, démo</strong> : aucune animation par défaut, 120 ms maximum, <code>prefers-reduced-motion</code> respecté ; <strong>aucun son</strong>, nulle part, pas même derrière un réglage ; bouton <code>Load demo data</code> qui charge les fixtures fictives en moins de 2 s, sans compte ni installation.</li>
+</ul>
+<h3 id="h12-proprietes-a-tester">H.12 Propriétés à tester</h3>
+<p>Toutes en fast-check, graines consignées dans <code>KIRO_JOURNAL.md</code> ; jeu par défaut 1 000 exécutions, 10 000 pour la
+campagne de soumission (<code>LED-N-13</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Id</th>
+<th>Invariant exact</th>
+<th>Générateur fast-check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LED-P-01</td>
+<td>Toute entrée construite par l'API somme à zéro, par devise</td>
+<td><code>arbBalancedEntry</code> : <code>fc.array(arbPosting, {minLength:1,maxLength:5})</code> + écriture d'équilibrage sur <code>suspense</code> ; assertion <code>sumByUnit === 0</code></td>
+</tr>
+<tr>
+<td>LED-P-02</td>
+<td>La balance générale est toujours équilibrée (<code>Σ débits = Σ crédits</code>)</td>
+<td><code>arbJournal(1..200)</code> ; <code>trialBalance(j).totals.debit === .credit</code></td>
+</tr>
+<tr>
+<td>LED-P-03</td>
+<td>Les soldes sont un pli sur le journal, indépendants de l'ordre</td>
+<td><code>arbJournal</code> + permutation (<code>fc.shuffledSubarray</code> complet) ; égalité stricte des deux maps de soldes</td>
+</tr>
+<tr>
+<td>LED-P-04</td>
+<td>La chaîne de hash se vérifie après toute insertion et toute contre-passation</td>
+<td><code>arbJournal</code> × <code>fc.array(arbOp)</code> où <code>arbOp = append \| contra</code> ; <code>verifyChain() === { ok: true }</code></td>
+</tr>
+<tr>
+<td>LED-P-05</td>
+<td>Aucune écriture n'est mutable : une tentative produit une contre-passature, pas un edit</td>
+<td>tout objet exposé est <code>Object.isFrozen</code> récursivement ; <code>fc.assert</code> que <code>r.postings[0].amountMinor = 1</code> lève, et que le hash reste identique</td>
+</tr>
+<tr>
+<td>LED-P-06</td>
+<td>Instantané + rejeu = mêmes soldes et même tête</td>
+<td><code>serialize → parse → replay</code> ; égalité bit à bit des soldes et du <code>headHash</code></td>
+</tr>
+<tr>
+<td>LED-P-07</td>
+<td>Aucune devise mélangée sans écriture de conversion explicite</td>
+<td><code>arbEntry</code> à deux unités ; rejet <code>MixedUnits</code> sauf <code>kind: "conversion"</code> avec <code>rate</code> et deux groupes équilibrés</td>
+</tr>
+<tr>
+<td>LED-P-08</td>
+<td>Le report d'enveloppe est conservatif sur 24 mois simulés</td>
+<td><code>arbEnvelopePlan(24)</code> × <code>arbMonthlySpending</code> ; <code>Σ budget + report₀ === Σ spent + reportFinal + Σ abandoned</code></td>
+</tr>
+<tr>
+<td>LED-P-09</td>
+<td>L'anonymisation est irréversible dans la vue publique</td>
+<td>entrées privées portant des marqueurs uniques (<code>PRIV-</code> + <code>fc.hexaString</code>) ; aucun marqueur, aucun <code>accountId</code> privé, aucun <code>party.id</code> dans le JSON publié</td>
+</tr>
+<tr>
+<td>LED-P-10</td>
+<td>Une contre-passation annule exactement l'entrée ciblée</td>
+<td><code>balances(j + contra(e))</code> === <code>balances(j sans e)</code> pour toute entrée terminale</td>
+</tr>
+<tr>
+<td>LED-P-11</td>
+<td>Aucune cellule exportée ne commence par un caractère de formule non neutralisé</td>
+<td><code>arbCsvText</code> hostile (<code>=</code>, <code>+</code>, <code>-</code>, <code>@</code>, tabulation) ; export puis relecture</td>
+</tr>
+<tr>
+<td>LED-P-12</td>
+<td>La répartition (<code>split</code>) est conservative</td>
+<td><code>arbSplit(2..6 jambes)</code> ; <code>Σ jambes === montant</code>, reliquat d'arrondi &lt; nombre de jambes</td>
+</tr>
+<tr>
+<td>LED-P-13</td>
+<td><code>leftToday</code> ne met jamais le mois en déficit</td>
+<td>simulation : dépenser exactement <code>leftToday</code> chaque jour restant ; résidu final ∈ <code>[0, daysLeft)</code> centimes</td>
+</tr>
+<tr>
+<td>LED-P-14</td>
+<td>L'import est idempotent</td>
+<td><code>arbCsv(1..500 lignes)</code> importé une puis deux fois ; même nombre d'entrées, mêmes hashes</td>
+</tr>
+<tr>
+<td>LED-P-15</td>
+<td>Toute chaîne passée à l'ouverture d'une vue donne une vue valide ou une erreur typée</td>
+<td><code>fc.string()</code> arbitraire en fragment ; jamais d'exception non gérée</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h13-strategie-kiro">H.13 Stratégie Kiro</h3>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Emploi précis</th>
+<th>Preuve dans le dépôt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Specs (8)</td>
+<td><code>ledger-contract</code> (exigences d'abord, H.6.1 en entrée) · <code>ledger-journal</code> (conception d'abord : chaîne de hash + contre-passation) · <code>ledger-reports</code> · <code>ledger-envelopes</code> · <code>ledger-csv-import</code> · <code>ledger-ui</code> · <code>app-envelopes</code> · <code>app-mutual-aid</code></td>
+<td><code>.kiro/specs/&lt;lot&gt;/{requirements,design,tasks}.md</code>, exigences <code>LED-*</code> tracées</td>
+</tr>
+<tr>
+<td>Steering</td>
+<td><code>product.md</code>, <code>tech.md</code>, <code>structure.md</code>, <code>testing.md</code> (toujours) ; <strong><code>accounting.md</code> en <code>fileMatch</code> sur <code>packages/core/**</code></strong> : convention de signe, soldes normaux, forme canonique du hash, interdiction absolue de muter une entrée ; <code>lean.md</code> (ce qu'on refuse d'ajouter et pourquoi) ; <code>apps.md</code> en <code>fileMatch</code> sur <code>apps/**</code> (interdiction d'import profond, cinq points d'extension)</td>
+<td><code>.kiro/steering/*.md</code> + journal : quelle règle du steering a évité quelle erreur</td>
+</tr>
+<tr>
+<td>Hooks</td>
+<td><code>loc-budget</code> (compte les lignes, refuse au-delà du budget) · <strong><code>immutable-journal-guard</code></strong> (refuse toute fonction qui mute une écriture : <code>.push</code>/<code>.splice</code>/<code>.sort</code> sur <code>records</code>, assignation sur <code>amountMinor</code>, <code>Object.assign</code> sur <code>Entry</code>, <code>delete</code>) · <code>property-guard</code> (relance les propriétés du noyau à l'enregistrement) · <code>fixture-privacy-guard</code> · <code>bundle-budget</code></td>
+<td><code>.kiro/hooks/*.json</code> (format v1 : <code>trigger</code>, <code>matcher</code>, <code>action</code>) + capture de la sortie d'erreur dans le journal</td>
+</tr>
+<tr>
+<td>Agents personnalisés</td>
+<td><code>ledger-reviewer</code> : lecture seule, confronte un diff aux exigences EARS et au steering <code>accounting.md</code>, ne peut pas écrire · <code>property-tester</code> : écrit uniquement dans <code>*.test.ts</code>, doit produire un contre-exemple reproductible avec sa graine</td>
+<td><code>.kiro/agents/*.md</code> + compte rendu de revue commité</td>
+</tr>
+<tr>
+<td>Power</td>
+<td><code>new-ledger-app</code> : manifeste + skill qui copie <code>skeleton/</code>, génère <code>ledger.config.ts</code> à partir de réponses (nom, unité, comptes, rapports), crée la spec et lance <code>loc-budget</code></td>
+<td><code>power/new-ledger-app/</code>, utilisé en direct dans la vidéo</td>
+</tr>
+<tr>
+<td>MCP (optionnel)</td>
+<td>Serveur <code>ledger-mcp</code> exposant en lecture seule <code>verify_chain</code>, <code>trial_balance</code>, <code>balances_asof</code> : l'agent vérifie son arithmétique auprès du noyau au lieu de la deviner</td>
+<td><code>.kiro/settings/mcp.json</code>, journal d'une session qui s'en sert</td>
+</tr>
+<tr>
+<td>Crew / CLI</td>
+<td>Deux sessions parallèles sur <code>app-envelopes</code> et <code>app-mutual-aid</code> à partir du même steering ; <code>kiro</code> en mode sans interface dans la CI pour rejouer les tâches de spec</td>
+<td>Journal : si les deux aboutissent sans toucher au noyau, la clarté est démontrée</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Comparaison spec / vibe coding</strong> (demandée par le formulaire) : fonction mesurée = <code>contra()</code> + recalcul de la
+chaîne. Même énoncé, deux sessions — l'une avec la spec <code>ledger-journal</code>, l'autre en invite libre ; on compte durée,
+allers-retours et défauts trouvés. Chiffres dans <code>KIRO_JOURNAL.md</code> §4 (<strong>À mesurer</strong>, rien d'annoncé à l'avance).</p>
+<p><strong>L'épreuve de l'inconnu.</strong> Une personne qui n'a jamais ouvert le dépôt reçoit l'URL du dépôt, le power
+<code>new-ledger-app</code> et un énoncé d'une page (« un grand livre de banque du temps : heures données et reçues, unité <code>hour</code>,
+un rapport mensuel, aucune enveloppe »). Chronomètre lancé. Réussite : l'application démarre, accepte deux écritures,
+en refuse une déséquilibrée, affiche le rapport — <strong>en moins de 15 minutes, sans modifier <code>packages/core</code> ni
+<code>packages/ui</code></strong>. Protocole, chrono et vidéo brute dans <code>docs/UNKNOWN-ROOM.md</code> ; c'est la troisième application de la
+vidéo (<code>apps/time-bank</code>) et la preuve la plus directe que le squelette est clair, y compris pour un agent.</p>
+<p><strong>Ce que les tests par propriétés ont trouvé</strong> : section dédiée du <code>KIRO_JOURNAL.md</code> (§6), un paragraphe par
+contre-exemple, avec la graine fast-check, l'entrée minimale qui casse, le défaut et le correctif. Le formulaire de
+soumission pose explicitement la question ; trois classes de défauts sont attendues et seront documentées avec les cas
+réels : arrondi d'une répartition <code>split</code> non conservative, dépendance du hash à l'ordre des clés d'un objet, report
+d'enveloppe qui recrée un reliquat déjà consommé (<strong>À confirmer par l'exécution</strong> — rien n'est inventé avant mesure).</p>
+<h3 id="h14-plan-de-realisation">H.14 Plan de réalisation</h3>
+<table>
+<thead>
+<tr>
+<th>Lot</th>
+<th>Contenu</th>
+<th>Dépend de</th>
+<th>Jours-agent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H1</td>
+<td>Socle dépôt, MIT, CI (ci-budget, conformité concours), squelette vide qui démarre</td>
+<td>—</td>
+<td>0,5</td>
+</tr>
+<tr>
+<td>H2</td>
+<td><code>core</code> : contrat Zod, unités, <code>hash.ts</code>, <code>journal.ts</code>, <code>contra.ts</code></td>
+<td>H1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>H3</td>
+<td><code>core</code> : <code>ledger.ts</code> (plis), <code>reports.ts</code> (4 rapports)</td>
+<td>H2</td>
+<td>1,5</td>
+</tr>
+<tr>
+<td>H4</td>
+<td><code>core</code> : <code>envelopes.ts</code> (report, <code>leftToday</code>), <code>rules.ts</code> (apprises)</td>
+<td>H3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>H5</td>
+<td><code>core</code> : <code>csv.ts</code> (détection, validation, rejets, idempotence)</td>
+<td>H2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>H6</td>
+<td><code>ui</code> : Shell, NumberBand, JournalTable, EntryForm, ImportWizard, EnvelopeBoard, ReportViews, AuditTrace, PrintReport</td>
+<td>H3</td>
+<td>2</td>
+</tr>
+<tr>
+<td>H7</td>
+<td><code>apps/envelopes</code></td>
+<td>H4, H5, H6</td>
+<td>1</td>
+</tr>
+<tr>
+<td>H8</td>
+<td><code>apps/mutual-aid</code> (rédaction, page publique, reçu, rapport annuel)</td>
+<td>H3, H6</td>
+<td>1</td>
+</tr>
+<tr>
+<td>H9</td>
+<td>Propriétés (15), hooks, steering, agents, fixtures + garde de confidentialité</td>
+<td>H2–H5</td>
+<td>1</td>
+</tr>
+<tr>
+<td>H10</td>
+<td><code>skeleton/</code>, power <code>new-ledger-app</code>, épreuve de l'inconnu, README-carte, hébergement</td>
+<td>H7, H8</td>
+<td>1</td>
+</tr>
+<tr>
+<td>H11</td>
+<td>Captures, montage vidéo, textes Devpost, blog</td>
+<td>H10</td>
+<td>1,5</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Périmètre minimal</strong></td>
+<td></td>
+<td><strong>11</strong></td>
+</tr>
+<tr>
+<td>Options</td>
+<td>Chiffrement au repos (0,5) · MCP <code>ledger-mcp</code> (0,5) · sparkline SVG et thème sombre (0,5) · service worker hors ligne (0,5) · banque du temps en 4e application livrée (0,5) · version fr de la page publique (0,5)</td>
+<td></td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Calendrier</strong> (aujourd'hui 11/11 ; période de construction ouverte jusqu'au 04/12 14 h Pacifique). H1–H3 du 12 au
+16/11 · H4–H6 du 17 au 21/11 (H5 et H6 en parallèle) · H7 et H8 du 22 au 24/11 en parallèle (deux sessions Crew, même
+steering) · H9–H10 les 25 et 26/11 · <strong>tout doit être mergé sur <code>main</code> le 26/11 à 18 h</strong> · captures et montage les 27
+et 28/11 · <strong>gel vidéo le 28/11</strong> · dépôt de la soumission le 30/11, marge de 4 jours avant la clôture.</p>
+<p><strong>Mergé avant le gel vidéo du 28 novembre</strong> (sinon la séquence est coupée du montage) : H1 à H4 (contrat, journal,
+chaîne de hash, contre-passation, rapports, enveloppes), H6 (NumberBand et ImportWizard au minimum), H7 et H8 en état
+de démonstration, H9 (les 15 propriétés vertes en CI et la sortie imprimable de la campagne à 10 000 journaux), H10
+(power + <code>apps/time-bank</code> généré une fois à blanc). Restent hors gel : options, blog, et la version française de la
+page publique.</p>
+<h3 id="h15-risques-et-parades">H.15 Risques et parades</h3>
+<table>
+<thead>
+<tr>
+<th>Risque</th>
+<th>Prob.</th>
+<th>Impact</th>
+<th>Parade</th>
+<th>Plan B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chevauchement perçu avec <code>bare-bones</code></td>
+<td>Moyenne</td>
+<td>Forte — les deux sont en Skeleton Crew</td>
+<td>Paragraphe dédié en H.1 et H.3, section « Read vs Write » dans les deux README, aucun code partagé</td>
+<td>Vidéo qui ouvre sur l'écriture et la contre-passation, jamais sur un import exploratoire</td>
+</tr>
+<tr>
+<td>Les deux applications se ressemblent</td>
+<td>Faible</td>
+<td>Forte</td>
+<td>Tableau H.9 tenu à jour ; modèles de confiance opposés ; <code>mutual-aid</code> n'a aucune enveloppe, <code>envelopes</code> n'a aucune publication</td>
+<td>Rendre <code>mutual-aid</code> strictement non-éditable en ligne (saisie locale puis publication d'un fichier)</td>
+</tr>
+<tr>
+<td>Le noyau grossit à chaque besoin d'application</td>
+<td>Forte</td>
+<td>Forte — la promesse « lean » tombe</td>
+<td>Hook <code>loc-budget</code> bloquant ; tout besoin passe par un point d'extension ou reste dans l'application ; <code>lean.md</code></td>
+<td>Reporter la fonctionnalité en option non livrée</td>
+</tr>
+<tr>
+<td>La partie double effraie le public non développeur</td>
+<td>Moyenne</td>
+<td>Moyenne</td>
+<td>Aucun mot de comptable dans <code>envelopes</code> : un chiffre, des enveloppes, des libellés ; le vocabulaire technique n'apparaît que dans <code>audit</code></td>
+<td>Mode « simple » qui masque balance et piste d'audit</td>
+</tr>
+<tr>
+<td>L'anonymisation ne suffit pas à protéger un bénéficiaire</td>
+<td>Moyenne</td>
+<td>Forte — préjudice réel</td>
+<td>Rédaction avant hachage, sel local, seuil <code>minGroupSize</code>, mode <code>aggregate</code> par défaut recommandé, risque résiduel écrit dans le README</td>
+<td>Publication agrégée uniquement (totaux par catégorie et par mois), aucune écriture individuelle</td>
+</tr>
+<tr>
+<td>Les propriétés ne trouvent rien d'intéressant à raconter</td>
+<td>Faible</td>
+<td>Moyenne — le formulaire de soumission les demande</td>
+<td>15 propriétés sur les zones à risque (arrondi, report, canonicalisation) ; campagne à 10 000 journaux</td>
+<td>Documenter honnêtement « aucun défaut trouvé, voici les graines » : un échec documenté vaut mieux qu'une promesse</td>
+</tr>
+<tr>
+<td>L'épreuve de l'inconnu dépasse 15 minutes</td>
+<td>Moyenne</td>
+<td>Moyenne</td>
+<td><code>skeleton/</code> + power testés à blanc sur H10 ; README-carte relu par un agent sans contexte</td>
+<td>Deux tentatives filmées, la meilleure retenue, l'échec documenté</td>
+</tr>
+<tr>
+<td>Gel vidéo du 28/11 non tenu</td>
+<td>Moyenne</td>
+<td>Forte</td>
+<td>Liste de ce qui doit être mergé (H.14), options toutes reportables</td>
+<td>Vidéo réduite à 2 min sur les deux applications seules</td>
+</tr>
+<tr>
+<td>Poids de la page publique &gt; 150 ko</td>
+<td>Faible</td>
+<td>Faible</td>
+<td>Hook <code>bundle-budget</code> ; aucune police web ; JSON publié paginé par période</td>
+<td>Publier le JSON en fichier externe chargé à la demande</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h16-demonstration-et-soumission">H.16 Démonstration et soumission</h3>
+<p>Voix off en anglais (élément de soumission), aucune musique, aucune marque tierce à l'écran : les relevés, noms et
+bénéficiaires sont fictifs, les interfaces sont les nôtres.</p>
+<table>
+<thead>
+<tr>
+<th>Temps</th>
+<th>Plan (image)</th>
+<th>Voix off, mot pour mot</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0:00–0:14</td>
+<td>Plein écran : un relevé CSV de 12 000 lignes défile, un compteur monte, s'arrête sur <code>0.6 s</code>. Puis un chiffre unique apparaît : <code>34 €</code></td>
+<td>"Three years of a bank statement. Twelve thousand lines. Imported in zero point six seconds, offline, and nothing left this laptop. And this is the only number Sarah needs: what she can still spend today."</td>
+</tr>
+<tr>
+<td>0:14–0:34</td>
+<td>Coupe sur le dépôt : arborescence, puis <code>schema.ts</code> — le type <code>Entry</code> et la ligne <code>Σ = 0</code> surlignée</td>
+<td>"This is Ledger: a double-entry skeleton. Four thousand two hundred lines. One law: every entry sums to zero. Everything else is configuration."</td>
+</tr>
+<tr>
+<td>0:34–0:58</td>
+<td>Terminal de l'application : tentative de modifier un montant → refus affiché ; puis <code>contra()</code> → deux écritures apparaissent, l'originale barrée en rouge ; <code>verifyChain()</code> → <code>ok</code></td>
+<td>"You cannot edit an entry. You reverse it. The mistake stays visible, forever, and the hash chain proves nothing was rewritten. Correctness here is not an opinion. It is an equation."</td>
+</tr>
+<tr>
+<td>0:58–1:26</td>
+<td>Application <code>envelopes</code> : assistant d'import (séparateur <code>;</code>, virgule décimale, Windows-1252 détectés et affichés), une correction <code>CARREFOUR MARKET → Courses</code>, la règle apprise, le tableau des enveloppes avec report</td>
+<td>"Application one: a household budget. It reads a real European bank export — semicolons, decimal commas, Windows-1252. Correct one assignment and it learns the rule. Leftovers roll over. Nothing is uploaded, ever."</td>
+</tr>
+<tr>
+<td>1:26–1:58</td>
+<td>Application <code>mutual-aid</code> : saisie d'une aide, écran de comparaison privée/publique (« a household, case 41 »), page publique qui s'ouvre sur un téléphone, un donateur saisit son reçu → <code>verified</code>, rapport annuel A4</td>
+<td>"Application two: the public book of a mutual-aid fund. Same core, opposite promise. Every donation and every grant is published in plain language, beneficiaries become case numbers, and any donor can verify the chain themselves. One question answered: where did the money go?"</td>
+</tr>
+<tr>
+<td>1:58–2:18</td>
+<td>Écran partagé : tableau H.9 (les deux applications aux antipodes) puis sortie de <code>loc-budget</code> et d'un hook qui refuse un fichier trop long</td>
+<td>"One hides everything. One publishes everything. Same two thousand two hundred lines of core, and a machine that refuses to let it grow."</td>
+</tr>
+<tr>
+<td>2:18–2:40</td>
+<td>Sortie de test : <code>10000 runs, 0 unbalanced entries</code>, graines affichées ; puis un contre-exemple du journal avec son correctif</td>
+<td>"Fifteen properties, ten thousand random journals, zero unbalanced entries. And three real bugs the properties caught that our tests had missed."</td>
+</tr>
+<tr>
+<td>2:40–2:56</td>
+<td>Chronomètre à l'écran : une personne qui n'a jamais vu le dépôt, Kiro, le power <code>new-ledger-app</code>, une banque du temps en unités d'heures qui démarre — <code>14 min 32 s</code></td>
+<td>"The unknown-room test: someone who has never seen this repository, Kiro, and the shipped power. A working time-bank ledger in fourteen minutes thirty-two, without touching the core."</td>
+</tr>
+<tr>
+<td>2:56–3:00</td>
+<td>Les trois adresses sur fond papier, aucune décoration</td>
+<td>"Ledger. A skeleton you can audit."</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Textes Devpost</strong> (anglais). Titre : <em>Ledger — a double-entry skeleton</em>. Accroche : « A 4 200-line double-entry core
+you cannot lie to: entries are immutable, corrections are visible pairs, balances are a fold, and every claim is a
+tested property. Two apps inherit it — one hides everything, one publishes everything. » Description : le problème
+(H.3), le squelette et ses cinq points d'extension (H.5.7), les deux applications (H.9), les preuves chiffrées (H.4),
+la stratégie Kiro (H.13), les limites assumées (H.5.3 et H.10). Section « Built with Kiro » : specs, hooks, steering
+<code>accounting.md</code>, deux agents, power, MCP optionnel, et les contre-exemples trouvés par fast-check. <strong>Bonus</strong> : article
+de blog « What a hash chain proves — and what it doesn't » (2 000 crédits) ; publication sociale avec une capture du
+chiffre unique et une de la page publique.</p>
+<h3 id="h17-recette">H.17 Recette</h3>
+<p>Les seuils sont durs ; les valeurs numériques ci-dessous sont des exemples de sortie à remplacer par la sortie réelle
+le jour de la recette (ne jamais publier une valeur non mesurée).</p>
+<ul>
+<li>[ ] <code>node scripts/recette.mjs --only=import</code> → <code>12000 rows parsed in 0.61 s, 0 rejected</code> (&lt; 1 s).</li>
+<li>[ ] <code>node scripts/recette.mjs --only=balance</code> → <code>trial balance: debit 4 317 55 = credit 4 317 55, 12000 entries</code> (égalité stricte).</li>
+<li>[ ] <code>node scripts/recette.mjs --only=chain</code> → <code>verifyChain: ok, 12000 links, head 9f2c…e41a, 118 ms</code> (&lt; 150 ms).</li>
+<li>[ ] <code>node scripts/recette.mjs --only=tamper</code> (un octet modifié dans le fichier journal) → <code>verifyChain: FAILED at seq 4287, reason bad-hash</code> (index exact).</li>
+<li>[ ] <code>node scripts/recette.mjs --only=immutable</code> → <code>TypeError: cannot assign to read only property</code> puis <code>contra() produced 2 entries, original hash unchanged</code>.</li>
+<li>[ ] <code>pnpm test:property -- --numRuns=10000</code> → <code>15 properties passed, 0 unbalanced entries, seeds logged</code> (LED-N-13 : &lt; 60 s).</li>
+<li>[ ] <code>node scripts/recette.mjs --only=replay</code> → <code>snapshot + replay: balances identical, head identical</code>.</li>
+<li>[ ] <code>node scripts/recette.mjs --only=public</code> → <code>public view: 147 812 bytes gzip (&lt; 152 400), 0 private markers, 0 private account ids</code>.</li>
+<li>[ ] <code>node scripts/recette.mjs --only=network</code> (Playwright, 30 s d'usage sur les deux applications) → <code>0 requests</code>.</li>
+<li>[ ] <code>node scripts/recette.mjs --only=loc</code> → <code>core 2 143/2 200 · ui 1 771/1 800 · skeleton 186/200 · envelopes 638/700 · mutual-aid 674/700</code>.</li>
+<li>[ ] <code>node scripts/recette.mjs --only=a11y</code> (axe sur les trois sites) → <code>0 critical, 0 serious</code>.</li>
+<li>[ ] <code>node scripts/recette.mjs --only=fixtures</code> → <code>fixture-privacy-guard: 0 IBAN, 0 card numbers, 6/6 files marked FICTIONAL</code>.</li>
+</ul>
+<h3 id="h18-questions-ouvertes">H.18 Questions ouvertes</h3>
+<ol>
+<li>Nom anglais définitif : « Ledger — a double-entry skeleton » (retenu) ou un nom moins générique, plus cherchable ? Le dépôt <code>ledger</code> est-il libre, sinon <code>ledger-skeleton</code> ?</li>
+<li><code>apps/time-bank</code> (banque du temps) reste-t-elle un artefact de la vidéo, ou devient-elle une troisième application livrée et hébergée ? Coût : 0,5 jour.</li>
+<li>Niveau d'anonymisation par défaut de <code>mutual-aid</code> : <code>pseudonymised</code> (détail lisible, plus transparent) ou <code>aggregate</code> (plus protecteur, moins incarné) ? À trancher avant le lot H8.</li>
+<li>Chiffrement au repos : livré en option (0,5 jour) ou exclu du périmètre pour tenir le gel vidéo ?</li>
+<li>Serveur MCP <code>ledger-mcp</code> : le livrer (preuve d'usage MCP, +0,5 jour) ou s'en tenir à l'optionnel ?</li>
+<li>La page publique est-elle un fichier commité dans le dépôt (prouvable par l'historique Git, ancrage naturel de la tête de chaîne) ou servie depuis un fragment d'URL ? Le premier est plus fort pour l'argument « vérifiable », le second plus simple.</li>
+<li>Langue de l'interface par défaut : <code>en</code> seul (règlement) ou <code>en</code> + <code>fr</code> (notre public réel) ?</li>
+</ol>
+</main>
+<footer>Généré depuis les sources Markdown du dépôt, vérifié sans dérive en CI. Licence MIT.</footer>
+</body>
+</html>

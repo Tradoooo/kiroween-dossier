@@ -1,0 +1,48 @@
+name: verif-site
+
+# Le site est publié depuis docs/ (source GitHub Pages « branche »), sans dépendre
+# d'Actions pour être en ligne. Ce workflow vérifie seulement que docs/ correspond
+# exactement à ce que le générateur produit à partir des sources Markdown : une seule
+# implémentation (tools/build_site.py), aucune dérive possible entre texte et site.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: verif-site-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  site-a-jour:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Installer python-markdown
+        run: python -m pip install --quiet markdown
+      - name: Régénérer le site
+        run: python3 tools/build_site.py /tmp/site-attendu
+      - name: docs/ doit correspondre à la génération
+        run: |
+          if ! diff -r --brief docs /tmp/site-attendu; then
+            echo "::error::docs/ n'est pas à jour. Relancer : python3 tools/build_site.py docs/"
+            exit 1
+          fi
+          echo "docs/ correspond à la génération."
+      - name: Aucune page vide
+        run: |
+          for p in index classement-usage classement-2mois classement-technique \
+                   idees-usage idees-2mois idees-semaine \
+                   disquette rota partie-double seance cadre consigne grille; do
+            test -s "docs/$p.html" || { echo "page vide ou absente : $p"; exit 1; }
+          done
+          grep -q '<table' docs/classement-usage.html
+          grep -q '<table' docs/idees-usage.html

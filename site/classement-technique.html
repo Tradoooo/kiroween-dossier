@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Classement technique — 39 — Dossier Kiroween — Hackathon 2026</title>
+<style>
+:root{--fg:#e8e6e3;--bg:#111014;--card:#1b1a20;--acc:#e08b3c;--acc2:#8fd3c7;
+ --mut:#9b968f;--bd:#2c2a33}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+ font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+header{padding:1.4rem 1.2rem;border-bottom:1px solid var(--bd);background:var(--card)}
+header h1{margin:0;font-size:1.25rem}
+header p{margin:.3rem 0 0;color:var(--mut);font-size:.9rem}
+nav{display:flex;flex-wrap:wrap;gap:.4rem;padding:.8rem 1.2rem;border-bottom:1px solid var(--bd)}
+nav a{color:var(--mut);text-decoration:none;font-size:.85rem;padding:.3rem .6rem;
+ border:1px solid var(--bd);border-radius:999px}
+nav a:hover{color:var(--fg)}
+nav a.actif{color:#111014;background:var(--acc);border-color:var(--acc);font-weight:600}
+main{padding:1.2rem;max-width:64rem;margin:0 auto}
+main h1{font-size:1.6rem;border-bottom:1px solid var(--bd);padding-bottom:.4rem}
+main h2{font-size:1.25rem;margin-top:2rem;color:var(--acc)}
+main h3{font-size:1.05rem;margin-top:1.6rem;color:var(--acc2)}
+a{color:var(--acc2)}
+code{background:#0c0b0f;padding:.1rem .35rem;border-radius:4px;font-size:.88em}
+pre{background:#0c0b0f;padding:.9rem;border-radius:8px;overflow-x:auto;border:1px solid var(--bd)}
+pre code{background:none;padding:0}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.9rem;display:block;overflow-x:auto}
+th,td{border:1px solid var(--bd);padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{background:var(--card);white-space:nowrap}
+blockquote{border-left:3px solid var(--acc);margin:1rem 0;padding:.2rem 1rem;color:var(--mut)}
+hr{border:0;border-top:1px solid var(--bd);margin:2rem 0}
+footer{padding:1.2rem;color:var(--mut);font-size:.85rem;border-top:1px solid var(--bd);text-align:center}
+@media (prefers-reduced-motion:no-preference){nav a{transition:color .15s,background .15s}}
+</style>
+</head>
+<body>
+<header>
+<h1>Dossier Kiroween — Hackathon 2026</h1>
+<p>1 350 idées générées, classées par cas d'usage réel, et quatre cahiers des charges complets.</p>
+</header>
+<nav>
+<a href="index.html">Accueil</a>
+<a href="classement-usage.html">Classement usage — 39</a>
+<a href="classement-2mois.html">Classement 2 mois — 39</a>
+<a href="classement-technique.html" class="actif">Classement technique — 39</a>
+<a href="idees-usage.html">Idées · usage réel (200)</a>
+<a href="idees-2mois.html">Idées · horizon 2 mois (400)</a>
+<a href="idees-semaine.html">Idées · 15 filons (750)</a>
+<a href="disquette.html">Cahier · Disquette</a>
+<a href="rota.html">Cahier · Rota</a>
+<a href="partie-double.html">Cahier · Partie double</a>
+<a href="seance.html">Cahier · Séance</a>
+<a href="cadre.html">Cadre du concours</a>
+<a href="consigne.html">Consigne de génération</a>
+<a href="grille.html">Grille de notation</a>
+</nav>
+<main>
+<h1 id="kiroween-2026-les-39-meilleures-idees-sur-750-generees">Kiroween 2026 — les 39 meilleures idées sur 750 générées</h1>
+<p>Sélection du 11 novembre 2026, 19 h. 15 lots × 50 idées = <strong>750 idées</strong> produites par sous-agents
+(dossier <code>idees/lot-*.md</code>). Les lots 16 à 20 (Costume Contest « objets » et « phénomènes », et les trois
+filons Frankenstein, 250 idées) étaient encore en génération au moment de la sélection : à intégrer en
+complément, ils ne changeront pas le haut du classement des trois catégories demandées.</p>
+<p><strong>Méthode de tri.</strong> Chaque idée a été passée sur la grille du jury (impact réel /25, innovation /20,
+faisabilité ≤ 8 jours-agent /20, démontrabilité en vidéo /20, potentiel Kiro /15) avec malus pour les
+doublons du portefeuille déjà soumis, les marques tierces, les serveurs coûteux et les métaphores
+décoratives, et bonus pour un public non développeur et pour un artefact imprimable.</p>
+<p><strong>Répartition retenue</strong> : 13 Resurrection · 13 Skeleton Crew · 13 Costume Contest.
+La référence <code>lot|num</code> renvoie à la ligne exacte dans <code>idees/lot-*.md</code>.</p>
+<hr>
+<h2 id="le-top-5-absolu-si-tu-ne-dois-en-faire-quun-par-categorie">Le top 5 absolu, si tu ne dois en faire qu'un par catégorie</h2>
+<table>
+<thead>
+<tr>
+<th>Rang</th>
+<th>Idée</th>
+<th>Catégorie</th>
+<th>Pourquoi elle peut gagner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1</strong></td>
+<td><strong>Sangsue</strong> (15|03)</td>
+<td>Costume Contest</td>
+<td>Le costume <em>est</em> la donnée : chaque abonnement est une sangsue qui gonfle du montant prélevé, et on la détache pour résilier. Public universel, chiffre mesuré par l'outil (€/mois saignés, €/an récupérés), plan de vidéo inoubliable, zéro serveur. Aucun équivalent connu.</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td><strong>Ordre de grandeur</strong> (06|45)</td>
+<td>Resurrection</td>
+<td>La règle à calculer ressuscitée comme <strong>instrument de vérification des nombres produits par une IA</strong>. Problème de 2026, technologie morte de 1930, démonstration en 10 secondes (on colle un chiffre halluciné, la règle le refuse), public = tous ceux qui utilisent un modèle.</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td><strong>Quorum</strong> (09|13)</td>
+<td>Skeleton Crew</td>
+<td>Squelette d'assemblée générale (motions, procurations, quorum, dépouillement, procès-verbal) et deux applications légalement distinctes : AG d'association et AG de copropriété. Invariants comptables → tests par propriétés en or, procès-verbal imprimable, public immense et obligatoire.</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td><strong>Chaîne-du-froid × Registre-sécu</strong> (11|36 + 11|12)</td>
+<td>Skeleton Crew</td>
+<td>Un seul squelette de <strong>registre réglementaire</strong> (entrée datée, signée, immuable, seuil, alerte, export imprimable) et deux obligations légales différentes : relevé de températures alimentaire et registre de sécurité d'un établissement recevant du public. Les utilisateurs existent déjà, la loi les y oblige.</td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td><strong>Station fantôme</strong> (14|37)</td>
+<td>Costume Contest</td>
+<td>Audit des liens morts rendu comme un métro abandonné : quai vivant = page vivante, station fantôme = lien mort, correspondance coupée = redirection. La métaphore code exactement l'état, l'outil est utile sans le costume, et le plan de la ligne qui s'éteint est une vidéo gagnante.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="resurrection-13-idees">RESURRECTION — 13 idées</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Nom (réf.)</th>
+<th>L'idée</th>
+<th>Le chiffre / le plan fort</th>
+<th>Public</th>
+<th>j</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1</td>
+<td><strong>Ordre de grandeur</strong> (06|45)</td>
+<td>La règle à calculer comme vérificateur d'ordres de grandeur des nombres produits par une IA ou un tableur : on colle un résultat, la règle donne la fourchette plausible issue des entrées.</td>
+<td>« 3 chiffres sur 20 refusés par la règle » ; plan : un chiffre absurde collé, l'aiguille sort de l'échelle.</td>
+<td>Développeurs, analystes, enseignants, journalistes</td>
+<td>4</td>
+</tr>
+<tr>
+<td>R2</td>
+<td><strong>Trente ans</strong> (01|09)</td>
+<td>Audit de lisibilité d'un dossier : classe chaque fichier par risque de disparition du lecteur, convertit vers des formats garantis lisibles 30 ans, produit un rapport imprimable.</td>
+<td>« 412 fichiers, 63 illisibles dans 10 ans, 61 sauvés » ; plan : le rapport posé à côté des disques d'origine.</td>
+<td>Familles, associations, petites mairies, archivistes amateurs</td>
+<td>5</td>
+</tr>
+<tr>
+<td>R3</td>
+<td><strong>Classeur</strong> (04|09)</td>
+<td>L'index des papiers d'une famille : chaque document a une fiche (où il est, copie numérique, date d'expiration), recherche par type, alertes d'échéance.</td>
+<td>« Où est le livret de famille ? → étagère 2, chemise bleue, expiré dans 4 mois » ; plan : la réponse en 3 secondes.</td>
+<td>Tous les foyers, aidants, personnes âgées</td>
+<td>4</td>
+</tr>
+<tr>
+<td>R4</td>
+<td><strong>Cachet de cire</strong> (03|45)</td>
+<td>Sceau chiffré apposé sur un PDF (devis, attestation, certificat scolaire, ordonnance) : toute modification casse le sceau, la vérification se fait hors ligne en un clic.</td>
+<td>« sceau intact / sceau rompu, octet 4 213 » ; plan : deux devis côte à côte, un seul scellé.</td>
+<td>Artisans, familles, associations, professions libérales</td>
+<td>5</td>
+</tr>
+<tr>
+<td>R5</td>
+<td><strong>Guichet-base</strong> (02|13)</td>
+<td>Un « mode Minitel » pour les démarches : 10 touches, pages numérotées 40×25, aucun compte, aucun défilement, une démarche par numéro court.</td>
+<td>« 7 écrans, 2 min 10, contre 11 écrans et 9 min » ; plan : la démarche faite au clavier, sans souris.</td>
+<td>Personnes âgées, zones blanches, médiateurs numériques, petites mairies</td>
+<td>6</td>
+</tr>
+<tr>
+<td>R6</td>
+<td><strong>Rotation</strong> (01|24)</td>
+<td>L'exercice de restauration réel : on branche la sauvegarde familiale, l'outil restaure pour de vrai, ouvre les fichiers et dit ce qui est illisible.</td>
+<td>« 1 sauvegarde sur 3 ne restaure pas » ; plan : la restauration qui échoue en direct, puis qui réussit.</td>
+<td>Familles, photographes amateurs, petites structures</td>
+<td>5</td>
+</tr>
+<tr>
+<td>R7</td>
+<td><strong>Poignée</strong> (01|30)</td>
+<td>Le trousseau d'urgence : les documents vitaux doivent tenir dans une capacité fixe (une clé, une disquette), l'outil dit ce qu'il faut sacrifier et ce qui manque.</td>
+<td>« 1,44 Mo : 9 documents vitaux, 2 manquants » ; plan : la clé tenue dans la main.</td>
+<td>Tous les foyers, personnes sous traitement, familles avec enfants</td>
+<td>3</td>
+</tr>
+<tr>
+<td>R8</td>
+<td><strong>Dictaphone</strong> (03|08)</td>
+<td>Enregistreur qui transcrit <strong>localement</strong> et scelle audio + transcription par une empreinte : rien ne quitte l'appareil, la transcription est datée et vérifiable.</td>
+<td>« 0 octet envoyé, 94 % de mots justes sur le jeu d'essai » ; plan : le câble réseau débranché pendant la transcription.</td>
+<td>Soignants non médicaux, aidants, artisans, journalistes, associations</td>
+<td>6</td>
+</tr>
+<tr>
+<td>R9</td>
+<td><strong>Album Relié</strong> (05|13)</td>
+<td>À partir de photos éparpillées (téléphone, disques, vrac), fabrique un album paginé à ordre figé, imprimable et reliable : dédoublonnage, ordre, légendes, page de garde.</td>
+<td>« 4 120 photos → 96 pages, 611 doublons retirés » ; plan : l'album imprimé tenu en main.</td>
+<td>Familles, clubs, écoles, maisons de retraite</td>
+<td>6</td>
+</tr>
+<tr>
+<td>R10</td>
+<td><strong>Colonne</strong> (02|14)</td>
+<td>Le télétexte municipal : l'information de la ville en pages numérotées de 40×25 qui se chargent en 2G, sans application, sans compte, imprimables.</td>
+<td>« 3,2 ko la page, 0,4 s en 2G simulée » ; plan : la page qui s'affiche sur un vieux téléphone.</td>
+<td>Petites communes, associations, usagers</td>
+<td>5</td>
+</tr>
+<tr>
+<td>R11</td>
+<td><strong>Registre de sécurité</strong> (04|40)</td>
+<td>Le registre de sécurité obligatoire des petits établissements recevant du public, ressuscité comme livre relié numérique : entrées chaînées par empreinte, vérifications périodiques, édition imprimable conforme.</td>
+<td>« 12 vérifications en retard, 3 obligations non tracées » ; plan : la page imprimée signée.</td>
+<td>Salles des fêtes, commerces, associations, ERP de 5e catégorie</td>
+<td>5</td>
+</tr>
+<tr>
+<td>R12</td>
+<td><strong>Leçon exécutable</strong> (07|26)</td>
+<td>Logiciel auteur de tutoriels où <strong>chaque étape se vérifie elle-même à l'exécution</strong> : l'apprenant ne peut passer à l'étape 4 que si l'étape 3 est prouvée vraie.</td>
+<td>« 18 étapes, 18 preuves, 0 apprenant bloqué au mauvais endroit » ; plan : l'étape qui refuse de s'ouvrir.</td>
+<td>Formateurs associatifs, enseignants, documentation technique</td>
+<td>6</td>
+</tr>
+<tr>
+<td>R13</td>
+<td><strong>Film de famille</strong> (05|06)</td>
+<td>Convertit les rushes de téléphone en bobine muette de 90 secondes : coupes imposées, cartons de titre, grain, aucune musique sous droits, fichier unique à projeter ou à offrir.</td>
+<td>« 340 vidéos → 90 secondes, 0 musique » ; plan : la bobine projetée sur un mur.</td>
+<td>Familles, mariages, clubs, écoles</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mentions honorables Resurrection</strong> : <em>Refuge</em> (01|32, bibliothèque hors réseau pour lieux sans internet),
+<em>Quittance</em> (04|22, carnet à souche de quittances de loyer pour bailleur particulier), <em>Mire du soir</em>
+(05|20, outil de test d'accessibilité visuelle sur mire à tube), <em>Cadran solaire</em> (06|27, cadran à peindre
+calculé depuis l'adresse, artefact physique), <em>Anneau</em> (07|13, anneau de sites de tiers-lieux vérifiés),
+<em>Délibérations</em> (04|37, registre chaîné des décisions d'un conseil d'association).</p>
+<hr>
+<h2 id="skeleton-crew-13-idees">SKELETON CREW — 13 idées</h2>
+<p>Chaque ligne donne <strong>le squelette</strong> puis <strong>les deux applications</strong> qui doivent vivre dans deux dossiers
+séparés du dépôt.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Squelette (réf.)</th>
+<th>Application A</th>
+<th>Application B</th>
+<th>La preuve chiffrée</th>
+<th>j</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1</td>
+<td><strong>Quorum</strong> (09|13) — assemblée générale : motions, procurations, quorum, dépouillement, procès-verbal</td>
+<td>AG d'association loi 1901 (40 membres, 12 motions)</td>
+<td>AG de copropriété (tantièmes, résolutions à double majorité)</td>
+<td>quorum atteint ou non calculé, 0 erreur de dépouillement sur 10 000 assemblées aléatoires (PBT), PV imprimable</td>
+<td>6</td>
+</tr>
+<tr>
+<td>S2</td>
+<td><strong>Registre réglementaire</strong> (11|36 + 11|12) — entrée datée, signée, immuable, seuil, alerte, export conforme</td>
+<td>Relevé de chaîne du froid (boulangerie, traiteur) avec seuils HACCP</td>
+<td>Registre de sécurité d'un ERP avec vérifications périodiques</td>
+<td>chaîne d'empreintes vérifiée après 500 entrées, 0 entrée modifiable, alerte en &lt; 1 s</td>
+<td>6</td>
+</tr>
+<tr>
+<td>S3</td>
+<td><strong>Parrain</strong> (08|31) — appariement : offres, demandes, préférences, capacité, score, <strong>stabilité</strong></td>
+<td>Parrainage mentor/mentoré dans une école de la 2e chance</td>
+<td>Prêt d'outils entre associations d'un même quartier</td>
+<td>aucune paire bloquante dans 10 000 appariements aléatoires (PBT de stabilité), 92 % de premiers vœux</td>
+<td>7</td>
+</tr>
+<tr>
+<td>S4</td>
+<td><strong>Échafaud</strong> (08|47) — dépendances : tâches, prérequis, graphe, ordre topologique, cycles, chemin critique</td>
+<td>Planning de rénovation d'un appartement (12 corps d'état)</td>
+<td>Prérequis d'un cursus de formation (modules, passerelles)</td>
+<td>cycle détecté et expliqué, chemin critique exact, replanification en &lt; 200 ms</td>
+<td>6</td>
+</tr>
+<tr>
+<td>S5</td>
+<td><strong>Garde-fou</strong> (08|05) — moteur de règles avec <strong>trace</strong> : faits, règles, priorités, conflits, décision expliquée</td>
+<td>Simulateur d'éligibilité aux aides sociales d'une commune</td>
+<td>Pré-vérification d'un dossier de déclaration préalable de travaux</td>
+<td>chaque refus cite la règle et le fait manquant, décision identique pour les mêmes faits (PBT)</td>
+<td>7</td>
+</tr>
+<tr>
+<td>S6</td>
+<td><strong>Creux</strong> (08|22) — intervalles : fusion, chevauchement, trous, durées, récurrence</td>
+<td>Calendrier de garde alternée et de disponibilités partagées</td>
+<td>Réservation d'une salle municipale avec créneaux récurrents</td>
+<td>fusion idempotente et commutative (PBT), 100 000 intervalles traités en &lt; 100 ms</td>
+<td>5</td>
+</tr>
+<tr>
+<td>S7</td>
+<td><strong>Sas</strong> (09|28) — anonymisation : champs sensibles, règles, k-anonymat, export agrégé</td>
+<td>Rapport d'activité d'une banque alimentaire publié sans donnée nominative</td>
+<td>Partage de statistiques médico-sociales entre partenaires</td>
+<td>k atteint mesuré, 0 identifiant direct ou indirect dans l'export (PBT), pertes chiffrées</td>
+<td>6</td>
+</tr>
+<tr>
+<td>S8</td>
+<td><strong>Devissec</strong> (08|28) — tarification : lignes, règles de prix, remises, arrondis, mentions légales</td>
+<td>Devis d'artisan du bâtiment (TVA à taux multiples, acomptes)</td>
+<td>Tarification d'un événement associatif (tarifs solidaires, paliers)</td>
+<td>total exactement égal à la somme des lignes arrondies (PBT), 0 écart de centime sur 10 000 devis</td>
+<td>6</td>
+</tr>
+<tr>
+<td>S9</td>
+<td><strong>Paroi</strong> (12|31) — simulation thermique : parois, isolation, apports, déperditions, scénarios, facture</td>
+<td>Rénovation d'une maison individuelle (3 scénarios chiffrés)</td>
+<td>Travaux dirigés de physique au lycée (mêmes équations, autre présentation)</td>
+<td>kWh/an et €/an calculés, écart &lt; 8 % face à une méthode de référence documentée</td>
+<td>7</td>
+</tr>
+<tr>
+<td>S10</td>
+<td><strong>Check</strong> (12|21) — exercice chronométré : étapes, fautes, positions sur schéma, score</td>
+<td>Gestes de premiers secours (compressions, rythme, positions)</td>
+<td>Habilitation électrique d'un atelier (manœuvres, interdits)</td>
+<td>0 étape validée hors délai (PBT), score reproductible à graine fixe, schéma annoté imprimable</td>
+<td>6</td>
+</tr>
+<tr>
+<td>S11</td>
+<td><strong>D'où Vient Ce Chiffre</strong> (10|14) — provenance : un nombre publié, sa chaîne de sources, sa méthode, sa date, sa licence</td>
+<td>Un chiffre affiché par une mairie (dette par habitant)</td>
+<td>Un chiffre cité dans un article de presse locale</td>
+<td>chaque nombre de la fiche relié à un jeu open data nommable, 0 chiffre sans source (PBT)</td>
+<td>6</td>
+</tr>
+<tr>
+<td>S12</td>
+<td><strong>Défibrillateur</strong> (10|09) — point critique le plus proche : équipements publics, isochrone à pied, disponibilité</td>
+<td>Carte des défibrillateurs et du temps pour y aller</td>
+<td>Points de solidarité (douches, épiceries, accueils de jour) d'une ville</td>
+<td>rayon et temps à pied calculés hors ligne, 0 adresse sans coordonnée (PBT)</td>
+<td>5</td>
+</tr>
+<tr>
+<td>S13</td>
+<td><strong>Quizforge</strong> (12|01) — moteur d'exercices : banque, générateur à paramètres aléatoires <strong>à graine fixe</strong>, correction immédiate, barème</td>
+<td>Conjugaison CE2 (2 000 formes générées)</td>
+<td>Habilitation sécurité d'un atelier industriel</td>
+<td>même graine ⇒ même énoncé et même corrigé (PBT), 0 exercice sans réponse juste vérifiée</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mentions honorables Skeleton Crew</strong> : <em>Étal</em> (09|04, stock périssable : banque alimentaire + boulangerie),
+<em>Vingt Minutes</em> (10|26, services atteignables en 15 minutes à pied), <em>Étiquette Énergie</em> (10|47,
+distribution des DPE d'une ville face au national), <em>Bilan d'os</em> (09|17, compte rendu financier de
+subvention), <em>Urne</em> (12|36, comparateur de modes de scrutin), <em>Autonomie</em> (12|43, dimensionnement
+solaire), <em>Vitrine</em> (09|46, annuaire d'aide hors ligne), <em>Rayon</em> (09|50, désherbage de rayon de
+bibliothèque), <em>Moisson</em> (08|38, agrégation temporelle à fenêtres).</p>
+<hr>
+<h2 id="costume-contest-13-idees">COSTUME CONTEST — 13 idées</h2>
+<p>Règle appliquée : <strong>le costume code une information réelle</strong>. Retire le costume, l'outil reste utile —
+c'est exactement ce que le règlement demande (« spooky design elements that <em>enhance your app's function</em> »).</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Nom (réf.)</th>
+<th>L'outil réel</th>
+<th>Ce que le costume code</th>
+<th>Plan fort de la vidéo</th>
+<th>Public</th>
+<th>j</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td><strong>Sangsue</strong> (15|03)</td>
+<td>Détecteur d'abonnements et de prélèvements récurrents à partir d'un relevé CSV</td>
+<td>Chaque abonnement est une sangsue sur un bras ; sa taille = le montant, son gonflement = l'augmentation, la détacher = résilier</td>
+<td>Le bras couvert de sangsues, puis le bras vidé et l'euro-mètre qui remonte</td>
+<td>Tous les foyers</td>
+<td>5</td>
+</tr>
+<tr>
+<td>C2</td>
+<td><strong>Station fantôme</strong> (14|37)</td>
+<td>Audit des liens morts et des redirections d'un site</td>
+<td>Quai vivant = page vivante, station fantôme = lien mort, correspondance coupée = redirection, ligne entière éteinte = section abandonnée</td>
+<td>La ligne de métro qui s'éteint station par station</td>
+<td>Développeurs, associations, petites mairies</td>
+<td>5</td>
+</tr>
+<tr>
+<td>C3</td>
+<td><strong>Deuil</strong> (13|13)</td>
+<td>Carnet d'inventaire et de destination des objets d'une personne décédée (avec les démarches associées)</td>
+<td>Une page par objet, une relique, sa photographie, son souvenir, sa destination (gardé, donné, vendu, jeté) ; le carnet se referme quand tout est décidé</td>
+<td>Une main qui pose un objet sur la page, la case « destination » qui se remplit</td>
+<td>Familles, notaires, aidants, pompes funèbres associatives</td>
+<td>6</td>
+</tr>
+<tr>
+<td>C4</td>
+<td><strong>Emprise</strong> (15|50)</td>
+<td>Inventaire des sessions et appareils connectés à un compte, et de leur révocation</td>
+<td>Chaque appareil est une emprise sur un corps ; l'œil qui suit = la session active ; chasser = révoquer</td>
+<td>Le corps couvert d'emprises, puis une seule révocation qui les fait lâcher</td>
+<td>Grand public, familles, petites équipes</td>
+<td>5</td>
+</tr>
+<tr>
+<td>C5</td>
+<td><strong>Vitraux</strong> (14|32)</td>
+<td>Couverture de tests par module, avec les modules non couverts en évidence</td>
+<td>Chaque fenêtre est un module, un panneau terne = non couvert, un panneau brisé = test cassé, la lumière traverse = la suite passe</td>
+<td>La rosace qui s'allume module par module</td>
+<td>Développeurs</td>
+<td>4</td>
+</tr>
+<tr>
+<td>C6</td>
+<td><strong>Nuit partagée</strong> (15|47)</td>
+<td>Répartition mesurée des levers nocturnes entre deux parents (sommeil perdu, dette cumulée)</td>
+<td>Le corps du couple s'épuise à chaque lever ; la moitié la plus sombre = celui qui a payé la nuit ; le corps se redresse quand l'équilibre revient</td>
+<td>Deux silhouettes, l'une qui s'affaisse, le compteur de dette de sommeil</td>
+<td>Parents, jeunes familles</td>
+<td>5</td>
+</tr>
+<tr>
+<td>C7</td>
+<td><strong>Encens</strong> (13|18)</td>
+<td>Purge de données conforme pour petite structure : tri, archivage, destruction, certificat</td>
+<td>Trois autels (garder, archiver, détruire), la fumée = la destruction effective, le certificat scellé à la fin</td>
+<td>Les trois autels, le tas qui brûle, le certificat imprimé</td>
+<td>PME, associations, cabinets libéraux</td>
+<td>5</td>
+</tr>
+<tr>
+<td>C8</td>
+<td><strong>Allées</strong> (14|25)</td>
+<td>Registre des concessions d'un cimetière communal (titulaires, échéances, reprises)</td>
+<td>Les allées sont les sections, une lampe éteinte = une concession arrivée à échéance, une pierre descellée = une reprise à instruire</td>
+<td>Le plan du cimetière avec les lampes qui clignotent sur les concessions échues</td>
+<td>Petites communes, régisseurs</td>
+<td>6</td>
+</tr>
+<tr>
+<td>C9</td>
+<td><strong>Tribunal</strong> (13|08)</td>
+<td>Arbitrage d'un litige de facture ou de garantie par pièces à conviction</td>
+<td>Plaignant, défense, pièces numérotées, audience, verdict motivé et imprimé ; aucune pièce sans référence</td>
+<td>Le verdict tombé sur une facture contestée, imprimé</td>
+<td>Artisans, consommateurs, petites associations</td>
+<td>6</td>
+</tr>
+<tr>
+<td>C10</td>
+<td><strong>Restes</strong> (15|24)</td>
+<td>Anti-gaspillage du frigo : inventaire des restes, date limite, idées de repas</td>
+<td>La goule se nourrit des restes et <strong>maigrit</strong> quand on les mange ; son ventre = l'euro gâché</td>
+<td>La goule repue du dimanche, puis affamée du mercredi</td>
+<td>Foyers, familles, cuisines associatives</td>
+<td>4</td>
+</tr>
+<tr>
+<td>C11</td>
+<td><strong>Chantier inondé</strong> (14|20)</td>
+<td>Suivi de projet où la dette technique et les chantiers abandonnés sont mesurés</td>
+<td>L'eau qui monte = la dette, les étages inondés = les modules abandonnés, la pompe = la correction</td>
+<td>L'eau qui franchit le seuil d'un étage pendant qu'on ajoute une dépendance</td>
+<td>Développeurs, équipes produit</td>
+<td>5</td>
+</tr>
+<tr>
+<td>C12</td>
+<td><strong>Veine</strong> (15|17)</td>
+<td>Suivi des dons du sang avec la date de prochain don autorisée par type de don</td>
+<td>Le bras se vide à chaque don, la jauge dit quand revenir sans risque, la veine se referme = délai légal écoulé</td>
+<td>Le bras vidé, puis la jauge qui remonte jusqu'au feu vert</td>
+<td>Donneurs, associations de donneurs, étudiants</td>
+<td>4</td>
+</tr>
+<tr>
+<td>C13</td>
+<td><strong>Phare</strong> (14|03)</td>
+<td>Suivi des échéances obligatoires d'une petite association</td>
+<td>Le faisceau balaie les obligations, la distance aux rochers = les jours restants, un feu éteint = une échéance dépassée</td>
+<td>Le faisceau qui passe sur trois obligations, dont une à deux jours</td>
+<td>Associations, trésoriers bénévoles, petites mairies</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mentions honorables Costume Contest</strong> : <em>Radio</em> (15|07, radiographie du squelette de titres pour
+l'accessibilité), <em>Train fantôme</em> (14|47, file d'échecs de CI en wagons), <em>Grenier</em> (14|08, audit de
+désencombrement d'une maison), <em>Malles</em> (14|36, checklist de numérisation des photos de famille),
+<em>Exuvie</em> (15|10, garde-robe des vêtements portés une fois), <em>Vestige</em> (15|22, appareils en veille
+fantômes), <em>Correction</em> (15|18, la horde des copies non corrigées), <em>Fièvre</em> (15|29, fatigue accumulée
+des aidants), <em>Ex-voto</em> (13|33, mur des promesses d'aidants), <em>Pèlerinage fiscal</em> (13|38, stations de
+la déclaration d'impôts), <em>Confession</em> (13|29, registre de dette technique avouée), <em>Métamorphose</em>
+(15|15, sevrage par paliers visibles), <em>Accroc</em> (15|33, repair café et ses cicatrices), <em>Colonie</em>
+(15|36, chats non stérilisés d'un refuge), <em>Wagon-lit</em> (14|22, passation de relève des équipes de nuit),
+<em>Cimetière de projets</em> (14|40, registre des projets personnels abandonnés), <em>Marc</em> (13|02, lecture de
+marc d'un relevé bancaire).</p>
+<hr>
+<h2 id="comment-lire-ce-classement">Comment lire ce classement</h2>
+<ul>
+<li><strong>Les cinq premières lignes du tableau du haut sont celles que je construirais.</strong> Elles maximisent à la
+  fois le critère « quelqu'un l'utiliserait vraiment » et le critère « présentation mémorable », et elles
+  tiennent toutes en 4 à 6 jours-agent, en site statique, sans serveur ni compte.</li>
+<li><strong>Le portefeuille existant est saturé d'outils pour développeurs.</strong> Les 39 ci-dessus contiennent 27 idées
+  pour un public non développeur : c'est là que se gagnent les points d'impact que les autres candidats
+  ne vont pas chercher.</li>
+<li><strong>Règle d'or pour Costume Contest</strong> : le costume doit coder une donnée (taille = montant, hauteur d'eau =
+  dette, panneau terne = non couvert, lampe éteinte = échéance dépassée). Une ambiance sans codage perd
+  le critère Design et le critère Innovation simultanément.</li>
+<li><strong>Règle d'or pour Skeleton Crew</strong> : les deux applications doivent différer par la forme des données, la
+  logique métier, la présentation et le public — et la polyvalence doit être prouvée par une mesure
+  (temps de construction d'une application neuve par une personne qui ne connaît pas le dépôt).</li>
+<li><strong>Règle d'or pour Resurrection</strong> : la technologie morte doit être <em>vraiment</em> morte, et sa contrainte
+  d'époque doit devenir la fonction. La nostalgie seule ne marque aucun point.</li>
+</ul>
+<h2 id="contrainte-de-calendrier-a-ne-pas-oublier">Contrainte de calendrier à ne pas oublier</h2>
+<p>Il reste 23 jours avant la clôture du 4 décembre, 7 dépôts déjà ouverts et <strong>aucune vidéo tournée</strong>.
+Chaque soumission ajoute environ 1,5 jour de vidéo, textes Devpost, billet de blog et publication sociale.
+Ajouter plus de deux projets neufs à ce stade met en péril les sept existants.</p>
+</main>
+<footer>Généré depuis les sources Markdown du dépôt, vérifié sans dérive en CI. Licence MIT.</footer>
+</body>
+</html>

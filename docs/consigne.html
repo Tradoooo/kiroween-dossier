@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Consigne de génération — Dossier Kiroween — Hackathon 2026</title>
+<style>
+:root{--fg:#e8e6e3;--bg:#111014;--card:#1b1a20;--acc:#e08b3c;--acc2:#8fd3c7;
+ --mut:#9b968f;--bd:#2c2a33}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+ font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+header{padding:1.4rem 1.2rem;border-bottom:1px solid var(--bd);background:var(--card)}
+header h1{margin:0;font-size:1.25rem}
+header p{margin:.3rem 0 0;color:var(--mut);font-size:.9rem}
+nav{display:flex;flex-wrap:wrap;gap:.4rem;padding:.8rem 1.2rem;border-bottom:1px solid var(--bd)}
+nav a{color:var(--mut);text-decoration:none;font-size:.85rem;padding:.3rem .6rem;
+ border:1px solid var(--bd);border-radius:999px}
+nav a:hover{color:var(--fg)}
+nav a.actif{color:#111014;background:var(--acc);border-color:var(--acc);font-weight:600}
+main{padding:1.2rem;max-width:64rem;margin:0 auto}
+main h1{font-size:1.6rem;border-bottom:1px solid var(--bd);padding-bottom:.4rem}
+main h2{font-size:1.25rem;margin-top:2rem;color:var(--acc)}
+main h3{font-size:1.05rem;margin-top:1.6rem;color:var(--acc2)}
+a{color:var(--acc2)}
+code{background:#0c0b0f;padding:.1rem .35rem;border-radius:4px;font-size:.88em}
+pre{background:#0c0b0f;padding:.9rem;border-radius:8px;overflow-x:auto;border:1px solid var(--bd)}
+pre code{background:none;padding:0}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.9rem;display:block;overflow-x:auto}
+th,td{border:1px solid var(--bd);padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{background:var(--card);white-space:nowrap}
+blockquote{border-left:3px solid var(--acc);margin:1rem 0;padding:.2rem 1rem;color:var(--mut)}
+hr{border:0;border-top:1px solid var(--bd);margin:2rem 0}
+footer{padding:1.2rem;color:var(--mut);font-size:.85rem;border-top:1px solid var(--bd);text-align:center}
+@media (prefers-reduced-motion:no-preference){nav a{transition:color .15s,background .15s}}
+</style>
+</head>
+<body>
+<header>
+<h1>Dossier Kiroween — Hackathon 2026</h1>
+<p>1 350 idées générées, classées par cas d'usage réel, et quatre cahiers des charges complets.</p>
+</header>
+<nav>
+<a href="index.html">Accueil</a>
+<a href="classement-usage.html">Classement usage — 39</a>
+<a href="classement-2mois.html">Classement 2 mois — 39</a>
+<a href="classement-technique.html">Classement technique — 39</a>
+<a href="idees-usage.html">Idées · usage réel (200)</a>
+<a href="idees-2mois.html">Idées · horizon 2 mois (400)</a>
+<a href="idees-semaine.html">Idées · 15 filons (750)</a>
+<a href="disquette.html">Cahier · Disquette</a>
+<a href="rota.html">Cahier · Rota</a>
+<a href="partie-double.html">Cahier · Partie double</a>
+<a href="seance.html">Cahier · Séance</a>
+<a href="cadre.html">Cadre du concours</a>
+<a href="consigne.html" class="actif">Consigne de génération</a>
+<a href="grille.html">Grille de notation</a>
+</nav>
+<main>
+<h1 id="consigne-2-fabrique-didees-kiroween-2026-horizon-deux-mois">CONSIGNE 2 — fabrique d'idées Kiroween 2026, horizon DEUX MOIS</h1>
+<p>Tu produis un <strong>lot de 50 idées</strong> de projets pour le hackathon Kiroween 2026. Rien d'autre.
+Tu ne crées aucun dépôt, aucun code, aucun fichier autre que ton lot. <strong>Tu ne délègues pas.</strong></p>
+<p><strong>Cette consigne remplace la précédente.</strong> Le changement majeur : l'horizon n'est plus « 8 jours-agent »,
+c'est <strong>deux mois de construction</strong>. Les idées doivent donc être <strong>beaucoup plus ambitieuses</strong> : des
+produits complets, pas des utilitaires d'un week-end.</p>
+<h2 id="les-4-categories-texte-officiel">Les 4 catégories (texte officiel)</h2>
+<ul>
+<li><strong>Resurrection</strong> — ressusciter une technologie morte, réinterprétée avec les innovations d'aujourd'hui
+  ou pour résoudre les problèmes de demain.</li>
+<li><strong>Frankenstein</strong> — coudre des technologies apparemment incompatibles en une seule app, pour un résultat
+  inattendu et puissant.</li>
+<li><strong>Skeleton Crew</strong> — un <strong>gabarit de code squelette</strong>, assez maigre pour être clair, assez souple pour
+  servir à des cas variés, prouvé par <strong>deux applications distinctes</strong> tirées de cette base
+  (deux dossiers séparés dans le dépôt).</li>
+<li><strong>Costume Contest</strong> — n'importe quelle app, mais avec une <strong>interface hantée, léchée et inoubliable</strong>,
+  où les éléments effrayants <strong>améliorent la fonction</strong> (pas de décoration gratuite).</li>
+</ul>
+<h2 id="horizon-et-jalons-la-contrainte-qui-remplace-toutes-les-autres">Horizon et jalons — la contrainte qui remplace toutes les autres</h2>
+<ul>
+<li><strong>Horizon total : deux mois</strong>, du 12 novembre 2026 à la mi-janvier 2027, soit ~40 jours-personne,
+  démultipliables par une flotte d'agents pilotée par une personne.</li>
+<li><strong>Jalon 1 — v1 soumise avant le 4 décembre 2026, 23 h Paris.</strong> Elle doit déjà tenir debout seule :
+  un parcours complet de bout en bout, un mode démo sans compte, une vidéo de moins de 3 minutes.</li>
+<li><strong>Jalon 2 — version complète avant le 29 janvier 2027</strong> (fin du jugement ; les juges peuvent re-regarder
+  le dépôt et l'app). C'est là que l'ambition se paie : profondeur du moteur, richesse des données,
+  multi-supports, publication durable.</li>
+<li>Chaque idée doit donc être <strong>découpable</strong> : dis en une clause ce que contient la v1 et ce que le
+  deuxième mois ajoute.</li>
+</ul>
+<h2 id="ce-que-ambitieux-veut-dire-ici-barre-de-qualite">Ce que « ambitieux » veut dire ici — barre de qualité</h2>
+<p>Une idée à deux mois doit cocher <strong>au moins quatre</strong> de ces six points :</p>
+<ol>
+<li><strong>Un moteur réel</strong>, pas seulement une interface : solveur, moteur de règles avec explication, moteur de
+   simulation calibré, index et recherche, moteur de fusion/synchronisation, compilateur d'un petit langage,
+   chaîne de preuves cryptographiques.</li>
+<li><strong>Des données réelles et volumineuses</strong> : jeux de données publics ouverts, historique long, corpus
+   importé par l'utilisateur, plusieurs territoires ou plusieurs années.</li>
+<li><strong>Plusieurs surfaces cohérentes</strong> : web, CLI, export imprimable, fichier auto-portant, éventuellement
+   un petit worker gratuit — le tout partageant le même cœur.</li>
+<li><strong>Un artefact durable</strong> que l'utilisateur garde : rapport imprimé, registre chaîné, album, page
+   publique, certificat vérifiable, archive lisible dans trente ans.</li>
+<li><strong>Une preuve mesurée par l'outil lui-même</strong> : un chiffre opposable aux juges (exactitude, temps,
+   économies, couverture, conformité, écart à une référence).</li>
+<li><strong>Une profondeur vérifiable</strong> : propriétés testées (fast-check), corpus de cas tordus, rejeu
+   déterministe, banc de performance rejoué en intégration continue.</li>
+</ol>
+<h2 id="contraintes-dures-inchangees">Contraintes dures inchangées</h2>
+<ol>
+<li><strong>Juges = développeurs/AWS-Kiro</strong>, note sur 5 critères à 20 % : impact potentiel, usage de Kiro,
+   design, innovation, présentation vidéo de moins de 3 minutes.</li>
+<li><strong>Démo en 30 secondes sans compte ni installation</strong> pour la v1 ; un chiffre mesuré par l'outil.</li>
+<li>Application en <strong>anglais</strong>, dépôt public MIT, dossier <code>.kiro</code> à la racine et non ignoré.</li>
+<li><strong>Aucune marque tierce</strong> (pas de Tamagotchi, Winamp, Kodak, Nintendo, Clippy…), aucune musique sous
+   droits, aucun texte religieux réel cité, aucune image sous droit.</li>
+<li>Vie privée : traitement local d'abord, aucun envoi de donnée sans action explicite ; aucun son par défaut.
+   Un petit worker serverless gratuit et sans compte est accepté s'il est indispensable.</li>
+<li>Accessibilité AA, clavier complet, <code>prefers-reduced-motion</code>, information jamais portée par la seule couleur.</li>
+<li>Règles de code de la maison : moins de 500 lignes par fichier, moins de 50 lignes par fonction,
+   budgets de lignes par paquet gardés en CI, intégration continue sous 5 minutes.</li>
+<li>Modèle de langage : toujours <strong>optionnel et désactivé par défaut</strong>, derrière une interface de
+   fournisseur, avec une voie sans modèle pour chaque fonction.</li>
+</ol>
+<h2 id="a-ne-pas-dupliquer-deja-soumis-par-le-user">À ne PAS dupliquer (déjà soumis par le user)</h2>
+<p><code>bipeur</code> (pager SNPP pour superviser des agents IA, Resurrection) · <code>packet-voyage</code> (traceroute 1987 ×
+géographie, Frankenstein) · <code>suture</code> (Git × tableur .xlsx, Frankenstein) · <code>ghost-hours</code> (commits × agenda ×
+notes → heures et facture, Frankenstein) · <code>thin-air</code> (webcam → instrument de musique, Frankenstein) ·
+<code>bare-bones</code> (squelette d'explorateur de données + 2 apps, Skeleton Crew) · <code>placard</code> (audit des secrets
+Git en manoir hanté, Costume Contest).
+Plus les cinq idées déjà écrites en cahier des charges : <strong>Disquette</strong> (budget 1,44 Mo), <strong>Rota</strong>
+(squelette d'ordonnancement), <strong>Partie double</strong> (squelette de grand livre), <strong>Exorcisme</strong> (rite d'expulsion
+d'une dépendance), <strong>Séance</strong> (postmortem où les fantômes se contredisent).</p>
+<p>Le portefeuille est saturé d'outils pour développeurs : <strong>au moins la moitié de ton lot doit viser un
+public non développeur</strong> (bénévoles, familles, artisans, enseignants, soignants non médicaux, communes,
+associations, usagers du service public).</p>
+<h2 id="format-de-sortie-strict-rien-dautre">Format de sortie — strict, rien d'autre</h2>
+<p>Fichier : une seule écriture. En-tête de 2 lignes, puis <strong>exactement 50 lignes numérotées</strong>, une idée par
+ligne, <strong>60 mots maximum par idée</strong> :</p>
+<pre><code># Lot NN — &lt;nom du filon&gt;
+&lt;1 ligne : ce que couvre ce filon&gt;
+01. **Nom** — le produit et son public. Le moteur ou la mécanique réelle. v1 : … ; mois 2 : … [v1 X j / total Y j]
+02. ...
+</code></pre>
+<p><code>[v1 X j / total Y j]</code> = charge en jours-agent de la v1, puis du projet complet (total ≤ 40).
+Pas de tableau, pas de section, pas de conclusion : <strong>50 lignes et c'est tout</strong>.</p>
+<h2 id="interdits">Interdits</h2>
+<p>Les clones de jeu rétro, les générateurs d'art, les « tableaux de bord pour X » sans moteur ni
+différenciateur, les idées exigeant un matériel introuvable, une API payante, un compte tiers obligatoire,
+ou un modèle de langage indispensable au fonctionnement. Interdit aussi : l'idée dont la métaphore est
+décorative — retire-la, l'outil doit rester meilleur <em>grâce</em> à elle.</p>
+</main>
+<footer>Généré depuis les sources Markdown du dépôt, vérifié sans dérive en CI. Licence MIT.</footer>
+</body>
+</html>
