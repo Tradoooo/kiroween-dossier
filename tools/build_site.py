@@ -7,6 +7,7 @@ Usage : python3 tools/build_site.py [repertoire_de_sortie]
 from __future__ import annotations
 
 import pathlib
+import re
 import sys
 
 try:
@@ -104,8 +105,28 @@ def gabarit(titre: str, corps: str, actif: str) -> str:
 """
 
 
+ITEM = re.compile(r"^\d{2}\. ")
+
+
+def preparer(texte: str) -> str:
+    """Insère une ligne vide avant chaque bloc d'idées numérotées.
+
+    Sans cette ligne vide, Markdown traite les lignes « 01. … » comme la
+    continuation paresseuse du paragraphe précédent : le bloc entier devient
+    un seul paragraphe illisible au lieu d'une liste.
+    """
+    sortie: list[str] = []
+    for ligne in texte.split("\n"):
+        if ITEM.match(ligne):
+            precedente = sortie[-1] if sortie else ""
+            if precedente.strip() and not ITEM.match(precedente):
+                sortie.append("")
+        sortie.append(ligne)
+    return "\n".join(sortie)
+
+
 def convertir(src: pathlib.Path) -> str:
-    texte = src.read_text(encoding="utf-8")
+    texte = preparer(src.read_text(encoding="utf-8"))
     return markdown.markdown(texte, extensions=EXTENSIONS, output_format="html5")
 
 

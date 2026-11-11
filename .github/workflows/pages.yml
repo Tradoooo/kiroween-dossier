@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Installer python-markdown
-        run: python -m pip install --quiet markdown
+        run: python -m pip install --quiet "markdown==3.5.2"
       - name: Régénérer le site
         run: python3 tools/build_site.py /tmp/site-attendu
       - name: docs/ doit correspondre à la génération
@@ -45,4 +45,9 @@ jobs:
             test -s "docs/$p.html" || { echo "page vide ou absente : $p"; exit 1; }
           done
           grep -q '<table' docs/classement-usage.html
-          grep -q '<table' docs/idees-usage.html
+          # Le corpus d'idées est une liste : chaque idée doit être un <li>, pas
+          # un morceau de paragraphe (continuation paresseuse Markdown).
+          n=$(grep -o '</li>' docs/idees-usage.html | wc -l)
+          test "$n" -ge 200 || { echo "idées mal rendues : $n <li> au lieu de 200"; exit 1; }
+          n=$(grep -o '</li>' docs/idees-semaine.html | wc -l)
+          test "$n" -ge 750 || { echo "idées mal rendues : $n <li> au lieu de 750"; exit 1; }
