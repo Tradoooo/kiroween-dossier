@@ -111,3 +111,22 @@ obligations légales, et ajouter 8 700 idées n'ajoute aucune obligation nouvell
 ce n'est pas du volume, c'est **la vérification terrain** des trois premiers : nombre réel d'utilisateurs,
 outil concurrent existant et son prix, chiffre en euros mesurable. Je peux faire cette vérification sur
 les trois idées du podium en une heure.
+
+---
+
+## Complément — le filon bâtiment, arrivé après le classement
+
+Le cinquième filon ciblé usage (bâtiment et artisanat, 50 idées) a atterri après la publication du
+classement ci-dessus. Cinq de ses idées atteignent le palier 2 et s'intercaleraient entre les rangs 24
+et 31 sans déplacer le palier 1 :
+
+| Note | Idée | Catég. | Qui, quelle obligation, quelle fréquence | v1 / total |
+|---|---|---|---|---|
+| 76 | **Paie contre pointage** | Frankenstein | Artisan employeur : les heures pointées sur chantier doivent correspondre à la paie déclarée, sous peine de redressement. Mensuel, risque financier direct. | 8 j / 30 |
+| 75 | **Facture lisible, TVA juste** | Frankenstein | Entreprise du bâtiment : plusieurs taux de TVA sur un même chantier (normal, réduit, intermédiaire), erreur = redressement. À chaque facture. | 7 j / 28 |
+| 74 | **Réserves à signature** | Frankenstein | Maître d'ouvrage et artisan : sans procès-verbal de réception signé, les réserves ne peuvent plus être levées dans les règles et la garantie ne démarre pas. Par chantier. | 8 j / 30 |
+| 74 | **Dossier de preuve** | Skeleton | Squelette pièces + signature + empreinte + échéance, décliné en réception de chantier et en dossier d'assurance. Hebdomadaire. | 9 j / 34 |
+| 73 | **Bordereau de déchets** | Resurrection | Tout producteur de déchets de chantier : bordereau de suivi obligatoire et filière justifiable. À chaque évacuation. | 7 j / 28 |
+
+Elles confirment la règle dégagée plus haut : ce qui monte dans le classement, ce sont les obligations
+et l'argent, pas les métaphores. Le corpus publié compte donc **1 400 idées**.
