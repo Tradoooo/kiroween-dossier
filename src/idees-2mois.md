@@ -1,4 +1,4 @@
-# 1 350 idées — vague 2 : horizon deux mois (400 idées)
+# 1 400 idées — vague 2 : horizon deux mois (400 idées)
 
 Six filons : paradigmes informatiques morts, protocoles morts, squelettes à moteur profond, domaines réglementés, plus les quatre lots transverses (Resurrection, Skeleton Crew, Costume Contest, Frankenstein).
 

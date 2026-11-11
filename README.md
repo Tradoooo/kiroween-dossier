@@ -1,7 +1,7 @@
 # Dossier Kiroween
 
 Dossier de travail ouvert du hackathon [Kiroween 2026](https://kiroween.devpost.com/) :
-**1 350 idées** générées par vagues successives, **trois classements** sur trois critères dominants
+**1 400 idées** générées par vagues successives, **trois classements** sur trois critères dominants
 différents, et **quatre cahiers des charges** complets en 18 sections.
 
 **Site publié** : <https://baptistefaisy.github.io/kiroween-dossier/>

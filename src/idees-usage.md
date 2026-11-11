@@ -1,6 +1,6 @@
-# 1 350 idées — vague 3 : usage réel d'abord (200 idées)
+# 1 400 idées — vague 3 : usage réel d'abord (250 idées)
 
-Quatre filons : alimentation, social et aide à domicile, associations, argent du foyer. Chaque ligne nomme l'utilisateur, l'obligation ou la perte, et la fréquence d'usage.
+Cinq filons : métiers de bouche, bâtiment et artisanat, social et aide à domicile, associations, argent du foyer. Chaque ligne nomme l'utilisateur, l'obligation légale ou la perte d'argent, et la fréquence d'usage.
 
 # Lot E1 — métiers de bouche et de l'alimentation
 50 idées pour qui cuisine, vend, stocke et livre de la nourriture : conformité sanitaire, coûts matière, pertes, invendus, vente directe, du marché forain au drive.
@@ -54,6 +54,111 @@ Quatre filons : alimentation, social et aide à domicile, associations, argent d
 48. **Le fantôme du livreur** [Costume Contest] — livreur : la chaîne du froid se prouve par heure et température à chaque arrêt ; un spectre suit le camion, s'agite quand la porte s'ouvre trop longtemps et marque chaque arrêt non conforme, à signer sur l'écran. v1 : saisie par arrêt et preuve ; mois 2 : tournées, alertes, export registre. [v1 6 j / total 12 j]
 49. **L'autel des factures** [Costume Contest] — gérant : les factures se conservent dix ans et les impayés se repèrent tard ; l'autel hanté piste l'encaissement et montre le spectre du client qui ne paie pas depuis trente jours. v1 : suivi des encaissements ; mois 2 : relances et rapprochement comptable. [v1 6 j / total 12 j]
 50. **Le feu follet du gaspillage** [Costume Contest] — cantine associative : cent repas par jour, des restes jetés, un gaspillage jamais chiffré ; un feu follet hante le service et révèle l'écart entre production et consommation, en euros et en portions. v1 : comptage des restes et valorisation ; mois 2 : prévision de production et don aux banques alimentaires. [v1 6 j / total 13 j]
+
+---
+
+# Lot E2 — Bâtiment, artisanat et très petites entreprises du chantier
+De la caution de vigilance à la réception des travaux : 50 produits pour artisans, chefs d'équipe et conducteurs de travaux, chacun adossé à une obligation légale ou à une perte d'argent mesurable.
+
+01. **Carnet de chantier, version lisible** — [Resurrection] l'artisan maçon qui consigne heures, matériaux et déplacements sur un carnet papier ressaisit 6 h/semaine et perd ses justificatifs de TVA au contrôle. Moteur : OCR hors ligne, journal chiffré. v1 : carnet photographié → devis et facture ; mois 2 : corpus manuscrit, export comptable. [v1 12 j / total 26 j]
+
+02. **Minitel des échéances** — [Resurrection] l'entreprise de bâtiment qui laisse filer une échéance paie 40 € de pénalité par jour, plafonnée à 8 000 € ; le Minitel devient terminal d'échéances. Moteur : règles d'échéance et de plafond légal. v1 : saisie + alerte ; mois 2 : connecteur mail, relance prête à envoyer. [v1 10 j / total 24 j]
+
+03. **Télécopieur des ouvrages exécutés** — [Resurrection] l'architecte qui reçoit le dossier des ouvrages exécutés par fax perd la preuve de remise et la retenue de garantie reste bloquée (5 % du marché) ; à chaque réception, le fax numérique horodate. Moteur : reçu signé + empreinte de fichier. v1 : dépôt d'un DOE signé → reçu horodaté ; mois 2 : contrôle de complétude automatique. [v1 11 j / total 23 j]
+
+04. **Code-barres 1974** — [Resurrection] le chef d'équipe qui suit harnais, cafés et consommables sur un carnet perd du matériel périmé en intervention (blâme ou accident) et rachète en double. Moteur : inventaire scanné + alertes péremption. v1 : scan de 50 articles → tableau ; mois 2 : réapprovisionnement et calcul de marge matière. [v1 10 j / total 22 j]
+
+05. **Duplicata au carbone** — [Resurrection] l'artisan qui perd un devis sur cinq perd environ 8 % de son chiffre d'affaires chaque mois ; le duplicata carbone devient un gestionnaire de devis avec relances. Moteur : statuts devis/devis signé/perdu + relance programmée. v1 : 10 devis, tableau de relance ; mois 2 : envoi par mail et suivi. [v1 9 j / total 20 j]
+
+06. **Fiche de navette** — [Resurrection] l'artisan qui transmet son entreprise perd 2 000 € de dossiers inaccessibles (devis, factures, attestations) et l'acquéreur bloque ; l'enveloppe de transmission devient dossier de reprise chiffré. Moteur : inventaire + checksum. v1 : liste de pièces manquantes ; mois 2 : transfert chiffré et éditable. [v1 11 j / total 24 j]
+
+07. **Dictaphone de chantier** — [Resurrection] le chef d'équipe qui note à la voix perd 15 % des consignes et paie des reprises ; chaque consigne vocale devient une tâche datée. Moteur : transcription locale + extraction d'actions. v1 : 10 notes → tâches ; mois 2 : rattachement aux lots du métré. [v1 12 j / total 26 j]
+
+08. **Standard de chantier** — [Resurrection] le patron d'une équipe de 6 quarrellers pour savoir qui a fait quoi, 1 h/jour perdue et disputes sur les heures ; le standard devient journal de coordination horodaté. Moteur : journal d'événements + réconciliation pointage. v1 : saisie de poste par équipe ; mois 2 : intégration aux relevés d'heures. [v1 11 j / total 23 j]
+
+09. **Terminal d'acompte** — [Resurrection] l'artisan qui facture mal ses acomptes perd 5 % du montant de chaque chantier ; l'ancienne caisse enregistreuse devientPreflight des acomptes (30 % à l'ouverture). Moteur : calcul de l'acompte légal + relance. v1 : calcul et échéancier ; mois 2 : paiement en ligne sans compte tiers. [v1 10 j / total 22 j]
+
+10. **Cachet et paraphe** — [Resurrection] l'architecte sans PV de réception signé ne peut plus lever les réserves et bloque la retenue de garantie (5 % du marché) ; le cachet manuscrit renaît en signature tracée. Moteur : PV horodaté, opposable, exportable. v1 : PV de réception signé sur tablette ; mois 2 : suivi des réserves et des délais. [v1 13 j / total 27 j]
+
+11. **Fiche de stock en atelier** — [Resurrection] le métreur qui compte à l'œil se trompe de 15 % sur les quantités et rachète 1 200 € de Materials par an ; la fiche de stock renaît en calcul à partir du métré. Moteur : aléa de quantité par poste. v1 : métré saisi → quantités ; mois 2 : comparaison avec les bons de livraison. [v1 12 j / total 25 j]
+
+12. **Bon de livraison carbone** — [Resurrection] le conducteur de travaux qui evacue les déchets sans bordereau de suivi s'expose à 1 500 € d'amende et au refus de décharge ; le duplicata redevient piste de traçabilité par flux. Moteur : rapprochement bordereau / pesée / décharge. v1 : saisie bordereau ; mois 2 : registre déchets et taux de valorisation. [v1 11 j / total 24 j]
+
+13. **Le tableur qui voit double** — [Frankenstein] le métreur qui croise un plan de travaux et son tableur de quantités perd 8 h par quantitatif et 12 % de ses lignes sont fausses ; le moteur rapproche annotations de plan et lignes de métré, écart par écart. v1 : plan PDF + tableur → écarts ; mois 2 : import IFC et multi-postes. [v1 14 j / total 30 j]
+
+14. **EXIF contre métré** — [Frankenstein] le chef de chantier qui photographie au smartphone et compte dans Excel laisse 30 % des photos orphelines, donc des réserves jamais levées ; le moteur fusionne date, géolocalisation et ligne de métré. v1 : 20 photos + métré → rattachement ; mois 2 : repérage automatique de lots. [v1 14 j / total 30 j]
+
+15. **Comptabilité contre garanties** — [Frankenstein] l'expert-comptable et le DOE vivent séparés : les garanties biennales et décennales ne sont jamais provisionnées ni relancées ; le moteur rapproche échéances de garantie et écritures comptables. v1 : import du plan de garantie ; mois 2 : simulation de provision. [v1 12 j / total 26 j]
+
+16. **Chronologie de litige** — [Frankenstein] l'expert judiciaire qui reconstitue un désordre de travaux doit éplucher 400 e-mails et 300 photos ; le moteur reconstruit une frise unique (courriels, photos horodatées, météo, PV). v1 : import de 3 sources → frise ; mois 2 : export contradictoire. [v1 15 j / total 32 j]
+
+17. **Machine à lire les déchets** — [Frankenstein] l'éco-porteuse de chantier doit Justifier 3 000 € de tri par an ; le moteur OCR les bons de pesée et les rapproche du plan de site et des catégories de déchets. v1 : photo de bordereau → fiche structurée ; mois 2 : taux de valorisation et aléas. [v1 12 j / total 25 j]
+
+18. **Réserves à signature** — [Frankenstein] la maîtrise d'ouvrage signe des réserves en quatre points, mais l'échéance de levée se perd ; le moteur croie signature électronique et règles de calcul des pénalités journalières. v1 : PV signé + échéances ; mois 2 : relance et PV de levée. [v1 13 j / total 28 j]
+
+19. **Planning issu du métré** — [Frankenstein] le conducteur qui planifie à l'intuition décale les corps d'état de 3 semaines en moyenne et perd 2 000 € de marges ; le moteur déduit dépendances et dates à partir du métré et des contraintes. v1 : métré + 8 tâches → planning ; mois 2 : simulation de glissement. [v1 15 j / total 32 j]
+
+20. **Carte et gravats** — [Frankenstein] l'éco-porteuse paie 180 € de trajet mal choisi par benne ; le moteur combine carte open source, tonnage déclaré et contrainte de décharge pour tracer l'itinéraire légal. v1 : 3 flux simulés ; mois 2 : optimisation multi-camions et export. [v1 12 j / total 25 j]
+
+21. **Cahier des chargeś拆** — [Frankenstein] le candidat aux marchés publics rate 1 appel sur 3 pour une clause éliminatoire oubliée (assurance décennale non conforme) ; le moteur extrait les critères, les confronte aux attestations du dossier. v1 : un CCTP + attestations ; mois 2 : veille et calendrier de remise. [v1 15 j / total 33 j]
+
+22. **Paie contre pointage** — [Frankenstein] l'artisan qui compte ses heures à la main se fait redresser sur des heures supplémentaires non payées ; le moteur rapproche pointage de chantier et bulletin de paie. v1 : export pointage + paie ; mois 2 : alerte sur les écarts et sur les majorations. [v1 12 j / total 26 j]
+
+23. **Météo contre planning** — [Frankenstein] le chef d'équipe planifie l'étanchéité un jour de pluie, perd 2 journées-revenu par chantier ; le moteur recale les tâches météo-dépendantes sur la prévision horaire locale. v1 : 10 tâches → planning ajusté ; mois 2 : alerte de fenêtre de pose. [v1 12 j / total 26 j]
+
+24. **Facture lisible, TVA juste** — [Frankenstein] l'entreprise en rates mixtes se fait redresser sur la TVA à 5,5 %, 10 % et 20 % mal ventilée ; le moteur lit la facture PDF, ventile les lignes par taux et calcule les déclarations. v1 : 20 lignes → ventilation ; mois 2 : suivi des acomptes et autoliquidation. [v1 13 j / total 28 j]
+
+25. **Squelette du dossier de preuve** — [Skeleton Crew] un noyau unique (pièces, signature, empreinte, échéance) sert deux apps distinctes, en deux dossiers : (a) vigilance des sous-traitants, vérifiée tous les six mois, (b) attestations d'assurance décennale, exigées à chaque marché. v1 : l'app vigilance de bout en bout ; mois 2 : app décennale et socle partagé. [v1 15 j / total 32 j]
+
+26. **Squelette registre + échéance** — [Skeleton Crew] deux apps sur un même moteur d'échéances et de rappels : (a) registre de sécurité, tenu chaque jour, (b) carnet d'entretien et garanties, chaque année. v1 : registre de sécurité ; mois 2 : carnet d'entretien et export imprimable. [v1 13 j / total 28 j]
+
+27. **Squelette devis vers chantier** — [Skeleton Crew] le même moteur de lignes, prix et marges alimente deux apps : (a) devis et facture conformes pour l'artisan, chaque semaine ; (b) métré et quantitatifs pour le métreur, par projet. v1 : devis-facture ; mois 2 : métré-planning et autoliquidation. [v1 14 j / total 30 j]
+
+28. **Squelette chaîne de preuve** — [Skeleton Crew] un noyau (capture, horodatage, empreinte, clé publique) sert deux apps : (a) photos datées et géolocalisées de chantier, (b) bordereaux de déchets de chantier. v1 : photos géolocalisées signées ; mois 2 : déchets et audit opposable. [v1 15 j / total 33 j]
+
+29. **Squelette du portail multi-acteurs** — [Skeleton Crew] deux apps sur un moteur de rôles et de demandes : (a) portail sous-traitants (demande et relance d'attestations, chaque semaine) ; (b) portail maître d'ouvrage (réserves, plans d'interventions, à chaque réception). v1 : portail sous-traitants ; mois 2 : portail client et notifications. [v1 14 j / total 31 j]
+
+30. **Squelette planning à dépendances** — [Skeleton Crew] deux apps sur le même moteur de tâches et de contraintes : (a) planning d'intervention entre corps d'état, tenu chaque semaine ; (b) planning des visites de garantie, annuel. v1 : planning de chantier ; mois 2 : second métier de la base et statistiques de glissement. [v1 14 j / total 30 j]
+
+31. **Squelette TVA multi-taux** — [Skeleton Crew] deux apps partagent le moteur de taux et d'arrondis : (a) facture de travaux en taux réduit et normal, chaque mois ; (b) situations de travaux avec acompte de 30 %, par chantier. v1 : facture multi-taux ; mois 2 : situations et déclaration préparée. [v1 13 j / total 28 j]
+
+32. **Squelette conformité documentaire** — [Skeleton Crew] deux apps sur un moteur de contrôle de complétude : (a) dossier de qualification pour marchés publics, à chaque consultation ; (b) dossier de réception (DOE, PV, réserves) à chaque fin de chantier. v1 : dossier de réception ; mois 2 : qualification et pièces périmées. [v1 14 j / total 30 j]
+
+33. **Squelette recouvrement** — [Skeleton Crew] deux apps sur le même moteur d'échéances et de relances : (a) relance clients, hebdomadaire, avec pénalités légales ; (b) levier des retenues de garantie et impayés sous-traitants, à chaque solde. v1 : relance clients ; mois 2 : sous-traitants et échéancier de trésorerie. [v1 12 j / total 26 j]
+
+34. **Squelette audit sécurité** — [Skeleton Crew] deux apps sur un socle d'échéances et de pièces : (a) plan de prévention et PPSPS, revus à chaque marché et à chaque nouvelle entreprise intervenante ; (b) habilitations et formations du personnel, à l'embauche et tous les 3 ans. v1 : PPSPS et plan de prévention ; mois 2 : habilitations et tableau de recyclages. [v1 15 j / total 32 j]
+
+35. **Squelette objet et coût** — [Skeleton Crew] deux apps sur le même moteur d'affectation et de coût : (a) outillage et consommables, suivis chaque mois ; (b) main d'œuvre et heures, chaque semaine. v1 : consommables et outillage ; mois 2 : main d'œuvre et marge par chantier. [v1 13 j / total 28 j]
+
+36. **Squelette dossier de référence** — [Skeleton Crew] deux apps sur un moteur d'export et d'indexation : (a) transmission d'entreprise, une fois dans la vie de l'artisan ; (b) transmission de chantier, DOE et garanties, à chaque réception. v1 : dossier de reprise d'entreprise ; mois 2 : archive de chantier exportable. [v1 14 j / total 31 j]
+
+37. **Squelette du litige** — [Skeleton Crew] deux apps sur un moteur de preuve et de contradiction : (a) expertise après sinistre, une fois par sinistre ; (b) litige de délai et de consignation, courant sur les marchés. v1 : expertise sinistre ; mois 2 : litige de délai etDies. [v1 16 j / total 34 j]
+
+38. **Squelette tableau de bord chantier** — [Skeleton Crew] un cœur de calcul (avancement, Reste à faire, marge) sert deux apps : (a) suivi d'avancement pour le conducteur, chaque semaine ; (b) suivi des heures et de la rentabilité pour le patron, chaque mois. v1 : avancement ; mois 2 : rentabilité et prévision de fin. [v1 13 j / total 28 j]
+
+39. **Le fantôme de la réserve oubliée** — [Costume Contest] le maître d'ouvrage qui laisse traîner une réserve retient 5 % du marché et s'expose à des dommages-immobilisation ; chaque réserve non levée hante l'écran, plus elle est vieille plus elle revient. Moteur :加剧 clock, tri par échéance. v1 : liste hantée des réserves ; mois 2 : PV de levée et relance. [v1 13 j / total 28 j]
+
+40. **Le shérif des impayés** — [Costume Contest] l'artisan qui attend sa facture perd 40 € par jour de retard, plafonné à 8 000 €, etSometimes abandonne ; chaque impayé devient un cavalier qui galope vers vous. Moteur : pénalité légale et relance automatique. v1 : 5 créances et relances ; mois 2 : échéancier et.escalade. [v1 12 j / total 26 j]
+
+41. **Le vampire de la TVA** — [Costume Contest] l'entreprise en taux multiples se fait redresser sur 5,5 %, 10 % et 20 % mal ventilés ; le vampire de la TVA suce la ventilation ligne par ligne. Moteur : règles de taux par travaux, date et zone. v1 : 20 lignes ventilées ; mois 2 : simulation de redressement et déclarer. [v1 13 j / total 28 j]
+
+42. **Le fossoyeur des déchets** — [Costume Contest] le conducteur qui évacue sans bordereau s'expose à 1 500 € d'amende et au refus de décharge ; le fossoyeur du chantier montre la fosse des déchets sans paperasse. Moteur : rapprochement flux-bordereau-pesée. v1 : un flux complet ; mois 2 : registre, valorisation et alertes. [v1 12 j / total 26 j]
+
+43. **La maison hantée des garanties** — [Costume Contest] le propriétaire ou l'artisan laisse expirer une garantie biennale ou décennale et paie une réparation de 4 000 € à sa charge ; les pièces garanties apparaissent comme des spectres qui s'éteignent. Moteur : échéancier annuel par ouvrage. v1 : 10 garanties ; mois 2 : carnet d'entretien et interventions. [v1 13 j / total 27 j]
+
+44. **Le zombie de l'assurance** — [Costume Contest] l'entreprise sans attestation décennale valide est écartée d'un marché public ou voit sa garantie abaissée ; le zombie de l assurance rôde dans le dossier de qualification. Moteur : contrôle documentaire annuel et à chaque consultation. v1 : dépôt et expiration ; mois 2 : veille et alertes de renouvellement. [v1 12 j / total 25 j]
+
+45. **Le tribunal des réserves** — [Costume Contest] l'architecte qui laisse 30 réserves ouvertes perd 3 000 € de solde de travaux ; le tribunal classe chaque réserve, la juge grave ou mineure, et rend un verdict opposable. Moteur : scoring de gravité et délai. v1 : 20 réserves jugées ; mois 2 : suivi de levée et PV. [v1 13 j / total 28 j]
+
+46. **La cave des stocks** — [Costume Contest] le chef d'équipe trouve un harnais périmé ou du café épuisé en pleine semaine : 1 journée d'arrêt et un risque d'accident ; la cave des stocks montre ce qui moisit. Moteur : péremption, seuils, réappro. v1 : 30 articles ; mois 2 : rattachement aux chantiers et alertes. [v1 11 j / total 24 j]
+
+47. **Le manoir des habilitations** — [Costume Contest] l'employeur qui laisse expirer un CACES ou une habilitation électrique s'expose à la faute inexcusable en cas d'accident grave ; le manoir hanté montre les diplômes expirés dans chaque pièce. Moteur : dates d'échéance et de recyclage. v1 : 20 salariés ; mois 2 : plan de formation et relance. [v1 12 j / total 26 j]
+
+48. **L'horloge maudite du planning** — [Costume Contest] le conducteur qui ignore la dépendance entre corps d'état décale tout d'une semaine et perd 1 500 € ; l'horloge maudite avance quand une tâche glisse et réveille les successors. Moteur : propagation des contraintes. v1 : 15 tâches ; mois 2 : simulation de scénarios de glissement. [v1 14 j / total 30 j]
+
+49. **La veuve de la vigilance** — [Costume Contest] le maître d'ouvrage qui ne vérifie pas l'attestation de vigilance de ses sous-traitants tous les six mois engage sa responsabilité en cas de faillite : la veuve frappe à la porte tous les six mois. Moteur : échéance semestrielle et preuve. v1 : suivi d'un sous-traitant ; mois 2 : portefeuille complet et alertes. [v1 13 j / total 27 j]
+
+50. **L'escalier hanté de l'accessibilité** — [Costume Contest] le maître d'ouvrage qui livre un seuil de 4 cm ou une rampe non conforme perd l'agrément et s'expose à 6 000 € de sanction ; l'escalier hanté montre chaque obstacle sous forme de spectre. Moteur : règles PMR et seuils mesurés. v1 : visite photo → anomalies ; mois 2 : audit complet et rapport. [v1 14 j / total 30 j]
 
 ---
 

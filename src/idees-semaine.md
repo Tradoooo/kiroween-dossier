@@ -1,4 +1,4 @@
-# 1 350 idées — vague 1 : quinze filons (750 idées)
+# 1 400 idées — vague 1 : quinze filons (750 idées)
 
 Filon par filon : supports de stockage morts, réseaux et protocoles morts, terminaux et saisie, bureau et papier, domestique et médias, instruments analogiques, paradigmes logiciels, squelettes algorithmiques, associations, données publiques, artisans, pédagogie, rituels, lieux hantés, monstres.
 

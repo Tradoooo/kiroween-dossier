@@ -1,4 +1,4 @@
-# Dossier Kiroween — 1 350 idées, classées par cas d'usage réel
+# Dossier Kiroween — 1 400 idées, classées par cas d'usage réel
 
 Dossier de travail ouvert du hackathon **Kiroween 2026** (Kiro, clôture des soumissions le
 4 décembre 2026, fin du jugement le 29 janvier 2027). Il contient tout ce qui a servi à choisir
@@ -15,7 +15,7 @@ vérifie qu'il n'y a aucune dérive entre le texte et les pages publiées.
 | **[Classement usage — 39](classement-usage.html)** | Le classement qui fait foi : 39 idées notées sur une grille où **75 points sur 100 viennent de la réalité de l'usage** (obligation légale, argent en jeu, fréquence, utilisateur nommable) et 25 seulement de la séduction. |
 | [Classement 2 mois — 39](classement-2mois.html) | L'étape précédente : les mêmes 39 notées à l'horizon deux mois, mais encore dominées par l'élégance technique. |
 | [Classement technique — 39](classement-technique.html) | Le premier classement, à l'échelle d'une semaine de construction. Conservé pour la traçabilité. |
-| [Idées · usage réel](idees-usage.html) | 200 idées ciblées sur quatre filons à forte obligation : métiers de bouche, social et aide à domicile, associations, argent du foyer. |
+| [Idées · usage réel](idees-usage.html) | 250 idées ciblées sur cinq filons à forte obligation : métiers de bouche, bâtiment et artisanat, social et aide à domicile, associations, argent du foyer. |
 | [Idées · horizon 2 mois](idees-2mois.html) | 400 idées ambitieuses : paradigmes et protocoles morts, squelettes à moteur profond, domaines réglementés. |
 | [Idées · 15 filons](idees-semaine.html) | 750 idées de la première vague, une par filon de technologie morte ou de squelette. |
 | [Cahier · Disquette](disquette.html) | Cahier des charges complet en 18 sections : la disquette 1,44 Mo ressuscitée comme budget dur du web. |
@@ -58,7 +58,7 @@ Le troisième les fait toutes sortir du haut du tableau.
 - **Vague 2** — horizon porté de huit jours à **deux mois**, avec v1 avant le 4 décembre et version
   complète avant la fin du jugement : **400 idées** sur huit filons.
 - **Vague 3** — recentrage sur le gisement qui score le plus haut : les obligations légales et l'argent
-  des publics non développeurs : **200 idées** sur quatre filons.
+  des publics non développeurs : **250 idées** sur cinq filons.
 
 Chaque idée tient en une ligne avec son utilisateur, sa douleur, sa fréquence et sa charge estimée en
 jours-agent. Les doublons avec les sept projets déjà soumis au concours sont écartés à la génération.
