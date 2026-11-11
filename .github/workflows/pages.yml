@@ -40,8 +40,8 @@ jobs:
       - name: Aucune page vide
         run: |
           for p in index classement-usage classement-2mois classement-technique \
-                   idees-usage idees-2mois idees-semaine \
-                   disquette rota partie-double seance cadre consigne grille; do
+                   idees-usage idees-2mois idees-semaine idees-devs classement-devs \
+                   cahiers-devs disquette rota partie-double seance cadre consigne grille; do
             test -s "docs/$p.html" || { echo "page vide ou absente : $p"; exit 1; }
           done
           grep -q '<table' docs/classement-usage.html
@@ -51,3 +51,5 @@ jobs:
           test "$n" -ge 200 || { echo "idées mal rendues : $n <li> au lieu de 200"; exit 1; }
           n=$(grep -o '</li>' docs/idees-semaine.html | wc -l)
           test "$n" -ge 750 || { echo "idées mal rendues : $n <li> au lieu de 750"; exit 1; }
+          n=$(grep -o '</li>' docs/idees-devs.html | wc -l)
+          test "$n" -ge 450 || { echo "idées mal rendues : $n <li> au lieu de 450"; exit 1; }

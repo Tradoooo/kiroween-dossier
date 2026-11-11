@@ -23,8 +23,8 @@ jobs:
         run: |
           test -s index.md
           test -s README.md
-          for f in classement-usage classement-2mois classement-technique \
-                   idees-usage idees-2mois idees-semaine \
+          for f in classement-usage classement-2mois classement-technique classement-devs \
+                   idees-usage idees-2mois idees-semaine idees-devs cahiers-developpeurs \
                    DISQUETTE-cahier ROTA-cahier PARTIE-DOUBLE-cahier SEANCE-cahier \
                    cadre-concours consigne-2mois grille-notation; do
             test -s "src/$f.md" || { echo "source manquante : $f"; exit 1; }
