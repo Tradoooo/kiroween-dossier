@@ -11,6 +11,7 @@ indépendant** qui ne lit que la fiche et la grille — jamais les attaques ni l
 |---|---|---|---|---|---|---|
 | Ver — *Mutation Score* | 14 | 12 | 14 | 15 | 12 | **67/100** |
 | Rejeu — *Agent Replay* | 15 | 15 | 13 | 17 | 13 | **73/100** |
+| Reprise — *Local Restore Drill* | 9 | 7 | 8 | 12 | 9 | **45/100** |
 
 **Aucune fiche écrite ne peut atteindre 100/100.** Le juge indépendant l'a établi sans ambiguïté :
 quatre critères sur cinq exigent des **artefacts qui n'existent que construits** — un dépôt avec
@@ -18,7 +19,21 @@ quatre critères sur cinq exigent des **artefacts qui n'existent que construits*
 un hook qui a réellement bloqué un commit, un rapport `axe` à zéro violation, une démo en ligne,
 une vidéo. Tant que le code n'existe pas, ces cases valent entre 12 et 15 sur 20.
 
-Seul le critère **Innovation** est atteignable sur papier (15 et 17 sur 20) — et il est déjà presque
+### Le cas Reprise : 90/100 au classement, 45/100 au juge
+
+Reprise était notée 90 dans le classement développeurs. Le juge indépendant lui donne **45**. Trois
+raisons, toutes instructives :
+
+1. **Contradiction interne** sur le chiffre central — la fiche promettait « RTO ≤ 5 min », publiait
+   « 6 min 12 s » et ouvrait la vidéo sur « 8 min 12 s ».
+2. **Fréquence non sourcée** — « 4 incidents par an » inventé pour annualiser un gain.
+3. **Concurrents les plus proches non nommés** — devcontainers, Nix flakes, direnv, dotenv-vault.
+   Un juge peut dire : « un devcontainer rend l'état local reproductible, votre exercice perd son objet. »
+
+Leçon : une note d'opportunité élevée ne survit pas à un juge strict si la fiche se contredit ou si le
+paysage concurrentiel n'est pas épuisé. Ce sont les deux premiers contrôles à faire avant d'écrire.
+
+Seul le critère **Innovation** est atteignable sur papier (12 à 17 sur 20) — et il est déjà presque
 saturé : c'est ce que la boucle attaque/amélioration a acheté.
 
 ## Le plafond d'une fiche, et le chemin vers 100
@@ -42,7 +57,6 @@ aucun jeu de données, aucune exécution ne peut encore les produire : la fiche 
 **Règle adoptée à partir de là** : dans toute fiche, un chiffre est soit marqué *[cible]*, soit
 accompagné du chemin du fichier qui le produit. La boucle a servi à ça — pas à gonfler des notes.
 
----
 
 # GRILLE-100 — ce qu'est une soumission parfaite à Kiroween 2026
 
@@ -140,6 +154,7 @@ Une fiche V2 doit contenir, dans cet ordre :
 
 Longueur : **90 à 150 lignes**. Densité obligatoire : aucune phrase qui ne contienne un objet précis.
 
+
 ---
 
 # Jugement — Ver · Dette de mutation (V2-03, catégorie Frankenstein)
@@ -199,6 +214,7 @@ Longueur : **90 à 150 lignes**. Densité obligatoire : aucune phrase qui ne con
 
 Il reste **20 défauts** à traiter avant 100/100. La fiche est la plus aboutie mécaniquement du lot (invariant de somme, témoins, ratchet, limites honnêtes bien écrites), mais elle **raconte au passé des preuves qui n'existent pas** : trois dates de journal antérieures à la livraison des lots correspondants, une sortie d'outil inventée de bout en bout, et aucune spec EARS ni aucun test d'accessibilité nommés. Tant que ces nombres ne sont pas produits par du code qui tourne, la fiche promet au lieu de prouver.
 
+
 ---
 
 # Jugement — Rejeu (Agent Replay)
@@ -250,5 +266,42 @@ Aucun dépôt, aucun jeu de données ni aucune exécution ne peut encore produir
 
 il reste 8 défauts à traiter avant 100/100
 
+
 ---
 
+# J-09 — Jugement indépendant de V2-09 « Reprise » (Local Restore Drill)
+
+Juge : sous-agent indépendant, n'a lu que GRILLE-100.md et la fiche V2. Rien n'est construit : toute « preuve » citée dans la fiche est une promesse tant qu'aucun artefact de dépôt n'est vérifiable.
+
+## Notes sur 20
+
+| Critère | Note | Ce qui manque pour 20/20 |
+|---|---|---|
+| Impact | 16 | Lever la contradiction interne « garantie ≤ 5 min en v1 » (§2) contre RTO mesuré 6 min 12 s / budget 7 min (§4), et rendre l'étude 11 dévs vérifiable (`docs/reprise-11devs.md` inexistant, recrutement et définition des « 4 incidents/an » non sourcés). |
+| Kiro | 17 | Que chaque artefact cité existe vraiment dans le dépôt : `.kiro/specs/*`, `KIRO_JOURNAL.md` avec graines 0xC0FFEE/0xBEEF, hook `drill-guard`, agents relecteur/testeur, comparatif spec/vibe rejouable. |
+| Design | 15 | Des captures réelles des 4 états (annoncées dans `docs/etats/`, absentes) et un rapport axe-core en CI à 0 violation **exécuté**, pas affirmé. |
+| Innovation | 16 | Écarter nommément les reconstructeurs d'environnement déclaratif (nix, devbox, mise, devenv) : sans eux dans §6, un juge peut dire « c'est du nix avec un chronomètre ». |
+| Présentation | 14 | Respecter la longueur imposée (fiche à 208 lignes, grille : 90–150) et répondre aux 8 questions Devpost **in extenso** au lieu de renvoyer à des sections. |
+
+**Total : 78/100.**
+
+## Défauts qui coûtent encore des points
+
+1. Fiche de 208 lignes, hors de la borne 90–150 de la grille.
+2. Contradiction chiffrée : RTO « garanti ≤ 5 min en v1 » (§2) vs exemple 6 min 12 s et budget 7 min (§4) vs carton vidéo « 6 min 12 s » (§8).
+3. Aucun artefact vérifiable : specs EARS, journal, graines PBT, incident du 12 nov., steering 2→0, `verdicts.jsonl`, captures `docs/etats/`, étude 11 dévs — tout est cité comme existant, rien n'est dans un dépôt consultable.
+4. Concurrents « environnement déclaratif » (nix/devbox/mise/devenv) absents de §6, alors qu'ils ciblent exactement « reconstruire l'état local ».
+5. Les 8 questions Devpost sont déclarées répondues « chiffre par chiffre » par simple renvoi à §2/§5/§9.
+6. Échantillon de 11 dévs : méthode de recrutement, biais de sélection et source des « 4 incidents/an » non donnés.
+7. Le mode démo embarque un corpus de 512 Mio mais la démo web est promise « < 30 s sans installation » : le chargement de ce corpus n'est pas démontré compatible avec les 30 s.
+
+## Chiffres affirmés mais non prouvables (projet, rien n'est construit)
+
+47 min médiane / plage 12 min–3 h 20 / 2 sur 11 impossibles / 3 h 10 par dev et par an ; première valeur en 47 s ; RTO 6 min 12 s, 8 min 12 s, 12 min 04 s, dérive +12 %, écart −38 s ; 300 manifestes générés, graines 0xC0FFEE et 0xBEEF ; 120 fixtures en 40 s ; spec/vibe (4 h 20, 9 it., 4 défauts, 380 lignes, 0,9 — vs 2 h 05, 3 it., 11 défauts, 410 lignes, 0,3) ; MCP 1 h 40 → 6 min ; axe-core 0 violation ; CI corpus 512 Mio en 2 min 12 s ; charge 6 jours-agent / 20 j.
+
+## Verdict
+
+**[il reste 7 défauts à traiter avant 100/100]** — total 78/100.
+
+
+---

@@ -76,6 +76,7 @@ chacune, 48 bloqueurs au total), un **réécriveur** (fiche V2 neutralisant chaq
 |---|---|---|---|---|---|---|
 | Ver — *Mutation Score* | 14 | 12 | 14 | 15 | 12 | **67/100** |
 | Rejeu — *Agent Replay* | 15 | 15 | 13 | 17 | 13 | **73/100** |
+| Reprise — *Local Restore Drill* | 9 | 7 | 8 | 12 | 9 | **45/100** |
 
 Le juge a relevé **18 chiffres affirmés mais non prouvables** dans la fiche Rejeu (16 dans Ver) :
 « 41 s par exécution », « 18 localisations correctes sur 20 », « un contre-exemple fast-check à la
