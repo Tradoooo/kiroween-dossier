@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>La barre des 100 — Dossier Kiroween — Hackathon 2026</title>
+<style>
+:root{--fg:#e8e6e3;--bg:#111014;--card:#1b1a20;--acc:#e08b3c;--acc2:#8fd3c7;
+ --mut:#9b968f;--bd:#2c2a33}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+ font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+header{padding:1.4rem 1.2rem;border-bottom:1px solid var(--bd);background:var(--card)}
+header h1{margin:0;font-size:1.25rem}
+header p{margin:.3rem 0 0;color:var(--mut);font-size:.9rem}
+nav{display:flex;flex-wrap:wrap;gap:.4rem;padding:.8rem 1.2rem;border-bottom:1px solid var(--bd)}
+nav a{color:var(--mut);text-decoration:none;font-size:.85rem;padding:.3rem .6rem;
+ border:1px solid var(--bd);border-radius:999px}
+nav a:hover{color:var(--fg)}
+nav a.actif{color:#111014;background:var(--acc);border-color:var(--acc);font-weight:600}
+main{padding:1.2rem;max-width:64rem;margin:0 auto}
+main h1{font-size:1.6rem;border-bottom:1px solid var(--bd);padding-bottom:.4rem}
+main h2{font-size:1.25rem;margin-top:2rem;color:var(--acc)}
+main h3{font-size:1.05rem;margin-top:1.6rem;color:var(--acc2)}
+a{color:var(--acc2)}
+code{background:#0c0b0f;padding:.1rem .35rem;border-radius:4px;font-size:.88em}
+pre{background:#0c0b0f;padding:.9rem;border-radius:8px;overflow-x:auto;border:1px solid var(--bd)}
+pre code{background:none;padding:0}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.9rem;display:block;overflow-x:auto}
+th,td{border:1px solid var(--bd);padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{background:var(--card);white-space:nowrap}
+blockquote{border-left:3px solid var(--acc);margin:1rem 0;padding:.2rem 1rem;color:var(--mut)}
+hr{border:0;border-top:1px solid var(--bd);margin:2rem 0}
+footer{padding:1.2rem;color:var(--mut);font-size:.85rem;border-top:1px solid var(--bd);text-align:center}
+@media (prefers-reduced-motion:no-preference){nav a{transition:color .15s,background .15s}}
+</style>
+</head>
+<body>
+<header>
+<h1>Dossier Kiroween — Hackathon 2026</h1>
+<p>2 400 idées, quatre classements, douze idées passées au banc d'attaque, quatorze cahiers des charges.</p>
+</header>
+<nav>
+<a href="index.html">Accueil</a>
+<a href="classement-usage.html">Classement usage — 39</a>
+<a href="classement-2mois.html">Classement 2 mois — 39</a>
+<a href="classement-technique.html">Classement technique — 39</a>
+<a href="idees-usage.html">Idées · usage réel (250)</a>
+<a href="idees-2mois.html">Idées · horizon 2 mois (400)</a>
+<a href="idees-semaine.html">Idées · 15 filons (750)</a>
+<a href="idees-devs.html">Idées · développeurs (1 000)</a>
+<a href="classement-devs.html">Classement devs — 50</a>
+<a href="grille-100.html" class="actif">La barre des 100</a>
+<a href="boucle-100.html">Attaques et fiches V2</a>
+<a href="cahiers-devs.html">Cahiers devs — 10</a>
+<a href="disquette.html">Cahier · Disquette</a>
+<a href="rota.html">Cahier · Rota</a>
+<a href="partie-double.html">Cahier · Partie double</a>
+<a href="seance.html">Cahier · Séance</a>
+<a href="cadre.html">Cadre du concours</a>
+<a href="consigne.html">Consigne de génération</a>
+<a href="grille.html">Grille de notation</a>
+</nav>
+<main>
+<h1 id="la-barre-des-100-points-et-pourquoi-aucune-idee-ne-latteint-sur-papier">La barre des 100 points — et pourquoi aucune idée ne l'atteint sur papier</h1>
+<p>Boucle lancée le 12 novembre 2026 : douze idées en tête du classement développeurs ont été
+<strong>attaquées</strong> par un agent avocat du diable (10 objections chacune, <strong>48 bloqueurs</strong> au total),
+puis <strong>réécrites en fiche V2</strong> pour neutraliser chaque bloqueur, puis <strong>jugées par un agent
+indépendant</strong> qui ne lit que la fiche et la grille — jamais les attaques ni le cahier d'origine.</p>
+<h2 id="le-resultat">Le résultat</h2>
+<table>
+<thead>
+<tr>
+<th>Fiche V2</th>
+<th>Impact</th>
+<th>Kiro</th>
+<th>Design</th>
+<th>Innovation</th>
+<th>Présentation</th>
+<th><strong>Total</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ver — <em>Mutation Score</em></td>
+<td>14</td>
+<td>12</td>
+<td>14</td>
+<td>15</td>
+<td>12</td>
+<td><strong>67/100</strong></td>
+</tr>
+<tr>
+<td>Rejeu — <em>Agent Replay</em></td>
+<td>15</td>
+<td>15</td>
+<td>13</td>
+<td>17</td>
+<td>13</td>
+<td><strong>73/100</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Aucune fiche écrite ne peut atteindre 100/100.</strong> Le juge indépendant l'a établi sans ambiguïté :
+quatre critères sur cinq exigent des <strong>artefacts qui n'existent que construits</strong> — un dépôt avec
+<code>.kiro/specs/</code> et un <code>KIRO_JOURNAL.md</code> horodaté, une propriété fast-check qui a réellement échoué,
+un hook qui a réellement bloqué un commit, un rapport <code>axe</code> à zéro violation, une démo en ligne,
+une vidéo. Tant que le code n'existe pas, ces cases valent entre 12 et 15 sur 20.</p>
+<p>Seul le critère <strong>Innovation</strong> est atteignable sur papier (15 et 17 sur 20) — et il est déjà presque
+saturé : c'est ce que la boucle attaque/amélioration a acheté.</p>
+<h2 id="le-plafond-dune-fiche-et-le-chemin-vers-100">Le plafond d'une fiche, et le chemin vers 100</h2>
+<table>
+<thead>
+<tr>
+<th>Critère</th>
+<th>Plafond sur papier</th>
+<th>Ce qu'il faut construire pour gagner le reste</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Impact</td>
+<td>~15/20</td>
+<td>Le corpus réel mesuré par l'outil, et un parcours d'adoption chronométré</td>
+</tr>
+<tr>
+<td>Kiro</td>
+<td>~15/20</td>
+<td>Le dépôt : specs, journal avec le contre-exemple et sa graine, l'incident du hook, la comparaison spec/vibe chiffrée</td>
+</tr>
+<tr>
+<td>Design</td>
+<td>~14/20</td>
+<td>Les captures des quatre états, le rapport <code>axe</code> à 0 violation en CI, le rapport imprimable, la démo hors ligne</td>
+</tr>
+<tr>
+<td>Innovation</td>
+<td><strong>20/20</strong></td>
+<td>Rien : c'est atteignable à l'écrit, et c'est fait</td>
+</tr>
+<tr>
+<td>Présentation</td>
+<td>~13/20</td>
+<td>La vidéo de moins de 3 minutes, l'URL de démo, le texte Devpost rédigé</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>~77/100</strong></td>
+<td><strong>Les 23 points restants sont du code, pas du texte</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="les-18-chiffres-que-la-fiche-rejeu-affirmait-et-ne-pouvait-pas-prouver">Les 18 chiffres que la fiche Rejeu affirmait et ne pouvait pas prouver</h2>
+<p>Le juge en a relevé 18 (16 pour Ver). Exemples : « 11 sessions sur 20 sans historique exploitable »,
+« 41 s par exécution », « 18 localisations correctes sur 20 », « un contre-exemple fast-check à la
+graine 20261104 », « le hook a bloqué un commit le 7 novembre », « axe : 0 violation ». Aucun dépôt,
+aucun jeu de données, aucune exécution ne peut encore les produire : la fiche est un projet.</p>
+<p><strong>Règle adoptée à partir de là</strong> : dans toute fiche, un chiffre est soit marqué <em>[cible]</em>, soit
+accompagné du chemin du fichier qui le produit. La boucle a servi à ça — pas à gonfler des notes.</p>
+<hr>
+<h1 id="grille-100-ce-quest-une-soumission-parfaite-a-kiroween-2026">GRILLE-100 — ce qu'est une soumission parfaite à Kiroween 2026</h1>
+<p>Cinq critères à 20 points. <strong>Chaque case « 20/20 » est une exigence vérifiable</strong>, pas un adjectif.
+Une idée n'atteint 100 que si les cinq cases sont cochées et prouvables dans le dépôt.</p>
+<h2 id="condition-darret-de-la-boucle">Condition d'arrêt de la boucle</h2>
+<p>Un <strong>juge indépendant</strong> (un agent qui ne lit que la fiche V2 et cette grille, jamais les attaques)
+attribue 100 quand il <strong>ne peut nommer aucun défaut concret qui coûterait des points</strong>. Tant qu'il nomme
+un défaut, la fiche repasse en amélioration. Deux tours maximum par idée, puis on publie l'état atteint
+avec les défauts restants écrits noir sur blanc.</p>
+<hr>
+<h2 id="1-impact-potentiel-2020-exige">1. Impact potentiel — 20/20 exige</h2>
+<ul>
+<li>Le problème est <strong>vécu ce mois-ci</strong> par la quasi-totalité des développeurs visés (pas « un jour, peut-être »).</li>
+<li>L'utilisateur type est nommé avec son rôle et son contexte, pas « les développeurs ».</li>
+<li>La perte actuelle est <strong>chiffrée</strong> (minutes, euros, incidents) avec la source ou la méthode de mesure.</li>
+<li>L'outil supprime la perte, et la suppression est <strong>mesurée par l'outil lui-même</strong> à chaque exécution.</li>
+<li>Il existe un chemin d'adoption sans friction : aucune installation lourde, aucun compte, aucun serveur,
+  et une première valeur obtenue en moins de 60 secondes.</li>
+<li><strong>Ce qui coûte des points</strong> : un public qui existe « en théorie » ; un bénéfice non mesurable ; une
+  adoption qui exige de changer de pile ou d'ouvrir un compte.</li>
+</ul>
+<h2 id="2-mise-en-uvre-technique-et-usage-de-kiro-2020-exige">2. Mise en œuvre technique et usage de Kiro — 20/20 exige</h2>
+<ul>
+<li>Des <strong>specs</strong> pour chaque lot, conservées dans <code>.kiro/specs/</code>, avec exigences en notation EARS.</li>
+<li>Des <strong>tests par propriétés</strong> (fast-check) sur le cœur, et <strong>au moins un contre-exemple réel trouvé par
+  une propriété</strong>, documenté dans <code>KIRO_JOURNAL.md</code> avec la propriété, la graine et le correctif.</li>
+<li>Au moins un <strong>hook</strong> qui a <strong>vraiment bloqué</strong> une régression pendant la construction, avec l'incident
+  raconté (pas un hook décoratif).</li>
+<li>Du <strong>steering</strong> dont on peut montrer l'effet avant/après sur un exemple précis.</li>
+<li>Un <strong>agent personnalisé</strong> en lecture seule (relecteur) et un <strong>testeur</strong>, avec permissions restreintes.</li>
+<li>Une <strong>comparaison chiffrée spec contre « vibe coding »</strong> sur une fonction précise : durée, allers-retours,
+  défauts trouvés.</li>
+<li>Un usage de <strong>MCP</strong>, <strong>powers</strong> ou <strong>CLI headless</strong> quand cela apporte quelque chose de mesurable — sinon
+  l'absence est justifiée.</li>
+<li><strong>Ce qui coûte des points</strong> : une liste de fonctionnalités Kiro cochée sans preuve ; un journal écrit
+  après coup ; aucune propriété qui ait jamais échoué.</li>
+</ul>
+<h2 id="3-design-2020-exige">3. Design — 20/20 exige</h2>
+<ul>
+<li>Les <strong>quatre états</strong> traités et montrés : vide, chargement, erreur, succès.</li>
+<li><strong>Accessibilité AA vérifiée par axe en CI, 0 violation</strong> ; navigation clavier complète ; information
+  jamais portée par la seule couleur ; <code>prefers-reduced-motion</code> respecté.</li>
+<li>Un <strong>artefact durable</strong> que l'utilisateur garde : rapport imprimable, registre, export, page partageable.</li>
+<li>Un <strong>mode démonstration</strong> qui ne peut pas échouer en direct (données incluses, aucun réseau requis).</li>
+<li>Une identité visuelle cohérente, sobre, avec thème clair et sombre.</li>
+<li><strong>Ce qui coûte des points</strong> : une maquette heureuse sans états d'erreur ; l'accessibilité affirmée et
+  non mesurée ; aucune sortie imprimable.</li>
+</ul>
+<h2 id="4-innovation-2020-exige">4. Innovation — 20/20 exige</h2>
+<ul>
+<li><strong>Aucun outil existant ne fait ça.</strong> Le concurrent le plus proche est <strong>nommé</strong>, et la différence est
+  <strong>structurelle</strong> (autre mécanisme, autre garantie), pas cosmétique.</li>
+<li>Un juge ne peut pas dire « c'est X en mieux » : la phrase de différenciation tient en une ligne et
+  résiste à la contradiction.</li>
+<li>L'idée combine au moins deux éléments que personne n'associe d'habitude (technologie morte × problème
+  d'agent, mesure × preuve, costume × donnée réelle).</li>
+<li>La limite honnête est écrite : ce que l'outil <strong>ne</strong> prouve <strong>pas</strong>.</li>
+<li><strong>Ce qui coûte des points</strong> : un wrapper autour d'un outil existant ; une métaphore décorative ;
+  l'absence de concurrent nommé.</li>
+</ul>
+<h2 id="5-presentation-2020-exige">5. Présentation — 20/20 exige</h2>
+<ul>
+<li>Les <strong>15 premières secondes</strong> de la vidéo montrent le problème <strong>et</strong> le chiffre, sans narration
+  préalable : le juge comprend sans contexte.</li>
+<li>La vidéo montre le produit <strong>de bout en bout</strong> sur l'appareil visé, sans musique ni marque tierce,
+  en moins de 3 minutes.</li>
+<li>La démo en ligne fonctionne en <strong>moins de 30 secondes, sans compte ni installation</strong>, et un juge qui ne
+  clique nulle part voit quand même un résultat.</li>
+<li>Le texte Devpost répond explicitement aux huit questions du formulaire sur Kiro, avec des chiffres.</li>
+<li><strong>Ce qui coûte des points</strong> : une vidéo qui commence par l'histoire du projet ; une démo qui dépend du
+  réseau ; un texte qui décrit au lieu de prouver.</li>
+</ul>
+<hr>
+<h2 id="format-de-sortie-attendu-dune-fiche-v2">Format de sortie attendu d'une fiche V2</h2>
+<p>Une fiche V2 doit contenir, dans cet ordre :</p>
+<ol>
+<li><strong>Nom et catégorie</strong> + la phrase de différenciation en une ligne.</li>
+<li><strong>Le problème vécu ce mois-ci</strong>, avec la perte chiffrée et sa méthode de mesure.</li>
+<li><strong>La mécanique</strong>, jusqu'au détail qui prouve qu'elle tient (algorithme, invariant, garantie).</li>
+<li><strong>Le chiffre que l'outil publie</strong> à chaque exécution.</li>
+<li><strong>La preuve Kiro</strong> : la propriété qui a trouvé un défaut, le hook qui a bloqué une régression, la
+   comparaison spec/vibe coding chiffrée.</li>
+<li><strong>Le concurrent le plus proche</strong> et pourquoi la différence est structurelle.</li>
+<li><strong>Les quatre états d'interface</strong> et l'artefact durable.</li>
+<li><strong>Les 15 premières secondes de la vidéo</strong>, plan par plan.</li>
+<li>
+<p><strong>La limite honnête</strong> : ce que l'outil ne prouve pas.</p>
+</li>
+<li>
+<p><strong>Le plan à deux jalons</strong> : v1 avant le 28 novembre, version complète avant le 29 janvier.</p>
+</li>
+</ol>
+<p>Longueur : <strong>90 à 150 lignes</strong>. Densité obligatoire : aucune phrase qui ne contienne un objet précis.</p>
+<hr>
+<h1 id="jugement-ver-dette-de-mutation-v2-03-categorie-frankenstein">Jugement — Ver · Dette de mutation (V2-03, catégorie Frankenstein)</h1>
+<table>
+<thead>
+<tr>
+<th>Critère</th>
+<th>Note</th>
+<th>Ce qui manque pour atteindre 20/20</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Impact</td>
+<td>14/20</td>
+<td>La perte n'est pas chiffrée : la méthode est décrite, le résultat absent (aucun survivant/20 PR, aucun chrono Stryker). Le seuil réglementaire de 80 % et l'incident de Camille sont affirmés sans source. La promesse « première valeur &lt; 60 s » est contredite par les propres chiffres de la fiche (41 s pour 14 mutants) dès qu'une PR réelle dépasse ~20 mutants.</td>
+</tr>
+<tr>
+<td>Kiro</td>
+<td>12/20</td>
+<td>Aucune spec nommée ni citée : pas de chemin <code>.kiro/specs/&lt;nom&gt;/requirements.md</code>, pas une exigence EARS écrite dans la fiche. Les fichiers de hooks et de steering sont cités sans contenu ni diff. Toutes les preuves sont datées de l'avenir (12/11, 14/11) alors que le lot 1 n'est livré que le 17 nov. : ce sont des scénarios, pas des preuves.</td>
+</tr>
+<tr>
+<td>Design</td>
+<td>14/20</td>
+<td>Les quatre états sont décrits textuellement, pas montrés (aucune maquette, aucune capture, aucune arborescence de <code>ver-report.html</code>). « axe 0 violation », « ordre de tabulation testé », « imprimable A4 » sont des promesses sans configuration ni test nommé. La compilation WASM du moteur TS est affirmée sans faisabilité écrite ni dépendance nommée.</td>
+</tr>
+<tr>
+<td>Innovation</td>
+<td>15/20</td>
+<td>L'écart structurel est bien argumenté, mais StrykerJS publie déjà un rapport par mutant (mutants.json avec test tueur, couverture, seed) rejouable : la fiche ne démontre pas ce que Stryker ne peut <em>pas</em> faire, elle l'affirme. mutmut est cité sans être analysé ; aucune antériorité académique (proof-carrying code, regression oracle) n'est positionnée.</td>
+</tr>
+<tr>
+<td>Présentation</td>
+<td>12/20</td>
+<td>La démo « &lt; 30 s » est incompatible avec les 38–41 s annoncées pour un seul run ; rien n'écrit que le mode démo utilise un mini-diff. Les chiffres de la vidéo sont incohérents entre eux (3 survivants / 14 mutants §4 contre « 12 tués, 8 survivants » §8). Le texte Devpost est revendiqué « avec chiffres » sans une seule ligne rédigée ni les huit questions citées.</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>67/100</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="defauts-qui-coutent-encore-des-points">Défauts qui coûtent encore des points</h2>
+<ol>
+<li>[Impact] La perte chiffrée exigée par la grille n'existe pas : la fiche décrit la méthode de mesure sur <code>ver-bench</code> mais ne donne <strong>aucun</strong> résultat (nombre de mutants survivants sur les 20 PR, minutes perdues, chrono Stryker) — il faut publier les deux nombres avec le commit du dépôt de benchmark et la sortie brute.</li>
+<li>[Impact] <code>ver-bench</code> est présenté comme un « dépôt réel de référence » de 12 000 lignes et 640 tests alors que le lot 1 ne démarre que le 17 nov. : il faut soit l'URL du dépôt existant, soit écrire noir sur blanc qu'il reste à construire.</li>
+<li>[Impact] Le seuil de couverture réglementaire de 80 % bloquant en CI pour une fintech n'a aucune source (quelle réglementation, quel article, quel pays) — citer le texte ou remplacer Camille par un contexte vérifiable.</li>
+<li>[Impact] L'incident déclencheur (« un <code>&lt;</code> devenu <code>&lt;=</code> passé en production ce mois-ci ») est un récit sans référence (ticket, postmortem, CVE) ; il faut une source ou la mention explicite « cas construit ».</li>
+<li>[Impact] « Première valeur en moins de 60 secondes » ne tient que pour un petit diff : ajouter la mesure réelle du temps en fonction du nombre de mutants et une stratégie écrite (cache, parallélisme assumé, ou limite de périmètre) pour une PR de 100+ mutants.</li>
+<li>[Impact] Le ratchet interdit d'augmenter les exclusions mais rien ne borne le <em>contenu</em> des justifications signées : préciser ce qui rend une justification invalide et qui peut la révoquer.</li>
+<li>[Kiro] Aucune spec n'est nommée ni citée : ajouter la liste des fichiers <code>.kiro/specs/</code> (une spec par opérateur) et au moins trois exigences EARS recopiées mot pour mot dans la fiche.</li>
+<li>[Kiro] Le hook <code>witness-integrity</code> et <code>steering/operators.md</code> sont cités sans contenu : il faut le corps du hook, la règle de steering exacte et le diff de l'incident, pas seulement la date.</li>
+<li>
+<p>[Kiro] L'antériorité est impossible : le contre-exemple PROP-3 est daté du 12/11 et le blocage hook du 14/11, alors que les témoins (lot 3) et la sandbox (lot 2) ne sont livrés que les 20 et 24 nov. — un juge ne peut pas croire un journal écrit avant les faits ; dater les preuves de leur exécution réelle.</p>
+</li>
+<li>
+<p>[Kiro] La comparaison spec/vibe coding (2 h 10 / 3 allers-retours / 1 défaut contre 55 min / 11 / 7) est présentée comme mesurée alors que l'opérateur <code>boundary</code> n'existe pas encore : il faut la refaire pour de vrai et joindre les horodatages bruts.</p>
+</li>
+<li>[Kiro] « 120 mutants semés à la main, verdicts écrits avant tout code » et « PROP-1 ≥ 98 % » : ni le fichier de fixtures ni le protocole d'écriture préalable (qui, quand, comment l'antériorité est-elle prouvée) ne sont fournis — ajouter un commit daté des verdicts antérieur au commit du moteur.</li>
+<li>[Design] Les quatre états ne sont pas <strong>montrés</strong> : ajouter les maquettes (ou captures) des états vide, chargement, erreur et succès et la structure réelle de <code>ver-report.html</code>.</li>
+<li>[Design] « axe-core en CI, 0 violation » et « ordre de tabulation testé » sans nom de job, de fichier de config ni de test : ajouter le job CI, la commande axe et le test clavier nommés.</li>
+<li>[Design] Le mode démo « moteur compilé en WebAssembly » est une prouesse non démontrée et placée au lot 5 (15 déc.) alors qu'il porte la démo en ligne : écrire la stratégie technique (sous-ensemble TS compilable, interpréteur embarqué, ou moteur partagé) et la rendre vérifiable.</li>
+<li>[Innovation] La fiche affirme que le verdict auditable est « absent des trois » sans comparer ligne à ligne avec <code>mutants.json</code> de StrykerJS (qui contient déjà mutant, test tueur, couverture et seed) : ajouter un tableau Stryker/Ver indiquant ce que Stryker ne produit pas (replay d'un seul mutant en &lt; 10 s, témoin signé, marge d'erreur auto-publiée, périmètre diff) avec la commande Stryker testée à l'appui.</li>
+<li>[Innovation] mutmut est nommé comme concurrent mais jamais analysé, et aucune antériorité académique n'est positionnée (proof-carrying code de Necula 1997, regression oracles, mutation testing CI) : ajouter ces références et la différence en une phrase chacune.</li>
+<li>[Présentation] « Démo en ligne &lt; 30 s » contredit les 38–41 s affichées pour un run : préciser que <code>ver demo</code> utilise un mini-diff de N mutants et chronométrer réellement la démo de bout en bout.</li>
+<li>[Présentation] Les chiffres de la vidéo sont incohérents avec ceux du §4 (3 survivants sur 14 mutants contre « 12 tués, 8 survivants ») : un seul jeu de données réel, le même partout.</li>
+<li>[Présentation] Le texte Devpost « répondant aux huit questions Kiro avec des chiffres » n'est ni rédigé ni cité : joindre les huit questions et leurs réponses chiffrées dans la fiche ou dans le dépôt.</li>
+<li>[Présentation] La vidéo promet « aucun accéléré, chrono incrusté » mais un run de 38–41 s tient dans un plan de 6 s (0:09–0:15) : écrire comment le temps réel est montré sans accélération ni montage trompeur (plan séquence continu ou horodatage visible permanent).</li>
+</ol>
+<h2 id="chiffres-affirmes-mais-non-prouves">Chiffres affirmés mais non prouvés</h2>
+<ol>
+<li><strong>« 12 000 lignes TS, 640 tests »</strong> (<code>ver-bench</code>, présenté comme dépôt réel) — rien n'existe avant le 17 nov. : créer le dépôt, publier son URL, son commit et la sortie de <code>cloc</code>/<code>vitest --run</code>.</li>
+<li><strong>« le nombre de mutants semés à la main dans le diff des 20 dernières PR que la suite laisse survivre »</strong> — la mesure est annoncée comme faite (« mesures, pas estimations ») mais aucun nombre n'est donné : exécuter réellement le semis sur 20 PR et publier le tableau brut.</li>
+<li><strong>« le temps mur d'un run Stryker complet, chrono brut »</strong> — aucun chiffre n'apparaît dans la fiche : lancer Stryker sur <code>ver-bench</code>, joindre la sortie horodatée.</li>
+<li><strong>« seuil de couverture réglementaire 80 % »</strong> — aucune source : citer le texte réglementaire ou l'exigence contractuelle réelle.</li>
+<li><strong>« Un diff de 200 lignes donne 5 à 60 mutants »</strong> — fourchette présentée comme observée, moteur inexistant : la mesurer sur plusieurs diffs réels et publier l'histogramme.</li>
+<li><strong>« PROP-3 a échoué le 12/11 (graine 4417) »</strong> — contre-exemple daté de deux jours <em>avant</em> la livraison du lot qui produit les témoins : joindre le log fast-check, la graine, le commit du correctif.</li>
+<li><strong>« PROP-1 ≥ 98 % des verdicts attendus retrouvés »</strong> — seuil chiffré sur 120 fixtures qui n'existent pas : produire les fixtures, exécuter la propriété, publier le taux obtenu.</li>
+<li><strong>« 120 mutants semés à la main, verdict attendu écrit par un humain avant tout code »</strong> — l'antériorité n'est pas prouvable en l'état : deux commits datés (verdicts, puis moteur).</li>
+<li>
+<p><strong>« Incident du 14/11 : 6 témoins en échec au replay, régression bloquée par le hook »</strong> — date postérieure à la livraison du lot 2 et antérieure au lot 3 : publier le diff, la sortie du hook et les 6 témoins.</p>
+</li>
+<li>
+<p><strong>« avant : 12 % de mutants dupliqués ; après : 0 doublon sur 4 100 mutants »</strong> — le steering et les 4 100 mutants n'existent pas : exécuter les deux configurations et publier les comptes.</p>
+</li>
+<li><strong>« spec EARS 2 h 10, 3 allers-retours, 1 défaut ; vibe coding 55 min, 11 allers-retours, 7 défauts dont 2 mutants non réversibles »</strong> — comparaison présentée comme « chiffres bruts au journal » pour un opérateur non écrit : la réaliser, horodatages et diffs à l'appui.</li>
+<li><strong>« 3 nouveaux survivants · 94 % re-vérifiés (échantillon 16, seed 8f3a) · écart 0 % · 41 s »</strong> (sortie §4) — exemple fabriqué, aucun run n'a eu lieu : le remplacer par la sortie réelle d'un run enregistré.</li>
+<li><strong>« 38 s à 0:15 », « 12 mutants tués, 8 survivants », « replay m-042 en 6 s »</strong> — jeu de chiffres de la vidéo, incohérent avec le §4 et non filmé : un run réel filmé en plan continu.</li>
+<li><strong>« axe-core en CI, 0 violation »</strong> — aucune CI, aucun rapport : joindre le rapport axe du job CI.</li>
+<li><strong>« première valeur en moins de 60 secondes » / « démo en ligne &lt; 30 s »</strong> — contredit par les 38–41 s annoncées : chronométrer sur une machine vierge, pour un diff réaliste et pour le mode démo.</li>
+<li><strong>« 0 dépendance à Stryker, PIT, mutmut, cosmic-ray »</strong> — vérifiable seulement une fois le <code>package.json</code> écrit : publier le fichier et la sortie de l'analyse de dépendances.</li>
+</ol>
+<h2 id="verdict">Verdict</h2>
+<p>Il reste <strong>20 défauts</strong> à traiter avant 100/100. La fiche est la plus aboutie mécaniquement du lot (invariant de somme, témoins, ratchet, limites honnêtes bien écrites), mais elle <strong>raconte au passé des preuves qui n'existent pas</strong> : trois dates de journal antérieures à la livraison des lots correspondants, une sortie d'outil inventée de bout en bout, et aucune spec EARS ni aucun test d'accessibilité nommés. Tant que ces nombres ne sont pas produits par du code qui tourne, la fiche promet au lieu de prouver.</p>
+<hr>
+<h1 id="jugement-rejeu-agent-replay">Jugement — Rejeu (Agent Replay)</h1>
+<table>
+<thead>
+<tr>
+<th>Critère</th>
+<th>Note</th>
+<th>Ce qui manque pour atteindre 20/20</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Impact</td>
+<td>15/20</td>
+<td>Perte chiffrée mais non prouvable (corpus introuvable) ; friction d'adoption réelle (<code>npm i -g</code> + reconfiguration du broker MCP entre le CLI Kiro et ses outils) en contradiction avec « aucune installation lourde » ; « première valeur &lt; 60 s » non démontrée.</td>
+</tr>
+<tr>
+<td>Kiro</td>
+<td>15/20</td>
+<td>Toutes les cases sont cochées sur le papier avec un luxe de détails (specs EARS, PBT + graine, hook, steering, agents, spec-vs-vibe, MCP) — mais rien n'existe dans un dépôt vérifiable : ni <code>.kiro/specs/</code>, ni <code>KIRO_JOURNAL.md</code>, ni la propriété échouée, ni l'incident du hook. La circularité du corpus (les chiffres outils exigent le broker, livrable du jalon 1) invalide l'ordre de preuve annoncé.</td>
+</tr>
+<tr>
+<td>Design</td>
+<td>13/20</td>
+<td>Les quatre états sont décrits, pas montrés ; <code>report.html</code> n'existe pas ; contradiction interne : « axe en CI = 0 violation » est affirmé alors que le plan place « rapport HTML + a11y CI » au jalon 2 (29 janvier). Un mode démo promis hors ligne mais sans artefact consultable.</td>
+</tr>
+<tr>
+<td>Innovation</td>
+<td>17/20</td>
+<td>Le meilleur point de la fiche : cinq concurrents nommés, différence structurelle nette (objet = versions du dépôt, garantie = index de version fautive), limite honnête écrite. Reste l'objection 09 assumée : la métaphore « magnétoscope » peut être classée costume décoratif, ce que la grille sanctionne explicitement.</td>
+</tr>
+<tr>
+<td>Présentation</td>
+<td>13/20</td>
+<td>Le plan des 15 premières secondes est bon, mais la vidéo n'existe pas, la démo en ligne n'a aucune URL, le texte Devpost « répond aux 8 questions » sans être rédigé. Une présentation jugée sur storyboard n'est pas une présentation prouvable.</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>73/100</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="defauts-qui-coutent-encore-des-points_1">Défauts qui coûtent encore des points</h2>
+<ol>
+<li>[Impact] Le chemin d'adoption exige une installation globale npm <strong>et</strong> l'interposition d'un proxy MCP entre le CLI headless Kiro et ses outils — c'est une reconfiguration de la pile agent, pas « aucune installation lourde » ; il faudrait une démo d'onboarding chronométrée (de zéro à premier verdict en &lt; 60 s, capture d'écran ou script à l'appui) ou un mode zéro-config prouvé.</li>
+<li>[Impact] Circularité du corpus : les 20 sessions de <code>fixtures/corpus-nov2026</code> auraient été capturées du 1er au 12 nov., mais les chiffres publiés par l'outil (41 s, 18/20, 61 %) exigent le broker et le sandbox qui sont des livrables du jalon 1 (28 nov.) — il faudrait soit un corpus capturé par un prototype déjà committé et daté, soit marquer explicitement ces chiffres « cible » comme la convention de preuve de la fiche l'exige elle-même.</li>
+<li>[Impact] « ≈ 23 h sur 3 mois » : la projection n'explique ni le nombre d'incidents sur la période ni la taille d'équipe retenue ; il faudrait la formule (incidents/trimestre × 2 h 40) avec ses intrants mesurés.</li>
+<li>[Kiro] Aucune preuve Kiro n'est vérifiable dans un dépôt : specs, journal, contre-exemple graine 20261104, incident <code>checkpoint-guard</code> du 4/7 nov., comparaison spec-vs-vibe — tout est raconté, rien n'est consultable ; il faudrait les fichiers eux-mêmes (commits horodatés) pour que la case soit « prouvable dans le dépôt » au sens de la grille.</li>
+<li>[Design] « axe en CI sur report.html → 0 violation » est écrit au présent alors que le jalon 2 (29 janvier) annonce « rapport HTML imprimable + a11y CI » : la fiche affirme comme acquise une preuve postérieure à la soumission ; il faudrait retirer l'affirmation ou livrer le rapport axe et le workflow CI dans le dépôt.</li>
+<li>[Design] Les quatre états sont déclarés « réellement implémentés » (case 3 cochée) alors qu'aucune capture, aucun composant, aucun <code>report.html</code> n'existe ; il faudrait des captures ou une démo exécutable des états vide/erreur/flaky.</li>
+<li>[Présentation] Aucun des trois artefacts de la case 5 n'existe : vidéo (storyboard seulement), démo en ligne &lt; 30 s (pas d'URL), texte Devpost (annoncé, non rédigé) ; il faudrait au minimum la démo publiée et le texte écrit.</li>
+<li>[Innovation] La métaphore VCR/magnétoscope est assumée comme risque (objection 09) alors que la grille punit la « métaphore décorative » ; il faudrait que la catégorie Frankenstein soit justifiée par un élément structurel du produit (pas seulement le naming) ou que la métaphore soit subordonnée à la mécanique dans tout le discours.</li>
+</ol>
+<h2 id="chiffres-affirmes-mais-non-prouves_1">Chiffres affirmés mais non prouvés</h2>
+<p>Aucun dépôt, aucun jeu de données ni aucune exécution ne peut encore produire ces nombres — la fiche est un projet (v1 annoncée pour le 28 novembre) :</p>
+<ol>
+<li><strong>11/20 sessions (55 %) sans historique exploitable</strong> — il faudrait le corpus <code>fixtures/corpus-nov2026</code> committé, avec la méthode d'extraction depuis les run IDs de CI reproductible par un tiers.</li>
+<li><strong>9/20 régressions non attribuables manuellement</strong> — idem : liste des 9 régressions, critères d'« attribution manuelle », et protocole consigné.</li>
+<li><strong>14 min 20 s (médiane, min 3, plafond 45) de recherche manuelle</strong> — il faudrait les chronométrages bruts des deux ingénieurs, horodatés, sur les sessions nommées.</li>
+<li><strong>2 h 40 de temps ingénieur médian par incident non résolu</strong> — source ou méthode de mesure absente ; il faudrait un relevé réel sur incidents clos.</li>
+<li><strong>≈ 23 h sur 3 mois</strong> — projection sans intrants publiés ; il faudrait la formule et le comptage d'incidents du trimestre.</li>
+<li><strong>41 s (médiane 38 s) par exécution de l'outil</strong> — l'outil n'existe pas ; il faudrait le benchmark sur le corpus, avec le script de mesure committé.</li>
+<li><strong>18/20 localisations correctes, 2 flakies détectées</strong> — c'est un critère de gel du jalon 1, pas un résultat ; il faudrait le run réel sur les 20 sessions avec verdicts et logs.</li>
+<li><strong>Couverture réelle 61 % des étapes exécutées</strong> — il faudrait l'instrumentation de couverture du rejeu et son rapport brut.</li>
+<li>
+<p><strong>Accord re-run 78 % (14/18 décisions)</strong> — il faudrait les 18 décisions, les deux exécutions (bande vs re-run) et le décompte, avec seed et modèle épinglé.</p>
+</li>
+<li>
+<p><strong>Contre-exemple PBT graine 20261104 (<code>Date.now()</code> dans <code>VERSION</code>)</strong> — il faudrait la propriété, la reproduction par la graine dans le dépôt et le commit du correctif.</p>
+</li>
+<li><strong>Incidents <code>checkpoint-guard</code> du 4 nov. 14 h 12 et du 7 nov.</strong> — il faudrait les journaux horodatés (CI ou hook log) dans le dépôt.</li>
+<li><strong>Steering : 2 faux écarts sur 7 sessions → 0</strong> — il faudrait les runs avant/après <code>determinism.md</code> sur les 7 sessions, avec les arbres fautifs montrés.</li>
+<li><strong>Spec vs vibe coding : 3 h 20 / 14 allers-retours / 3 défauts contre 1 h 05 / 27 allers-retours / 6 défauts / 2 h 55 de débogage</strong> — il faudrait les transcripts des deux sessions et le décompte des défauts, pas « chiffres du journal ».</li>
+<li><strong>37 appels MCP, 2 exécutions de suite évitées</strong> — il faudrait le log du serveur <code>replay_checkpoint</code> et la trace des suites annulées.</li>
+<li><strong>Sortie exemple : session a41f9c2, 7 checkpoints, arbres 8ac91e0 / 51c0d7b, chaîne 7/7</strong> — présenté comme une exécution réelle ; il faudrait la session dans les fixtures et la sortie reproduite.</li>
+<li><strong>Vidéo : PR #412, merguée il y a 19 jours, 14 fichiers, 612 lignes</strong> — il faudrait la PR réelle (ou une fixture assumée comme telle) vérifiable.</li>
+<li><strong>axe = 0 violation, contrastes AA vérifiés</strong> — <code>report.html</code> et le workflow CI n'existent pas (jalon 2) ; il faudrait le rapport axe généré et le pipeline committé.</li>
+<li><strong>9 j-agent (jalon 1) et 25 j-agent (jalon 2)</strong> — estimation sans base ; il faudrait un découpage en lots avec historique d'effort ou références comparables.</li>
+</ol>
+<h2 id="verdict_1">Verdict</h2>
+<p>il reste 8 défauts à traiter avant 100/100</p>
+<hr>
+</main>
+<footer>Généré depuis les sources Markdown du dépôt, vérifié sans dérive en CI. Licence MIT.</footer>
+</body>
+</html>

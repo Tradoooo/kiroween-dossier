@@ -41,7 +41,8 @@ jobs:
         run: |
           for p in index classement-usage classement-2mois classement-technique \
                    idees-usage idees-2mois idees-semaine idees-devs classement-devs \
-                   cahiers-devs disquette rota partie-double seance cadre consigne grille; do
+                   cahiers-devs grille-100 boucle-100 disquette rota partie-double \
+                   seance cadre consigne grille; do
             test -s "docs/$p.html" || { echo "page vide ou absente : $p"; exit 1; }
           done
           grep -q '<table' docs/classement-usage.html

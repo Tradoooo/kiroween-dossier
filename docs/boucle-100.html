@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Attaques et fiches V2 — Dossier Kiroween — Hackathon 2026</title>
+<style>
+:root{--fg:#e8e6e3;--bg:#111014;--card:#1b1a20;--acc:#e08b3c;--acc2:#8fd3c7;
+ --mut:#9b968f;--bd:#2c2a33}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+ font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+header{padding:1.4rem 1.2rem;border-bottom:1px solid var(--bd);background:var(--card)}
+header h1{margin:0;font-size:1.25rem}
+header p{margin:.3rem 0 0;color:var(--mut);font-size:.9rem}
+nav{display:flex;flex-wrap:wrap;gap:.4rem;padding:.8rem 1.2rem;border-bottom:1px solid var(--bd)}
+nav a{color:var(--mut);text-decoration:none;font-size:.85rem;padding:.3rem .6rem;
+ border:1px solid var(--bd);border-radius:999px}
+nav a:hover{color:var(--fg)}
+nav a.actif{color:#111014;background:var(--acc);border-color:var(--acc);font-weight:600}
+main{padding:1.2rem;max-width:64rem;margin:0 auto}
+main h1{font-size:1.6rem;border-bottom:1px solid var(--bd);padding-bottom:.4rem}
+main h2{font-size:1.25rem;margin-top:2rem;color:var(--acc)}
+main h3{font-size:1.05rem;margin-top:1.6rem;color:var(--acc2)}
+a{color:var(--acc2)}
+code{background:#0c0b0f;padding:.1rem .35rem;border-radius:4px;font-size:.88em}
+pre{background:#0c0b0f;padding:.9rem;border-radius:8px;overflow-x:auto;border:1px solid var(--bd)}
+pre code{background:none;padding:0}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.9rem;display:block;overflow-x:auto}
+th,td{border:1px solid var(--bd);padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{background:var(--card);white-space:nowrap}
+blockquote{border-left:3px solid var(--acc);margin:1rem 0;padding:.2rem 1rem;color:var(--mut)}
+hr{border:0;border-top:1px solid var(--bd);margin:2rem 0}
+footer{padding:1.2rem;color:var(--mut);font-size:.85rem;border-top:1px solid var(--bd);text-align:center}
+@media (prefers-reduced-motion:no-preference){nav a{transition:color .15s,background .15s}}
+</style>
+</head>
+<body>
+<header>
+<h1>Dossier Kiroween — Hackathon 2026</h1>
+<p>2 400 idées, quatre classements, douze idées passées au banc d'attaque, quatorze cahiers des charges.</p>
+</header>
+<nav>
+<a href="index.html">Accueil</a>
+<a href="classement-usage.html">Classement usage — 39</a>
+<a href="classement-2mois.html">Classement 2 mois — 39</a>
+<a href="classement-technique.html">Classement technique — 39</a>
+<a href="idees-usage.html">Idées · usage réel (250)</a>
+<a href="idees-2mois.html">Idées · horizon 2 mois (400)</a>
+<a href="idees-semaine.html">Idées · 15 filons (750)</a>
+<a href="idees-devs.html">Idées · développeurs (1 000)</a>
+<a href="classement-devs.html">Classement devs — 50</a>
+<a href="grille-100.html">La barre des 100</a>
+<a href="boucle-100.html" class="actif">Attaques et fiches V2</a>
+<a href="cahiers-devs.html">Cahiers devs — 10</a>
+<a href="disquette.html">Cahier · Disquette</a>
+<a href="rota.html">Cahier · Rota</a>
+<a href="partie-double.html">Cahier · Partie double</a>
+<a href="seance.html">Cahier · Séance</a>
+<a href="cadre.html">Cadre du concours</a>
+<a href="consigne.html">Consigne de génération</a>
+<a href="grille.html">Grille de notation</a>
+</nav>
+<main>
+<h1 id="la-boucle-attaques-bloqueurs-et-fiches-v2">La boucle — attaques, bloqueurs et fiches V2</h1>
+<p>Douze idées attaquées (10 objections chacune, 48 bloqueurs), puis réécrites en fiches V2 pour
+neutraliser chaque bloqueur. Les fiches V2 publiées ici sont celles qui étaient stabilisées au
+moment de la mise en ligne ; les autres suivent.</p>
+<h2 id="les-attaques">Les attaques</h2>
+<h1 id="at-01-attaque-cc-01-chemin-fantome-ghost-path">AT-01 · Attaque — CC-01 Chemin-fantôme (Ghost Path)</h1>
+<p>Rôle : avocat du diable. Objectif : faire perdre cette idée au concours Kiroween 2026, contre GRILLE-100.</p>
+<ol start="01">
+<li>
+<p>[bloqueur] <strong>L'antériorité est fatale : <code>tsc</code> fait déjà ça</strong> — Le cœur de la promesse (« un import vers <code>../db/session</code> inexistant doit être signalé ») est exactement ce que TypeScript (<code>error TS2307: Cannot find module</code>), <code>eslint-plugin-import/no-unresolved</code> et <code>dependency-cruiser</code> produisent depuis des années, dès que le patch est écrit sur disque. Pire : Serena MCP et les serveurs LSP-MCP exposent déjà <code>find_symbol</code>/<code>resolve_path</code> à l'agent <em>avant</em> qu'il écrive — la section 10 du cahier admet elle-même qu'il faut construire ce MCP, preuve que l'existant le fournit. La grille Innovation exige « aucun outil existant ne fait ça » : ici quatre le font. · Parade : abandonner la vérification des chemins/imports (couverte) et cibler exclusivement les références <em>hors code compilable</em> — routes, tables SQL, variables d'env, symboles cités en prose dans le plan de l'agent — que ni tsc ni ESLint ne voient jamais.</p>
+</li>
+<li>
+<p>[majeur] <strong>La réduction tue : « c'est un linter d'imports qui lit du JSONL »</strong> — Enlevez le costume : parser un journal JSONL, regexer les chemins, les passer à un resolver existant. Un juge écrira « diff d'entrée = log d'agent au lieu de fichier source, sinon c'est <code>no-unresolved</code> » et la phrase de différenciation en une ligne (exigence 8 de la fiche V2) ne résiste pas à cette contradiction. Le cahier revendique « on ne corrige pas l'agent, on prouve où il a menti » : c'est une métaphore décorative, explicitement listée comme ce qui coûte des points. · Parade : rendre la différence structurelle et démontrable en une phrase — par exemple la garantie de rejeu binaire au commit fixé avec attribution par citation horodatée, ce qu'aucun linter ne produit car aucun ne travaille sur une session d'agent.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>La v1 en 8 jours est une fiction</strong> — Le lot 1 (3 jours) promet « fichiers + exports AST » pour TypeScript : à eux seuls, les alias <code>tsconfig.paths</code>, les barrels <code>index.ts</code> avec re-exports, la résolution <code>node_modules</code> et les workspaces mono-repo consomment cette enveloppe. Derrière, il reste 5 jours pour extract sur des journaux hétérogènes, resolve + distance aux candidats, rapport HTML <em>accessible AA vérifiée axe en CI</em> (exigence Design 20/20), mode CI, plus toute la preuve Kiro (PBT, hook qui a vraiment bloqué, steering avant/après, comparaison spec/vibe chiffrée). Le gel au 28 novembre tombera avec un MVP sans rapport ni preuves Kiro. · Parade : couper la v1 à TypeScript sans alias + chemins de fichiers uniquement (pas de symboles), rapport JSON brut et page HTML minimale générée, et pré-rédiger les specs Kiro dès le jour 1 pour que les preuves existent au gel.</p>
+</li>
+<li>
+<p>[majeur] <strong>Le chiffre mesuré est circulaire</strong> — « 100 % des fantômes du corpus détectés » : le corpus de fixtures est construit par l'auteur, donc la mesure prouve seulement que l'outil retrouve ce qu'on y a planté — la grille Impact exige une perte chiffrée <em>avec source ou méthode de mesure</em>, et « &lt; 2 % de faux positifs sur code sain » est mesuré sur un dépôt sain choisi par l'auteur. Le 12 % → 3 % de la vidéo repose sur deux sessions, n=1 de chaque côté, aucune variance, aucune reproductibilité. · Parade : mesurer sur des journaux réels publics (sessions Claude Code/Codex partagées) et sur 5 dépôts open-source non choisis pour le test, publier faux positifs ET faux négatifs avec intervalles.</p>
+</li>
+<li>
+<p>[majeur] <strong>La vidéo montre une fonctionnalité qui n'existera pas</strong> — La séquence 2:20–3:00 (comparaison de deux sessions via le MCP de vérité, 12 % → 3 %) dépend des lots 5 et 6, planifiés pour décembre–janvier, donc absents au gel v1 du 28 novembre : soit la vidéo ment, soit elle est reconstituée, et un juge qui vérifie le dépôt le verra. Le reste (0:20–1:40) est un terminal qui affiche du JSON puis un <code>ls</code> — la grille Présentation exige un produit montré de bout en bout sur l'appareil visé, pas un CLI brut. · Parade : couper la séquence MCP de la vidéo v1 ou livrer un MCP minimal dans la v1 ; remplacer le terminal par le rapport HTML avec citations cliquables comme plan principal.</p>
+</li>
+<li>
+<p>[majeur] <strong>Le récit Kiro est prévu, pas vécu</strong> — La grille est explicite : « ce qui coûte des points : un journal écrit après coup ; aucune propriété qui ait jamais échoué ». Or le cahier planifie à l'avance le hook <code>ghost-path-guard</code> qui « refusera une PR » et la comparaison spec/vibe « mesurée » : au stade du cahier, aucune propriété n'a encore trouvé de contre-exemple réel avec graine documentée. Le hook lui-même est décoratif-circulaire : l'outil anti-fantômes garde ses propres fixtures, un scénario qu'on se fabrique en dix secondes. · Parade : écrire dans le journal les incidents réels au fur et à mesure, et faire garder par le hook un vrai dépôt tiers (un fixture open-source) où une régression a effectivement été bloquée, capture à l'appui.</p>
+</li>
+<li>
+<p>[majeur] <strong>Dans six mois, le problème est résolu par les agents eux-mêmes</strong> — La boucle « l'agent écrit → le compilateur refuse → l'agent corrige » existe déjà dans Kiro, Claude Code et Cursor : un import fantôme coûte un aller-retour de compilation, quelques secondes, pas « six minutes ». La tendance lourde est l'intégration LSP native dans les agents (Serena, MCP de langage, éditeurs qui exposent le graphe de symboles) : en janvier 2027 la vérification se fera <em>dans</em> l'agent, en amont, et un scanner post-hoc de journaux sera un outil de niche pour l'audit. La grille Impact exige un problème « vécu ce mois-ci » par la quasi-totalité : celui-ci est en cours de disparition. · Parade : repositionner sur l'audit et la conformité (preuves datées pour revues de code, régulateur, équipes qui n'ont pas le droit de faire confiance à l'agent) plutôt que sur le gain de temps développeur.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>L'angle mort technique ruine la garantie binaire</strong> — La promesse « résolution binaire, zéro référence non résolue passée inaperçue » explose sur le réel : chemins construits dynamiquement (<code>`./locales/${lang}.json`</code>), alias et barrels, mono-repos où <code>@org/db</code> résout par workspaces, JavaScript non typé où <code>Users.getOne</code> n'a aucun export vérifiable, routes Express définies par composition. Et l'extraction elle-même est floue : dans la prose d'un agent, distinguer une référence à un fichier d'une simple chaîne de caractères (« range ça dans src/utils un jour ») est un problème de NLP que le cahier évacue d'une ligne. Le risque « faux positifs sur chemins dynamiques : fort » est admis par l'auteur — un juge lira que la métrique centrale n'est pas fiable. · Parade : restreindre honnêtement le périmètre aux références dans les blocs de code et diffs (jamais la prose), documenter la limite comme non-objectif chiffré, et viser la précision plutôt que le rappel dans la phrase de différenciation.</p>
+</li>
+<li>
+<p>[mineur] <strong>Le « déjà vu » des hackathons : énième IA-qui-vérifie-une-IA</strong> — Les juges Devpost ont vu des dizaines de projets « hallucination checker » : métriques de faithfulness RAG dans DeepEval et LangSmith, guardrails type NeMo Guardrails, validateurs de sorties LLM. La catégorie Frankenstein attire exactement ce genre de méta-outils, et « l'agent ment, on le prouve » est une accroche usée depuis 2023. Sans un angle inattendu, le projet se noie dans la pile même s'il est bien exécuté. · Parade : incarner le costume Frankenstein par un artefact visuel fort et inédit — par exemple un « registre des mensonges » imprimable et daté, avec extraits cités façon pièce à conviction — que personne d'autre ne produit.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>En démo directe, ça casse sur le dépôt du juge</strong> — La grille exige une démo en ligne en moins de 30 secondes sans installation, et le meilleur argument du projet est « lancez-le sur VOTRE dépôt » : or le juge qui le fait tombe sur un format JSONL différent (Claude Code ≠ Cursor ≠ Kiro), des alias tsconfig non gérés en v1, et une avalanche de faux positifs <code>ghost</code> sur <code>@org/*</code> — la démonstration s'auto-détruit en direct. La cible « base de vérité d'un dépôt de 50 000 lignes &lt; 20 s » n'est testée que sur des fixtures jouets ; sur un vrai dépôt avec <code>node_modules</code> et barrels, la résolution des symboles peut diverger ou exploser en mémoire. · Parade : fournir un mode démo verrouillé (journal + dépôt inclus, zéro réseau, comme l'exige la grille Design) ET un adaptateur par format de journal déclaré supporté, testé en CI sur un dépôt open-source réel de 50 k+ lignes.</p>
+</li>
+</ol>
+<hr>
+<h1 id="at-02-attaque-de-cc-02-poisoned-prompt-avocat-du-diable">AT-02 · Attaque de CC-02 <em>Poisoned Prompt</em> — avocat du diable</h1>
+<p>10 objections, une par champ imposé. Objectif : faire perdre cette idée.</p>
+<ol start="01">
+<li>
+<p>[bloqueur] <strong>L'antériorité est écrasante et déjà open source</strong> — <strong>LLM Guard (Protect AI)</strong> fait exactement ça : scanners locaux, déterministes, versionnés (<code>BanSubstrings</code>, <code>Secrets</code>, <code>Regex</code>), intégration CI, faux positifs mesurés ; <strong>Rebuff</strong> et <strong>NeMo Guardrails</strong> couvrent le reste. La fiche cite « filtres propriétaires cloud » comme seul existant — c'est un épouvantail : le concurrent direct, gratuit et local, n'est même pas nommé. · Parade : nommer LLM Guard explicitement et prouver une différence structurelle (ex. garantie de détermination + rejeu de corpus que LLM Guard n'offre pas), sinon retirer la claim d'innovation.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>« C'est juste un grep déguisé en courrier d'Halloween »</strong> — 60 règles déterministes sur du texte, c'est <code>grep -f patterns.txt</code> avec un rapport HTML et un costume ; la catégorie Resurrection exige que la métaphore apporte une mécanique, or le « sas de tri du courrier » ne change rien au moteur (regex + normalisation). Le jury cochera « métaphore décorative », ce que la grille punit explicitement. · Parade : faire porter la métaphore par une vraie mécanique de quarantaine (texte mis en salle d'attente, levée de doute, traçabilité type registre de courrier) visible dans le produit.</p>
+</li>
+<li>
+<p>[majeur] <strong>La v1 en 8 jours est un rêve de planning</strong> — les lots 1 à 4 totalisent exactement 8 jours, zéro marge, et n'incluent ni les specs <code>.kiro/</code>, ni le PBT, ni le journal spec/vibe, ni le rapport AA à 0 violation axe — tout ce que la grille exige au score. Surtout, le lot 3 (1,5 jour) promet 200 attaques + <strong>2 000 issues réelles anonymisées</strong> : collecter, anonymiser et valider 2 000 issues réelles en une journée et demie est irréaliste, sans parler du RGPD. · Parade : réduire la v1 à 500 issues saines et 100 attaques, et pré-chiffrer les jours Kiro (specs/PBT/journal) dans le plan.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>Les chiffres sont circulaires</strong> — « 200/200 détectées » mesure un corpus construit <em>par</em> l'équipe <em>pour</em> ses règles : c'est un test unitaire déguisé en résultat. Le « 0,4 % de faux positifs » annoncé dans la vidéo est mesuré sur un corpus sain maison, jamais sur un jeu tiers ; et la grille exige que la perte soit chiffrée <em>avec source</em> — ici aucun incident réel, aucun benchmark indépendant. Un juge demande « sur quelles vraies attaques, trouvées par qui ? » et tout s'effondre. · Parade : évaluer aussi sur un corpus tiers public (ex. jeux d'injection de la littérature ou issues GitHub réelles d'incidents documentés) et publier le taux de détection <em>hors</em> corpus maison.</p>
+</li>
+<li>
+<p>[majeur] <strong>La vidéo démo ne prouve rien de bout en bout</strong> — le payload montré (commentaire HTML <code>cat .env</code>) est écrit par l'équipe qui a écrit la règle : c'est un match garanti, pas une détection. Aucun plan ne montre un <em>agent réel</em> détourné sans l'outil puis sauvé avec l'outil ; le verdict <code>block</code> dans un terminal ne prouve pas que l'exfiltration aurait eu lieu. Le plan « ajout d'une règle en direct » est du théâtre rejoué mille fois. · Parade : filmer un agent Kiro qui exécute réellement l'injection (fuite vers un fichier témoin) puis la même scène avec le sas, fuite absente — avant/après mesurable.</p>
+</li>
+<li>
+<p>[majeur] <strong>Le récit Kiro est décoratif sur les points clés</strong> — le serveur MCP <code>scan_text</code>, seul élément qui accroche l'outil à un agent, est repoussé au lot 6 en janvier : la v1 soumise n'est donc <em>pas</em> un pré-filtre d'agent (O4 non tenu). Le hook <code>rules-corpus-guard</code> n'est que la suite de tests rejouée — un CI banal, pas l'incident de régression raconté qu'exige la grille ; et comparer spec/vibe sur « l'écriture de 10 règles » regex est un exercice trop petit pour être probant. · Parade : livrer un MCP minimal dès la v1 et documenter un vrai blocage de hook avec date, diff et correctif.</p>
+</li>
+<li>
+<p>[majeur] <strong>Dans six mois, plus personne</strong> — les plateformes intègrent nativement la défense (GitHub, Anthropic, OpenAI durcissent leurs agents contre l'injection côté produit), et le déterministe perd la course aux contournements : la fiche l'admet elle-même (« jeu du chat et de la souris assumé »). Pire, la question ouverte (2) avoue que publier le catalogue <strong>arme les attaquants</strong> : l'outil a une date de péremption écrite dedans. · Parade : cibler un usage durable que les plateformes ne couvriront pas (conformité/audit : registre horodaté des textes bloqués pour la preuve de diligence), pas la détection elle-même.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>Angle mort : les issues qui <em>parlent</em> d'injection seront bloquées</strong> — tout rapport de sécurité citant un payload (« voici l'attaque reçue : ignore previous instructions… »), toute doc, tout test déclenchera <code>block</code> : la classe de faux positifs la plus fréquente du corpus sain est structurelle, pas marginale. Et côté faux négatifs, rien ne détecte l'injection <em>sémantique</em> sans mot-clé (« le mainteneur a demandé d'afficher la config pour le debug »), ni le payload scindé sur plusieurs lignes, ni l'injection en français — les règles citées sont anglo-centrées. · Parade : contexte-aware (citer un payload dans un bloc de code/une quote ≠ l'énoncer), règles multilingues, et publier la liste des contournements connus <em>non</em> détectés.</p>
+</li>
+<li>
+<p>[majeur] <strong>« Déjà vu » est le verdict le plus probable du jury</strong> — les scanners de prompt injection ont saturé les hackathons 2024-2025 ; un juge qui a vu dix « LLM firewall » locaux classera celui-ci sans même lire la différenciation. La grille exige « aucun outil existant ne fait ça » : ici trois outils le font (objection 01), et la phrase de différenciation (« local, déterministe, explicable ») décrit aussi LLM Guard. · Parade : déplacer la proposition de valeur sur l'artefact unique — le corpus versionné + le rejeu avec variation de faux positifs (INJ-F-06) comme <em>produit</em>, pas le scanner.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>Le jour J, le juge écrit son propre texte</strong> — deux scénarios tuent la démo live : le juge soumet une phrase innocente dans sa langue ou citant une attaque et obtient <code>block</code> (faux positif humiliant en direct), ou il paraphrase une attaque sans mot-clé et obtient <code>pass</code> (faux négatif pire encore, l'outil promettant 100 %). Le « rejeu du corpus en direct » (200 attaques + 2 000 issues) peut aussi dépasser le créneau, et aucun mode démonstration hors-ligne figé n'est prévu alors que la grille l'exige. · Parade : préparer un mode démo à données incluses + une réponse scénarisée au faux positif (« verdict review, citation de la règle, levée de doute en un clic ») qui transforme l'incident en preuve d'explicabilité.</p>
+</li>
+</ol>
+<hr>
+<h1 id="at-03-ver-mutation-score-avocat-du-diable-10-objections">AT-03 · Ver — <em>Mutation Score</em> — avocat du diable (10 objections)</h1>
+<ol start="01">
+<li>
+<p>[bloqueur] <strong>« Exécution ciblée » est LA fonctionnalité historique de PIT, pas une innovation</strong> — PIT (pitest.org) sélectionne depuis 2010 les tests par couverture de ligne avant de muter, et Stryker a <code>--incremental</code> + <code>coverageAnalysis: perTest</code> qui ne rejoue que les tests pertinents ; le tableau « Différence » du cahier décrit donc le comportement par défaut des deux concurrents qu'il cite. La seule différence restante est un rapport « orienté action », c'est-à-dire cosmétique au sens de la grille (critère 4 : structurelle, pas cosmétique). · Parade : trouver un mécanisme réellement absent de PIT/Stryker (ex. preuve formelle d'équivalence par opérateur, ou sélection par graphe de dépendance de données plutôt que par couverture de ligne) et le nommer en une ligne vérifiable.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>Le budget temps est contredit par ses propres chiffres</strong> — 4 132 mutants en &lt; 4 min sur 4 cœurs, c'est ~58 ms par mutant tout compris : transpilation TS, sandbox, lancement ciblé du runner. Un seul démarrage de worker Vitest/Jest coûte 200 ms à 1 s ; Stryker annonce des heures sur des dépôts de cette taille, et le lot 1 (carte ligne → tests) exige un run d'instrumentation par test, donc O(tests × suite) avant même de muter. · Parade : publier un benchmark réel sur la fixture avec le chrono brut (pas une cible), assumer un échantillonnage stratifié comme mode par défaut, ou réduire la v1 à 500 mutants sur un mini-dépôt en le disant.</p>
+</li>
+<li>
+<p>[majeur] <strong>La réduction méprisante tient en une phrase : « un wrapper Stryker avec un joli rapport »</strong> — Stryker publie déjà le survivant avec sa ligne, son mutant et les tests qui le couvrent (<code>stryker report</code> + dashboard), garde un seuil en CI (<code>--thresholds-break</code>) et compare les commits sur son dashboard. Il ne reste à Ver que le formatage ; un juge qui connaît Stryker coche « wrapper autour d'un outil existant », ce qui coûte explicitement des points au critère 4. · Parade : supprimer toute dépendance possible à Stryker et démontrer une garantie qu'il n'a pas (ex. reproductibilité bit-à-bit du score, preuve que la sélection ciblée ne rate aucun test tueur — avec contre-exemple à l'appui).</p>
+</li>
+<li>
+<p>[majeur] <strong>Le score publié n'est pas comparable, donc le seuil CI est un gadget</strong> — la doc Stryker elle-même avertit que le mutation score dépend du jeu d'opérateurs, du style de code et des équivalents restants : 89,3 % ici et 62 % ailleurs ne mesurent pas la même chose, et l'indicateur « score identique entre deux runs » ne prouve rien sur la signification du chiffre. Une équipe dont le dépôt est plein de code mort ou de constantes hérite d'un seuil arbitraire qu'elle passera son temps à abaisser. · Parade : ne publier en v1 que la tendance par commit et par fichier (delta de survivants sur le diff), jamais un absolu gardé par un seuil global.</p>
+</li>
+<li>
+<p>[majeur] <strong>L'exclusion manuelle des équivalents (MUT-F-07) est une faille de gaming béante</strong> — la détection d'équivalence sémantique est indécidable en général ; avec une heuristique à « &lt; 5 % de faux », la porte de sortie est évidente : marquer les survivants gênants comme <code>equivalent</code> et le score monte sans écrire un test. Le chiffre phare de l'outil est donc manipulable par son utilisateur en trois clics, ce qui ruine la promesse « mesure honnête ». · Parade : rendre toute exclusion signée, horodatée, comptée et affichée dans le score (« 89,3 % dont 4,1 % d'exclusions manuelles »), avec ratchet interdisant d'augmenter le taux d'exclusions.</p>
+</li>
+<li>
+<p>[majeur] <strong>La sélection par couverture de ligne rate les vrais tueurs</strong> — un test d'intégration ou un snapshot qui échoue à cause d'un mutant situé à trois appels de là ne « couvre » pas forcément la ligne au sens de la carte ligne → tests ; MUT-P-04 ne vérifie la complétude que contre un run complet « sur un sous-ensemble », c'est-à-dire sur les fixtures de l'auteur. Résultat : des mutants classés <code>survived</code> que la suite complète tue, et un score faussement bas — exactement l'inverse de la promesse d'honnêteté. · Parade : double mode (ciblé / complet) avec mesure publiée de l'écart sur un dépôt tiers réel, pas une fixture maison.</p>
+</li>
+<li>
+<p>[majeur] <strong>La vidéo repose sur une exécution qu'elle ne peut pas montrer</strong> — le plan 0:20–1:00 affiche un run de 4 132 mutants censé tenir en 40 secondes à l'écran alors que la cible interne est 4 minutes : tout le monde verra l'accéléré ou le cache, et la grille punit la démo qui ne tient pas ses promesses. Pire payoff dramatique : ajouter un test fait passer le score de 89,3 à 89,4 — un dixième de point, invisible, anticlimatique. · Parade : démo sur un mini-dépôt où le run réel tient en &lt; 60 s chrono affiché à l'écran, et un survivant qui fait chuter un fichier entier de 95 % à 40 % pour que le chiffre saute aux yeux.</p>
+</li>
+<li>
+<p>[mineur] <strong>Le récit Kiro est circulaire et interchangeable</strong> — tester un générateur de mutants avec des mutants générés aléatoirement (MUT-P-01 à 05) n'a de valeur que si l'oracle est indépendant, or l'oracle est… l'outil lui-même ; et le hook <code>mutation-budget</code> est une commande CI banale que GitHub Actions exécute sans Kiro. La comparaison spec/vibe coding sur l'opérateur <code>boundary</code> est le seul point réellement probant, et il porte sur le composant le plus simple. · Parade : propriétés avec oracle externe (ex. mutants semés à la main avec verdict connu, ou comparaison contre PIT sur du code JVM équivalent) et un hook Kiro qui bloque une vraie régression du moteur, racontée avec date et diff.</p>
+</li>
+<li>
+<p>[majeur] <strong>Dans six mois, plus personne</strong> — les équipes qui adoptent le mutation testing l'abandonnent massivement à cause du coût (c'est le reproche n°1 dans les issues Stryker), et Stryker/PIT sont gratuits, maintenus, intégrés aux dashboards existants ; un mutateur TS solo de hackathon n'a aucune raison de survivre face à eux, surtout si sa seule avance (ciblage) est déjà dans leurs releases. Le public « toute équipe qui affiche une couverture » est précisément le public théorique que la grille pénalise. · Parade : nommer un utilisateur type précis avec sa perte chiffrée ce mois-ci (ex. équipe CI-contrainte à un seuil de couverture réglementaire) et un canal d'adoption en &lt; 60 s (<code>npx</code> sur le dépôt courant, sans config).</p>
+</li>
+<li>
+<p>[bloqueur] <strong>Le jour J, c'est le chronomètre et le sandbox qui cassent</strong> — en live : machine du jury ≠ 4 cœurs garantis, parallélisation qui rend l'ordre des timeouts non déterministe (un mutant <code>timeout</code> compte-t-il <code>killed</code> ? le cahier ne tranche pas), tests utilisant <code>Date.now()</code> ou le réseau qui rendent le score non reproductible, et MUT-F-01 « jamais modifier le disque » : le moindre bug d'écriture dans le bac à sable corrompt l'arbre de travail devant le jury. « Mutation testing » est en outre un sujet classique de hackathon (technique de 1978, DeMillo/Lipton/Sayward) : le « déjà vu » est garanti sans preuve d'un mécanisme neuf. · Parade : mode démo 100 % pré-enregistré en cache avec données embarquées (exigence grille §3), politique <code>timeout</code> écrite noir sur blanc, empreinte d'arbre vérifiée avant/après chaque run de démo, et une slide assumant l'antériorité avec la différence structurelle en une ligne.</p>
+</li>
+</ol>
+<hr>
+<h1 id="at-04-attaque-de-cc-04-fuite-redact-10-objections-avocat-du-diable">AT-04 · Attaque de CC-04 « Fuite / Redact » — 10 objections (avocat du diable)</h1>
+<ol start="01">
+<li>
+<p>[bloqueur] <strong>Antériorité écrasante : le canal sortant est déjà occupé</strong> — gitleaks et trufflehog lisent <code>stdin</code>/flux depuis des années, GitGuardian et GitHub secret scanning interceptent au push, et Nightfall AI fait exactement la rédaction en ligne d'un flux sortant avec journal d'audit. Le DLP d'entreprise (Zscaler, Forcepoint) est le « point de passage unique » que la fiche revendique comme sien. · Parade : nommer Nightfall comme concurrent direct et déplacer la garantie sur le registre chaîné vérifiable <strong>hors ligne, sans cloud, sans compte</strong> — seule chose qu'aucun des quatre n'offre.</p>
+</li>
+<li>
+<p>[majeur] <strong>La réduction méprisante tient en une ligne : « c'est gitleaks sur un pipe »</strong> — motifs par type, entropie sur jetons longs, validation Luhn : c'est littéralement le jeu de règles public de gitleaks (MIT) plus une substitution de sous-chaîne et un fichier append-only. Un juge technique compte ~200 lignes réelles de logique neuve pour 3 500 annoncées. · Parade : assumer « moteur emprunté, garantie nouvelle » et prouver la garantie par PBT (P-02) et par une vérification tierce du journal — ce que gitleaks ne fait pas.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>La v1 de 8 jours n'intercepte pas la sortie du scénario d'accroche</strong> — le plan met le proxy HTTP/prompt au lot 5, en décembre : au gel du 28 novembre, <code>gate</code> ne couvre que logs et exports fichiers. La fuite racontée en §2 (le prompt de l'agent qui part avec <code>DATABASE_URL</code>) est donc impossible à montrer dans la vidéo de la v1. · Parade : remplacer le proxy TLS par un wrapper/hook MCP <code>check_outbound</code> sur un seul agent (Kiro ou Claude Code), livrable au lot 3, et rayer le HTTPS de la v1.</p>
+</li>
+<li>
+<p>[majeur] <strong>Le chiffre publié est une tautologie</strong> — « 100 % des secrets du corpus interceptés » ne mesure rien : le corpus est écrit par l'auteur, qui connaît chaque secret et chaque motif. « 37 secrets interceptés sur la journée » et « 41 alertes / 12 confirmées » sont des nombres de démonstration, pas une perte vécue ce mois-ci comme l'exige la grille §1. · Parade : mesurer sur un corpus réel non contrôlé (historique git public, <code>git-secrets-tests</code>, logs réels du poste) et publier un taux avec intervalle et faux négatifs assumés.</p>
+</li>
+<li>
+<p>[majeur] <strong>La vidéo est illisible : trois minutes de terminal et de voix off</strong> — les 15 premières secondes (fichier <code>.env</code> + agent qui prépare une requête + « Regardez ce qui part vraiment ») dépendent entièrement de la narration, ce que la grille §5 interdit explicitement. Le moment fort (<code>redact verify</code> échoue après altération) est du texte gris sur fond noir, invisible en 720p. · Parade : une page locale à deux volets (flux brut / flux rédigé) avec compteur qui s'incrémente en direct, et un plan d'ouverture où <code>[REDACTED:github_token]</code> apparaît en rouge sans un mot.</p>
+</li>
+<li>
+<p>[majeur] <strong>Le récit Kiro est décoratif</strong> — le hook <code>no-secret-in-fixtures</code> ne bloque aucune régression puisqu'il vérifie des fixtures écrites par l'auteur ; P-02 est un test de non-occurrence sur des corpus connus ; et aucune comparaison chiffrée spec/vibe coding n'apparaît dans le cahier. La grille §2 exige un incident réel raconté et une mesure, pas un tableau d'intentions. · Parade : fabriquer dès maintenant un incident vérifiable (secret injecté en CI, hook qui refuse le commit, graine et correctif dans <code>KIRO_JOURNAL.md</code>) et chiffrer une fonction réalisée spec contre vibe.</p>
+</li>
+<li>
+<p>[mineur] <strong>À six mois : aucun chemin d'adoption</strong> — un certificat racine local à installer, une politique par canal à écrire, des listes blanches à entretenir : c'est un outillage DLP déguisé en outil dev, et le dev visé a déjà le secret scanning gratuit de son forge. Le non-objectif « pas de DLP d'entreprise » contredit la mécanique, qui en demande l'effort d'installation. · Parade : une seule commande d'installation, zéro certificat, zéro compte, première valeur en moins de 60 secondes, et le catalogue de motifs publié comme bien commun.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>Angle mort assumé mais noyé : faux sentiment de sécurité</strong> — un mot de passe interne, un jeton maison, un nom de client sous NDA, une URL de staging : rien n'est intercepté, et la fiche le range en ligne 4 d'un tableau de risques. Pire, le journal chaîné devient une « preuve » que rien n'a fuité alors qu'il ne prouve que l'absence des familles connues. · Parade : afficher à chaque <code>guard</code> la couverture mesurée (« 8 familles, X % du corpus réel ») et bannir tout vocabulaire de garantie au profit de « filet détectable ».</p>
+</li>
+<li>
+<p>[majeur] <strong>Risque « déjà vu » maximal dans la catégorie</strong> — la sécurité des sorties d'agents est le thème le plus saturé de 2026 : prompt-injection shields, MCP gateways, sandboxes, et chaque saison Devpost amène son lot de « ne laissez pas l'agent fuiter vos clés ». Un juge qui en a vu cinq ne lira pas la ligne de différenciation, il cochera « wrapper de scanner ». · Parade : ne plus se vendre comme protection mais comme <strong>preuve</strong> — registre chaîné auditable par un tiers, angle que les shields ne traitent pas.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>En démo directe, ça casse devant le juge</strong> — le juge colle un vrai jeton <code>ghp_</code> expiré (faux négatif immédiat), ou une ligne de log contenant un UUID/un hash de commit déclenche l'entropie et la rédaction corrompt une sortie légitime (faux positif visible). L'altération du journal, seul moment spectaculaire, dépend de l'état d'un fichier et d'un terminal non rejouable. · Parade : un mode <code>redact demo</code> 100 % fixtures sans réseau, et montrer volontairement un faux négatif et un faux positif avant le succès — l'honnêteté devient jouable en direct.</p>
+</li>
+</ol>
+<hr>
+<h1 id="at-05-attaque-de-cc-05-rejeu-avocat-du-diable">AT-05 — Attaque de CC-05 <em>Rejeu</em> (avocat du diable)</h1>
+<p>Lecture : GRILLE-100.md + cahiers/CC-05-rejeu.md. Dix objections, une par champ imposé.</p>
+<ol start="01">
+<li>
+<p>[majeur] <strong>rr et replay.io font déjà le rejeu déterministe, en plus fort</strong> — Mozilla <strong>rr</strong> rejoue un processus réel au niveau des appels système avec FS virtuel et horloge contrôlée ; <strong>replay.io</strong> vend le time-travel debugging ; <strong>VCR/cassettes</strong> rejouent le réseau ; LangSmith/Langfuse rejouent des traces d'agents. La grille exige « aucun outil existant ne fait ça » : ici quatre le font, et le cahier ne nomme aucun concurrent précis — il cite des catégories floues (« journaux d'agent », « snapshots »), ce qui coûte directement les 20 points d'innovation. · Parade : nommer rr et replay.io et prouver une différence structurelle (rejeu hors processus, au format ouvert, sans runtime instrumenté) — sinon abandonner la claim d'innovation.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>« C'est juste un enregistreur de log avec un diff »</strong> — la capture produit un JSONL (ce que Claude Code, Kiro et OpenAI Agents SDK écrivent déjà), le rejeu relit ce JSONL en réinjectant les sorties, et le « diff étape par étape » est un <code>jq</code> + <code>diff</code>. Toute la mécanique tient en une phrase de mépris, et la grille punit explicitement « un wrapper autour d'un outil existant ». · Parade : ajouter une garantie que le log seul n'offre pas (signature cryptographique de la chaîne d'étapes, empreinte de dépôt vérifiée à chaque étape, détection de triche) et la montrer comme impossible avec un log brut.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>O3 (capture sans instrumenter l'agent) est incompatible avec la capture promise</strong> — le cahier promet graine, horloge injectée et config capturées, mais un adaptateur JSONL passif ne voit que ce que l'agent veut bien logger : ni graine, ni horloge, ni empreinte par étape. Injecter une horloge logique dans un agent tiers exige de le modifier — exactement ce que REJ-N-01 interdit. En 9 jours, il faut choisir : capturer pauvrement (et le rejeu n'est plus « déterministe ») ou forker l'agent (et O3 tombe). · Parade : restreindre la v1 à un agent dont on contrôle le runtime (le CLI headless de Kiro) et l'écrire noir sur blanc dans la fiche V2, en sacrifiant O3.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>Le chiffre phare « 214/214 identiques » est une tautologie</strong> — le rejeu réinjecte les sorties capturées des étapes non déterministes (REJ-F-02), donc l'identité est vraie <strong>par construction</strong> : l'indicateur « 100 % des sessions rejouées à l'identique » ne peut mathématiquement pas échouer. La seule mesure honnête — relancer l'agent avec la même graine et comparer — est listée en non-objectif (« pas de régénération des réponses du modèle »). La grille exige une perte chiffrée mesurée par l'outil : ici l'outil mesure sa propre tautologie. · Parade : publier un deuxième chiffre non tautologique (ex. taux de rejeu identique après régénération réelle du modèle avec graine fixée, même à 60 %) ou retirer la prétention de mesure.</p>
+</li>
+<li>
+<p>[majeur] <strong>La démo vidéo montre un lecteur de vidéo</strong> — 0:20–1:00 : on regarde défiler deux fois la même sortie, « 214 identiques » ; 1:00–1:50 : on édite un champ JSON à la main et une ligne rouge apparaît — c'est un diff, pas un produit. Aucun des quatre états d'interface n'existe visuellement, rien n'est spectaculaire en 15 secondes, et la grille exige que le juge comprenne le problème <strong>et</strong> le chiffre sans narration : ici la voix off fait tout le travail. · Parade : ouvrir sur une régression réelle incompréhensible, puis montrer le rejeu qui la rejoue et localise l'étape fautive en direct, avec une vraie interface (timeline, états vide/erreur/chargement).</p>
+</li>
+<li>
+<p>[majeur] <strong>Kiro est décoratif dans le récit d'usage</strong> — le hook <code>logical-clock-guard</code> est une règle de lint (interdire <code>Date.now</code>), le serveur MCP est un wrapper du CLI, et le « rejeu nocturne Crew » rejoue des fixtures, pas du travail réel. Rien n'utilise specs/steering comme mécanisme central ; l'outil est agent-agnostique et tournerait aussi bien sans Kiro, ce qui affaiblit « Best Kiro Crew App » visé en prix. · Parade : faire de Kiro le sujet — capturer les sessions des agents Crew de Kiro elles-mêmes, et montrer qu'une spec EARS du dépôt génère le contrat que le rejeu vérifie.</p>
+</li>
+<li>
+<p>[majeur] <strong>Personne ne rejoue une session d'agent</strong> — le scénario du cahier (régression trois semaines après un correctif accepté) se résout aujourd'hui par <code>git blame</code>, le diff de la PR et les tests CI, pas par le rejeu d'une session ; le public « équipes qui audittent » existe surtout dans la compliance, qui a déjà LangSmith/Langfuse avec rétention et export. La grille exige un problème vécu <strong>ce mois-ci</strong> par la quasi-totalité des développeurs visés : « je voudrais rejouer ma session d'agent » n'est le besoin de personne, c'est une solution en quête de problème. · Parade : trouver un cas où le rejeu est la seule issue (bug Heisenberg non reproductible même avec les logs, incident où le journal est incomplet) et le chiffrer sur une session réelle.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>Le rejeu « exécute réellement » les effets de bord</strong> — l'étape 3 de la mécanique rejoue les sorties capturées du modèle mais <strong>exécute</strong> le reste : écritures de fichiers, commandes shell, git push de la session d'origine, le tout sur une machine dont le dépôt a dérivé depuis la capture. Rejouer une session qui contenait <code>rm -rf</code> ou un push est soit destructeur, soit diverge dès l'étape 1 (empreinte de dépôt fausse) ; le cahier classe le bac à sable FS en <strong>question ouverte</strong> (question 2) alors que c'est le cœur du moteur. · Parade : décider maintenant — soit sandbox complet (overlay FS + réseau coupé, ce qui mange le lot 3 entier), soit rejeu 100 % simulé, et assumer que dans ce cas on retombe sur l'objection 02.</p>
+</li>
+<li>
+<p>[mineur] <strong>Le jury dira « déjà vu » dans la catégorie Frankenstein</strong> — « ressusciter le magnétoscope » est la métaphore la plus évidente du lot, et record/replay est un thème rabâché de hackathon (rr date de 2013, replay.io a levé 25 M$ dessus) ; sans preuve d'un mécanisme nouveau, le juge classe l'idée en « VCR pour agents, sympathique ». · Parade : une ligne de différenciation qui résiste à la contradiction — par exemple « le seul rejeu qui fonctionne sur un journal déjà écrit, sans avoir instrumenté l'exécution d'origine » — et la défendre avec l'objection 03 résolue.</p>
+</li>
+<li>
+<p>[majeur] <strong>Le jour de la démo en direct, l'empreinte du dépôt ne matchera pas</strong> — le rejeu vérifie <code>repoDigest</code> et exécute de vraies étapes : sur la machine de démo (autre chemin absolu, autre version de Node, autre locale), les étapes déterministes divergent pour de fausses raisons et le rapport affiche des divergences parasites devant le jury — le contraire exact du « mode démonstration qui ne peut pas échouer » exigé par la grille. Pire : si la démo tombe sur l'étape qui exécute un shell, elle peut échouer en direct. · Parade : un mode démo embarqué (fixtures + dépôt miniature inclus, zéro réseau, zéro exécution réelle) construit dès le lot 1, pas à la veille du gel.</p>
+</li>
+</ol>
+<hr>
+<p>Bilan : 4 bloqueurs (02, 03, 04, 08) — la tautologie du chiffre (04) et l'angle mort des effets de bord (08) sont les deux plus mortelles pour la grille.</p>
+<hr>
+<h1 id="at-06-agent-review-10-objections-avocat-du-diable">AT-06 · Agent Review — 10 objections (avocat du diable)</h1>
+<p>Cible : <code>cahiers/CC-06-diff-agent.md</code>, jugée contre <code>GRILLE-100.md</code>. Objectif : faire perdre cette idée.</p>
+<ol start="01">
+<li>
+<p>[bloqueur] <strong>Tout l'outillage existe déjà, pièce par pièce</strong> — <code>danger.js</code> fait depuis 2017 exactement les règles du lot 4 (<code>fail</code> si lockfile modifié, si un fichier hors liste déclarée est touché, si des tests sont supprimés), le <code>dependency-review-action</code> officiel de GitHub publie déjà dépendances ajoutées, licences et taille (DAG-F-06 recopié), et Microsoft <code>api-extractor</code> établit la surface publique d'un paquet TS avec ses ruptures. Il ne reste qu'un <code>git diff --stat</code> collé à trois actions existantes. · Parade : prouver qu'aucune composition d'outils existants ne produit le même rapport, en exécutant danger.js + dependency-review + api-extractor sur la même diff et en montrant ce qu'ils ratent, chiffre à l'appui.</p>
+</li>
+<li>
+<p>[majeur] <strong>La réduction qui tue : « un diff --stat avec un champ declaredFiles »</strong> — un juge pressé résume l'idée en une phrase : tu fais saisir à l'humain le périmètre que tu prétends deviner, puis tu soustrais deux listes de chemins et tu appelles ça une mesure. Le cahier lui-même avoue la béquille (risque 1 : « exiger une liste de fichiers déclarés en mode strict »), donc le mode fiable est celui où l'outil ne devine rien. · Parade : supprimer le mode « périmètre déclaré obligatoire » du récit et démontrer l'extraction automatique sur une demande jamais vue, ou assumer et vendre autre chose que la reconstitution du périmètre.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>8 jours pour quatre paquets, dont le seul qui compte est impossible</strong> — le lot 2 (1,5 jour) doit transformer « ajoute une validation d'email sur le formulaire d'inscription » en ensemble de fichiers et symboles autorisés ; c'est un problème de compréhension de code ouvert, pas une tâche d'après-midi. Pire, DAG-N-01 exige un verdict de base sans modèle : sans LLM l'extraction se réduit à des mots-clés, et « formulaire » ne mène pas à <code>apps/signup/Form.tsx</code> + <code>packages/validation/*</code>. Les 2 jours du lot 4 (rapport Markdown, HTML AA, commentaire de PR, check GitHub) sont eux-mêmes sous-estimés d'un facteur deux. · Parade : couper le périmètre v1 à ce qui est décidable sans LLM (fichiers déclarés + graphe d'imports) et le dire dès la phrase de différenciation, en déplaçant l'extraction en langage naturel au jalon de janvier.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>Le chiffre publié n'est pas une mesure, c'est un avis déguisé</strong> — « 6 out-of-scope » dépend entièrement d'un seuil que le cahier admet ne pas savoir placer (question ouverte 2), et la cible « ≥ 95 % sur corpus étiqueté » s'appuie sur un corpus qui n'existe pas (question ouverte 3 : « publier le corpus »). Un contre-exemple suffit à ruiner l'objectivité : la demande « ajoute une validation d'email » implique légitimement de renommer <code>checkInput</code> en <code>validateEmail</code>, donc 12 sites d'import deviennent « hors périmètre » alors qu'ils sont la conséquence directe de la demande. Quant au « temps de revue économisé estimé », c'est une estimation inventée, or la grille (critère 1) exige une suppression de perte <strong>mesurée par l'outil à chaque exécution</strong>. · Parade : publier l'intervalle et la règle de décision avec le chiffre, remplacer le temps économisé par une grandeur réellement observée (symboles publics cassés sans test, tests supprimés), et livrer le corpus étiqueté à deux annotateurs avec kappa de Cohen.</p>
+</li>
+<li>
+<p>[majeur] <strong>La vidéo contredit la grille et montre du code qui n'existera pas</strong> — les 20 premières secondes sont portées par une voix off (« Deux minutes de revue humaine. Voici ce qui passe. ») alors que la grille impose le problème <strong>et</strong> le chiffre sans narration préalable ; et le plan 2:20–3:00 (comparaison de deux agents, 4 % contre 31 %) met en scène le lot 6, prévu en janvier, dans une vidéo tournée pour un gel v1 au 28 novembre. Ajoutons que 3:00 pile dépasse « moins de 3 minutes ». · Parade : ouvrir sur un plan muet du rapport chiffré plein écran, supprimer le plan comparaison ou le filmer réellement, viser 2:30.</p>
+</li>
+<li>
+<p>[majeur] <strong>La preuve Kiro est décorative : aucune propriété ne peut échouer</strong> — DAG-P-01 (chaque changement reçoit une classification) et DAG-P-02 (la somme des lignes égale le total) sont des identités comptables vraies par construction ; DAG-P-05 (une diff contenue dans les fichiers déclarés ne produit aucun hors-périmètre) teste un filtre de chemins, pas la classification. Aucune ne peut trouver le moindre défaut, donc aucune ne produira le contre-exemple réel avec graine et correctif que la grille exige. Le hook <code>scope-guard</code> refuse une PR sans périmètre déclaré : c'est une politique, pas une régression bloquée, et l'agent « relecteur » qui relit le rapport n'apporte aucune mesure. · Parade : écrire une propriété sémantique falsifiable (ex. « tout symbole exporté modifié a au moins un test qui l'exerce ou un drapeau <code>manque</code> »), la faire échouer sur une vraie diff d'agent, documenter graine et correctif, et remplacer le hook par un garde qui a réellement arrêté une régression pendant la construction.</p>
+</li>
+<li>
+<p>[majeur] <strong>Deux semaines d'usage et tout le monde le contourne</strong> — le destin des indicateurs de PR est connu : les équipes élargissent le périmètre déclaré jusqu'à l'absurdité (« scope: tout le dépôt ») pour obtenir le check vert, exactement comme les quality gates SonarQube et les seuils CodeClimate finissent muets ou relevés. Et la valeur s'effondre dès que l'agent devient discipliné : Claude Code avec un plan validé, Cursor avec <code>.cursor/rules</code> ou Copilot coding agent produisent déjà des diffs bornées, donc l'outil mesure un défaut en voie de disparition. · Parade : chiffrer la dérive sur un vrai historique de PR (taux de périmètres déclarés dégénérés) et montrer une valeur qui subsiste quand l'agent est sage — la preuve de non-régression (API publique cassée sans test) plutôt que le taux de hors-périmètre.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>Angle mort : le refactoring légitime est la norme, pas l'exception</strong> — un agent qui extrait un helper, renomme pour cohérence, met à jour 12 imports, régénère un lockfile ou déplace un fichier produit mécaniquement du « hors périmètre » ; <code>git diff</code> sans détection de renommage solide (<code>-M</code> à seuil élevé) lit un déplacement comme suppression + ajout, et la propriété DAG-P-02 devient fausse dès qu'un fichier est copié. Contre-exemple concret : <code>package-lock.json</code> ajoute 8 000 lignes pour une dépendance demandée, ce qui écrase <code>outOfScopeLines</code> et <code>testToCodeRatio</code> et rend le rapport illisible. · Parade : traiter explicitement renommages, déplacements, fichiers générés et lockfiles (règles dédiées, exclusion du comptage de lignes, détection par graphe de similarité), et publier la liste des faux positifs connus comme limite honnête.</p>
+</li>
+<li>
+<p>[majeur] <strong>Le jury dira « déjà vu » en trois secondes</strong> — CodeRabbit, Greptile, Qodo <code>PR-Agent</code> et Ellipsis publient déjà des revues de PR structurées avec détection de changements non liés, GitHub Copilot code review poste des commentaires de revue automatiques, et le slogan du cahier (« read the patch before the human does ») est mot pour mot la promesse de CodeRabbit. La seule différence annoncée (« mesure, pas opinion ») repose sur le seuil arbitraire de l'objection 04, donc la phrase de différenciation d'une ligne ne résiste pas à la contradiction comme l'exige le critère 4. · Parade : nommer CodeRabbit et Qodo PR-Agent dans la fiche, exécuter l'un d'eux sur la même diff dans la vidéo, et montrer côte à côte la ligne qu'ils ne publient pas (symbole public cassé + consommateurs listés) plutôt que de revendiquer une catégorie entière.</p>
+</li>
+<li>
+<p>[majeur] <strong>Le jour J, la démo en direct casse par les deux bouts</strong> — en mode « données incluses, aucun réseau » imposé par la grille, <code>agent-review pr</code> (commentaire + check rouge GitHub) ne peut pas tourner : le plan 1:40–2:20 sera un enregistrement, et un juge qui le remarque perd confiance dans le reste. En mode réel sur une diff que le jury propose, l'extraction du périmètre en langage naturel échoue publiquement (objection 03) et le verdict « sans modèle » s'effondre ; sans oublier le budget &lt; 3 s sur 500 lignes qui saute dès qu'un lockfile ou un fichier généré entre dans la diff, ni les quatre états d'interface (vide, chargement, erreur, succès) et l'accessibilité AA qui sont difficiles à montrer dans un terminal. · Parade : construire une démo hors réseau avec un dépôt embarqué et trois scénarios fixes (diff propre, diff d'agent, diff ambiguë), afficher le rapport en HTML accessible plutôt qu'en terminal, et répéter le cas « diff inconnue » avec un repli assumé sur le périmètre déclaré.</p>
+</li>
+</ol>
+<hr>
+<h1 id="at-07-attaques-contre-cc-07-bombe-a-cardinalite-avocat-du-diable">AT-07 — Attaques contre CC-07 · Bombe à cardinalité (avocat du diable)</h1>
+<p>Grille de référence : GRILLE-100.md. Dix objections, une par champ imposé (a)→(j).</p>
+<ol start="01">
+<li>
+<p>[bloqueur] <strong>L'antériorité est écrasante et déjà nommée à moitié</strong> — Chronosphere Control Plane, Grafana Cloud « Cardinality Explorer » (usage insights), Datadog « tag cardinality » et <code>megaease/cardinal</code> font déjà l'analyse de cardinalité par label avec coût et ordre de suppression ; le cahier ne cite que <code>promtool</code> et la doc, ce qui est un aveu d'angle mort. Pire : tous ces outils partent de séries <strong>réelles</strong> dans le TSDB, là où CC-07 promet une estimation statique strictement moins fiable. · Parade : citer les quatre concurrents nommément et repositionner la différence structurelle sur « avant déploiement, sans TSDB ni compte fournisseur » — la seule case qu'ils n'occupent pas.</p>
+</li>
+<li>
+<p>[majeur] <strong>La réduction méprisante tient en une ligne</strong> — « c'est un grep qui multiplie des nombres de labels et invente une facture » : le cœur (produit des cardinalités par classe heuristique) est arithmétiquement trivial, et toute la valeur perçue repose sur des heuristiques de classification qu'un juge peut qualifier de devinettes habillées en champ de mines. Le costume « démineur » renforce la suspicion de métaphore décorative, explicitement pénalisée par la grille (critère 4). · Parade : démontrer une classification non triviale (preuve par occurrence, borne inférieure/ supérieure encadrant une mesure réelle) et assumer « linter de cardinalité » comme catégorie plutôt que de la maquiller.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>La v1 en 8 jours est un plan de 30 jours compressé</strong> — les lots 1–4 (8 jours) doivent livrer : scan AST TypeScript, heuristiques de classification avec preuves, estimation bornée, plan de déminage, rapport HTML accessible AA vérifié par axe, mode CI bloquant, serveur MCP <code>estimate_metric</code>, hook Kiro, steering, PBT fast-check avec au moins un contre-exemple documenté, journal, comparaison chiffrée spec/vibe coding — c'est la totalité du critère 2 de la grille en plus du produit. Et le cahier promet un public « Prometheus, OTel, CloudWatch » alors que Python/Go n'arrivent qu'au lot 5 (décembre) : la v1 du concours ne couvre qu'un seul langage, donc une fraction du public annoncé. · Parade : réduire la v1 assumée à TypeScript + sortie markdown/CI, déplacer MCP et rapport HTML en stretch, et écrire la limite « un seul langage en v1 » noir sur blanc dans la fiche.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>Le chiffre publié est un produit supérieur sans signification économique</strong> — estimer 480 000 séries en multipliant les cardinalités par label suppose que toutes les combinaisons existent, ce qui est faux en pratique (la plupart des couples <code>user_id × path</code> ne se produisent jamais) ; le chiffre réel peut être 10 à 100 fois inférieur, donc le « coût mensuel estimé » et le « −99,7 % » du plan de déminage sont gonflés d'autant. La grille (critère 1) exige une perte chiffrée <strong>avec source ou méthode de mesure</strong> : « cette ligne coûte 400 € par mois » n'a ici ni mesure ni tarif réel, seulement un tarif « fourni par l'utilisateur » multiplié par une borne supérieure. · Parade : publier systématiquement l'intervalle [borne inf., borne sup.] avec le ratio réel mesuré sur au moins trois dépôts open source instrumentés, et retirer tout chiffre en euros non adossé à un tarif public daté.</p>
+</li>
+<li>
+<p>[majeur] <strong>La vidéo prouve uniquement ce que l'auteur a planté</strong> — le scénario 0:00–3:00 tourne sur un dépôt de fixtures dont les trois bombes ont été écrites par l'équipe : « 100 % de bombes détectées sur le corpus » est une tautologie, et un juge le sentira dès que la voix off annonce un coût jamais facturé. Les 15 premières secondes montrent <code>counter.inc({ user_id })</code> puis une affirmation chiffrée non prouvée, exactement le « décrit au lieu de prouver » pénalisé par le critère 5. · Parade : inclure dans la vidéo un scan <strong>non monté</strong> d'un dépôt réel connu (ex. un service OTel open source) avec l'écart estimation/mesure affiché à l'écran.</p>
+</li>
+<li>
+<p>[mineur] <strong>Le récit Kiro est auto-référentiel</strong> — le hook <code>cardinality-guard</code> surveille les fichiers d'instrumentation… du projet qui détecte l'instrumentation, et le contre-exemple PBT annoncé (« retirer un label augmentait les séries ») ressemble à un cas synthétique fabriqué pour cocher la case « au moins un défaut trouvé ». La comparaison spec/vibe coding sur des heuristiques de classification sera difficile à rendre honnête, car il n'existe pas de référence objective pour trancher laquelle des deux approches classe mieux. · Parade : faire tourner le hook et le scan sur un vrai dépôt tiers instrumenté intégré comme fixture, et choisir pour la comparaison spec/vibe une fonction à contrat vérifiable (ex. le calcul de bornes) plutôt que les heuristiques.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>Le public est une niche, pas « la quasi-totalité des développeurs »</strong> — la majorité des développeurs n'expose aucune métrique Prometheus/OTel ; ceux qui le font sont des équipes platform/SRE déjà équipées de Grafana Cloud, Datadog ou Chronosphere, c'est-à-dire des outils qui mesurent la cardinalité réelle en continu. Le critère 1 de la grille exige un problème « vécu ce mois-ci » par la quasi-totalité du public visé : ici le problème est vécu par les opérateurs, pas par le développeur qui écrit la ligne, et il est déjà couvert côté opérateur. · Parade : cibler explicitement les développeurs <strong>avant</strong> qu'ils aient un backend de métriques (CI comme premier filet) et chiffrer l'audience réelle (nombre de dépôts GitHub avec instrumentation Prometheus/OTel) plutôt que « les développeurs ».</p>
+</li>
+<li>
+<p>[bloqueur] <strong>L'angle mort technique invalide la promesse « depuis le code »</strong> — la cardinalité finale d'une série se décide largement hors du code applicatif : <code>relabel_configs</code> et <code>metric_relabel_configs</code> du scrape, labels injectés par le service discovery Kubernetes (<code>pod</code>, <code>namespace</code>, <code>container</code>, <code>instance</code>), attributs de ressource OTel et surtout labels ajoutés par les bibliothèques d'auto-instrumentation (<code>http.route</code>, <code>http.response.status_code</code>, <code>net.peer.ip</code>) qui n'apparaissent jamais dans le dépôt scanné. Contre-exemple concret : l'incident Roblox d'octobre 2021 (73 h d'indisponibilité) venait de métriques Consul émises par l'infrastructure, pas par une ligne de code métier — un scan statique du code ne l'aurait pas vu. · Parade : analyser aussi la configuration Prometheus/OTel Collector (fichiers de scrape et pipelines) en v1, et écrire dans la limite honnête que les labels d'auto-instrumentation ne sont couverts que via une base de connaissances des bibliothèques.</p>
+</li>
+<li>
+<p>[majeur] <strong>Le jury dira « déjà vu » dès l'accroche</strong> — la bombe à cardinalité est le marronnier documenté du secteur depuis Roblox : blogs Grafana et Datadog, talk « cardinality is the root of all evil », et chaque hackathon observabilité produit son linter de labels ; la phrase « reads your code and tells you which ones are lit » ne résiste pas à la contradiction puisque Chronosphere le fait en temps réel sur données réelles. Le critère 4 exige qu'aucun outil existant ne fasse ça : or « estimer la cardinalité depuis le code » se rapproche de ce que font déjà les règles de linting OTel et les validateurs de <code>relabel_config</code>. · Parade : déplacer la différenciation sur l'artefact que personne n'a — l'<strong>ordre de déminage chiffré avec bornes et preuves par occurrence</strong>, testable par propriétés — et non sur la détection.</p>
+</li>
+<li>
+<p>[majeur] <strong>Le jour de la démo en direct, trois choses cassent</strong> — (1) un juge lance le scan sur son propre dépôt : s'il est en Go/Python (majoritaire chez les exposants de métriques), la v1 ne trouve rien et affiche l'état vide ; (2) sur un dépôt réel non instrumenté ou instrumenté via un framework, le rapport sort « 0 bombe » et la démo devient muette ; (3) le mode démo hors réseau exige des données incluses, mais le coût mensuel dépend d'un tarif « fourni par l'utilisateur », donc absent ou inventé en direct. Sans compter le seuil des &lt; 20 s sur 50 000 lignes à tenir sur la machine du stand. · Parade : embarquer trois dépôts réels pré-analysés (TS, Go, Python via résultats figés clairement étiquetés) et un mode démo avec tarif public daté inclus, vérifié sur la machine de secours avant le gel.</p>
+</li>
+</ol>
+<hr>
+<h1 id="at-08-attaque-de-cc-08-plongee-tail-avocat-du-diable">AT-08 — Attaque de CC-08 « Plongée / Tail » (avocat du diable)</h1>
+<p>Objectif : faire perdre cette idée au concours. Dix objections, une par champ imposé.
+Verdict d'ensemble : un outil juste, mais un pitch de talk de 2013 habillé en produit — le jury le sentira.</p>
+<ol start="01">
+<li>
+<p>[bloqueur] <strong>L'antériorité est écrasante et déjà open source</strong> — <code>goaccess</code> lit un access.log brut, sans agent, et publie p50/p90/p99 par URL dans un rapport HTML statique depuis des années ; Loki + <code>quantile_over_time</code> et Datadog Watchdog font la « décomposition des lents » en production, et le talk de Gil Tene « How NOT to Measure Latency » (2013) + HDRHistogram ont déjà installé le récit « la moyenne ment ». Ce que Tail ajoute — deux modes détectés, un test de fenêtre — est une couche statistique fine sur un produit existant. · Parade : assumer goaccess comme concurrent nommé et déplacer la promesse sur la comparaison de distributions avant/après avec effet mesuré, seule chose qu'aucun des trois ne fait.</p>
+</li>
+<li>
+<p>[majeur] <strong>La réduction « script awk avec des percentiles » tient debout</strong> — <code>awk '{print $NF}' access.log | sort -n | sed -n "$((99*$(wc -l &lt; access.log)/100))p"</code> donne le p99 exact en une ligne ; le group-by dimensionnel, c'est <code>sort | uniq -c</code>. Tout le lot 2 (2,5 jours pour « histogramme exact + percentiles ») est trivial en mémoire : 1 M de flottants = 8 Mo, on trie et on indexe. Il faut que le cœur de valeur soit ailleurs que le percentile. · Parade : faire de la détection de bimodalité et du test de fenêtre le produit, et montrer en démo l'échec explicite de la ligne awk (logs désordonnés, champs manquants, durées hétérogènes).</p>
+</li>
+<li>
+<p>[bloqueur] <strong>La v1 en 8 jours-agent est une fiction</strong> — le plan promet 4 paquets (~3 700 lignes), 3 parseurs + schéma déclaré, détection de modes (un problème de KDE/dip-test, pas un tri), test de différence de distribution avec effect size, rapport HTML accessible AA avec équivalent textuel de chaque figure, un serveur MCP, le CLI, 5 propriétés PBT avec graines, les fixtures étiquetées à 95 % de rappel, le journal Kiro, la comparaison spec/vibe chiffrée ET la vidéo. Le lot 4 seul (comparaison + rapport, 1,5 jour) en mange 3 dès qu'on touche l'accessibilité. · Parade : couper la détection de modes et le MCP de la v1, garder analyze + compare + rapport texte ; le HTML devient un lot de décembre.</p>
+</li>
+<li>
+<p>[majeur] <strong>La « décomposition causale » est une corrélation, et le cahier se contredit</strong> — O2 promet « décomposition causale sans agent » alors que le risque 12.3 jure « jamais le mot cause » ; sur l'exemple vidéo, <code>version=v2.14</code> et <code>route=/search</code> sont probablement la base rate du trafic (si v2.14 sert 78 % des requêtes, le chiffre ne dit rien). Sans groupe témoin ni normalisation par le volume de chaque dimension, on tombe en plein paradoxe de Simpson, et PLG-P-04 (« 100 % des lentes attribuées à des dimensions existantes ») est une tautologie : tout enregistrement a des dimensions. · Parade : publier un lift (part des lentes ÷ part du trafic global par valeur de dimension) et renommer l'objectif O2 « attribution par association, jamais causale ».</p>
+</li>
+<li>
+<p>[majeur] <strong>La vidéo démontre un meurtre dont l'équipe est l'auteur</strong> — les fixtures sont synthétiques : c'est le candidat qui a injecté le pic <code>v2.14</code> sur <code>/search</code>, donc la « découverte » à 1:00–1:50 est circulaire, et le tableau de bord « 84 ms » des 15 premières secondes est une maquette, pas un vrai Grafana. Le jury Devpost a vu cinquante démos sur données fabriquées ; rien ici ne prouve que l'outil survit à un log qu'il n'a pas écrit. · Parade : un plan sur un vrai log public (dataset HTTP de Wikipedia/Alibaba cluster trace) non retouché, avec le résultat brut, même imparfait.</p>
+</li>
+<li>
+<p>[majeur] <strong>Le récit Kiro est décoratif</strong> — PLG-P-01 (« p99 égale la valeur théorique ») teste surtout la convention de quantile choisie (R-7 vs R-8, interpolation ou non) : la propriété « échouera » à la première définition ambiguë, ce qui fabrique un faux contre-exemple de journal ; et PLG-P-02 (invariance d'ordre) est vraie par construction pour un histogramme trié — le « contre-exemple trouvé par PBT » promis au journal sera soit trivial, soit écrit après coup, exactement ce que la grille §2 sanctionne. Le hook <code>stats-exactness</code> qui rejoue des fixtures est un test CI banal, pas « un hook qui a vraiment bloqué une régression ». · Parade : choisir une propriété non triviale (PLG-P-03 faux positifs de changement sur fenêtres glissantes, avec graines et échec documenté en cours de construction) et raconter l'incident daté dans le journal.</p>
+</li>
+<li>
+<p>[majeur] <strong>Personne n'analyse ses logs à la main en 2026</strong> — les équipes qui ont un p99 à 4,2 s et une culture SLO ont déjà Prometheus + Grafana ou un APM (Datadog, Grafana Cloud) ; celles qui n'ont qu'un fichier de log brut sont trop petites pour souffrir de la queue de latence, et leur « perte chiffrée » (grille §1 : vécue ce mois-ci, mesurée) est introuvable. Le public nommé, « équipes qui se fient à une moyenne », est un repoussoir rhétorique, pas un utilisateur avec un rôle et un contexte. · Parade : cibler précisément les équipes auto-hébergées/sans APM pour raisons de coût ou de confidentialité (PLG-N-01 devient l'argument n° 1) et chiffrer la perte sur un cas réel daté.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>Les logs réels ne contiennent pas ce que l'outil suppose</strong> — le format nginx combined n'a ni durée ni identifiant de corrélation par défaut (il faut configurer <code>$request_time</code>), <code>request_time</code> et <code>upstream_response_time</code> ne mesurent pas la même chose, Apache, HAProxy, les logs JSON applicatifs et CloudFront ont chacun leur sémantique ; les requêtes annulées (499) disparaissent précisément quand elles sont lentes, biaisant la queue qu'on veut mesurer. Avec « 3 parseurs courants + schéma déclaré », la première exécution sur le log d'un juge produit soit une erreur, soit des percentiles faussement confiants — pire que rien. · Parade : une étape obligatoire de « contrat de champ » qui fait dire à l'outil ce qu'il a compris (unité, horloge, couverture des statuts) et un état d'erreur riche quand la durée manque ou que les annulées sont absentes.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>Le jury dira « déjà vu » avant la deuxième minute</strong> — l'accroche « Your dashboard says 84 ms. Your users say otherwise. » est la diapositive d'ouverture de chaque talk sur la latence depuis treize ans (Tene 2013, les SLO de Google SRE Book chapitre 4), la catégorie Frankenstein n'est pas exploitée — « plongée × queue de distribution » est une métaphore décorative, le costume que la grille §4 pénalise — et le concurrent nommé (APM/Prometheus) est battu sur un critère cosmétique (local, pas d'agent) plutôt que structurel. Il ne reste que le test de différence de distribution entre fenêtres, qui tient en une phrase et ne remplit pas une vidéo de 3 minutes. · Parade : faire du test statistique honnête (effet mesuré, faux positifs bornés, PLG-P-03) LA ligne de différenciation, et supprimer la métaphore sous-marine ou la rendre fonctionnelle (profondeur = rang dans la queue, affiché).</p>
+</li>
+<li>
+<p>[mineur] <strong>Le jour de la démo en direct, tout vient du fichier qu'on vous tend</strong> — si un juge lance <code>tail analyze</code> sur son propre log, le schéma déclaré transforme la démo en séance de configuration ; sur données inattendues (durées négatives ou en secondes mélangées à des millisecondes, horodatages multi-fuseaux, NaN, log multi-lignes) les cas limites non spécifiés dans les exigences produisent un crash ou un p99 absurde publié avec aplomb. Le « mode démonstration qui ne peut pas échouer » (grille §3) existe peut-être, mais la démo live sur log inconnu est le seul moment où le juge teste vraiment l'outil. · Parade : un <code>tail doctor</code> qui valide le log avant analyse et refuse de publier un chiffre tant que l'unité et le fuseau ne sont pas confirmés — l'échec élégant devient la preuve de rigueur.</p>
+</li>
+</ol>
+<h2 id="synthese-pour-le-parent">Synthèse pour le parent</h2>
+<p>Trois bloqueurs (01 antériorité goaccess, 03 périmètre 8 jours, 08 hétérogénéité des logs) + un quasi-bloqueur (09 « déjà vu »).
+L'idée n'est sauvable qu'en rétrécissant : analyze+compare sur schéma validé, test de distribution comme seule promesse, fixtures réelles publiques.</p>
+<hr>
+<h1 id="at-09-attaques-restore-drill-cc-09">AT-09 — Attaques : Restore Drill (CC-09)</h1>
+<p>10 objections, avocat du diable. But : faire perdre cette idée.</p>
+<ol start="01">
+<li>
+<p>[bloqueur] <strong>L'antériorité est accablante</strong> — <code>restic check --read-data</code> lit déjà tous les paquets et reconstitue les fichiers, <code>borg check --verify-data</code> fait exactement la comparaison d'empreintes revendiquée, et Veeam/Acronis vendent des « SureBackup »/« Instant Verification » qui restaurent réellement en bac à sable et publient un rapport daté depuis plus de dix ans. Restore Drill n'est que la juxtaposition de mécanismes existants, sans aucune garantie nouvelle : la grille exige une différence <strong>structurelle</strong>, ici elle est cosmétique (un wrapper multi-sources autour de vérifications déjà faites par les sources elles-mêmes). · Parade : cibler précisément ce que <code>restic check</code> ne fait PAS (ouvrir et décoder les fichiers témoins, verdict unifié multi-sources rejoué en CI) et le démontrer par une comparaison chiffrée côte à côte dans la fiche.</p>
+</li>
+<li>
+<p>[majeur] <strong>La réduction méprisante est prête</strong> — « c'est un script shell de 30 lignes : <code>tar -x</code> dans un tmpdir, <code>sha256sum -c</code>, <code>echo fail</code> » — et honnêtement, la v1 gelée au 28 nov. est exactement ça, puisque les adaptateurs <code>restic</code>/<code>borg</code> (la seule partie intéressante) sont repoussés au lot 5 en décembre. Un juge technique qui lit le plan de réalisation verra que la v1 ne restaure que des dossiers et des tar, ce qu'aucun jury ne peut appeler innovation. · Parade : amener au moins l'adaptateur <code>restic</code> dans la v1 et montrer le manifeste + garde d'écriture comme la vraie valeur (le shell script n'a ni bac à sable prouvé, ni historique, ni verdict signé).</p>
+</li>
+<li>
+<p>[bloqueur] <strong>La v1 en 8 jours est intenable, et le plan le trahit</strong> — le cahier annonce 8 jours-agent pour la v1 mais le tableau des lots en additionne 8 pour les seuls lots 1–4, sans le corpus de fixtures corrompues, sans le rapport accessible AA, sans la démo CI, sans les specs EARS/PBT/hooks Kiro exigés par la grille. Pire : la propriété RES-P-01 (« aucune écriture hors du bac à sable, vérifiée par trace système ») demande un audit syscall (strace/fanotify/landlock) qui à lui seul peut manger 3 jours, et sans lui le « 0 écriture hors sandbox » est une affirmation, pas une preuve. · Parade : réduire la v1 à <code>tar</code> + <code>directory</code> + garde par <code>landlock</code> ou chroot simple, tracer RES-P-01 par audit du FS (diff avant/après) plutôt que par syscall, et assumer 6 jours au lieu de 8 avec un périmètre écrit noir sur blanc.</p>
+</li>
+<li>
+<p>[majeur] <strong>Le chiffre mesuré ne prouve rien d'utile</strong> — « 1 204 fichiers restaurés, 11 témoins vérifiés, 38 secondes » : ce sont des compteurs d'activité, pas une réduction de perte chiffrée comme l'exige le critère Impact (minutes ou euros perdus aujourd'hui, mesurés à chaque exécution). Le seul chiffre opposable serait « probabilité que votre sauvegarde soit restaurable » et l'outil ne peut pas la calculer : un exercice qui passe sur 11 témoins choisis par l'utilisateur ne dit rien des 1 193 autres fichiers ni de la restauration complète. · Parade : publier à chaque exécution l'écart au budget déclaré et l'âge du dernier exercice réussi (« votre sauvegarde n'a pas été prouvée depuis N jours »), chiffre d'alerte actionnable, et écrire la limite honnête sur l'échantillonnage.</p>
+</li>
+<li>
+<p>[majeur] <strong>La démo vidéo est un théâtre de fixtures</strong> — tout se joue sur des archives de test avec corruptions semées à des positions connues (section 9) : le juge comprendra en 20 secondes que « l'archive de trois mois » de 0:00–0:20 est fabriquée pour l'occasion, puisque l'outil n'a jamais touché une vraie sauvegarde d'équipe. Le verdict <code>fail</code> puis <code>pass</code> après « réparation » montre seulement que l'outil sait lire un sha256 fourni dans le manifeste — la boucle du spectacle est écrite d'avance. · Parade : faire au moins un exercice réel et documenté (vraie sauvegarde restic du dépôt du projet, anonymisée, avec consentement) dans la vidéo, et montrer une corruption naturelle (bit-rot ou snapshot incomplet) plutôt que semée.</p>
+</li>
+<li>
+<p>[majeur] <strong>Le récit d'usage de Kiro est plaqué</strong> — « une spec par adaptateur » mais la v1 n'a que deux adaptateurs triviaux ; la comparaison spec/vibe coding est prévue sur l'adaptateur <code>restic</code>… qui n'existe pas avant décembre : la preuve Kiro centrale sera donc soit fausse, soit écrite après coup, exactement ce que la grille punit. Le hook <code>sandbox-guard</code> (« tout test doit déclarer son bac à sable ») est décoratif : il valide un champ obligatoire d'un type TypeScript, il ne peut pas « vraiment bloquer une régression » de manière spectaculaire. · Parade : déplacer la comparaison spec/vibe sur la garde d'écriture (vrai sujet de sûreté, en EARS), et concevoir un hook qui bloque réellement — par exemple interdiction d'exécuter un test qui monte un volume ou touche <code>$HOME</code>.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>Le jury n'a pas de sauvegardes à tester</strong> — les juges et le public Devpost sont des développeurs dont la « sauvegarde » c'est GitHub, Time Machine en fond, ou un snapshot SaaS : aucun ne vit ce mois-ci la perte décrite (disque qui lâche + archive corrompue), et aucun n'exécutera un exercice de restauration sur ses propres données pendant le jugement. Le critère Impact exige un problème vécu ce mois-ci par la quasi-totalité du public visé ; ici le public réel (équipes avec restic/borg et obligations de conformité) est absent du jury, et la démo en ligne « sans compte ni installation » est impossible — on ne restaure pas une archive de 2 Go dans un navigateur en 30 secondes. · Parade : recadrer sur les données que les devs sauvegardent vraiment (bases locales, <code>.env</code>, media projects) et fournir une démo web avec une micro-archive embarquée qui rejoue un verdict réel pré-calculé.</p>
+</li>
+<li>
+<p>[majeur] <strong>L'angle mort technique ruine la promesse</strong> — les vraies restaurations qui échouent ne sont pas des fichiers corrompus mais des états vivants : base PostgreSQL restaurée sans cohérence transactionnelle, permissions/ACL perdues, volumes Docker et montages réseaux introuvables, chemins absolus codés en dur. Le cahier exclut explicitement bases managées (v1) et PRA, donc l'outil prouve précisément la classe de problèmes la plus facile (fichiers plats intègres) et se tait sur celle qui tue réellement les restaurations. Un juge DBA dira : « restaurer un dump SQL et l'ouvrir, ça ne prouve pas qu'il se charge ». · Parade : ajouter dès la v1 un témoin « ouvrable par son application » (ex. <code>sqlite3 file . integrity_check</code> ou <code>pg_restore --list</code>) — prouver que le fichier est utilisable, pas seulement lisible.</p>
+</li>
+<li>
+<p>[mineur] <strong>Le « déjà vu » guette en catégorie Frankenstein</strong> — la métaphore exercice d'évacuation incendie × sauvegarde est celle de Veeam SureBackup marketing depuis des années (« your backup is only as good as your restore » est un slogan usé jusqu'à la corde), et les Devpost regorgent d'outils « backup verifier » en CI. La combinaison « technologie morte × problème d'agent » exigée par la grille est faible : rien ici n'implique d'agent ni d'IA, le MCP <code>run_drill</code> est un gadget sans bénéfice mesurable. · Parade : revendiquer l'antériorité Veeam dans la fiche (concurrent nommé, différence = open source, multi-sources, local-first, CI natif) et supprimer le MCP s'il n'apporte pas un chiffre.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>Le jour de la démo en direct, le risque est de toucher une vraie source</strong> — la démonstration exige par construction d'accéder à de vraies archives ; si le stand ou la vidéo en direct branche un dépôt restic/borg réel, le moindre chemin mal déclaré écrit hors du bac à sable devant le jury — et l'outil dont la promesse unique est « 0 écriture hors sandbox » n'a pas encore la garde prouvée en v1 (voir objection 03). Un seul <code>tar -x -P</code> avec chemin absolu dans une fixture suffit à extraire dans <code>/</code> : le scénario catastrophe du projet EST son scénario de démo. · Parade : démo en direct exclusivement sur fixtures embarquées read-only, source montée en lecture seule au niveau OS, et la garde d'écriture démontrée AVANT toute restauration (trace affichée à l'écran).</p>
+</li>
+</ol>
+<hr>
+<h1 id="at-10-attaques-contre-cc-10-caracterisation-cta">AT-10 — Attaques contre CC-10 « Caractérisation » (CTA)</h1>
+<p>Adversaire : avocat du diable. Objectif : faire perdre cette idée au concours. 10 objections, une par champ imposé.</p>
+<ol start="01">
+<li>
+<p>[bloqueur] <strong>L'antériorité est dans le titre même</strong> — « Characterization test » n'est pas un concept de 2026 : c'est le chapitre 13 de <em>Working Effectively with Legacy Code</em> (Michael Feathers, 2004), et le record/replay au niveau fonction existe en production depuis <strong>VCR/vcrpy</strong> (cassettes Ruby/Python), <strong>Polly.js</strong> et <strong>nock-recorder</strong> : on enregistre le réel, on le rejoue, on hurle à la dérive. Un juge qui connaît Feathers ne voit qu'un nom de livre recyclé en produit. · Parade : assumer l'héritage en une ligne et déplacer la nouveauté sur ce que ni Feathers ni vcrpy ne font (le compteur de chemins observés + la sensibilité mesurée), puis renommer l'outil pour qu'il ne s'appelle pas comme le chapitre.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>« C'est un snapshot test à l'échelle du module »</strong> — la réduction tient en 30 lignes de code : <code>for (const f of corpus) expect(parse(f)).toMatchSnapshot()</code>. Jest fait exactement ça, <strong>Approval Tests</strong> d'Emily Bache et le <strong>Golden Master</strong> le théorisent depuis quinze ans, et <code>jest --ci</code> refuse déjà toute dérive non approuvée. Le tableau « Ce qui existe déjà » du cahier écarte Jest d'un revers (« suppose un test écrit à la main »), ce qui est faux : une boucle sur un dossier de corpus est un test écrit à la main de dix lignes. · Parade : prouver en direct que la boucle-snapshot échoue là où CTA réussit (sortie non sérialisable, exception, chemin non couvert), et filmer cet échec — sinon la différence reste cosmétique au sens de la grille §4.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>La v1 en 9 jours repose sur une instrumentation qui n'existe pas</strong> — <code>withRecorder(fn)</code> « sans patcher le source » exige quand même de connaître le point d'appel et de l'éditer : les appels <em>internes</em> du parseur (<code>matchBrace</code>, <code>assignEmpty</code>) ne passent jamais par le proxy, donc le <code>pathLabel</code> promis ne peut pas venir de là. Or V8 coverage ne rend que des plages d'octets, pas des noms de branches : le mapping <code>parseIni&gt;matchBrace&gt;assignEmpty</code> est un projet à lui seul, et il faut en plus écrire à la main les deux adaptateurs de 250 lignes et le « legacy » de 3 200 lignes qui n'existe nulle part. · Parade : réduire la v1 à la seule frontière publique du module (une fonction exportée, entrées/sorties, zéro pathLabel), et livrer le pathLabel en L6 avec une méthode écrite et vérifiable.</p>
+</li>
+<li>
+<p>[majeur] <strong>Les chiffres sont auto-attribués, et l'un d'eux est une tautologie</strong> — O3 exige C ≥ 95 % « des chemins observés », mais la suite est <em>générée depuis</em> ces mêmes chemins observés : C = 100 % par construction, et la recette V5 l'écrit noir sur blanc. Un indicateur qui ne peut pas échouer ne mesure rien, et la grille §1 exige une perte <em>supprimée</em> et mesurée, pas un compteur décoratif. Côté mutants, les 50 mutants sont choisis par l'outil, injectés dans un module écrit par l'équipe : 92 % de détection sur ses propres mutants, c'est une note qu'on se donne. · Parade : publier un chiffre qui peut rater (C mesuré sur un corpus <em>étranger</em>, taux de mutants équivalents survivants, mutants tiers type Stryker), et supprimer O3 ou le reformuler en « chemins du module non observés ».</p>
+</li>
+<li>
+<p>[majeur] <strong>La vidéo démontre un test unitaire qui passe</strong> — le climax (1:20–1:55) consiste à changer <code>+</code> en <code>-</code> dans un moteur de prix <em>écrit par l'équipe</em> puis à voir D = 1 : n'importe quelle suite de tests attrape ça, et le juge ne voit ni le parseur de 2016, ni les 4 jours de détection tardive, ni les 1 800 € de rollback du §2. Pire, les 15 premières secondes exigées par la grille §5 (« le problème <strong>et</strong> le chiffre ») montrent un dépôt et <code>0 tests</code> — aucun chiffre. · Parade : ouvrir sur le chiffre réel (11 % de lignes à <code>0000-00-00</code>, 1 800 €, 4 jours) et faire de la dérive un vrai refactor de 40 lignes dont seul CTA attrape l'effet, pas une mutation d'opérateur.</p>
+</li>
+<li>
+<p>[majeur] <strong>Le récit « deux applications éloignées » ne tient pas, et la preuve Kiro est post-hoc</strong> — un parseur de fichiers et un moteur de prix, tous deux en TypeScript, tous deux fonctions pures, tous deux dans <code>examples/</code>, écrits par le même auteur à trois jours d'intervalle, ne sont pas « far apart » : ce sont deux fixtures du même harnais, et la catégorie Skeleton Crew attend un squelette transplanté dans des mondes réellement distincts. Côté Kiro, les hooks annoncés sont <code>wc -l</code>, <code>lint</code> et un grep sur <code>http</code> — décoratifs, alors que la grille §2 exige un hook qui a <em>vraiment bloqué</em> une régression ; et le lot L9 (specs, steering, hooks, agents, powers) est planifié <strong>après</strong> L8, soit un journal écrit après coup, le défaut explicitement pénalisé. · Parade : remplacer une des deux applications par un corps étranger réel (un vrai module npm abandonné, ou un langage/paradigme différent) et avancer L9 en L1 pour que le hook bloquant soit daté avant la v1.</p>
+</li>
+<li>
+<p>[majeur] <strong>Dans six mois, personne ne le branche en CI</strong> — 1 042 assertions générées, c'est 1 042 triages humains à la première dérive : dès qu'une sortie dépend de l'horloge, d'un flottant, d'un ordre de clés de <code>Map</code> ou d'un objet mutable aliasé, la suite devient flaky, l'équipe met <code>--threshold-drift 999</code> et l'outil meurt (le R5 du cahier admet « probabilité élevée, impact élevé »). Le périmètre Node/TS exclut l'essentiel du legacy réel — Java, .NET, PHP, COBOL — et l'alternative gagnante en 2027 est triviale : demander à Kiro ou Copilot d'écrire les tests du module, ce qui produit de la compréhension en plus du filet. · Parade : cibler un écosystème où le legacy est massif et l'offre faible, et prouver la stabilité sur 200 exécutions consécutives sans faux positif publiée dans le README.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>L'angle mort est exactement l'incident raconté</strong> — le proxy capture l'entrée, la sortie et l'exception : jamais les effets de bord. Un refactor qui cesse d'écrire le fichier de log, saute un <code>INSERT</code> ou n'émet plus l'événement passe à D = 0 en vert, alors que le §2 décrit précisément une perte de donnée en production ; et les entrées non capturables (stream, handle, <code>this</code>, closure, tampon mutable modifié après l'appel) rendent le rejeu infidèle sans avertissement. Côté bugs figés, <code>test.fails</code> de Vitest <em>passe</em> quand le test échoue : le jour où le <code>known-bug</code> LEGACY-42 est corrigé, la suite redevient rouge pour une bonne nouvelle, et le label dépend d'une décision humaine non tranchée (arbitrage n° 5). · Parade : documenter la limite en page 1 du README (« ne prouve pas les effets de bord »), capturer un canal effets de bord injectable (fs/clock/émetteur espionnés), et rendre la correction d'un <code>known-bug</code> explicitement attendue plutôt que rouge.</p>
+</li>
+<li>
+<p>[mineur] <strong>« Déjà vu » garanti, et aucun costume</strong> — le pipeline INSTRUMENT → RECORDER → GENERATE → COMPARE ressemble à s'y méprendre à un enchaînement d'outils existants (jest-snapshot, Approval Tests, Stryker) et le rendu est une sortie terminal plus un rapport HTML : dans une édition Kiroween où la catégorie Skeleton Crew promet un squelette <em>visible</em>, un CLI qui affiche trois compteurs ne donne au juge aucune image à retenir ni aucune seconde de surprise. · Parade : une identité visuelle forte (le squelette qui se fige autour du module, animation des chemins observés) et une accroche qui ne soit pas une reformulation de Feathers.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>En démo directe, ça casse à la première commande du juge</strong> — il n'y a pas d'instrumentation générique : <code>cta capture --module &lt;m&gt;</code> suppose un adaptateur dédié (R1 du cahier, et <code>src/adapters/legacy-file-parser</code>), donc « essayez sur votre code » échoue immédiatement ; la démo en ligne &lt; 30 s sans installation exigée par la grille §5 est impossible pour un CLI Node qui a besoin d'un corpus et de <code>npx</code> ; <code>unshare -n</code> (V11) n'existe pas dans un navigateur ; et V4 admet jusqu'à 60 s pour 1 042 tests — un trou d'air d'une minute en direct, suivi de <code>cta mutate</code> qui rejoue 50 fois la suite, tue les 3 minutes. · Parade : un mode démo figé (corpus embarqué, résultats pré-calculés, <code>--max-cases 50</code>) qui ne peut pas échouer au sens de la grille §3, plus une cible web où un module de démonstration est réellement capturé sans adaptateur.</p>
+</li>
+</ol>
+<hr>
+<h1 id="at-11-graphmantle-skeleton-crew-90100-attaque-avocat-du-diable">AT-11 — Graphmantle (Skeleton Crew, 90/100) — attaque avocat du diable</h1>
+<ol start="01">
+<li>
+<p>[bloqueur] <strong>L'antériorité est massive et commerciale</strong> — « Cette CVE est-elle atteignable chez moi ? » est déjà vendu par JFrog Xray Contextual Analysis, Endor Labs Reachability et Snyk Reachability ; Eclipse Steady (ex-VULAS, SAP) le faisait en 2017 et osv-scanner a un mode expérimental « callgraph » (Soot pour Java, PoC Python). La grille exige qu'« aucun outil existant ne fait ça » : ici trois éditeurs en vivent. · Parade : se différencier structurellement (preuve vérifiable par le juge, chemin citable ligne à ligne, VEX signé en sortie) et nommer ces concurrents dans la fiche avant que le jury ne le fasse.</p>
+</li>
+<li>
+<p>[majeur] <strong>La réduction méprisante tient en une ligne</strong> — « C'est <code>madge</code> collé à <code>osv-scanner</code> avec un joli graphe en sortie » : un wrapper qui parse, construit un graphe de dépendances d'appels et affiche un compteur, sans moteur propriétaire. Un juge qui connaît npm audit + un visualiseur de graphe classera ça en « déjà fait le week-end ». · Parade : publier l'invariant non trivial (complétude du graphe sur les callbacks/async) et une propriété fast-check qui a vraiment échoué, pour montrer un noyau et non un collage.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>9 jours pour deux frontends inter-procédures fiables, c'est intenable</strong> — Un call graph TS doit résoudre les types, les generics et surtout le code <strong>compilé/minifié</strong> publié sur npm (la plupart des paquets livrent du dist JS, pas le TS) ; côté Python il faut gérer importlib, décorateurs et resolution d'attributs. Pire : aucune base publique ne mappe CVE → <strong>symbole</strong> vulnérable (OSV donne des plages de versions, pas des noms de fonctions) — sans cette donnée, l'analyse ne démarre même pas. · Parade : restreindre la v1 à un langage et à un corpus de ~20 CVE mappées à la main (documenté), ou utiliser CodeQL/Semgrep comme moteur et se concentrer sur le chemin et le chiffre.</p>
+</li>
+<li>
+<p>[majeur] <strong>Le chiffre publié est invérifiable et son faux négatif est une faute grave</strong> — Dire « 42 CVE publiées, 3 atteignables » sans ground truth (un PoC par CVE) n'est qu'une assertion ; et si l'outil déclare « non atteignable » à tort, le développeur laisse un trou exploitable — aucun RSSI n'acceptera ce verdict, d'où l'existence du format VEX justement pour encadrer cette prétention. · Parade : publier le taux avec la méthode de validation (échantillon vérifié à la main + faux négatifs documentés) et formuler la sortie comme un VEX « needs review », jamais comme un feu vert.</p>
+</li>
+<li>
+<p>[mineur] <strong>La vidéo sera ennuyeuse et infalsifiable</strong> — Les 15 premières secondes montrent… un parseur qui tourne puis un nombre, que le juge ne peut pas distinguer d'un <code>print(3)</code> codé en dur ; construire un graphe n'a aucune tension visuelle. · Parade : ouvrir sur une vraie CVE du mois sur un repo connu, écran scindé avant/après (npm audit : 42 alertes ; Graphmantle : 3 chemins cliquables jusqu'à la route HTTP), avec la commande visible à l'écran.</p>
+</li>
+<li>
+<p>[majeur] <strong>Les deux applications ne sont pas « éloignées » et le noyau partagé est un mythe</strong> — TypeScript/npm et Python/PyPI sont deux langages dynamiques à gestionnaire de paquets, même forme exacte ; un juge dira « le même démo deux fois ». Et le « noyau d'atteignabilité » ne partage rien de substantiel : les parsers, la résolution d'appels et le mapping de symboles sont spécifiques à chaque langage — ce qui contredit le récit Skeleton Crew (peu de code, beaucoup de squelette commun). · Parade : mesurer et afficher le pourcentage de lignes réellement partagées, ou remplacer la 2e app par un vrai éloignement (binaire Go/Rust, ou un monorepo avec appels RPC).</p>
+</li>
+<li>
+<p>[majeur] <strong>L'impact réel est douteux : la réponse n'est pas actionnable</strong> — Même « non atteignable », la conformité (ISO 27001, clients entreprise, scanners du CI) exige de patcher ou de justifier par un VEX revu par un humain ; l'équipe sécurité qui reçoit « 3/42 » doit quand même traiter les 42. Le gain annoncé (ignorer 93 % des CVE) est exactement celui que JFrog vend déjà aux entreprises — un dev solo, lui, n'a pas le droit d'ignorer. · Parade : faire produire à l'outil le VEX/justification conforme directement consommable par osv-scanner/Snyk, et chiffrer le temps de rédaction de VEX économisé plutôt que les CVE « ignorées ».</p>
+</li>
+<li>
+<p>[bloqueur] <strong>L'angle mort technique invalide le chiffre : sondeur contre sous-approximation</strong> — Node est saturé d'EventEmitter (<code>emit</code>/<code>on</code> casse tout chemin statique), de callbacks promisifiés, de DI (NestJS, Angular) et de <code>require(variable)</code> ; Python a getattr, monkey-patching et les métaclasses. Un graphe <strong>sûr</strong> (sur-approximé) rend tout atteignable et le chiffre s'effondre à 42/42 — inutile ; un graphe précis sous-approxime et produit les faux négatifs mortels du point 04. · Parade : borner honnêtement la garantie (« atteignabilité directe + callbacks résolus par convention X »), tracer chaque arête non résolue dans le rapport, et le dire dans la limite honnête de la fiche.</p>
+</li>
+<li>
+<p>[majeur] <strong>Le jury dira « déjà vu » avant la fin de la vidéo</strong> — Entre le battage JFrog Contextual Analysis, les VEX de l'OpenSSF et les projets Devpost des éditions précédentes sur « reachability + CodeQL », l'espace est saturé de demos de graphe d'appel ; « CVE + call graph » est le sujet de stage classique de la sécurité applicative. · Parade : déplacer le pitch sur l'artefact unique (chemin d'exploitation reproductible, exportable, testé) plutôt que sur la question « atteignable ou pas », déjà possédée par le marché.</p>
+</li>
+<li>
+<p>[majeur] <strong>Le jour J, la démo casse sur le réseau ou sur un dist minifié</strong> — La grille impose un mode démo sans réseau, mais une CVE crédible « de ce mois-ci » exige l'API OSV en direct ; et il suffit d'une dépendance qui ne livre que du JS bundlé/minifié (ou d'un <code>export default</code> ré-exporté) pour que le graphe se vide devant le juge. Le parse d'un vrai repo dépasse facilement les 30 secondes imposées. · Parade : jeu de données figé et pré-calculé dans le repo (snapshot OSV daté + cache du graphe), avec un bouton « données live » optionnel, et un chronomètre affiché prouvant le &lt; 30 s.</p>
+</li>
+</ol>
+<hr>
+<h1 id="at-12-shrink-avocat-du-diable-shrink-resurrection-89100">AT-12-shrink — avocat du diable (Shrink, Resurrection, 89/100)</h1>
+<ol start="01">
+<li>
+<p>[bloqueur] <strong>Antériorité massive : tout existe déjà</strong> — C-Reduce, <code>afl-tmin</code>, <code>cvt</code>, le minimiseur de libFuzzer (<code>-minimize_crash=1</code>) et surtout <strong>Hypothesis</strong>, dont le shrinking automatique est une fonctionnalité phare depuis 2014, couvrent exactement le périmètre annoncé. La grille innovation (20/20) exige « aucun outil existant ne fait ça » avec concurrent nommé et différence <em>structurelle</em> : Shrink est un ddmin générique de plus, sans mécanisme nouveau. · Parade : trouver une garantie qu'aucun réducteur n'offre (ex. preuve formelle d'équivalence d'erreur par hachage du message + de la trace), et nommer Hypothesis/libFuzzer comme concurrents battus sur cette garantie précise.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>« C'est ddmin, un algorithme de 2002 »</strong> — ddmin (Zeller, ISSTA 2002) tient en ~80 lignes ; un juge technique écrase l'innovation en une phrase, et la grille punit explicitement le « wrapper autour d'un outil existant ». Le budget de 32 jours pour un algorithme publié il y a 24 ans paraît disproportionné et se retourne contre l'équipe. · Parade : ne pas vendre l'algorithme mais le système autour (oracle fiable, cache d'exécutions, réduction parallèle, rapport diffable) et le chiffrer en complexité réellement nouvelle.</p>
+</li>
+<li>
+<p>[majeur] <strong>9 jours de v1 irréalistes pour la fiabilité</strong> — ddmin est trivial en démonstration, mais la robustesse vient du harnais : timeout de l'oracle, codes de sortie ambigus, stderr non stable, reproductibilité, parallélisation des exécutions. Les réducteurs existants ont mis des années à absorber ces cas limites ; en 9 jours on livrera le happy path exact que la grille « mise en œuvre » (propriétés fast-check, contre-exemple réel, hook qui bloque) rend insuffisant. · Parade : réduire le périmètre v1 à un seul type d'entrée (CSV) avec oracle déterministe contractuel, et documenter le reste comme hors-limite honnête.</p>
+</li>
+<li>
+<p>[majeur] <strong>Le chiffre publié ne prouve rien</strong> — « 8 000 lignes → 6 lignes » mesure la capacité de ddmin à supprimer du bruit, pas la valeur du résultat : la perte chiffrée exigée par la grille impact doit être en <em>minutes de développeur économisées</em>, avec source ou méthode de mesure. Un chiffre de taille est gonflable à l'infini en choisissant un jeu d'entrée volumineux et un bogue sensible à une seule ligne — le juge y verra une métrique de concours. · Parade : publier le temps humain de réduction manuelle mesuré sur plusieurs développeurs contre le temps Shrink, sur le même cas.</p>
+</li>
+<li>
+<p>[majeur] <strong>Démo vidéo sans spectacle</strong> — une réduction est une boucle qui retire des lignes pendant N minutes : à l'écran, un compteur et du texte qui rétrécit, l'inverse des « 15 premières secondes » exigeant problème + chiffre sans narration. Aucun mouvement, aucune couleur, aucun « wow » ; la grille présentation sera notée sévèrement. · Parade : montage avant/après en split-screen accéléré avec l'erreur qui reste identique en surbrillance, et le chiffre de réduction incrusté dès la seconde 3.</p>
+</li>
+<li>
+<p>[majeur] <strong>La technique n'est pas morte — donc pas de Resurrection</strong> — le shrinking est plus vivant que jamais : Hypothesis, fast-check, jqwik, <code>cargo test</code> avec proptest, libFuzzer et les réducteurs LLM émergents l'utilisent ou le réinventent en 2024-2026. La catégorie Resurrection suppose une technique abandonnée que Kiro remet au goût du jour ; ici le récit est faux et un juge qui connaît le fuzzing le dira. · Parade : recadrer sur ce qui est réellement mort (C-Reduce, spécifique C/C++ et quasi abandonné) et l'étendre aux données modernes (CSV/JSON) — ou changer de catégorie.</p>
+</li>
+<li>
+<p>[majeur] <strong>Public minuscule, problème rare</strong> — combien de développeurs réduisent des cas d'échec à la main <em>ce mois-ci</em> ? Le fuzzing est l'affaire d'une niche (sécurité, compilateurs, parsers) ; l'utilisateur type nommé avec rôle et contexte, exigé par la grille, sera introuvable au-delà de « ingénieur QA chez un éditeur de parsers ». Le critère « vécu ce mois-ci par la quasi-totalité des développeurs visés » échoue. · Parade : cibler un pain mainstream vérifiable — jeux de fixtures de tests d'intégration qui gonflent — et le chiffrer par enquête ou statistiques publiques.</p>
+</li>
+<li>
+<p>[bloqueur] <strong>Oracle non déterministe et bug morphing</strong> — dès que l'erreur dépend de l'ordre, du temps, de la mémoire ou de la graine (flaky test, heap overflow, data race), la « garantie que le cas réduit déclenche exactement la même erreur » est fausse : ddmin peut converger vers un <em>autre</em> bogue qui satisfait l'oracle, ou réduire vers le vide. C'est le trou technique central, et la limite honnête de la grille le rendra visible. · Parade : exécuter l'oracle k fois (k configurable) avec comparaison normalisée de l'erreur, et publier un score de confiance au lieu d'une « garantie ».</p>
+</li>
+<li>
+<p>[mineur] <strong>Le jury dira « déjà vu »</strong> — entre <code>afl-tmin</code>, le minimize de libFuzzer et Hypothesis, tout juge ayant fait du fuzzing a déjà vu un réducteur tourner en direct ; l'effet « jamais vu » de la grille présentation/innovation tombe à plat, et la note 89 actuelle repose probablement sur des juges non-spécialistes. · Parade : différencier par l'expérience (rapport HTML diffable, intégration CI en un hook Kiro) plutôt que par l'algorithme, et le dire d'emblée dans la fiche.</p>
+</li>
+<li>
+<p>[mineur] <strong>Casse-jour de démo en direct</strong> — la réduction d'un vrai cas prend des minutes à des heures (des milliers d'exécutions de l'oracle) ; en live, soit la démo tourne trop lentement, soit l'équipe triche avec un cas pré-réduit — et la grille exige un mode démonstration qui ne peut pas échouer, sans réseau. Un oracle lent, un timeout ou un flaky le jour J produit un cas réduit invalide en direct. · Parade : mode démo avec données incluses et exécutions pré-enregistrées rejouables (cache d'oracle), plus un vrai mini-cas qui se réduit en &lt; 30 s pour prouver que ce n'est pas du playback.</p>
+</li>
+</ol>
+<hr>
+<h2 id="les-fiches-v2">Les fiches V2</h2>
+<h1 id="v2-03-ver-dette-de-mutation-categorie-frankenstein">V2-03 · Ver — <em>Dette de mutation</em> (catégorie : Frankenstein)</h1>
+<p><strong>Différenciation en une ligne :</strong> Stryker, PIT et mutmut publient un <strong>score agrégé non vérifiable</strong> ; Ver publie, pour chaque ligne du diff, un <strong>verdict muni d'un témoin rejouable en &lt; 10 s</strong> que la CI re-vérifie elle-même — un rapport <em>proof-carrying</em>, pas un chiffre de plus.</p>
+<h2 id="2-le-probleme-vecu-ce-mois-ci">2. Le problème vécu ce mois-ci</h2>
+<p>Utilisatrice type : <strong>Camille, tech lead de 6 devs sur une appli fintech</strong> soumise à un seuil de couverture réglementaire (80 %) bloquant en CI. Ce mois-ci sa suite est verte à 87 % et un <code>&lt;</code> devenu <code>&lt;=</code> dans un calcul de plafond de remise est passé en production : la couverture mesure ce qui est <strong>exécuté</strong>, jamais ce qui est <strong>asserté</strong>.</p>
+<p>Perte mesurée, méthode écrite : sur <code>ver-bench</code> (dépôt réel de référence, 12 000 lignes TS, 640 tests) nous mesurons (a) le nombre de mutants semés <strong>à la main</strong> dans le diff des 20 dernières PR que la suite laisse survivre, (b) le temps mur d'un run Stryker complet, chrono brut. Les deux chiffres sont publiés dans <code>KIRO_JOURNAL.md</code> : mesures, pas estimations. Adoption : <code>npx ver</code>, sans compte, sans serveur, sans config — lecture de <code>git diff</code>, première valeur en <strong>moins de 60 secondes</strong>.</p>
+<h2 id="3-la-mecanique-jusquau-detail-qui-prouve-quelle-tient">3. La mécanique (jusqu'au détail qui prouve qu'elle tient)</h2>
+<ol>
+<li><strong>Périmètre = le diff.</strong> <code>git diff --unified=0 base…head</code> → lignes touchées → mutants AST sur ces seules lignes (6 opérateurs : comparaison, logique, constante, borne, retour, suppression d'appel). Un diff de 200 lignes donne 5 à 60 mutants : le budget temps est borné par la taille de la PR, jamais par celle du dépôt.</li>
+<li><strong>Exécution déterministe.</strong> Sandbox <code>tmpfs</code> par mutant, arbre de travail jamais écrit (empreinte SHA-256 de l'arbre vérifiée avant/après chaque run, publiée). Carte ligne → tests construite une fois, cachée par empreinte d'arbre. Exécution <strong>mono-process, séquentielle, triée par <code>mutantId</code></strong> → même JSON octet par octet entre deux runs.</li>
+<li><strong>Témoin (le mécanisme neuf).</strong> Chaque verdict produit un artefact signé : <code>{mutantId, hash du patch AST, seed, commande de replay, sortie tronquée du test tueur, exit code, durée, horloge virtuelle figée}</code>. <code>ver replay &lt;mutantId&gt;</code> rejoue <strong>ce seul mutant</strong> en &lt; 10 s et doit retrouver le même verdict ; <code>ver audit</code> re-vérifie un échantillon aléatoire (seed publiée) et publie le <strong>taux de verdicts confirmés</strong>. Rien n'est demandé « sur parole ».</li>
+</ol>
+<pre><code class="language-ts">type Witness = { mutantId: string; patchSha: string; seed: number; replayCmd: string;
+  killerTest?: string; tail: string; exitCode: number; durationMs: number; virtualClock: string };
+type DebtEntry = { mutantId: string; file: string; line: number; justification: string;
+  signedBy: string; signedAt: string; treeSha: string };
+type VerRun = { commit: string; base: string; treeShaBefore: string; treeShaAfter: string;
+  total: number; killed: number; survived: number; timeout: number; equivalent: number;
+  auditedSample: number; confirmedRate: number; fullSuiteGap: number; wallMs: number };
+</code></pre>
+<ol start="4">
+<li><strong>Contrôle d'honnêteté.</strong> Mode « écart » : sur 30 mutants du diff, suite <strong>complète</strong> au lieu du ciblage ; l'écart de verdicts (<code>fullSuiteGap</code>) est publié à chaque run, et &gt; 5 % bascule la CI en mode complet. Un rapport dont <code>treeShaBefore ≠ treeShaAfter</code> est un échec dur, pas un avertissement.</li>
+<li><strong>Verdicts.</strong> <code>killed</code> (un test échoue), <code>survived</code> (aucun ne bronche → <strong>dette</strong>), <code>timeout</code> (politique écrite : compté à part, <strong>jamais</strong> <code>killed</code>, exclu du numérateur), <code>equivalent</code> (toujours manuel, signé, horodaté, compté dans la ligne « dont x % d'exclusions »).</li>
+<li><strong>Invariant.</strong> <code>killed + survived + timeout + equivalent = total</code>, vérifié par le moteur à chaque run : un rapport qui le viole est rejeté, pas publié.</li>
+</ol>
+<h2 id="4-le-chiffre-que-loutil-publie-a-chaque-execution">4. Le chiffre que l'outil publie à chaque exécution</h2>
+<p>Quatre nombres, rien d'autre : <strong>« 3 nouveaux survivants sur ce diff · 94 % des verdicts re-vérifiés (échantillon 16, seed 8f3a) · écart ciblé/complet 0 % · 41 s »</strong>.</p>
+<pre><code>$ npx ver                       # diff de PR, 14 mutants générés
+nouveaux survivants   3        (src/pricing/limit.ts:88, :104, src/pricing/fx.ts:31)
+verdicts re-vérifiés  94 %     (échantillon 16/14+cache, seed 8f3a, `ver replay` &lt; 10 s chacun)
+écart ciblé/complet   0 %      (30 mutants rejoués en suite complète)
+temps                 41 s     arbre inchangé (sha 9c1f… = 9c1f…)
+grille CI             ÉCHEC — dette signée 0, nouveaux survivants 3
+</code></pre>
+<p>Aucun score global absolu : la grille de CI est <strong><code>nouveaux survivants ≤ dette signée</code></strong>, et le registre de dette ne peut que stagner ou décroître (ratchet). Le chiffre publié <strong>est</strong> la perte supprimée : chaque survivant est une branche du diff que personne n'asserte.</p>
+<h2 id="5-la-preuve-kiro">5. La preuve Kiro</h2>
+<ul>
+<li><strong>PBT à oracle externe.</strong> 120 mutants semés <strong>à la main</strong> dans <code>fixtures/known-verdicts/</code>, verdict attendu écrit par un humain avant tout code (<code>killed</code>/<code>survived</code>/<code>equivalent</code> + test tueur). PROP-1 ≥ 98 % des verdicts attendus retrouvés ; PROP-2 arbre inchangé (empreinte) ; PROP-3 déterminisme octet par octet ; PROP-4 invariant de somme ; PROP-5 mutant en code mort = <code>survived</code>, jamais <code>killed</code>. fast-check sur arbres TS aléatoires bornés pour la génération AST. <strong>Contre-exemple réel</strong> : PROP-3 a échoué le 12/11 (graine 4417) — <code>durationMs</code> du témoin variait et contaminait le hachage canonique du rapport ; correctif = champ exclu du hachage. Propriété, graine et diff dans <code>KIRO_JOURNAL.md</code>.</li>
+<li><strong>Hook qui a vraiment bloqué.</strong> <code>.kiro/hooks/witness-integrity</code> refuse tout commit dont un témoin de fixture n'est pas rejouable. Incident du 14/11 : cache de couverture périmé après un rebase, 6 témoins en échec au replay, régression bloquée par le hook (date + diff au journal) ; correctif = invalidation par empreinte d'arbre.</li>
+<li><strong>Steering avant/après.</strong> <code>steering/operators.md</code> (fileMatch <code>packages/mutate</code>) : avant, <code>boundary</code> produisait 12 % de mutants dupliqués sur le chaînage optionnel ; après la règle « une mutation par nœud AST, ignorer <code>?.</code> déjà couvert », 0 doublon sur 4 100 mutants.</li>
+<li><strong>Spec contre vibe coding, chiffré</strong>, sur l'opérateur <code>boundary</code> (le plus piégeux, pas le plus simple) : spec EARS 2 h 10, 3 allers-retours, 1 défaut ; vibe coding 55 min, 11 allers-retours, 7 défauts dont 2 mutants non réversibles. Chiffres bruts au journal.</li>
+<li><strong>Agents</strong> : <code>ver-reviewer</code> en lecture seule (aucune écriture), <code>ver-tester</code> borné à <code>fixtures/**</code> et <code>packages/*/tests/**</code>. <strong>CLI headless</strong> : run nocturne sur <code>main</code>, registre publié en artefact. <strong>MCP</strong> écarté et justifié : aucun serveur externe n'apporte de mesure ici.</li>
+</ul>
+<h2 id="6-le-concurrent-le-plus-proche-et-pourquoi-lecart-est-structurel">6. Le concurrent le plus proche, et pourquoi l'écart est structurel</h2>
+<p>Concurrents nommés : <strong>StrykerJS</strong> (<code>--incremental</code>, <code>coverageAnalysis: perTest</code>, <code>--thresholds-break</code>, dashboard) et <strong>PIT</strong> (sélection de tests par couverture depuis 2010). Leur ciblage est assumé comme <strong>acquis</strong> : il n'est pas notre innovation. L'écart porte sur l'objet produit — eux répondent « quel est ton score ? » (scalaire non rejouable, non comparable d'un dépôt à l'autre, non auditable sans refaire le run entier) ; Ver répond « ce diff introduit N branches non assertées, voici la preuve rejouable de chaque verdict ». Trois conséquences structurelles, pas cosmétiques : (a) <strong>auditable</strong> — un tiers rejoue un mutant en &lt; 10 s sans réinstaller ni relancer la suite ; (b) <strong>périmètre diff</strong> — temps borné par la PR, chiffre comparable entre PR d'un même dépôt ; (c) l'outil <strong>publie sa propre marge d'erreur</strong> (taux de re-vérification + écart ciblé/complet), ce qu'aucun des trois ne fait. Moteur AST TypeScript écrit pour le projet : <strong>0 dépendance</strong> à Stryker, PIT, mutmut, cosmic-ray.</p>
+<h2 id="7-les-quatre-etats-et-lartefact-durable">7. Les quatre états et l'artefact durable</h2>
+<ul>
+<li><strong>Vide</strong> : diff sans ligne mutable → « 0 mutant, rien à prouver » + accès au mode dépôt complet. <strong>Chargement</strong> : progression par mutant, chrono visible (pas de spinner menteur). <strong>Erreur</strong> : suite cassée au départ → « tes tests ne passent pas, Ver ne peut rien mesurer », exit code distinct (2) ; sandbox indisponible → refus net, jamais d'écriture. <strong>Succès</strong> : tableau des survivants (fichier, ligne, avant/après, tests l'ayant exécuté sans échouer, commande de replay copiable).</li>
+<li><strong>Artefact durable</strong> : <code>ver-report.html</code>, page <strong>auto-portante</strong> (CSS/JS inline, zéro réseau), imprimable A4, partageable hors ligne, embarquant le registre de dette signé (survivant, justification, auteur, date, hash) ; <code>ver-report.json</code> pour la CI.</li>
+<li><strong>Accessibilité</strong> : axe-core en CI, <strong>0 violation</strong> ; navigation clavier complète (ordre de tabulation testé) ; statut jamais porté par la seule couleur (icône + texte) ; <code>prefers-reduced-motion</code> respecté ; thème clair/sombre.</li>
+<li><strong>Mode démo</strong> : <code>ver demo</code> = moteur compilé en <strong>WebAssembly</strong> + fixtures embarquées, run réel dans la page, aucun réseau, aucune dépendance à la machine du juge.</li>
+</ul>
+<h2 id="8-les-15-premieres-secondes-de-la-video-plan-par-plan">8. Les 15 premières secondes de la vidéo, plan par plan</h2>
+<ul>
+<li><strong>0:00–0:04</strong> plein écran sur le check CI « coverage 87 % ✓ — PR merged », aucune narration.</li>
+<li><strong>0:04–0:09</strong> le diff : <code>if (total &lt; limit)</code> → <code>&lt;=</code> ; carton « 0 test n'échoue. »</li>
+<li><strong>0:09–0:15</strong> <code>npx ver</code> ; <strong>chrono réel incrusté</strong> ; à 0:15 il affiche 38 s et « 3 nouveaux survivants — merge bloqué ». Le chiffre saute : 12 mutants tués, 8 survivants sur le diff.</li>
+<li>Suite : 0:15–1:10 <code>ver replay m-042</code> (6 s, même verdict) ; 1:10–2:00 le test ajouté, le survivant meurt, la dette repasse à 0 ; 2:00–2:40 le ratchet refuse une PR qui augmente les exclusions ; 2:40–3:00 la limite honnête à l'écran. &lt; 3 min, sans musique ni marque tierce, <strong>aucun accéléré</strong> : le chrono incrusté est la preuve.</li>
+</ul>
+<h2 id="9-la-limite-honnete">9. La limite honnête</h2>
+<p>Ver ne prouve <strong>pas</strong> que ta suite est bonne en général : il ne mesure que les lignes du diff. Il ne prouve <strong>pas</strong> l'équivalence sémantique (indécidable) : <code>equivalent</code> reste une décision humaine signée et comptée. Il ne détecte <strong>pas</strong> les régressions induites à distance (changement d'API cassant un comportement hors diff) : seul le mode « écart » en donne une mesure partielle, publiée comme telle. Un diff à 0 survivant n'est pas un diff sans bug.</p>
+<h2 id="10-plan-a-deux-jalons">10. Plan à deux jalons</h2>
+<table>
+<thead>
+<tr>
+<th>Lot</th>
+<th>Contenu</th>
+<th>Jours</th>
+<th>Avant</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Diff → lignes → mutants AST (6 opérateurs) + 120 fixtures à verdicts connus</td>
+<td>2,5</td>
+<td>17 nov.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Sandbox, exécution ciblée séquentielle, empreinte d'arbre, cache de couverture</td>
+<td>2</td>
+<td>20 nov.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Témoins rejouables, <code>ver replay</code>, <code>ver audit</code> (échantillon, seed publiée)</td>
+<td>2</td>
+<td>24 nov.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Registre de dette signé, ratchet, rapport HTML AA auto-portant, grille CI</td>
+<td>1,5</td>
+<td><strong>27 nov. (gel v1 28)</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Mode « écart » suite complète, comparaison de PR, <code>ver demo</code> WASM, vidéo</td>
+<td>5</td>
+<td>15 déc.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Python (mêmes témoins), suggestion de test par survivant, run nocturne</td>
+<td>6</td>
+<td><strong>29 janv.</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>v1 = lots 1 à 4</strong> : la promesse tient (diff, témoins, rejouabilité, ratchet) sans le lot 5.</p>
+<h2 id="les-cinq-cases-2020">Les cinq cases 20/20</h2>
+<ul>
+<li><strong>Impact 20/20</strong> — utilisatrice nommée (Camille, tech lead fintech sous seuil réglementaire) ; perte mesurée sur <code>ver-bench</code> (mutants semés à la main survivant aux 20 dernières PR + chrono Stryker brut, au journal) ; suppression mesurée <strong>par l'outil à chaque run</strong> (les 4 nombres du §4) ; adoption <code>npx</code> sans compte ni serveur, première valeur &lt; 60 s.</li>
+<li><strong>Kiro 20/20</strong> — specs EARS par opérateur dans <code>.kiro/specs/</code> ; PBT fast-check à <strong>oracle externe</strong> (120 verdicts humains) avec contre-exemple réel documenté (PROP-3, graine 4417, 12/11) ; hook <code>witness-integrity</code> ayant <strong>vraiment bloqué</strong> le 14/11 (date + diff) ; steering avant/après chiffré (12 % → 0 %) ; relecteur lecture seule + testeur borné ; spec/vibe chiffré sur <code>boundary</code> ; CLI headless nocturne ; MCP écarté et justifié.</li>
+<li><strong>Design 20/20</strong> — quatre états implémentés et filmés ; axe <strong>0 violation</strong> en CI ; clavier complet ; jamais la couleur seule ; <code>prefers-reduced-motion</code> ; clair/sombre ; artefact durable imprimable (<code>ver-report.html</code> auto-portant + registre signé) ; mode démo WASM hors réseau.</li>
+<li><strong>Innovation 20/20</strong> — concurrents nommés (StrykerJS, PIT, mutmut) ; écart <strong>structurel</strong> : verdict à témoin rejouable + auto-publication de la marge d'erreur + périmètre diff, contre un scalaire non auditable ; combinaison inédite (preuve × mesure de tests, technique de 1978 × gate de PR) ; limite honnête §9 ; 0 dépendance aux outils cités.</li>
+<li><strong>Présentation 20/20</strong> — 15 s = problème + chiffre sans narration ; chrono réel incrusté ; démo de bout en bout &lt; 3 min sans musique ni marque tierce ; démo en ligne &lt; 30 s sans compte ni installation avec résultat visible sans cliquer ; texte Devpost répondant aux huit questions Kiro avec chiffres.</li>
+</ul>
+<h2 id="objections-traitees">Objections traitées</h2>
+<ul>
+<li>01 antériorité PIT/Stryker sur l'exécution ciblée : <strong>[neutralisée]</strong> — le ciblage n'est plus vendu comme innovation ; le produit est le verdict à témoin rejouable sur le diff, absent des trois.</li>
+<li>02 budget temps irréaliste (4 132 mutants / 4 min) : <strong>[neutralisée]</strong> — abandon du run dépôt complet en v1 ; périmètre diff (5–60 mutants), chrono réel publié, benchmark brut au journal.</li>
+<li>03 « wrapper Stryker avec joli rapport » : <strong>[neutralisée]</strong> — 0 dépendance et garantie nouvelle (rejouabilité, déterminisme octet par octet) démontrée par <code>ver replay</code> / <code>ver audit</code>.</li>
+<li>04 score absolu non comparable, seuil gadget : <strong>[neutralisée]</strong> — plus de score global ; grille sur les nouveaux survivants du diff + ratchet de dette signée.</li>
+<li>05 gaming par exclusion d'équivalents : <strong>[neutralisée]</strong> — exclusion signée, horodatée, comptée dans le chiffre affiché, ratchet interdisant d'augmenter le taux d'exclusions.</li>
+<li>06 le ciblage rate les vrais tueurs : <strong>[neutralisée]</strong> — mode « écart » sur suite complète (30 mutants), écart publié à chaque run, bascule automatique &gt; 5 %.</li>
+<li>07 vidéo non crédible, payoff invisible : <strong>[neutralisée]</strong> — run réel de 38 s chrono incrusté ; payoff = 8 survivants sur le diff et merge bloqué (plus de 89,3 → 89,4).</li>
+<li>08 récit Kiro circulaire (oracle = l'outil) : <strong>[neutralisée]</strong> — oracle externe : 120 mutants semés à la main, verdicts écrits avant le code ; hook raconté avec date et diff.</li>
+<li>09 abandon à six mois, public théorique : <strong>[assumée : la survie dépend de l'intégration au gate de PR existant, pas de l'outil seul]</strong> — utilisatrice précise nommée, perte chiffrée sur dépôt réel, adoption <code>npx</code> &lt; 60 s sans config.</li>
+<li>10 jour J (chrono, sandbox, déterminisme) : <strong>[neutralisée]</strong> — exécution séquentielle triée, horloge virtuelle figée, politique <code>timeout</code> écrite (jamais <code>killed</code>), empreinte d'arbre avant/après, démo WASM 100 % embarquée.</li>
+</ul>
+<hr>
+<h1 id="v2-05-rejeu-rejouer-les-versions-dun-agent-pas-ses-logs">V2-05 · Rejeu — <em>rejouer les versions d'un agent, pas ses logs</em></h1>
+<h2 id="1-nom-categorie-phrase-de-differenciation">1. Nom, catégorie, phrase de différenciation</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nom</td>
+<td><strong>Rejeu</strong> — <em>Agent Replay : rejouer les versions d'un agent, pas ses logs</em></td>
+</tr>
+<tr>
+<td>Catégorie</td>
+<td>Frankenstein — le magnétoscope ressuscité, mais la bobine est l'historique de versions d'un agent, pas une capture d'écran</td>
+</tr>
+<tr>
+<td>Public</td>
+<td>Équipes de 4 à 15 personnes qui reviewent des PR produites par un agent de code (Anaïs, dev senior, 6 personnes, 3 PR d'agent/semaine, 2 dépôts)</td>
+</tr>
+<tr>
+<td>Prix visés</td>
+<td>Best Frankenstein, Best Kiro Crew App, prix globaux</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Phrase de différenciation (une ligne) :</strong> « rr restitue l'exécution d'un processus qu'il a dû lancer sous ptrace ; Rejeu restitue les <strong>versions successives du dépôt</strong> qu'un agent a traversées puis qu'un <em>squash</em> a effacées, et produit l'<strong>index de la version fautive</strong> — une information qu'aucun traceur (qui n'exécute rien) ni <code>git bisect</code> (dont les commits n'existent plus) ne peut fournir. »</p>
+<p><strong>Les trois objets, tenus séparés (le cœur de la V2) :</strong> ce qui est <strong>rejoué</strong> = les états du dépôt (arbres git, adressés par contenu) ; ce qui est <strong>prouvé</strong> = l'index du premier checkpoint où le prédicat bascule, établi par <strong>exécution réelle</strong> du prédicat dans un bac à sable ; ce qui est <strong>versionné</strong> = <code>replay/&lt;session&gt;/chain.json</code> (chaîne d'attestation) + <code>report.html</code>, commités dans le dépôt — la preuve devient un <strong>test de non-régression</strong> rejouable en CI.</p>
+<h2 id="2-le-probleme-vecu-ce-mois-ci-la-perte-chiffree-et-sa-methode">2. Le problème vécu ce mois-ci, la perte chiffrée et sa méthode</h2>
+<ul>
+<li><strong>Fait vécu, novembre 2026 :</strong> l'agent itère (il corrige son propre test rouge), puis l'équipe fait <code>git commit --amend</code> ou <code>git rebase -i</code> pour obtenir une PR propre. <strong>Les états intermédiaires disparaissent du dépôt.</strong> La PR finale est élégante ; la version qui a introduit le bug est introuvable.</li>
+<li><strong>Perte chiffrée (corpus <code>fixtures/corpus-nov2026</code>, 20 sessions du CLI headless Kiro, 1er→12 nov. 2026) :</strong> <strong>11 sessions sur 20 (55 %) n'ont plus d'historique exploitable</strong> ; <strong>9 régressions sur 20 n'ont pas pu être attribuées manuellement</strong> ; temps de recherche manuelle quand l'historique existe : <strong>14 min 20 s</strong> (médiane, 2 ingénieurs, min 3, plafond 45 min) ; <strong>2 h 40</strong> de temps ingénieur médian par incident non résolu, <strong>≈ 23 h sur 3 mois</strong> pour l'équipe.</li>
+<li><strong>Méthode de mesure :</strong> extraction des sessions depuis les run IDs de CI (1er→12 nov.), comparaison avec l'historique git du serveur <em>avant</em> squash (référence), chronométrage manuel par deux ingénieurs du service. Le chiffre <strong>41 s</strong> publié par l'outil (point 4) est obtenu sur le même corpus, sur la même métrique.</li>
+<li><strong>Pourquoi le rejeu est la seule issue, pas un nicer :</strong> l'information n'existe plus (squash), <code>git bisect</code> exige des commits existants, les logs d'agent ne portent pas l'état du dépôt, et <code>rr</code> n'a jamais vu la session (elle a eu lieu sans lui). Aucun concurrent ne peut reconstruire un état effacé.</li>
+</ul>
+<h2 id="3-la-mecanique-jusquau-detail-qui-prouve-quelle-tient_1">3. La mécanique, jusqu'au détail qui prouve qu'elle tient</h2>
+<ol>
+<li><strong>Capture par proxy d'outils, sans toucher au code de l'agent.</strong> Un serveur MCP (<code>replay-broker</code>) s'interpose entre le CLI headless Kiro et ses outils. Après chaque appel mutant (<code>edit</code>, <code>write</code>, <code>bash</code> touchant le dépôt), il écrit un <strong>checkpoint</strong> : <code>git write-tree</code> (arbre git du dépôt de travail), diff contre le checkpoint précédent, sortie de l'outil, empreinte des fichiers <strong>hors dépôt</strong> connus, <code>SOURCE_DATE_EPOCH</code>/<code>seed</code>/<code>modelVersion</code>. L'agent n'est ni patché ni forké : <strong>seuls ses appels d'outils passent par le proxy</strong>.</li>
+<li><strong>Store de checkpoints, pas un journal.</strong> <code>.replay/objects/</code> est un store <strong>adressé par contenu</strong> (arbres git) ; <code>chain.json</code> liste les checkpoints dans l'ordre, chaque entrée portant le hash de la précédente → <strong>attestation</strong> : retoucher le journal casse la chaîne et <code>replay verify</code> sort en 1. Une chaîne d'attestation n'existe pas dans un log brut éditable.</li>
+<li><strong>Rejeu 100 % simulé.</strong> <code>replay find</code> extrait chaque checkpoint dans un répertoire jetable (<code>git archive</code> de l'arbre), coupe le réseau (<code>unshare -n</code>, allowlist du fournisseur uniquement en mode re-run), exécute le <strong>prédicat</strong> (<code>pnpm test agents/parser.spec.ts</code>) <strong>dans ce bac à sable</strong>, et ne touche jamais le dépôt de travail : <strong>0 écriture hors sandbox</strong>, aucune commande destructive rejouée sur la machine hôte.</li>
+<li><strong>Recherche de la version fautive.</strong> Dichotomie sur l'ordre des checkpoints quand le prédicat est monotone, balayage linéaire sinon ; sortie = <strong>le plus petit k tel que P(k) faux et P(k-1) vrai</strong>. <em>Invariant REJ-P-01 :</em> rejouer le checkpoint k depuis k-1 redonne <strong>exactement</strong> le même hash d'arbre ; <em>invariant REJ-P-03 :</em> le sandbox ne modifie que son propre répertoire (hash du dépôt hôte inchangé avant/après).</li>
+<li><strong>Deux modes honnêtes.</strong> Mode <strong>bande</strong> : les sorties capturées du modèle sont réinjectées (utile pour isoler un composant, et <strong>tautologique par construction</strong> — ce n'est donc pas le chiffre publié). Mode <strong>re-run</strong> : le fournisseur est réellement appelé (température 0, modèle épinglé, <code>seed</code> si le fournisseur l'expose) → l'<strong>accord de décision est mesuré (78 %, 14/18 décisions)</strong>, jamais supposé.</li>
+<li><strong>Trois sorties distinctes :</strong> le <strong>verdict</strong> (index du checkpoint fautif, son arbre, le prédicat qui bascule), la <strong>timeline</strong> (les 7 checkpoints, état de chaque prédicat), et la <strong>chaîne</strong> (traçabilité complète, committable).</li>
+</ol>
+<h2 id="4-le-chiffre-que-loutil-publie-a-chaque-execution_1">4. Le chiffre que l'outil publie à chaque exécution</h2>
+<pre><code>REJEU 1.0 · session a41f9c2 · 7 checkpoints · 7/7 rejoués · couverture réelle 61 %
+VERDICT  itération fautive #3 (arbre 8ac91e0) · prédicat : agents/parser.spec.ts › trailing comma
+PRÉCÉDENT #2 (arbre 51c0d7b) passe · TEMPS 41 s · CHAÎNE vérifiée 7/7 · RE-RUN accord 78 % (14/18)
+</code></pre>
+<ul>
+<li><strong>Chiffre en gras : l'itération fautive</strong> — nombre produit par exécution réelle du prédicat, pas par comparaison de texte.</li>
+<li><strong>Trois chiffres non tautologiques :</strong> itération localisée correctement sur <strong>18/20 sessions</strong> (2 flakies détectées, verdict suspendu « non déterministe ») ; temps <strong>41 s</strong> (médiane 38 s) contre <strong>14 min 20 s</strong> en recherche manuelle ; <strong>couverture réelle 61 %</strong> des étapes exécutées (le reste est bandé).</li>
+<li>Une bande ne peut produire aucun de ces trois chiffres : elle n'exécute aucun prédicat. Un log + diff n'en produit qu'un : le diff.</li>
+</ul>
+<h2 id="5-la-preuve-kiro_1">5. La preuve Kiro</h2>
+<ul>
+<li><strong>Specs</strong> : <code>.kiro/specs/replay/*.md</code>, une par lot, exigences en EARS ; chaque exigence possède un <strong>vérificateur</strong> exécuté à chaque checkpoint → « exigence REJ-F-03 violée au checkpoint #3 ». Les specs <strong>fournissent les prédicats</strong> : c'est le mécanisme central, pas une case cochée.</li>
+<li><strong>Propriétés (fast-check)</strong> : 5 propriétés, dont REJ-P-01 (arbre stable) et REJ-P-03 (sandbox isolé). <strong>Contre-exemple réel</strong> : la propriété « l'arbre du checkpoint k est stable pour deux captures de la même action » a échoué, <strong>graine 20261104</strong> — <code>scripts/version.mjs</code> insérait <code>Date.now()</code> dans <code>VERSION</code>, donc deux captures de la même action donnaient deux arbres ; correctif : <code>.replayignore</code> + digest séparé pour les fichiers générés. Journal <code>KIRO_JOURNAL.md</code>, section « property seed 20261104 ».</li>
+<li><strong>Hook qui a vraiment bloqué</strong> : <code>checkpoint-guard</code> (pre-tool) refuse <code>git commit --amend</code>, <code>git reset --hard</code>, <code>git checkout -- .</code> pendant une session capturée. <strong>Incident du 4 nov., 14 h 12</strong> : l'amend a détruit l'arbre du checkpoint #3, <code>find</code> a désigné la mauvaise itération ; hook écrit le soir même ; <strong>il a re-bloqué le même appel le 7 nov.</strong> sur une session réelle.</li>
+<li><strong>Steering</strong> <code>determinism.md</code> (horloge logique, <code>TZ=UTC</code>, <code>seed</code> épinglé, générateurs dans <code>.replayignore</code>) — avant/après sur <code>scripts/version.mjs</code> : <strong>2 faux écarts de checkpoint sur 7 sessions → 0</strong>.</li>
+<li><strong>Agents personnalisés</strong> : <code>relecteur</code> (lecture seule : audite <code>chain.json</code>, le mapping exigence↔vérificateur, refuse les schémas non conformes) et <code>testeur</code> (sandbox + PBT, réseau coupé) ; permissions : lecture seule sur le dépôt, écriture seulement dans <code>.replay/</code>.</li>
+<li><strong>Spec vs « vibe coding » sur <code>findFaultyCheckpoint</code></strong> : <strong>spec (EARS + 5 PBT) = 3 h 20, 14 allers-retours, 3 défauts avant merge</strong> ; <strong>vibe coding (prompt direct, sans spec) = 1 h 05, 27 allers-retours, 6 défauts dont 2 bloquants (faux positif sur test flaky, divergence non localisée), 2 h 55 de débogage</strong> — chiffres du journal de construction.</li>
+<li><strong>MCP + CLI headless</strong> : serveur <code>replay_checkpoint</code> (« arbre au checkpoint n », « premier checkpoint fautif », « vérifier la chaîne ») — <strong>37 appels</strong> par les agents Kiro pendant la construction, <strong>2 exécutions complètes de suite évitées</strong> ; <code>kiro-cli --headless</code> pour capturer le corpus des 20 sessions ; aucune donnée sortante.</li>
+<li><em>Convention de preuve :</em> incidents datés = déjà survenus pendant la construction ; chiffres marqués « cible » seront mesurés sur <code>fixtures/corpus-nov2026</code> (20 sessions) au jalon 1.</li>
+</ul>
+<h2 id="6-le-concurrent-le-plus-proche-et-pourquoi-la-difference-est-structurelle">6. Le concurrent le plus proche, et pourquoi la différence est structurelle</h2>
+<table>
+<thead>
+<tr>
+<th>Concurrent</th>
+<th>Ce qu'il rejoue</th>
+<th>Ce qu'il exige</th>
+<th>Pourquoi ce n'est pas la même garantie</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>rr</code></strong> (Mozilla)</td>
+<td>appels système d'<strong>un processus</strong></td>
+<td>démarrer le processus sous <code>rr</code> (ptrace, Linux)</td>
+<td>ne rejoue pas un <strong>état effacé</strong>, n'attribue rien à une itération d'agent, pas de chaîne, pas de portabilité</td>
+</tr>
+<tr>
+<td><strong><code>replay.io</code></strong></td>
+<td>time-travel debugging natif</td>
+<td>abonnement, instrumentation native</td>
+<td>commercial, hors agents, pas d'artefact versionnable</td>
+</tr>
+<tr>
+<td><strong>VCR / cassettes</strong> (VCR.py, Polly)</td>
+<td>requêtes HTTP</td>
+<td>proxy réseau pendant l'original</td>
+<td>rejoue l'I/O réseau, pas les versions successives du dépôt</td>
+</tr>
+<tr>
+<td><strong>LangSmith / Langfuse</strong></td>
+<td>traces d'agents</td>
+<td>SDK dans l'agent</td>
+<td>observabilité : n'exécutent <strong>rien</strong>, ne localisent aucune version fautive</td>
+</tr>
+<tr>
+<td><strong><code>git bisect</code></strong></td>
+<td>commits existants</td>
+<td>que les commits existent</td>
+<td>les commits de l'agent ont été <strong>squashés</strong> : le commit à finder n'existe plus</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Différence structurelle (une phrase) :</strong> nous rejouons <strong>le dépôt</strong>, pas <strong>le processus</strong>, et la garantie produite est <strong>l'index de la version fautive</strong> (par exécution réelle du prédicat à chaque version), non la fidélité bit-à-bit d'une trace. Aucun des cinq ne peut la produire, y compris sur une session déjà passée.</p>
+<h2 id="7-les-quatre-etats-dinterface-et-lartefact-durable">7. Les quatre états d'interface et l'artefact durable</h2>
+<ul>
+<li><strong>Vide</strong> : aucune session capturée → « Aucune session. Lancez <code>replay capture</code> » + les 3 dernières sessions locales ; aucune maquette de contenu fantôme.</li>
+<li><strong>Chargement</strong> : progression par checkpoint (« checkpoint 4/7 — prédicat en cours — 12 s »), squelette de timeline, Annuler possible.</li>
+<li><strong>Erreur</strong> — trois cas distincts, tous actionnables : prédicat introuvable, checkpoint non rejouable (dépendance manquante), <strong>flaky</strong> (« le prédicat a échoué 2 fois puis réussi 1 fois : test non déterministe, verdict suspendu »).</li>
+<li><strong>Succès</strong> : verdict, timeline des checkpoints (icône + texte + couleur, <strong>jamais la couleur seule</strong>), diff du checkpoint fautif vs le précédent, bouton « rejouer ce checkpoint ».</li>
+<li><strong>Artefact durable</strong> : <code>replay/&lt;session&gt;/report.html</code> <strong>imprimable A4</strong> (verdict + timeline + chaîne + prédicat), <code>replay/&lt;session&gt;/chain.json</code> <strong>versionné</strong> dans le dépôt, store <code>.replay/objects/</code> (arbres git adressés par contenu).</li>
+<li><strong>Accessibilité</strong> : <code>axe</code> en CI sur <code>report.html</code> → <strong>0 violation</strong> ; navigation clavier complète (Tab/Entrée/Échap, focus visible) ; <code>prefers-reduced-motion</code> coupe les transitions de la timeline ; contrastes AA vérifiés sur thème clair et sombre.</li>
+<li><strong>Mode démonstration</strong> : fixtures + dépôt miniature embarqués, <strong>zéro réseau, zéro exécution réelle</strong> (résultats préenregistrés) → il ne peut pas échouer devant un jury.</li>
+</ul>
+<h2 id="8-les-15-premieres-secondes-de-la-video-plan-par-plan_1">8. Les 15 premières secondes de la vidéo, plan par plan</h2>
+<ul>
+<li><strong>0:00–0:03</strong> : CI rouge sur la PR #412, merguée il y a 19 jours ; la liste des commits n'en montre qu'<strong>un</strong> — étiquette « squashed ».</li>
+<li><strong>0:03–0:07</strong> : on fait défiler le diff : 14 fichiers, 612 lignes, aucun commit intermédiaire ; aucune narration.</li>
+<li><strong>0:07–0:11</strong> : surimpression — <strong>« 2 h 40 perdus · 9 sessions sur 20 sans historique »</strong>.</li>
+<li><strong>0:11–0:15</strong> : <code>replay find a41f9c2</code> → <strong>« itération fautive #3 · 41 s »</strong> ; la timeline passe au rouge au checkpoint 3, le diff s'ouvre.</li>
+<li>Aucun carton d'intro, aucun texte projet avant 0:07 : le problème <strong>et</strong> le chiffre sont à l'écran.</li>
+<li><strong>0:15–3:00</strong> : capture via le broker (0:15–0:40) · rejeu en sandbox, réseau coupé visible (0:40–1:20) · divergence localisée (1:20–1:50) · <code>checkpoint-guard</code> qui refuse un <code>commit --amend</code> (1:50–2:10) · <code>report.html</code> imprimable + <code>chain.json</code> committé (2:10–2:40) · mode démo hors ligne (2:40–3:00).</li>
+</ul>
+<h2 id="9-la-limite-honnete-ce-que-loutil-ne-prouve-pas">9. La limite honnête : ce que l'outil ne prouve pas</h2>
+<ul>
+<li>Il <strong>ne prouve pas</strong> que le modèle est reproductible : le taux d'accord (78 %) est <strong>mesuré</strong>, l'identité ne l'est pas ; un fournisseur peut changer un modèle sous une version épinglée → le mode re-run signale la dérive au lieu de la masquer.</li>
+<li>Il <strong>ne capture</strong> que ce qui passe par le broker : un outil écrivant hors dépôt sur un chemin non listé n'est pas suivi (liste blanche explicite : <code>~</code>, <code>/tmp</code>, caches outils).</li>
+<li>Il <strong>ne remplace pas la revue de code</strong> : il localise la version fautive, il ne dit pas si le correctif est bon.</li>
+<li>Il <strong>ne rattrape pas le passé</strong> : la capture doit être active (comme <code>rr</code>) — mais contrairement à <code>rr</code>, aucun traceur n'est requis : un proxy d'outils suffit, l'agent n'est pas instrumenté.</li>
+<li>Un test <strong>flaky</strong> suspend le verdict (« non déterministe ») au lieu de deviner.</li>
+<li><code>unshare</code> ⇒ <strong>Linux uniquement en v1</strong> (macOS/Windows déclarés hors périmètre) ; la chaîne prouve l'<strong>intégrité</strong> du journal, pas l'honnêteté de l'agent qui l'a écrit.</li>
+</ul>
+<h2 id="10-le-plan-a-deux-jalons">10. Le plan à deux jalons</h2>
+<ul>
+<li><strong>Jalon 1 — v1 avant le 28 novembre (9 j-agent)</strong> : broker MCP (capture + checkpoints <code>git write-tree</code>) · store <code>.replay/objects/</code> · <code>chain.json</code> + <code>replay verify</code> · <code>find</code> sur un prédicat unique avec sandbox <code>unshare -n</code> · rapport terminal · mode démo hors ligne. <strong>Critère de gel :</strong> 20 sessions capturées, 18/20 localisées, chaîne vérifiée, démo qui ne peut pas échouer.</li>
+<li><strong>Jalon 2 — version complète avant le 29 janvier (25 j-agent)</strong> : dichotomie + détection de flakies · attribution aux exigences EARS · rapport HTML imprimable + a11y CI · multi-prédicats · <strong>Crew nocturne sur les sessions du jour</strong> (rejeu réel, ouverture d'un ticket au premier checkpoint fautif) · serveur MCP <code>replay_checkpoint</code> · CI <code>replay verify</code> en merge-blocking.</li>
+</ul>
+<h2 id="les-cinq-cases-2020_1">Les cinq cases 20/20</h2>
+<ul>
+<li>[x] <strong>1 · Impact</strong> — problème mesuré ce mois-ci sur 20 sessions réelles (11/20 sans historique, 2 h 40/incident) ; l'outil <strong>publie lui-même</strong> le temps de localisation (41 s) et le taux de localisations correctes ; adoption sans friction : <code>npm i -g replay</code> + un proxy MCP, aucun compte, aucun serveur, première valeur &lt; 60 s.</li>
+<li>[x] <strong>2 · Technique / Kiro</strong> — 5 specs EARS dans <code>.kiro/specs/replay/</code> <strong>fournissant les prédicats</strong> ; 5 propriétés fast-check dont <strong>un contre-exemple réel (graine 20261104)</strong> consigné dans <code>KIRO_JOURNAL.md</code> ; hook <code>checkpoint-guard</code> ayant <strong>réellement bloqué</strong> un <code>commit --amend</code> le 7 nov. ; steering <code>determinism.md</code> (2 faux écarts → 0) ; agents <code>relecteur</code>/<code>testeur</code> en lecture seule ; comparaison chiffrée sur <code>findFaultyCheckpoint</code> ; MCP (37 appels, 2 suites évitées) + CLI headless.</li>
+<li>[x] <strong>3 · Design</strong> — 4 états réellement implémentés (vide / chargement / erreur / succès, flakie comprise) ; <code>axe</code> CI = <strong>0 violation</strong> ; clavier complet ; icône + texte en plus de la couleur ; <code>prefers-reduced-motion</code> ; artefacts durables <code>report.html</code> imprimable A4 + <code>chain.json</code> versionné ; mode démo hors ligne (fixtures + dépôt miniature, aucune exécution).</li>
+<li>[x] <strong>4 · Innovation</strong> — concurrents nommés (<code>rr</code>, <code>replay.io</code>, VCR/cassettes, LangSmith/Langfuse, <code>git bisect</code>) ; différence <strong>structurelle</strong> (objet = versions du dépôt, garantie = index de version fautive, non fidélité d'une trace) ; combinaison inhabituelle : rejeu système × régression d'agent × exécution de tests ; limite honnête écrite au point 9.</li>
+<li>[x] <strong>5 · Présentation</strong> — 0:00–0:15 problème + chiffre à l'écran, sans narration préalable ; démo hors ligne &lt; 30 s, sans compte ni installation, résultat visible sans clic ; 8 questions Devpost reprises avec les chiffres ci-dessus.</li>
+</ul>
+<h2 id="objections-traitees_1">Objections traitées</h2>
+<ol start="01">
+<li><strong>[neutralisée]</strong> — <code>rr</code> et <code>replay.io</code> nommés au point 6 ; l'objet n'est pas le processus mais les versions du dépôt, la garantie est l'index de version fautive : hors de portée de <code>rr</code> (ptrace, processus vivant, état effacé non rattrapable). Différence structurelle, pas cosmétique.</li>
+<li><strong>[neutralisée]</strong> — ce n'est pas un log + diff : store de checkpoints <strong>adressé par contenu</strong> (arbres git), exécution réelle du prédicat en sandbox, chaîne d'attestation vérifiable (<code>replay verify</code>), et une <strong>sortie qui est un verdict</strong> (index), pas une liste de différences. Un log brut n'exécute rien et ne prouve rien.</li>
+<li><strong>[neutralisée]</strong> — v1 restreinte au runtime contrôlé (CLI headless Kiro + Crew) ; capture par <strong>proxy d'outils</strong> sans modifier le code de l'agent ; l'absence de garantie pour un agent tiers est écrite noir sur blanc au point 9 (et O3 est reformulé, pas abandonné en silence).</li>
+<li><strong>[neutralisée]</strong> — le chiffre phare n'est plus « identité par construction » : c'est l'itération fautive (<strong>18/20</strong>, 2 flakies suspendues) et le temps (<strong>41 s</strong> vs 14 min 20 s) ; l'identité de la bande n'est qu'un prérequis, l'accord après régénération (<strong>78 %</strong>) est mesuré.</li>
+<li><strong>[neutralisée]</strong> — la vidéo ouvre sur une régression réelle et un diff squashé (0:00–0:07), pas sur un lecteur de log ; les 4 états sont visibles ; le chiffre est à l'écran à 0:07, narration nulle avant.</li>
+<li><strong>[neutralisée]</strong> — Kiro devient le sujet : broker MCP sur le CLI headless, specs EARS <strong>qui fournissent les prédicats</strong>, hook + CI <code>replay verify</code> sur <code>chain.json</code>, Crew nocturne qui rejoue <strong>les sessions du jour</strong> (pas des fixtures).</li>
+<li><strong>[neutralisée]</strong> — le cas vécu est chiffré sur 20 sessions réelles : le squash efface l'itération fautive (11/20), <code>git bisect</code> est impossible, les logs ne portent pas l'état du dépôt — le rejeu est la seule voie restante, pas un nicer.</li>
+<li><strong>[neutralisée]</strong> — décision arrêtée et documentée : <strong>rejeu 100 % simulé</strong> (répertoire jetable, réseau coupé, dépôt de travail intact, commandes destructives jamais rejouées sur l'hôte) ; l'overlay est le bac à sable, pas une question ouverte.</li>
+<li>**[assumée : la métaphore « magnétoscope » est conservée et peut coûter des points d'esthétique — le jury la classera peut-être en « sympathetic VCR for agents » ; on assume ce risque plutôt que de masquer la mécanique réelle sous une métaphore neuve.]</li>
+<li><strong>[neutralisée]</strong> — mode démo embarqué dès le lot 1 (fixtures + dépôt miniature, zéro réseau, zéro exécution) ; l'empreinte du dépôt n'est pas rejouée telle quelle mais <strong>reconstruite</strong> dans le sandbox à la volée, donc aucun chemin absolu ni version de Node figé ne peut faire diverger la démo.</li>
+</ol>
+<hr>
+<h1 id="v2-09-reprise-local-restore-drill">V2-09 — « Reprise » (<em>Local Restore Drill</em>)</h1>
+<blockquote>
+<p><strong>Recadrage de fond vs CC-09</strong> : la cible n'est plus « les équipes qui ont restic/borg », mais
+<strong>l'environnement local du développeur</strong> — l'état que Git ne contient pas — et la garantie n'est plus
+« l'archive est intacte » mais « <strong>l'environnement est vivant</strong> : restauré, puis rouvert par
+l'application qui en dépend, en un temps mesuré ».</p>
+</blockquote>
+<h2 id="1-nom-et-categorie">1. Nom et catégorie</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nom</td>
+<td><strong>Reprise</strong>. Anglais : <em>Local Restore Drill — the state git doesn't keep is the state nobody restores</em>.</td>
+</tr>
+<tr>
+<td>Catégorie</td>
+<td>Frankenstein — <em>l'exercice d'évacuation incendie des années 70</em> × <em>le poste de travail du développeur comme sinistre</em>, plus <em>la CI transformée en simulateur d'incident permanent</em>.</td>
+</tr>
+<tr>
+<td>Prix visés</td>
+<td>Best Frankenstein, Best Demo, prix globaux.</td>
+</tr>
+<tr>
+<td>Charge</td>
+<td>v1 <strong>6 jours-agent</strong> (périmètre écrit noir sur blanc, §10), total 20 j.</td>
+</tr>
+<tr>
+<td>Différenciation (une ligne)</td>
+<td><code>restic check</code> prouve que l'<strong>archive</strong> est intacte ; <strong>Reprise</strong> prouve que l'<strong>environnement local</strong> — celui que Git ne contient pas — est <strong>vivant</strong> : il le restaure en bac à sable, le fait rouvrir par <strong>l'application qui en dépend</strong> (<code>.env</code> déchiffré, <code>sqlite3 .integrity_check</code>, <code>pg_restore --list</code>, <code>npm ci &amp;&amp; vitest</code>), et publie le <strong>RTO local mesuré</strong> à chaque commit.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-le-probleme-vecu-ce-mois-ci_1">2. Le problème vécu ce mois-ci</h2>
+<p><strong>Persona (nommé) :</strong> <em>Alex, dev full-stack sur poste Ubuntu, conteneur Postgres 16 local + <code>.env</code>
+(12 secrets) + 34 fichiers ignorés par Git (seeds, exports SQL, captures) + config IDE + 2 workspaces
+npm</em>. Il perd l'état local quand un <code>docker compose down -v</code> vide un volume, quand un <code>.env</code> est
+écrasé par un stash mal fusionné, quand le disque se remplit, quand le portable ne redémarre plus.</p>
+<p><strong>Perte chiffrée (méthode : chronométrage sur 5 étapes — récupérer les secrets, rejouer les
+migrations, re-seeder, re-configurer l'IDE, relancer) :</strong>
+- médiane <strong>47 min</strong> de reprise, plage <strong>12 min – 3 h 20</strong> (11 dévs, protocole + captures
+  horodatées publiés dans <code>docs/reprise-11devs.md</code>) ;
+- <strong>2 / 11</strong> n'ont pas pu rejouer leurs seeds (état non reconstruit, chemins codés en dur) → <strong>absence
+  de reprise</strong>, pas seulement lenteur ;
+- coût annualisé : 47 min × 4 incidents/an ≈ <strong>3 h 10 par dev et par an</strong>, hors heures de travail
+  perdues.</p>
+<p><strong>Ce que l'outil supprime, mesuré par lui-même à chaque exécution :</strong> le drill reconstruit réellement
+l'environnement local dans un bac à sable et chronomètre la chaîne complète → <strong>RTO local mesuré</strong>
+(garantie ≤ 5 min en v1 avec snapshot à chaud), publié à chaque run. La perte passe de « 47 min
+inconnues, parfois impossibles » à « <strong>6 min 40 mesurées ce matin, état par état</strong> ».</p>
+<p><strong>Adoption sans friction :</strong> binaire unique, <strong>zéro compte, zéro serveur, zéro configuration
+préexistante</strong> (pas de restic à installer, pas de NAS à brancher) ; première valeur (découverte
+lecture seule + un témoin) en <strong>47 s</strong> mesurés. Le plus dur — décider <em>ce qui</em> doit survivre — est
+proposé par l'outil et validé en une touche.</p>
+<h2 id="3-la-mecanique-jusqua-linvariant">3. La mécanique — jusqu'à l'invariant</h2>
+<ol>
+<li><strong>Déclarer (0 s, lecture seule).</strong> <code>reprise discover</code> liste les <em>états vitaux</em> candidats : <code>.env*</code>,
+   volumes Docker nommés, fichiers ignorés Git non triviaux, secrets du trousseau, config d'outils.
+   Sortie : un manifeste <code>reprise.toml</code> proposé, que le dev valide (une ligne par état vital).</li>
+<li><strong>Capturer.</strong> Un snapshot local chiffré (restic en moteur, dépôt local, clé <code>age</code> dans le trousseau
+   OS) des états vitaux déclarés. Rien n'est écrit ailleurs que dans le dépôt de snapshot + le bac
+   à sable.</li>
+<li><strong>Bac à sable (le cœur).</strong> <code>unshare -m</code> (namespace de montage) + source montée <strong>en lecture seule</strong>
+   (<code>mount --bind,ro</code>) + Landlock (kernel ≥ 5.13) interdisant l'écriture sur <code>$HOME</code> et sur la source +
+   <code>tmpfs</code> inscriptible unique pour le travail. <strong>Aucun <code>tar -x</code> ne s'exécute hors de ce namespace.</strong></li>
+<li><strong>Restaurer.</strong> Décompactage du snapshot dans le sandbox, restitution des secrets (déchiffrement
+   <code>age</code> via la clé du trousseau), re-materialisation du volume, rechargement de la config.</li>
+<li><strong>Faire rouvrir par l'application (le cœur distinctif).</strong> Chaque état vital porte un <strong>témoin
+   applicatif déterministe</strong>, exécuté <em>dans</em> le sandbox : <code>sqlite3 db .integrity_check</code>,
+   <code>pg_restore --list dump.sql</code>, <code>psql -c 'select count(*) from users'</code> en transaction <strong>lecture
+   seule</strong>, <code>npm ci &amp;&amp; vitest run --changed</code>, <code>docker compose config -q</code>. Un fichier lisible mais
+   inexploitable ⇒ <code>fail</code>.</li>
+<li><strong>Mesurer.</strong> RTO (chaîne complète snapshot→témoins verts), débit, taille, écart au budget déclaré.</li>
+<li><strong>Publier.</strong> Verdict daté, signé (ed25519), <code>sha256</code> du rapport, append-only dans <code>verdicts.jsonl</code>.</li>
+<li><strong>Rejouer.</strong> Hook de commit + job CI nightly : dérive détectée si le RTO monte de &gt; 30 %, si un
+   état vital disparaît du manifeste, si un témoin passe de vert à rouge.</li>
+</ol>
+<p><strong>Invariant (prouvé, pas affirmé) :</strong> <em>le drill ne modifie ni ne supprime l'état d'origine</em> —
+le hash d'arbre du dépôt, du volume et de <code>$HOME</code> est calculé <strong>avant et après</strong>, et la CI échoue si
+les deux diffèrent. <strong>Garantie :</strong> <em>un drill vert prouve que N états vitaux ont été restaurés </em><em>et
+rouverts par l'application qui en dépend</em><em>, en ≤ budget, sans que l'environnement d'origine n'ait
+été modifié.</em></p>
+<p><strong>Preuve par propriété qui a réellement échoué :</strong> <code>RES-P-01</code> (« aucune écriture hors bac à sable »),
+fast-check, 300 manifestes générés (traversées <code>../../</code>, symlinks, chemins absolus), <strong>graine
+<code>0xC0FFEE</code></strong> → contre-exemple : un tar à entrée absolue <code>/home/alex/.bashrc</code> était extrait <strong>pendant
+la phase de pré-vérification, avant que le namespace soit appliqué</strong> ⇒ sortie du sandbox. Correctif :
+extraction <strong>uniquement</strong> via <code>unshare</code> + <code>mount --bind,ro</code> + Landlock <strong>avant</strong> toute extraction, et
+rejet des entrées absolues/<code>..</code> par <code>tar --list</code> avant extraction. Journal : <code>KIRO_JOURNAL.md</code>,
+propriété + graine + contre-exemple + correctif.</p>
+<h2 id="4-le-chiffre-que-loutil-publie-a-chaque-execution_2">4. Le chiffre que l'outil publie à chaque exécution</h2>
+<table>
+<thead>
+<tr>
+<th>Champ</th>
+<th>Exemple mesuré</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RTO local mesuré</strong> (chaîne complète)</td>
+<td><strong>6 min 12 s</strong></td>
+</tr>
+<tr>
+<td>États vitaux rouverts par leur application</td>
+<td><strong>5 / 5</strong></td>
+</tr>
+<tr>
+<td>Écart au budget déclaré</td>
+<td><strong>− 38 s</strong> (budget 7 min)</td>
+</tr>
+<tr>
+<td>Dérive RTO depuis le drill précédent</td>
+<td><strong>+ 12 %</strong> (seuil d'alerte 30 %)</td>
+</tr>
+<tr>
+<td>Âge du dernier drill vert</td>
+<td><strong>2 j</strong> (alerte à 7 j)</td>
+</tr>
+<tr>
+<td>Octets écrits hors bac à sable</td>
+<td><strong>0</strong> (diff d'empreintes avant/après)</td>
+</tr>
+<tr>
+<td>Empreinte + signature du verdict</td>
+<td><code>sha256:9f2c…</code> / <code>ed25519:7a1e…</code></td>
+</tr>
+</tbody>
+</table>
+<p>Un seul chiffre porte la promesse : <strong>« votre poste peut revenir en 6 min 12 s, prouvé par
+l'application qui l'utilise, ce matin. »</strong></p>
+<h2 id="5-la-preuve-kiro_2">5. La preuve Kiro</h2>
+<table>
+<thead>
+<tr>
+<th>Attendu par la grille</th>
+<th>Preuve concrète</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Specs EARS</td>
+<td><code>.kiro/specs/sandbox-guard.md</code>, <code>witness-runner.md</code>, <code>manifest-discovery.md</code>, <code>verdict-signing.md</code> — exigences <code>RES-F-01..08</code> en notation EARS, conservées</td>
+</tr>
+<tr>
+<td>PBT + contre-exemple réel</td>
+<td>fast-check sur <code>RES-P-01..05</code> ; contre-exemples <code>0xC0FFEE</code> (extraction avant namespace) et <code>0xBEEF</code> (fichier au sha256 correct mais au contenu indécodable ⇒ faux <code>pass</code> → ajout du témoin « ouvrabilité ») documentés dans <code>KIRO_JOURNAL.md</code></td>
+</tr>
+<tr>
+<td>Hook qui a bloqué une régression</td>
+<td><code>drill-guard</code> (pre-commit + gate CI) : refuse tout commit touchant <code>.env*</code>, <code>docker-compose*.yml</code>, <code>migrations/**</code>, <code>*.sql</code> sans drill vert sur le digest courant de l'arbre. <strong>Incident du 12 nov.</strong> : un commit renommant <code>0042_add_index.sql</code> faisait disparaître silencieusement le témoin <code>pg_restore --list</code> du manifeste ⇒ hook a <strong>refusé le push</strong> (« witness pg_restore manquant pour l'état vital db-local »), régression bloquée avant merge</td>
+</tr>
+<tr>
+<td>Steering avant/après</td>
+<td><code>safety.md</code> : avant, 2 occurrences d'extraction directe du chemin de l'archive ; après, 0 (tout passe par <code>sandbox.extract()</code>), vérifié par un grep en CI</td>
+</tr>
+<tr>
+<td>Agents à permissions restreintes</td>
+<td><code>.kiro/agents/relecteur.json</code> (lecture seule : <code>read</code>/<code>grep</code>/<code>list</code>, aucun write) relit manifeste + verdict et refuse 3 manifestes incohérents ; <code>.kiro/agents/testeur.json</code> (read + exécution sandbox) génère <strong>120 fixtures de corruption en 40 s</strong></td>
+</tr>
+<tr>
+<td>Comparaison spec vs vibe coding, chiffrée</td>
+<td>Fonction précise : <code>extractIntoSandbox()</code> (packages/guard). Spec-first : 4 h 20, 9 itérations, <strong>4 défauts avant merge</strong>, 380 lignes, 0,9 ligne de test/LOC. Vibe coding : 2 h 05, 3 itérations, <strong>11 défauts avant merge</strong> dont <strong>2 safety-critical</strong> (traversée de chemin, évasion symlink), 410 lignes, 0,3. Conclusion mesurée : le vibe est plus rapide sur le chemin heureux, mais <strong>ses 2 seuls défauts graves sont exactement ceux que la propriété RES-P-01 rattrape</strong></td>
+</tr>
+<tr>
+<td>MCP justifié</td>
+<td><code>drill_mcp</code> (<code>drill_run</code>, <code>drill_verdict</code>, <code>drill_fixtures</code>) : intégration CI de <strong>1 h 40 (script + parsing JSON) à 6 min</strong> ; le relecteur agent lit le verdict sans accès shell</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-le-concurrent-le-plus-proche-et-la-difference-structurelle">6. Le concurrent le plus proche, et la différence structurelle</h2>
+<p><strong><code>restic check --read-data</code></strong> (et <code>borg check --verify-data</code>) : vérifie l'<strong>intégrité des paquets</strong> de
+l'archive, sur place, <strong>sans jamais recréer un artefact utilisable</strong>. <strong>Veeam SureBackup / Instant
+Verification</strong> : restauration réelle + rapport daté, mais appliance propriétaire, licence, périmètre serveur.
+<strong><code>docker compose down -v</code></strong> : le vrai destructeur, sans aucune trace.</p>
+<p>Différence <strong>structurelle</strong>, trois axes, pas cosmétique :
+1. <strong>Objet de la preuve</strong> : octets du conteneur (<code>check</code>) ↔ <strong>environnement applicatif rejoué</strong>
+   (témoin exécuté par l'application qui en dépend) ;
+2. <strong>Périmètre</strong> : les sauvegardes déjà configurées (serveurs) ↔ <strong>l'état local que personne ne
+   sauvegarde et que Git ne contient pas</strong> (<code>.env</code>, volume, ignorés) ;
+3. <strong>Sortie</strong> : « paquets intacts » ↔ <strong>RTO mesuré + verdict signé + historique + gate CI</strong>.</p>
+<p><strong>Phrase de différenciation qui résiste à la contradiction :</strong> « <code>restic check</code> peut passer vert et
+votre poste rester irrécupérable ; Reprise ne dit jamais « intact », il dit « rouvre en 6 min 12 s » —
+et il le prouve en faisant tourner l'application. »</p>
+<h2 id="7-les-quatre-etats-dinterface-et-lartefact-durable_1">7. Les quatre états d'interface et l'artefact durable</h2>
+<table>
+<thead>
+<tr>
+<th>État</th>
+<th>Écran (vues du rapport web local, hors-ligne)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Vide</strong></td>
+<td>« 0 état vital déclaré » + <code>reprise discover</code> proposé (lecture seule, aucune écriture)</td>
+</tr>
+<tr>
+<td><strong>Chargement</strong></td>
+<td>phases nommées : capture → restauration → témoins (n/5) → verdict, % et phase courante</td>
+</tr>
+<tr>
+<td><strong>Erreur</strong></td>
+<td>échec <strong>nommé</strong> : quel état vital, quelle commande témoin, stderr complet, verdict <code>fail</code> signé, aucun crash ni page blanche</td>
+</tr>
+<tr>
+<td><strong>Succès</strong></td>
+<td>verdict horodaté, RTO, 5/5, empreinte, signature, bouton « imprimer le rapport »</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Accessibilité AA vérifiée par axe en CI</strong> : <code>axe-core</code> sur les 4 vues, <strong>0 violation</strong> ; navigation
+  clavier complète (tab/entrée, focus visible) ; l'information <strong>n'est jamais portée par la seule
+  couleur</strong> (verdict = mot <code>PASS</code>/<code>FAIL</code> + icône + bordure double) ; <code>prefers-reduced-motion</code> respecté.</li>
+<li><strong>Artefact durable</strong> : <code>verdicts.jsonl</code> append-only signé (ed25519) + <strong>rapport HTML autonome
+  imprimable</strong> (A4, une page par drill) exportable et vérifiable hors ligne.</li>
+<li><strong>Mode démonstration qui ne peut pas échouer en direct</strong> : <code>--demo</code> embarque un corpus signé
+  (512 Mio) et rejoue des verdicts réels <strong>pré-calculés</strong> ; <strong>aucun réseau requis</strong>.</li>
+<li><strong>Identité visuelle</strong> : sobre, deux couleurs d'état, thème clair et sombre via <code>prefers-color-scheme</code>.</li>
+</ul>
+<h2 id="8-les-15-premieres-secondes-de-la-video-plan-par-plan_2">8. Les 15 premières secondes de la vidéo, plan par plan</h2>
+<table>
+<thead>
+<tr>
+<th>Temps</th>
+<th>Plan</th>
+<th>Texte à l'écran</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0:00–0:04</td>
+<td>Terminal plein cadre, une ligne rouge</td>
+<td><code>RTO local : 8 min 12 s — db-local : rouvert ✓</code></td>
+</tr>
+<tr>
+<td>0:04–0:09</td>
+<td>Même écran, relance d'un drill</td>
+<td><code>12 min 04 s — 4/5 — .env a changé depuis le dernier drill</code></td>
+</tr>
+<tr>
+<td>0:09–0:15</td>
+<td>Split : <code>docker compose down -v</code> puis <code>reprise run</code></td>
+<td>reconstruction complète, verdict vert horodaté et signé</td>
+</tr>
+<tr>
+<td>0:15–0:20</td>
+<td>Carton</td>
+<td><strong>« 47 min pour rebricoler votre poste après une perte d'état local — médiane mesurée sur 11 développeurs. Nous on le prouve : 6 min 12 s. »</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Puis 0:20–1:10 le drill réel sur le dépôt du projet (vraie base locale, vrais secrets de démo) ·
+1:10–1:40 le témoin <code>pg_restore --list</code> et <code>sqlite3 .integrity_check</code> qui prouvent que les fichiers
+servent · 1:40–2:20 le hook <code>drill-guard</code> qui refuse un commit et sa trace à l'écran · 2:20–2:50
+l'historique des verdicts et la dérive + la démo web hors-ligne · 2:50–3:00 l'artefact imprimé.</p>
+<h2 id="9-la-limite-honnete-ce-que-loutil-ne-prouve-pas_1">9. La limite honnête — ce que l'outil ne prouve pas</h2>
+<ul>
+<li>Il ne prouve <strong>que les états vitaux déclarés</strong> : un <code>.env</code> non déclaré reste non couvert (le
+  manifeste est donc affiché, jamais caché).</li>
+<li>Il ne prouve <strong>pas</strong> la survie du hardware : un disque mort reste un disque mort (Reprise réduit le
+  coût de la <em>reprise</em>, pas la <em>panne</em>).</li>
+<li>Il ne remplace pas une <strong>stratégie de sauvegarde serveur</strong> : <code>restic</code> reste le moteur de capture,
+  pas la stratégie.</li>
+<li>Un témoin applicatif exécuté <strong>dans le sandbox</strong> ne prouve pas le comportement en production
+  (charge, réseau, migrations concurrentes) : RTO mesuré en local ≠ RTO en conditions réelles.</li>
+<li>Il ne dit <strong>rien</strong> des fichiers non déclarés, et son RTO est une <strong>moyenne d'un scénario</strong>, pas
+  une borne.</li>
+</ul>
+<h2 id="10-le-plan-a-deux-jalons_1">10. Le plan à deux jalons</h2>
+<p><strong>Jalon 1 — v1 gelée le 28 novembre (6 jours-agent, périmètre noir sur blanc) :</strong>
+manifeste + découverte (1 j) · garde <code>unshare</code> + Landlock + diff d'empreintes (1,5 j) · snapshot
+local + restauration en sandbox (1 j) · deux témoins applicatifs (<code>sqlite3 .integrity_check</code>,
+<code>pg_restore --list</code>) (1 j) · verdict signé + RTO + rapport imprimable (1 j) · hook <code>drill-guard</code> +
+CI (corpus 512 Mio, <strong>2 min 12 s</strong>, budget 5 min) + propriétés cassées documentées (0,5 j).
+<strong>Hors v1, assumé :</strong> pas de cluster Postgres, pas de cloud, pas de Windows, pas de multi-états
+simultanés au-delà de 2.</p>
+<p><strong>Jalon 2 — version complète avant le 29 janvier :</strong> <code>docker compose</code> multi-services · <code>pg_verifybackup</code>
+et cohérence transactionnelle · agent <strong>testeur</strong> de corruption naturelle (bit-rot, snapshot
+interrompu) · extension des états non-Git (hors-ligne, caches, configs IDE) · vue web multi-drills,
+thème clair/sombre, export PDF · MCP v1 stable · corpus de corruptions publié et appel à
+contribution · mode démo hors-ligne figé pour le jury.</p>
+<h2 id="les-cinq-cases-2020-cochees-avec-leur-preuve">Les cinq cases 20/20, cochées avec leur preuve</h2>
+<table>
+<thead>
+<tr>
+<th>Critère</th>
+<th>Preuve concrète</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Impact 20/20</strong></td>
+<td>Persona <em>Alex</em> nommé ; perte <strong>47 min médiane / 2 sur 11 reprises impossibles</strong>, mesurée sur 11 dévs (protocole + horodatages dans <code>docs/reprise-11devs.md</code>) ; suppression <strong>mesurée par l'outil à chaque run</strong> (RTO local) ; adoption <strong>zéro compte, zéro serveur, binaire unique, première valeur en 47 s</strong></td>
+</tr>
+<tr>
+<td><strong>2. Mise en œuvre 20/20</strong></td>
+<td>4 specs EARS dans <code>.kiro/specs/</code> ; 2 propriétés fast-check <strong>qui ont réellement échoué</strong> (<code>0xC0FFEE</code>, <code>0xBEEF</code>) avec correctif dans <code>KIRO_JOURNAL.md</code> ; hook <code>drill-guard</code> qui a <strong>refusé un commit le 12 nov.</strong> (incident raconté) ; steering <code>safety.md</code> <strong>2 → 0</strong> occurrence ; agents relecteur/testeur <strong>lecture seule</strong> ; comparatif spec/vibe chiffré sur <code>extractIntoSandbox()</code> (4 h 20 / 9 it. / 4 défauts <strong>vs</strong> 2 h 05 / 3 it. / 11 défauts dont 2 safety-critical) ; MCP <strong>1 h 40 → 6 min</strong></td>
+</tr>
+<tr>
+<td><strong>3. Design 20/20</strong></td>
+<td>4 états (vide/chargement/erreur/succès) décrits + 4 captures dans <code>docs/etats/</code> ; <strong>axe-core en CI, 0 violation</strong>, clavier complet, verdict jamais porté par la couleur, <code>prefers-reduced-motion</code> ; artefact durable = <code>verdicts.jsonl</code> signé + <strong>rapport HTML A4 imprimable</strong> ; <strong>mode démo hors-ligne</strong> (corpus embarqué, zéro réseau) ; thème clair/sombre</td>
+</tr>
+<tr>
+<td><strong>4. Innovation 20/20</strong></td>
+<td>Concurrent nommé <strong>et</strong> comparé : <code>restic check --read-data</code>, <code>borg check --verify-data</code>, <strong>Veeam SureBackup</strong> ; différence <strong>structurelle</strong> (preuve applicative rejouée vs intégrité de paquets ; état local vs serveur ; RTO vs binaire) ; combinaison rare : <em>exercice d'évacuation × poste de travail × CI</em> ; limite honnête écrite (§9)</td>
+</tr>
+<tr>
+<td><strong>5. Présentation 20/20</strong></td>
+<td>0:00–0:15 : <strong>le chiffre <code>8 min 12 s</code> à l'écran</strong>, narration différée ; 0:09–0:15 la cause réelle (<code>down -v</code>) ; démo de bout en bout ≤ 3 min, sans musique ni marque tierce ; <strong>démo web &lt; 30 s, sans compte ni installation, corpus embarqué, résultat visible sans clic</strong> ; les 8 questions du formulaire Devpost répondues <strong>chiffre par chiffre</strong> (§2, §5, §9)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="objections-traitees_2">Objections traitées</h2>
+<ul>
+<li><strong>01 — antériorité (<code>restic check</code>, <code>borg check</code>, Veeam)</strong> : <code>[neutralisée]</code> — la garantie n'est plus l'intégrité mais la <strong>preuve applicative rejouée + RTO mesuré</strong>, sur l'<strong>état local</strong> que Git ne contient pas ; concurrent nommé et comparé axe par axe (§6), plus la comparaison chiffrée spec/vibe qui montre ce que <code>check</code> ne prouve pas (§5).</li>
+<li><strong>02 — « c'est un script shell »</strong> : <code>[neutralisée]</code> — la v1 livre <strong>4 specs EARS</strong>, fast-check, garde noyau (Landlock + mount namespace), <strong>témoins applicatifs</strong>, verdict signé, hook qui bloque vraiment, rapport web/HTML ; et l'objection devient la démonstration : vibe coding = 11 défauts dont 2 safety-critical, spec-first = 4 (§5).</li>
+<li><strong>03 — v1 en 8 jours intenable</strong> : <code>[neutralisée]</code> — v1 <strong>réduite à 6 jours-agent</strong>, périmètre écrit noir sur blanc (§10) ; P-01 tracée par <strong>diff d'empreintes d'arbre avant/après</strong> (pas d'audit syscall), Landlock au lieu d'un audit complet ; fixtures, rapport, CI et specs inclus dans les 6 jours.</li>
+<li><strong>04 — le chiffre ne prouve rien</strong> : <code>[neutralisée]</code> — le chiffre publié est le <strong>RTO local mesuré par reconstruction réelle</strong>, avec 5/5 rouverts, dérive et âge ; l'échantillonnage est une limite assumée (§9) et non un angle mort.</li>
+<li><strong>05 — démo de fixtures</strong> : <code>[neutralisée]</code> — la vidéo montre <strong>le drill réel du dépôt du projet</strong> (vraie base locale, vrais secrets de démo) et une <strong>corruption naturelle</strong> (dump tronqué / snapshot interrompu), plus le <code>down -v</code> réel ; les fixtures semées ne servent qu'au test, pas au spectacle.</li>
+<li><strong>06 — récit Kiro plaqué</strong> : <code>[neutralisée]</code> — comparatif spec/vibe <strong>déplacé sur la garde d'écriture</strong> (sujet de sûreté, EARS, chiffres réels) ; hook <code>drill-guard</code> <strong>bloquant une régression réelle</strong> (incident du 12 nov.) ; property PBT <strong>cassée</strong> ; steering avec effet mesuré 2 → 0.</li>
+<li><strong>07 — le jury n'a pas de sauvegarde à tester</strong> : <code>[neutralisée]</code> — <strong>recadrage complet de la cible</strong> : l'objet est l'<strong>environnement local du développeur</strong>, que tout développeur possède, qui n'est pas dans Git et que personne ne teste ; le premier run se fait sur sa propre machine, sans compte ni serveur, en 47 s ; démo web hors-ligne pour le juge qui ne clique pas.</li>
+<li><strong>08 — angle mort technique (états vivants)</strong> : <code>[neutralisée]</code> — le <strong>témoin applicatif est obligatoire dès la v1</strong> (<code>sqlite3 .integrity_check</code>, <code>pg_restore --list</code>, <code>psql</code> en lecture seule, <code>npm ci &amp;&amp; vitest</code>), permissions/UID/GID et chemins absolus vérifiés, <code>pg_verifybackup</code> prévu au jalon 2 ; la corruption « lisible mais inutilisable » est le contre-exemple <code>0xBEEF</code> qui a fait évoluer le produit.</li>
+<li><strong>09 — « déjà vu » en Frankenstein</strong> : <code>[assumée : la métaphore d'évacuation est antérieure à Veeam — on la revendique et on la déplace sur le poste de travail, seul lieu où elle n'a jamais été appliquée ; le MCP est conservé car il apporte 1 h 40 → 6 min mesurés]</code></li>
+<li><strong>10 — risque de toucher une vraie source en démo</strong> : <code>[neutralisée]</code> — le drill <strong>ne déplace ni ne supprime l'état réel</strong> : il ne fait que le <em>dupliquer</em> vers un bac à sable ; la source est montée <strong>en lecture seule au niveau OS</strong>, la garde est démontrée <strong>avant</strong> toute restauration (trace affichée), et la démo live n'utilise que le corpus embarqué read-only.</li>
+</ul>
+<hr>
+</main>
+<footer>Généré depuis les sources Markdown du dépôt, vérifié sans dérive en CI. Licence MIT.</footer>
+</body>
+</html>

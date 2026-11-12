@@ -38,7 +38,7 @@ footer{padding:1.2rem;color:var(--mut);font-size:.85rem;border-top:1px solid var
 <body>
 <header>
 <h1>Dossier Kiroween — Hackathon 2026</h1>
-<p>2 400 idées générées, quatre classements successifs, quatorze cahiers des charges complets.</p>
+<p>2 400 idées, quatre classements, douze idées passées au banc d'attaque, quatorze cahiers des charges.</p>
 </header>
 <nav>
 <a href="index.html" class="actif">Accueil</a>
@@ -50,6 +50,8 @@ footer{padding:1.2rem;color:var(--mut);font-size:.85rem;border-top:1px solid var
 <a href="idees-semaine.html">Idées · 15 filons (750)</a>
 <a href="idees-devs.html">Idées · développeurs (1 000)</a>
 <a href="classement-devs.html">Classement devs — 50</a>
+<a href="grille-100.html">La barre des 100</a>
+<a href="boucle-100.html">Attaques et fiches V2</a>
 <a href="cahiers-devs.html">Cahiers devs — 10</a>
 <a href="disquette.html">Cahier · Disquette</a>
 <a href="rota.html">Cahier · Rota</a>
@@ -78,6 +80,14 @@ charges complets dans <strong><a href="cahiers-devs.html">Cahiers devs — 10</a
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><strong><a href="grille-100.html">La barre des 100</a></strong></td>
+<td>La grille où 100/100 est défini case par case, les jugements indépendants, et <strong>la démonstration qu'aucune fiche écrite ne dépasse ~77/100</strong> — les 23 points restants sont du code, pas du texte.</td>
+</tr>
+<tr>
+<td><a href="boucle-100.html">Attaques et fiches V2</a></td>
+<td>Les 120 objections (48 bloqueurs) portées contre les douze idées de tête, et les fiches réécrites pour les neutraliser.</td>
+</tr>
 <tr>
 <td><strong><a href="classement-devs.html">Classement devs — 50</a></strong></td>
 <td>Les 50 meilleures idées pour un public 100 % développeur, notées sur la reconnaissance immédiate du problème, la profondeur technique, le chiffre mesuré et la démonstration.</td>
@@ -268,6 +278,56 @@ dit rien — le taux de survie des mutants, si).</p>
 </tr>
 </tbody>
 </table>
+<h2 id="la-boucle-100100-et-son-resultat-honnete">La boucle « 100/100 » — et son résultat honnête</h2>
+<p>Douze idées de tête ont été soumises à trois agents successifs : un <strong>avocat du diable</strong> (10 objections
+chacune, 48 bloqueurs au total), un <strong>réécriveur</strong> (fiche V2 neutralisant chaque bloqueur), puis un
+<strong>juge indépendant</strong> qui ne lit que la fiche et la grille.</p>
+<table>
+<thead>
+<tr>
+<th>Fiche V2</th>
+<th>Impact</th>
+<th>Kiro</th>
+<th>Design</th>
+<th>Innovation</th>
+<th>Présentation</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ver — <em>Mutation Score</em></td>
+<td>14</td>
+<td>12</td>
+<td>14</td>
+<td>15</td>
+<td>12</td>
+<td><strong>67/100</strong></td>
+</tr>
+<tr>
+<td>Rejeu — <em>Agent Replay</em></td>
+<td>15</td>
+<td>15</td>
+<td>13</td>
+<td>17</td>
+<td>13</td>
+<td><strong>73/100</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Le juge a relevé <strong>18 chiffres affirmés mais non prouvables</strong> dans la fiche Rejeu (16 dans Ver) :
+« 41 s par exécution », « 18 localisations correctes sur 20 », « un contre-exemple fast-check à la
+graine 20261104 », « le hook a bloqué un commit le 7 novembre », « axe : 0 violation ». Aucun dépôt,
+aucune exécution ne peut encore les produire.</p>
+<blockquote>
+<p><strong>Conclusion de la boucle</strong> : une idée écrite plafonne autour de <strong>77/100</strong>. Le seul critère saturable
+à l'écrit est l'<strong>Innovation</strong> — et il l'est déjà. Les 23 points restants sont des artefacts : un dépôt
+avec ses specs et son journal horodaté, une propriété qui a réellement échoué, un rapport <code>axe</code> à zéro
+violation, une démo en ligne, une vidéo. <strong>On n'atteint pas 100 en écrivant davantage ; on l'atteint en
+construisant un projet.</strong></p>
+<p>Règle adoptée depuis : dans toute fiche, un chiffre est soit marqué <em>[cible]</em>, soit accompagné du
+chemin du fichier qui le produit.</p>
+</blockquote>
 <h2 id="comment-ce-corpus-a-ete-produit">Comment ce corpus a été produit</h2>
 <ul>
 <li><strong>Vague 1</strong> — 15 sous-agents, 15 filons de technologies mortes et de squelettes : <strong>750 idées</strong>.</li>

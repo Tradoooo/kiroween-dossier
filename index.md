@@ -15,6 +15,8 @@ charges complets dans **[Cahiers devs — 10](cahiers-devs.html)**.
 
 | Page | Contenu |
 |---|---|
+| **[La barre des 100](grille-100.html)** | La grille où 100/100 est défini case par case, les jugements indépendants, et **la démonstration qu'aucune fiche écrite ne dépasse ~77/100** — les 23 points restants sont du code, pas du texte. |
+| [Attaques et fiches V2](boucle-100.html) | Les 120 objections (48 bloqueurs) portées contre les douze idées de tête, et les fiches réécrites pour les neutraliser. |
 | **[Classement devs — 50](classement-devs.html)** | Les 50 meilleures idées pour un public 100 % développeur, notées sur la reconnaissance immédiate du problème, la profondeur technique, le chiffre mesuré et la démonstration. |
 | **[Cahiers devs — 10](cahiers-devs.html)** | Les dix premières développées en cahier des charges complet : problème exact, mécanique, exigences EARS, propriétés à tester, architecture, stratégie Kiro, plan de réalisation, script vidéo minuté, recette. |
 | [Idées · développeurs (1 000)](idees-devs.html) | Vingt filons techniques : outillage du quotidien, agents IA, données, sécurité, performance, tests, exploitation, langages, legacy, API, Git, interface, local d'abord, mesure, documentation, diagnostic, déploiement, architecture, CLI, coût. Chaque idée est marquée **[T]** technique ou **[S]** simple. |
@@ -63,6 +65,31 @@ partie la plus utile du dossier : on y voit ce que le changement de critère fai
 | 8 | 90 | **Plongée** | Frankenstein | La queue de distribution plutôt que la moyenne : p99 par route et décomposition des plus lents. |
 | 9 | 90 | **Restauration** | Frankenstein | Exercice réel de restauration rejoué en CI : la sauvegarde qui n'a jamais été testée échoue. |
 | 10 | 89 | **Caractérisation** | Skeleton Crew | Tests de caractérisation générés pour un code hérité sans tests : le comportement est figé, toute dérive sonne. |
+
+## La boucle « 100/100 » — et son résultat honnête
+
+Douze idées de tête ont été soumises à trois agents successifs : un **avocat du diable** (10 objections
+chacune, 48 bloqueurs au total), un **réécriveur** (fiche V2 neutralisant chaque bloqueur), puis un
+**juge indépendant** qui ne lit que la fiche et la grille.
+
+| Fiche V2 | Impact | Kiro | Design | Innovation | Présentation | Total |
+|---|---|---|---|---|---|---|
+| Ver — *Mutation Score* | 14 | 12 | 14 | 15 | 12 | **67/100** |
+| Rejeu — *Agent Replay* | 15 | 15 | 13 | 17 | 13 | **73/100** |
+
+Le juge a relevé **18 chiffres affirmés mais non prouvables** dans la fiche Rejeu (16 dans Ver) :
+« 41 s par exécution », « 18 localisations correctes sur 20 », « un contre-exemple fast-check à la
+graine 20261104 », « le hook a bloqué un commit le 7 novembre », « axe : 0 violation ». Aucun dépôt,
+aucune exécution ne peut encore les produire.
+
+> **Conclusion de la boucle** : une idée écrite plafonne autour de **77/100**. Le seul critère saturable
+> à l'écrit est l'**Innovation** — et il l'est déjà. Les 23 points restants sont des artefacts : un dépôt
+> avec ses specs et son journal horodaté, une propriété qui a réellement échoué, un rapport `axe` à zéro
+> violation, une démo en ligne, une vidéo. **On n'atteint pas 100 en écrivant davantage ; on l'atteint en
+> construisant un projet.**
+>
+> Règle adoptée depuis : dans toute fiche, un chiffre est soit marqué *[cible]*, soit accompagné du
+> chemin du fichier qui le produit.
 
 ## Comment ce corpus a été produit
 
