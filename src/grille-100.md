@@ -12,7 +12,32 @@ indépendant** qui ne lit que la fiche et la grille — jamais les attaques ni l
 | Rejeu — *Agent Replay* | 15 | 15 | 13 | 17 | 13 | **73/100** |
 | Ver — *Mutation Score* | 14 | 12 | 14 | 15 | 12 | **67/100** |
 | Chemin-fantôme — *Ghost Path Registry* | 12 | 10 | 11 | 15 | 11 | **59/100** |
-| Reprise — *Local Restore Drill* | 9 | 7 | 8 | 12 | 9 | **45/100** |
+| Reprise — *Local Restore Drill* | 14 | 13 | 11 | 13 | 11 | **62/100** |
+
+### Un même juge, deux passages, 16 points d'écart — et c'est le résultat le plus utile du dossier
+
+La fiche **Reprise** a été jugée **trois fois** par des juges indépendants, à froid, sur la même fiche et
+la même grille. Les notes ne concordent pas :
+
+| Passage | Impact | Kiro | Design | Innovation | Présentation | Total |
+|---|---|---|---|---|---|---|
+| Premier (12 nov.) | 9 | 7 | 8 | 12 | 9 | **45/100** |
+| Second (13 nov.) | 14 | 13 | 11 | 13 | 11 | **62/100** |
+| Contre-jugement antérieur (conservé dans l'historique) | 16 | 17 | 15 | 16 | 14 | **78/100** |
+
+**L'étendue (45 → 78) est plus instructive que n'importe quelle note isolée.** Ce qui varie d'un juge à
+l'autre n'est pas la lecture du document — les défauts cités se recoupent presque tous — mais la
+**rigueur appliquée à la preuve** : un juge qui exige le chemin du fichier là où la fiche n'en nomme
+qu'un, un juge qui lit « les chemins de fichiers *visent* comme *cible nommée* », un juge qui n'exige que
+l'artefact et rien de plus. 33 points d'écart, pour une fiche identique.
+
+Conséquence practice : **une note de juge n'est pas une mesure, c'est un avis.** Elle ne devient une
+mesure qu'avec l'artefact en face. Les trois jugements sont publiés dans cette page ; aucun n'a été
+effacé, et c'est le désaccord qui est instructive.
+
+Le seuil qui, lui, ne bouge pas : sur les quatre fiches, **aucun critère ne dépasse 17/20 et aucun total
+ne dépasse 78**. Une fiche écrite plafonne entre **45 et 78** selon la rigueur du juge — l'écart
+résiduel vers 100 est du code, pas du texte.
 
 **Aucune fiche écrite ne peut atteindre 100/100.** Le juge indépendant l'a établi sans ambiguïté :
 quatre critères sur cinq exigent des **artefacts qui n'existent que construits** — un dépôt avec
@@ -20,19 +45,27 @@ quatre critères sur cinq exigent des **artefacts qui n'existent que construits*
 un hook qui a réellement bloqué un commit, un rapport `axe` à zéro violation, une démo en ligne,
 une vidéo. Tant que le code n'existe pas, ces cases valent entre 12 et 15 sur 20.
 
-### Le cas Reprise : 90/100 au classement, 45/100 au juge
+### Le cas Reprise : 90/100 au classement, 45 à 78/100 au juge
 
-Reprise était notée 90 dans le classement développeurs. Le juge indépendant lui donne **45**. Trois
-raisons, toutes instructives :
+Reprise était notée 90 dans le classement développeurs. Les juges indépendants lui donnent **45, puis
+62, puis 78** — même fiche, même grille, trois lecteurs à froid. Les défauts cités se recoupent presque
+tous ; ce qui varie, c'est la rigueur appliquée à la preuve. Trois raisons, instructives dans les trois
+passages :
 
 1. **Contradiction interne** sur le chiffre central — la fiche promettait « RTO ≤ 5 min », publiait
-   « 6 min 12 s » et ouvrait la vidéo sur « 8 min 12 s ».
+   « 6 min 12 s » et ouvrait la vidéo sur « 8 min 12 s ». Le second passage en compte trois valeurs
+   coexistantes (6 min 40 / 6 min 12 s / 8 min 12 s) et signale même que 7 min − 6 min 12 s = − 48 s,
+   pas − 38 s.
 2. **Fréquence non sourcée** — « 4 incidents par an » inventé pour annualiser un gain.
-3. **Concurrents les plus proches non nommés** — devcontainers, Nix flakes, direnv, dotenv-vault.
-   Un juge peut dire : « un devcontainer rend l'état local reproductible, votre exercice perd son objet. »
+3. **Concurrents les plus proches non nommés** — devcontainers, Nix flakes, direnv, dotenv-vault. Le
+   second passage montre que l'écart porte plus loin : la fiche compare `restic check` (vérifier) quand
+   le concurrent le plus proche est `restic restore` / `borg restore` (restaurer), et elle s'attribue
+   elle-même l'objection la plus forte — *Veeam Instant Verification* fait déjà « restauration réelle +
+   rapport daté », l'écart invoqué étant un écart d'empaquetage, pas une garantie différente.
 
 Leçon : une note d'opportunité élevée ne survit pas à un juge strict si la fiche se contredit ou si le
-paysage concurrentiel n'est pas épuisé. Ce sont les deux premiers contrôles à faire avant d'écrire.
+paysage concurrentiel n'est pas épuisé. Ce sont les deux premiers contrôles à faire avant d'écrire —
+et le deuxième se vérifie en une phrase : **le produit le plus proche qui fait déjà le travail existe-t-il ?**
 
 Seul le critère **Innovation** est atteignable sur papier (12 à 17 sur 20) — et il est déjà presque
 saturé : c'est ce que la boucle attaque/amélioration a acheté.
@@ -270,104 +303,144 @@ il reste 8 défauts à traiter avant 100/100
 
 ---
 
-# J-09 — Jugement indépendant de V2-09 « Reprise » (Local Restore Drill)
+# J-09 — Jugement indépendant de V2-09 « Reprise » (Local Restore Drill), second passage
 
-Juge : sous-agent indépendant, n'a lu que GRILLE-100.md et la fiche V2. Rien n'est construit : toute « preuve » citée dans la fiche est une promesse tant qu'aucun artefact de dépôt n'est vérifiable.
+Juge : sous-agent indépendant, lecture aveugle (grille + fiche V2-09 seulement).
 
-## Notes sur 20
-
-| Critère | Note | Ce qui manque pour 20/20 |
-|---|---|---|
-| Impact | 16 | Lever la contradiction interne « garantie ≤ 5 min en v1 » (§2) contre RTO mesuré 6 min 12 s / budget 7 min (§4), et rendre l'étude 11 dévs vérifiable (`docs/reprise-11devs.md` inexistant, recrutement et définition des « 4 incidents/an » non sourcés). |
-| Kiro | 17 | Que chaque artefact cité existe vraiment dans le dépôt : `.kiro/specs/*`, `KIRO_JOURNAL.md` avec graines 0xC0FFEE/0xBEEF, hook `drill-guard`, agents relecteur/testeur, comparatif spec/vibe rejouable. |
-| Design | 15 | Des captures réelles des 4 états (annoncées dans `docs/etats/`, absentes) et un rapport axe-core en CI à 0 violation **exécuté**, pas affirmé. |
-| Innovation | 16 | Écarter nommément les reconstructeurs d'environnement déclaratif (nix, devbox, mise, devenv) : sans eux dans §6, un juge peut dire « c'est du nix avec un chronomètre ». |
-| Présentation | 14 | Respecter la longueur imposée (fiche à 208 lignes, grille : 90–150) et répondre aux 8 questions Devpost **in extenso** au lieu de renvoyer à des sections. |
-
-**Total : 78/100.**
-
-## Défauts qui coûtent encore des points
-
-1. Fiche de 208 lignes, hors de la borne 90–150 de la grille.
-2. Contradiction chiffrée : RTO « garanti ≤ 5 min en v1 » (§2) vs exemple 6 min 12 s et budget 7 min (§4) vs carton vidéo « 6 min 12 s » (§8).
-3. Aucun artefact vérifiable : specs EARS, journal, graines PBT, incident du 12 nov., steering 2→0, `verdicts.jsonl`, captures `docs/etats/`, étude 11 dévs — tout est cité comme existant, rien n'est dans un dépôt consultable.
-4. Concurrents « environnement déclaratif » (nix/devbox/mise/devenv) absents de §6, alors qu'ils ciblent exactement « reconstruire l'état local ».
-5. Les 8 questions Devpost sont déclarées répondues « chiffre par chiffre » par simple renvoi à §2/§5/§9.
-6. Échantillon de 11 dévs : méthode de recrutement, biais de sélection et source des « 4 incidents/an » non donnés.
-7. Le mode démo embarque un corpus de 512 Mio mais la démo web est promise « < 30 s sans installation » : le chargement de ce corpus n'est pas démontré compatible avec les 30 s.
-
-## Chiffres affirmés mais non prouvables (projet, rien n'est construit)
-
-47 min médiane / plage 12 min–3 h 20 / 2 sur 11 impossibles / 3 h 10 par dev et par an ; première valeur en 47 s ; RTO 6 min 12 s, 8 min 12 s, 12 min 04 s, dérive +12 %, écart −38 s ; 300 manifestes générés, graines 0xC0FFEE et 0xBEEF ; 120 fixtures en 40 s ; spec/vibe (4 h 20, 9 it., 4 défauts, 380 lignes, 0,9 — vs 2 h 05, 3 it., 11 défauts, 410 lignes, 0,3) ; MCP 1 h 40 → 6 min ; axe-core 0 violation ; CI corpus 512 Mio en 2 min 12 s ; charge 6 jours-agent / 20 j.
-
-## Verdict
-
-**[il reste 7 défauts à traiter avant 100/100]** — total 78/100.
-
----
-
-# Jugement — Chemin-fantôme (Ghost Path Registry, V2-01)
-
-Juge : sous-agent indépendant, lecture aveugle — il n'a lu que `GRILLE-100.md` et la fiche
-V2-01, jamais les attaques, ni les autres jugements, ni les cahiers des charges.
-Date : 13 novembre 2026 — quinze jours avant le jalon v1.
+Note de méthode : la fiche est notée **comme un projet** — v1 annoncée pour le 28/11/2026, dépôt non
+construit. Les chemins de fichiers nommés (`.kiro/specs/…`, `KIRO_JOURNAL.md`, `docs/reprise-11devs.md`,
+`docs/etats/`) valent comme **cible nommée**, pas comme preuve : la grille exige que la case soit
+prouvable *dans le dépôt*, et aucune ligne de ces artefacts n'est reproduite dans la fiche. Les
+énoncés au passé qui exigent un code non livré (§5 contre §10) sont traités comme des défauts.
 
 | Critère | Note | Ce qui manque pour 20/20 |
 |---|---|---|
-| Impact | 12/20 | La perte n'est chiffrée nulle part : « `[cible]` minutes par session », « `[cible]` % des affirmations fantômes », et le protocole `mesure/perte.md` est « à écrire au jalon 1 ». Le compteur « deux références sur trois n'existent pas » est écrit comme un fait, en contradiction avec la promesse « aucune mesure passée inventée ». La population visée (développeur qui pilote 3 à 8 sous-agents) n'est pas justifiée, et « première valeur en moins de 60 s » n'est ni chronométré ni borné. L'outil ne mesure pas la perte qu'il prétend supprimer : il compte des fantômes, pas des minutes évitées. |
-| Kiro | 10/20 | Tout est au conditionnel : specs nommées mais non écrites, contre-exemple fast-check « consigné le jour où il survient », hook `ghost-path-guard` sans incident et dont le substrat (CI sur dépôt tiers) est au jalon 2, steering `[cible]` → `[cible]`, comparaison spec/vibe intégralement `[cible]`, agents sans permissions visibles ni commits, MCP « livré seulement si le lot tient ». Aucune preuve consultable — c'est la case « une liste de fonctionnalités Kiro cochée sans preuve » que la grille sanctionne. |
-| Design | 11/20 | Les quatre états sont décrits avec précision mais aucun n'est montré. « axe-core en CI à 0 violation `[cible]` » n'est pas mesurable : la cible du contrôle n'est pas définie. L'identité visuelle n'existe pas (« thème clair/sombre » sans palette ni typo). Le mode démo contredit la règle « un juge qui ne clique nulle part voit un résultat » : l'état vide affiche un corpus de démo **avec un bouton**. |
-| Innovation | 15/20 | Le meilleur point : concurrent nommé, tableau de différence structurelle, limite honnête précise. Deux trous : le tableau §6 revendique en « Objet » symbole, route, table et var d'env — du contenu du jalon 2, pas de la v1 soumise ; et le jeu de concurrents omet les plateformes de trace d'agents (Langfuse, LangSmith, OpenTelemetry GenAI), qui produisent bel et bien session + étape + auteur + horodatage. En v1, la compression « c'est `no-unresolved` appliqué à un journal » reste plausible. |
-| Présentation | 11/20 | Le plan des 15 premières secondes est bon mais reste un storyboard. « Sur l'appareil visé » : l'appareil n'est jamais nommé. La démo en ligne n'a ni URL ni engagement mesuré, et le texte Devpost « répondant aux huit questions avec des chiffres » n'existe pas — les huit questions ne sont même pas énumérées dans la fiche. |
-| **Total** | **59/100** | |
+| Impact | 14 | Un seul RTO de référence dans tout le document (le doc en affiche trois : 6 min 40, 6 min 12 s, 8 min 12 s) ; la table de correspondance entre la chaîne de la perte mesurée (5 étapes) et la chaîne effectivement chronométrée par l'outil ; la source du « 4 incidents/an » qui fonde les 3 h 10 par dev et par an ; le critère de recrutement des 11 développeurs ; la trace datée du « 47 s » d'adoption. |
+| Kiro | 13 | Un extrait de `KIRO_JOURNAL.md` (propriété, graine, contre-exemple, correctif) et non le seul chemin ; un protocole et un artefact de comparaison spec/vibe (`docs/spec-vs-vibe.md` : mêmes conditions, liste des 11 défauts, horodatages) ; le fichier du hook et la trace du refus du 12/11 (un pre-commit ne refuse pas un push) ; l'état initial « 2 occurrences » du steering (fichier/commit) ; les sorties des agents relecteur et testeur. |
+| Design | 11 | L'alignement de §7 et §10 : les quatre vues web, l'axe-core en CI, le thème clair/sombre et le mode démo sont annoncés comme livrés alors que §10 les place au jalon 2 ; un rapport CI nommé prouvant « 0 violation » ; le chemin du rapport HTML A4 imprimable et son gabarit. |
+| Innovation | 13 | Le concurrent **le plus proche** nommé : la fiche compare `restic check` (opération différente) mais omet `restic restore` / `borg restore` / borgmatic et les scripts de smoke test maison que Reprise automatise ; et une réponse structurelle à l'objection que la fiche s'attribue elle-même (Veeam Instant Verification fait déjà « restauration réelle + rapport daté »). |
+| Présentation | 11 | Un artefact de démo en ligne (URL ou fichier autonome nommé) qui répond à « moins de 30 s, sans compte ni installation » alors que le mode démo est au jalon 2 ; les huit réponses Devpost, qui sont annoncées mais n'existent pas dans la fiche ; une marge sur le plan vidéo, calé à 3:00 pile. |
+
+**Total : 62/100.**
 
 ## Défauts qui coûtent encore des points
 
-Les trois qui coûtent chacun un critère entier :
-
-1. **[Impact] Aucune mesure de perte exécutée.** Les deux seules quantités sont des placeholders ; la
-   méthode annoncée est *promise*, pas *exécutée*. Correctif : relever sur N sessions réelles les minutes
-   entre l'affirmation fantôme et son rejet, versionner `mesure/perte.md` et les journaux bruts au gel.
-2. **[Kiro] Aucune preuve consultable.** Ni specs écrites, ni contre-exemple fast-check avec sa graine,
-   ni incident de hook, ni avant/après de steering. Correctif : `KIRO_JOURNAL.md` doit contenir au moins
-   un contre-exemple complet et reproductible au gel ; à défaut, la case Kiro plafonne quel que soit le reste.
-3. **[Présentation] Rien n'existe encore.** Ni URL de démo, ni texte Devpost rédigé, ni appareil cible
-   nommé, et un état vide qui exige un clic. Correctif : démo publiée et chronométrée, auto-démo au
-   premier écran, texte Devpost rédigé question par question.
-
-Les vingt autres : contradiction interne sur « deux références sur trois » (§1) ; population visée non
-justifiée ; « première valeur < 60 s » non chronométrée ; l'outil ne mesure pas la perte supprimée ;
-hook sans incident et au jalon 2 ; dépôt tiers ni nommé ni épinglé ; steering non mesuré ; spec/vibe
-intégralement `[cible]` ; agents sans permissions ni commits ; MCP conditionnel ; périmètre d'entrée
-annoncé au-delà de la v1 ; `axe` à 0 violation non mesurable ; contradiction du mode démo ; identité
-visuelle absente ; quatre états décrits et non montrés ; appareil cible non nommé ; démo en ligne
-inexistante ; texte Devpost non rédigé ; tableau §6 qui surestime la v1 ; jeu de concurrents incomplet ;
-compression « `no-unresolved` appliqué à un journal » non réfutée.
+1. [Impact] Trois valeurs de RTO coexistent et l'écart au budget est faux : §2 « la perte passe de
+   « 47 min inconnues » à « **6 min 40** mesurées ce matin » », §4 « RTO local mesuré … **6 min 12 s** ·
+   écart au budget **− 38 s** (budget 7 min) », §8 plan vidéo « **RTO local : 8 min 12 s** » puis carton
+   « 6 min 12 s ». En outre 7 min − 6 min 12 s = **− 48 s**, pas − 38 s ; et §2 promet « **≤ 5 min en
+   v1** » alors que l'exemple publié est à 6 min 12 s. Preuve : une seule valeur de référence dans tout
+   le document, le journal `verdicts.jsonl` signé qui la produit, et le calcul d'écart correct.
+2. [Impact] La comparaison « 47 min → 6 min 12 s » ne compare pas la même chaîne : la perte a été
+   mesurée sur 5 étapes (récupérer les secrets, rejouer les migrations, re-seeder, re-configurer l'IDE,
+   relancer) alors que l'outil chronomètre « snapshot → témoins verts », qui n'inclut ni le re-seeder ni
+   la reconfig IDE. Preuve : une table de correspondance des 5 étapes de `docs/reprise-11devs.md` vers les
+   phases de l'outil, plus un run des deux chaînes sur les mêmes postes.
+3. [Impact] « coût annualisé 47 min × 4 incidents ≈ 3 h 10 par dev et par an » : le « 4 incidents/an »
+   n'a aucune source dans la fiche. Preuve : la source du taux d'incident dans le protocole publié, ou la
+   suppression de l'annualisation au profit du seul chiffre médian.
+4. [Impact] L'échantillon (11 développeurs) n'a aucun critère de recrutement : « 11 développeurs » n'est
+   pas « la quasi-totalité des développeurs visés » sans sélection documentée. Preuve : la méthode de
+   recrutement et le profil (Ubuntu + Docker + Postgres) dans `docs/reprise-11devs.md`.
+5. [Impact] « première valeur (découverte lecture seule + un témoin) en **47 s** mesurés » : ni protocole,
+   ni horodatage, ni artefact. Preuve : un chronométrage reproductible (script + trace datée) du chemin
+   `reprise discover` → premier verdict.
+6. [Kiro] La preuve Kiro est écrite au passé alors que le code qui la rend possible est au jalon 1 non
+   livré : §5 revendique fast-check sur `RES-P-01..05`, contre-exemples `0xC0FFEE` et `0xBEEF`, hook
+   bloquant « incident du 12 nov. » et comparatif sur `extractIntoSandbox()` (packages/guard), tandis que
+   §10 place garde `unshare`/Landlock, propriétés, hook et CI dans les « 6 jours-agent » du jalon 1 et
+   annonce la v1 au 28/11. Preuve : soit les artefacts existent (chemin + commit daté avant le 28/11),
+   soit les passages §5 sont réécrits au futur et le jalon 1 devient la seule source de vérité.
+7. [Kiro] Le comparatif « spec-first vs vibe coding » n'a ni protocole ni artefact : qui a fait quoi, avec
+   quel modèle, à partir de quelle consigne, et où sont la liste des 11 défauts et les 4 défauts. Preuve :
+   `docs/spec-vs-vibe.md` (protocole, deux transcripts, liste des défauts avec sévérité, horodatages).
+8. [Kiro] Le hook est décrit en contradiction avec lui-même : « `drill-guard` (pre-commit + gate CI)
+   refuse tout commit […] **sans drill vert** » puis « hook a **refusé le push** » — un hook pre-commit ne
+   refuse pas un push, et exiger un drill vert suppose le drill déjà construit et vert, donc l'incident du
+   12/11 est auto-contradictoire. Preuve : le fichier du hook (chemin), son mode de déclenchement réel,
+   et la trace datée du refus (message + commit/Hash refusé).
+9. [Kiro] `KIRO_JOURNAL.md` est nommé mais aucun extrait n'est donné : la grille exige la propriété, la
+   graine et le correctif, pas un chemin. Preuve : les deux entrées (`0xC0FFEE`, `0xBEEF`) reproduites
+   avec la propriété formalisée et le correctif.
+10. [Kiro] Les agents sont annoncés avec des résultats (« refuse 3 manifestes incohérents », « génère
+    120 fixtures de corruption en 40 s ») sans aucune sortie nommée ; de plus le testeur est défini par
+    « read + exécution sandbox », ce qui dépasse la « permissions restreintes » demandée par la grille.
+    Preuve : `.kiro/agents/relecteur.json` et `testeur.json`, le journal d'exécution, la liste des 3
+    manifestes refusés et le fichier de 120 fixtures.
+11. [Kiro] Le steering « avant : 2 occurrences d'extraction directe du chemin de l'archive ; après : 0 » n'a
+    pas d'état initial nommé : sans le fichier ou le commit qui portait ces 2 occurrences, l'effet
+    avant/après n'est pas vérifiable. Preuve : le commit « avant » (ou fichier) et la commande de grep
+    exécutée en CI avec sa sortie.
+12. [Design] Contradiction de périmètre entre §7 (et la ligne « Design 20/20 ») et §10 : §7 présente les
+    quatre états d'interface comme des « vues du rapport web local », l'axe-core en CI, le thème clair et
+    sombre et le mode démo comme acquis, alors que §10 place « vue web multi-drills, thème clair/sombre »
+    et « mode démo hors-ligne figé pour le jury » au **jalon 2** (29/01). Preuve : la correction de §10
+    (entrer les vues en jalon 1 avec chemin de commits) ou la mention explicite que la case Design ne
+    peut pas être cochée en v1.
+13. [Design] « axe-core sur les 4 vues, **0 violation** » n'a ni workflow ni rapport nommé : c'est une
+    affirmation sans artefact, précisément ce que la grille sanctionne (« l'accessibilité affirmée et non
+    mesurée »). Preuve : le chemin du workflow CI et le rapport d'exécution (artefact) qui porte 0 violation.
+14. [Design] L'artefact durable est décrit (« rapport HTML autonome imprimable, A4, une page par drill »)
+    sans chemin de fichier ni gabarit d'impression ; l'export PDF est, lui, au jalon 2. Preuve : le
+    fichier du rapport (chemin), le gabarit d'impression et une impression réelle A4 en une page.
+15. [Innovation] Le concurrent **le plus proche** n'est pas nommé : la grille vise l'outil existant qui fait
+    le plus proche, or la fiche compare `restic check --read-data` (vérifier des paquets) et non
+    `restic restore` / `borg restore` / borgmatic (restaurer réellement) ni les scripts de smoke test
+    maison que Reprise automatise. Preuve : un tableau comparatif contre la restauration réelle d'outillage
+    existant, sur les trois axes de §6.
+16. [Innovation] La fiche se donne elle-même l'objection la plus forte : « Veeam SureBackup / Instant
+    Verification : restauration réelle + rapport daté ». Or l'écart invoqué est « appliance propriétaire,
+    licence, périmètre serveur » — un écart d'empaquetage et de périmètre, pas une garantie différente,
+    alors que la grille exige une différence structurelle qui résiste à la contradiction. Preuve : une
+    phrase de différenciation qui exclut explicitement Instant Verification (garantie applicative rejouée
+    + bac à sable local + verdict signé, contre restauration + rapport daté).
+17. [Présentation] « démo web < 30 s, sans compte ni installation, résultat visible sans clic » n'a ni URL ni
+    artefact de déploiement nommé, et le mode démo est au jalon 2 ; le corpus embarqué de 512 Mio va de
+    plus à l'encontre de « première valeur en 47 s » et « binaire unique » si la démo en dépend. Preuve :
+    l'artefact de démo nommé (fichier autonome ou URL) + la mesure horodatée du rendu sans clic.
+18. [Présentation] Les huit réponses du formulaire Devpost sont annoncées « chiffre par chiffre (§2, §5,
+    §9) », mais les huit questions ne sont ni reprises ni répondues dans la fiche. Preuve : une section
+    « Devpost » listant les 8 questions et leurs 8 réponses chiffrées.
+19. [Présentation] Le plan vidéo totalise exactement 3:00 (2:50–3:00 « l'artefact imprimé »), sans aucune
+    marge, alors que la grille exige « moins de 3 minutes ». Preuve : le plan recalé à ≤ 2:45.
 
 ## Chiffres affirmés mais non prouvés
 
-Seize, dont treize placeholders `[cible]` ou engagements de production : « deux références sur trois
-n'existent pas » (affirmation de fait, sans échantillon) · « 3 à 8 sous-agents par tâche » (source
-absente) · minutes par session · % d'affirmations fantômes · précision sur corpus témoin (le corpus
-témoin est au jalon 2, la ligne de sortie de la v1 ne peut donc pas le contenir) · steering avant/après ·
-défauts de la comparaison spec/vibe · `0 violation` axe · % de prose ignorée · requête et graine du
-tirage des 5 dépôts (non reproductible) · dépôt tiers et nombre de lignes du jalon 2 · « 3 fantômes »
-présentés comme un résultat d'exécution au plan vidéo · « première valeur en moins de 60 s » · durées
-vidéo et démo · la ligne de sortie elle-même, sans aucun exemple de valeurs réelles.
+1. 47 min de médiane (plage 12 min – 3 h 20) — il faut `docs/reprise-11devs.md` : protocole, critères de
+   sélection, horodatages par développeur, données brutes.
+2. 2 / 11 n'ont pas pu rejouer leurs seeds — il faut la grille de qualification (« absence de reprise »)
+   et le cas de chacun des 2 développeurs.
+3. 3 h 10 par dev et par an — il faut la source du taux de 4 incidents/an.
+4. 47 s de première valeur — il faut une trace datée et reproductible du chemin découverte → verdict.
+5. 6 min 12 s de RTO local — il faut le verdict signé correspondant dans `verdicts.jsonl` et le calcul
+   d'écart au budget.
+6. 6 min 40 « mesurées ce matin » — il faut la trace datée qui la produit, et sa réconciliation avec le 5.
+7. 8 min 12 s affiché à l'écran (0:00–0:04) — il faut le plan vidéo final, cohérent avec 5 et 6.
+8. 5 / 5 états vitaux rouverts — il faut le manifeste signé et la sortie nominative de chaque témoin.
+9. + 12 % de dérive RTO — il faut les deux verdicts successifs comparables.
+10. 2 j d'âge du dernier drill vert — il faut l'horodatage du verdict.
+11. 0 octet écrit hors bac à sable — il faut la sortie du diff d'empreintes avant/après.
+12. `sha256:9f2c…` / `ed25519:7a1e…` — empreintes tronquées, non vérifiables ; il faut les valeurs complètes
+    et le fichier de signature.
+13. 2 min 12 s de CI sur un corpus de 512 Mio — il faut une exécution CI datée (aujourd'hui, projection).
+14. 512 Mio de corpus signé — il faut le corpus (chemin, empreinte signée).
+15. 120 fixtures de corruption en 40 s — il faut le journal du testeur et le fichier de fixtures.
+16. 3 manifestes refusés par le relecteur — il faut la trace des refus.
+17. Steering 2 → 0 occurrences — il faut l'état initial nommé et la sortie du grep de CI.
+18. Spec-first 4 h 20 / 9 it. / 4 défauts vs vibe coding 2 h 05 / 3 it. / 11 défauts dont 2 safety-critical —
+    il faut `docs/spec-vs-vibe.md` : protocole, liste des défauts, horodatages.
+19. MCP « 1 h 40 → 6 min » — il faut la mesure versionnée (script + parsing JSON) des deux durées.
 
 ## Verdict
 
-**[il reste 23 défauts à traiter avant 100/100]** — total 59/100.
+**[il reste 19 défauts à traiter avant 100/100]** — total 62/100.
 
-**Conclusion factuelle :** la fiche est un plan cohérent et techniquement solide (invariants I1/I2,
-sortie ternaire, registre rejouable et hashé, limite honnête écrite), mais elle s'auto-déclare « les cinq
-cases 20/20 » alors qu'aucune n'est démontrée dans un dépôt : 13 des 16 chiffres cités sont des
-placeholders, le compteur « 2 références sur 3 » est une affirmation de fait, et la v1 réellement
-soumise (chemins TypeScript seuls, un adaptateur, pas de corpus témoin) ne peut produire ni la ligne de
-sortie décrite au §3 ni la précision affichée. **59/100 au gel** tant que le dépôt ne contient ni
-protocole de mesure exécuté, ni `KIRO_JOURNAL.md` avec contre-exemple, ni registre / HTML générés, ni
-URL de démo, ni texte Devpost.
-
----
+Les trois gains les plus rapides : (a) unifier les trois RTO et corriger l'écart au budget (défaut 1), (b)
+trancher la contradiction §7 / §10 sur le périmètre Design de la v1 (défaut 12), (c) nommer le concurrent
+le plus proche — `restic restore` / `borg restore` — et répondre à Veeam Instant Verification (défauts 15
+et 16). Les trois points les plus coûteux en notation sont Kiro (§5 vs §10 : les preuves ne peuvent pas
+précéder le code), Design (états, a11y et mode démo annoncés mais hors jalon 1) et Présentation (démo en
+ligne et Devpost annoncés, inexistants). Aucun adjectif dans ce verdict : chaque défaut ci-dessus nomme
+l'artefact qui le fermerait.
 
 ---

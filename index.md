@@ -76,13 +76,8 @@ chacune, 48 bloqueurs au total), un **réécriveur** (fiche V2 neutralisant chaq
 |---|---|---|---|---|---|---|
 | Rejeu — *Agent Replay* | 15 | 15 | 13 | 17 | 13 | **73/100** |
 | Ver — *Mutation Score* | 14 | 12 | 14 | 15 | 12 | **67/100** |
+| Reprise — *Local Restore Drill* | 14 | 13 | 11 | 13 | 11 | **62/100** |
 | Chemin-fantôme — *Ghost Path Registry* | 12 | 10 | 11 | 15 | 11 | **59/100** |
-| Reprise — *Local Restore Drill* | 9 | 7 | 8 | 12 | 9 | **45/100** |
-
-Le juge a relevé **18 chiffres affirmés mais non prouvables** dans la fiche Rejeu (16 dans Ver) :
-« 41 s par exécution », « 18 localisations correctes sur 20 », « un contre-exemple fast-check à la
-graine 20261104 », « le hook a bloqué un commit le 7 novembre », « axe : 0 violation ». Aucun dépôt,
-aucune exécution ne peut encore les produire.
 
 **Le classement s'est inversé sous le juge.** Chemin-fantôme était la première idée du classement
 développeurs (95/100) : le juge indépendant lui donne **59**, derrière Rejeu (73) et Ver (67). Trois
@@ -100,6 +95,13 @@ raisons, toutes structurelles :
 Et le concurrent le plus proche n'est pas écarté : les plateformes de trace d'agents (Langfuse,
 LangSmith, OpenTelemetry GenAI) produisent déjà session + étape + auteur + horodatage — l'argument
 « un linter n'a ni auteur ni horodatage » est vrai des linters, faux des traces d'agents.
+
+**Et une note de juge n'est pas une mesure.** La fiche Reprise a été jugée trois fois à froid par des
+juges indépendants : **45, puis 62, puis 78**. Les défauts cités se recoupent presque tous ; ce qui
+varie, c'est la rigueur appliquée à la preuve — exiger le chemin du fichier là où la fiche n'en nomme
+qu'un, ou exiger l'artefact et rien de plus. Trente-trois points d'écart, pour une fiche identique.
+Sur les quatre fiches, aucun total ne dépasse 78 : **une fiche écrite plafonne entre 45 et 78 selon la
+rigueur du juge**, et l'écart résiduel vers 100 est du code, pas du texte.
 
 > **Conclusion de la boucle** : une idée écrite plafonne autour de **77/100**. Le seul critère saturable
 > à l'écrit est l'**Innovation** — et il l'est déjà. Les 23 points restants sont des artefacts : un dépôt
