@@ -108,16 +108,49 @@ annonçait ont été remplacés par des chiffres <strong>mesurés</strong>.</p>
 <td>—</td>
 <td><code>chain.json</code> (chaîne d'attestation à digest chaîné), <code>report.html</code> imprimable A4, démo hors ligne sur Pages</td>
 </tr>
+<tr>
+<td>Vidéo</td>
+<td>« plan minuté »</td>
+<td><strong>66 s enregistrée</strong>, sans narration, sorties réelles</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ce-qui-a-ete-fait-depuis-13-nov-16-h">Ce qui a été fait depuis (13 nov., 16 h)</h2>
+<table>
+<thead>
+<tr>
+<th>Ajout</th>
+<th>Preuve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Vidéo</strong> (66 s, H.264, sans narration)</td>
+<td><code>docs/demo/rejeu-demo.mp4</code> ; toutes les sorties affichées sont produites par <code>scripts/capture-reel.mjs</code> (vraies exécutions)</td>
+</tr>
+<tr>
+<td><strong>Capture non coopérative</strong></td>
+<td><code>packages/proxy/</code> : un proxy MCP enveloppe le serveur d'outils de l'agent et capture chaque changement d'état. Prouvé sur un agent réel : <strong>3 appels → 2 checkpoints</strong>, l'appel de lecture n'en produit aucun. 4 tests dédiés</td>
+</tr>
+<tr>
+<td>Session réelle d'agent</td>
+<td><code>fixtures/session-agent/</code> (opencode + broker) : régression localisée à l'<strong>itération #0 en 3,0 s</strong></td>
+</tr>
+<tr>
+<td>Session proxy</td>
+<td><code>fixtures/session-proxy/</code> (opencode + proxy) : capture automatique, sans coopération</td>
+</tr>
 </tbody>
 </table>
 <h2 id="ce-qui-reste-a-faire-ecrit-noir-sur-blanc">Ce qui reste à faire, écrit noir sur blanc</h2>
 <ul>
-<li>La <strong>vidéo</strong> n'est pas tournée.</li>
-<li>La capture est <strong>coopérative</strong> : l'agent appelle <code>replay_checkpoint</code> parce
-  que le prompt le lui demande. Un proxy qui interpose les outils de l'agent
-  (capture sans coopération) n'est pas fait.</li>
 <li>Le banc de 20 sessions a des <strong>défauts injectés par script</strong> ; les arbres,
   les exécutions et les temps, eux, sont réels.</li>
+<li>La capture non coopérative suppose que l'agent passe par un serveur MCP
+  enveloppé.</li>
+<li>L'agent personnalisé en lecture seule, la comparaison spec/vibe coding
+  chiffrée et l'incident de hook « ayant bloqué une régression » <strong>n'existent
+  pas</strong> : la grille les exige, le dépôt ne les fournit pas encore.</li>
 </ul>
 <h2 id="ou-le-voir">Où le voir</h2>
 <ul>
