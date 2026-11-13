@@ -9,8 +9,9 @@ indépendant** qui ne lit que la fiche et la grille — jamais les attaques ni l
 
 | Fiche V2 | Impact | Kiro | Design | Innovation | Présentation | **Total** |
 |---|---|---|---|---|---|---|
-| Ver — *Mutation Score* | 14 | 12 | 14 | 15 | 12 | **67/100** |
 | Rejeu — *Agent Replay* | 15 | 15 | 13 | 17 | 13 | **73/100** |
+| Ver — *Mutation Score* | 14 | 12 | 14 | 15 | 12 | **67/100** |
+| Chemin-fantôme — *Ghost Path Registry* | 12 | 10 | 11 | 15 | 11 | **59/100** |
 | Reprise — *Local Restore Drill* | 9 | 7 | 8 | 12 | 9 | **45/100** |
 
 **Aucune fiche écrite ne peut atteindre 100/100.** Le juge indépendant l'a établi sans ambiguïté :
@@ -303,5 +304,70 @@ Juge : sous-agent indépendant, n'a lu que GRILLE-100.md et la fiche V2. Rien n'
 
 **[il reste 7 défauts à traiter avant 100/100]** — total 78/100.
 
+---
+
+# Jugement — Chemin-fantôme (Ghost Path Registry, V2-01)
+
+Juge : sous-agent indépendant, lecture aveugle — il n'a lu que `GRILLE-100.md` et la fiche
+V2-01, jamais les attaques, ni les autres jugements, ni les cahiers des charges.
+Date : 13 novembre 2026 — quinze jours avant le jalon v1.
+
+| Critère | Note | Ce qui manque pour 20/20 |
+|---|---|---|
+| Impact | 12/20 | La perte n'est chiffrée nulle part : « `[cible]` minutes par session », « `[cible]` % des affirmations fantômes », et le protocole `mesure/perte.md` est « à écrire au jalon 1 ». Le compteur « deux références sur trois n'existent pas » est écrit comme un fait, en contradiction avec la promesse « aucune mesure passée inventée ». La population visée (développeur qui pilote 3 à 8 sous-agents) n'est pas justifiée, et « première valeur en moins de 60 s » n'est ni chronométré ni borné. L'outil ne mesure pas la perte qu'il prétend supprimer : il compte des fantômes, pas des minutes évitées. |
+| Kiro | 10/20 | Tout est au conditionnel : specs nommées mais non écrites, contre-exemple fast-check « consigné le jour où il survient », hook `ghost-path-guard` sans incident et dont le substrat (CI sur dépôt tiers) est au jalon 2, steering `[cible]` → `[cible]`, comparaison spec/vibe intégralement `[cible]`, agents sans permissions visibles ni commits, MCP « livré seulement si le lot tient ». Aucune preuve consultable — c'est la case « une liste de fonctionnalités Kiro cochée sans preuve » que la grille sanctionne. |
+| Design | 11/20 | Les quatre états sont décrits avec précision mais aucun n'est montré. « axe-core en CI à 0 violation `[cible]` » n'est pas mesurable : la cible du contrôle n'est pas définie. L'identité visuelle n'existe pas (« thème clair/sombre » sans palette ni typo). Le mode démo contredit la règle « un juge qui ne clique nulle part voit un résultat » : l'état vide affiche un corpus de démo **avec un bouton**. |
+| Innovation | 15/20 | Le meilleur point : concurrent nommé, tableau de différence structurelle, limite honnête précise. Deux trous : le tableau §6 revendique en « Objet » symbole, route, table et var d'env — du contenu du jalon 2, pas de la v1 soumise ; et le jeu de concurrents omet les plateformes de trace d'agents (Langfuse, LangSmith, OpenTelemetry GenAI), qui produisent bel et bien session + étape + auteur + horodatage. En v1, la compression « c'est `no-unresolved` appliqué à un journal » reste plausible. |
+| Présentation | 11/20 | Le plan des 15 premières secondes est bon mais reste un storyboard. « Sur l'appareil visé » : l'appareil n'est jamais nommé. La démo en ligne n'a ni URL ni engagement mesuré, et le texte Devpost « répondant aux huit questions avec des chiffres » n'existe pas — les huit questions ne sont même pas énumérées dans la fiche. |
+| **Total** | **59/100** | |
+
+## Défauts qui coûtent encore des points
+
+Les trois qui coûtent chacun un critère entier :
+
+1. **[Impact] Aucune mesure de perte exécutée.** Les deux seules quantités sont des placeholders ; la
+   méthode annoncée est *promise*, pas *exécutée*. Correctif : relever sur N sessions réelles les minutes
+   entre l'affirmation fantôme et son rejet, versionner `mesure/perte.md` et les journaux bruts au gel.
+2. **[Kiro] Aucune preuve consultable.** Ni specs écrites, ni contre-exemple fast-check avec sa graine,
+   ni incident de hook, ni avant/après de steering. Correctif : `KIRO_JOURNAL.md` doit contenir au moins
+   un contre-exemple complet et reproductible au gel ; à défaut, la case Kiro plafonne quel que soit le reste.
+3. **[Présentation] Rien n'existe encore.** Ni URL de démo, ni texte Devpost rédigé, ni appareil cible
+   nommé, et un état vide qui exige un clic. Correctif : démo publiée et chronométrée, auto-démo au
+   premier écran, texte Devpost rédigé question par question.
+
+Les vingt autres : contradiction interne sur « deux références sur trois » (§1) ; population visée non
+justifiée ; « première valeur < 60 s » non chronométrée ; l'outil ne mesure pas la perte supprimée ;
+hook sans incident et au jalon 2 ; dépôt tiers ni nommé ni épinglé ; steering non mesuré ; spec/vibe
+intégralement `[cible]` ; agents sans permissions ni commits ; MCP conditionnel ; périmètre d'entrée
+annoncé au-delà de la v1 ; `axe` à 0 violation non mesurable ; contradiction du mode démo ; identité
+visuelle absente ; quatre états décrits et non montrés ; appareil cible non nommé ; démo en ligne
+inexistante ; texte Devpost non rédigé ; tableau §6 qui surestime la v1 ; jeu de concurrents incomplet ;
+compression « `no-unresolved` appliqué à un journal » non réfutée.
+
+## Chiffres affirmés mais non prouvés
+
+Seize, dont treize placeholders `[cible]` ou engagements de production : « deux références sur trois
+n'existent pas » (affirmation de fait, sans échantillon) · « 3 à 8 sous-agents par tâche » (source
+absente) · minutes par session · % d'affirmations fantômes · précision sur corpus témoin (le corpus
+témoin est au jalon 2, la ligne de sortie de la v1 ne peut donc pas le contenir) · steering avant/après ·
+défauts de la comparaison spec/vibe · `0 violation` axe · % de prose ignorée · requête et graine du
+tirage des 5 dépôts (non reproductible) · dépôt tiers et nombre de lignes du jalon 2 · « 3 fantômes »
+présentés comme un résultat d'exécution au plan vidéo · « première valeur en moins de 60 s » · durées
+vidéo et démo · la ligne de sortie elle-même, sans aucun exemple de valeurs réelles.
+
+## Verdict
+
+**[il reste 23 défauts à traiter avant 100/100]** — total 59/100.
+
+**Conclusion factuelle :** la fiche est un plan cohérent et techniquement solide (invariants I1/I2,
+sortie ternaire, registre rejouable et hashé, limite honnête écrite), mais elle s'auto-déclare « les cinq
+cases 20/20 » alors qu'aucune n'est démontrée dans un dépôt : 13 des 16 chiffres cités sont des
+placeholders, le compteur « 2 références sur 3 » est une affirmation de fait, et la v1 réellement
+soumise (chemins TypeScript seuls, un adaptateur, pas de corpus témoin) ne peut produire ni la ligne de
+sortie décrite au §3 ni la précision affichée. **59/100 au gel** tant que le dépôt ne contient ni
+protocole de mesure exécuté, ni `KIRO_JOURNAL.md` avec contre-exemple, ni registre / HTML générés, ni
+URL de démo, ni texte Devpost.
+
+---
 
 ---

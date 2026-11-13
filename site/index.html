@@ -296,6 +296,15 @@ chacune, 48 bloqueurs au total), un <strong>réécriveur</strong> (fiche V2 neut
 </thead>
 <tbody>
 <tr>
+<td>Rejeu — <em>Agent Replay</em></td>
+<td>15</td>
+<td>15</td>
+<td>13</td>
+<td>17</td>
+<td>13</td>
+<td><strong>73/100</strong></td>
+</tr>
+<tr>
 <td>Ver — <em>Mutation Score</em></td>
 <td>14</td>
 <td>12</td>
@@ -305,13 +314,13 @@ chacune, 48 bloqueurs au total), un <strong>réécriveur</strong> (fiche V2 neut
 <td><strong>67/100</strong></td>
 </tr>
 <tr>
-<td>Rejeu — <em>Agent Replay</em></td>
+<td>Chemin-fantôme — <em>Ghost Path Registry</em></td>
+<td>12</td>
+<td>10</td>
+<td>11</td>
 <td>15</td>
-<td>15</td>
-<td>13</td>
-<td>17</td>
-<td>13</td>
-<td><strong>73/100</strong></td>
+<td>11</td>
+<td><strong>59/100</strong></td>
 </tr>
 <tr>
 <td>Reprise — <em>Local Restore Drill</em></td>
@@ -328,6 +337,22 @@ chacune, 48 bloqueurs au total), un <strong>réécriveur</strong> (fiche V2 neut
 « 41 s par exécution », « 18 localisations correctes sur 20 », « un contre-exemple fast-check à la
 graine 20261104 », « le hook a bloqué un commit le 7 novembre », « axe : 0 violation ». Aucun dépôt,
 aucune exécution ne peut encore les produire.</p>
+<p><strong>Le classement s'est inversé sous le juge.</strong> Chemin-fantôme était la première idée du classement
+développeurs (95/100) : le juge indépendant lui donne <strong>59</strong>, derrière Rejeu (73) et Ver (67). Trois
+raisons, toutes structurelles :</p>
+<ol>
+<li><strong>Aucune mesure exécutée</strong> — la fiche promet « deux références sur trois n'existent pas » et un
+   protocole <code>mesure/perte.md</code> « à écrire au jalon 1 » : elle s'auto-déclare sans chiffres inventés
+   tout en énonçant un chiffre comme un fait.</li>
+<li><strong>Aucune preuve Kiro consultable</strong> — specs non écrites, contre-exemple fast-check « consigné le jour
+   où il survient », hook sans incident, steering et comparaison spec/vibe intégralement <code>[cible]</code>.</li>
+<li><strong>La v1 ne peut pas produire ce qu'elle annonce</strong> — la ligne de sortie exige un « corpus témoin » qui
+   arrive au jalon 2 ; le tableau des concurrents revendique symboles, routes et tables SQL, également
+   au jalon 2. Un juge compare le produit soumis, pas la feuille de route.</li>
+</ol>
+<p>Et le concurrent le plus proche n'est pas écarté : les plateformes de trace d'agents (Langfuse,
+LangSmith, OpenTelemetry GenAI) produisent déjà session + étape + auteur + horodatage — l'argument
+« un linter n'a ni auteur ni horodatage » est vrai des linters, faux des traces d'agents.</p>
 <blockquote>
 <p><strong>Conclusion de la boucle</strong> : une idée écrite plafonne autour de <strong>77/100</strong>. Le seul critère saturable
 à l'écrit est l'<strong>Innovation</strong> — et il l'est déjà. Les 23 points restants sont des artefacts : un dépôt

@@ -74,14 +74,32 @@ chacune, 48 bloqueurs au total), un **réécriveur** (fiche V2 neutralisant chaq
 
 | Fiche V2 | Impact | Kiro | Design | Innovation | Présentation | Total |
 |---|---|---|---|---|---|---|
-| Ver — *Mutation Score* | 14 | 12 | 14 | 15 | 12 | **67/100** |
 | Rejeu — *Agent Replay* | 15 | 15 | 13 | 17 | 13 | **73/100** |
+| Ver — *Mutation Score* | 14 | 12 | 14 | 15 | 12 | **67/100** |
+| Chemin-fantôme — *Ghost Path Registry* | 12 | 10 | 11 | 15 | 11 | **59/100** |
 | Reprise — *Local Restore Drill* | 9 | 7 | 8 | 12 | 9 | **45/100** |
 
 Le juge a relevé **18 chiffres affirmés mais non prouvables** dans la fiche Rejeu (16 dans Ver) :
 « 41 s par exécution », « 18 localisations correctes sur 20 », « un contre-exemple fast-check à la
 graine 20261104 », « le hook a bloqué un commit le 7 novembre », « axe : 0 violation ». Aucun dépôt,
 aucune exécution ne peut encore les produire.
+
+**Le classement s'est inversé sous le juge.** Chemin-fantôme était la première idée du classement
+développeurs (95/100) : le juge indépendant lui donne **59**, derrière Rejeu (73) et Ver (67). Trois
+raisons, toutes structurelles :
+
+1. **Aucune mesure exécutée** — la fiche promet « deux références sur trois n'existent pas » et un
+   protocole `mesure/perte.md` « à écrire au jalon 1 » : elle s'auto-déclare sans chiffres inventés
+   tout en énonçant un chiffre comme un fait.
+2. **Aucune preuve Kiro consultable** — specs non écrites, contre-exemple fast-check « consigné le jour
+   où il survient », hook sans incident, steering et comparaison spec/vibe intégralement `[cible]`.
+3. **La v1 ne peut pas produire ce qu'elle annonce** — la ligne de sortie exige un « corpus témoin » qui
+   arrive au jalon 2 ; le tableau des concurrents revendique symboles, routes et tables SQL, également
+   au jalon 2. Un juge compare le produit soumis, pas la feuille de route.
+
+Et le concurrent le plus proche n'est pas écarté : les plateformes de trace d'agents (Langfuse,
+LangSmith, OpenTelemetry GenAI) produisent déjà session + étape + auteur + horodatage — l'argument
+« un linter n'a ni auteur ni horodatage » est vrai des linters, faux des traces d'agents.
 
 > **Conclusion de la boucle** : une idée écrite plafonne autour de **77/100**. Le seul critère saturable
 > à l'écrit est l'**Innovation** — et il l'est déjà. Les 23 points restants sont des artefacts : un dépôt

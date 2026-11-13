@@ -320,6 +320,101 @@ Adversaire : avocat du diable. Objectif : faire perdre cette idée au concours. 
 
 ## Les fiches V2
 
+# V2-01 · Registre des chemins fantômes (Ghost Path Registry)
+
+**Catégorie : Frankenstein (méta-outil agent).** Différenciation en une ligne : *un linter vérifie du code écrit ; Ghost Path vérifie les **affirmations d'un agent avant qu'elles ne deviennent du code**, les attribue à l'étape précise de la session qui les a produites, et publie un taux de références fantômes daté, hashé et rejouable.*
+
+## 1. Le problème vécu ce mois-ci
+
+Utilisateur type : **Baptiste, développeur seul sur des dépôts TypeScript/Kotlin, qui pilote 3 à 8 sous-agents par tâche** (contexte réel de ce dépôt, novembre 2026). Un agent écrit dans son plan « je lis `src/db/session.ts`, j'appelle `SessionPool.acquire()` et j'ajoute la route `/api/v1/ghosts` » ; deux références sur trois n'existent pas. Coût : l'agent part, revient, le parent relit, et le mensonge n'est découvert qu'au merge ou en runtime.
+
+Méthode de mesure de la perte (aucun chiffre inventé) : protocole `mesure/perte.md` à écrire au jalon 1 — compter, sur N sessions réelles publiques, les minutes entre l'affirmation fantôme et son rejet par le compilateur ou le relecteur. Perte visée : `[cible]` minutes par session, `[cible]` % des affirmations de chemin/symbole/route fantômes. Tant que `mesure/perte.md` n'a pas tourné, la fiche n'affiche aucun nombre.
+
+## 2. La mécanique
+
+1. **Extract** — un adaptateur par format de journal déclaré supporté (Kiro, Claude Code JSONL, Cursor) extrait les références **uniquement dans les blocs de code, les diffs et les chemins entre backticks**, jamais dans la prose libre. Chaque référence garde `(session_id, step_index, horodatage, citation littérale)`.
+2. **Truth** — base de vérité du dépôt au commit fixé : fichiers, exports AST, routes déclarées, tables SQL des migrations, variables d'env de `.env.example`. Périmètre v1 : **chemins TypeScript sans alias `tsconfig.paths`, sans barrels, sans workspaces** ; symboles et routes en v2.
+3. **Resolve** — sortie **ternaire** : `résolu` / `fantôme` / `indéterminé` (chemin dynamique, alias non supporté, hors périmètre). **Invariant `I1`** : aucune référence extraite ne sort sans l'un des trois états, pas de silence. **Invariant `I2`** : `résolu` exige un nœud de graphe identifié par id, jamais une heuristique de chaîne.
+4. **Attribuer** — le fantôme est rattaché à l'étape d'agent qui l'a énoncé en premier, avec sa citation exacte. C'est la sortie que ni `tsc`, ni ESLint, ni un LSP ne peuvent produire : ils n'ont ni session, ni étape, ni auteur.
+5. **Rejeu** — même journal + même commit ⇒ **même registre bit à bit** ; le hash SHA-256 du registre est publié.
+
+## 3. Le chiffre publié à chaque exécution
+
+Une ligne en fin de run, toujours : `registre <sha256> · commit <sha> · <n> références · <f> fantômes · <i> indéterminés · précision sur corpus témoin [cible] %`. Le JSON brut est l'artefact de référence, le HTML n'en est qu'une vue. Faux positifs **et** faux négatifs publiés avec intervalles, sur corpus externe (§5), jamais sur les seules fixtures de l'auteur.
+
+## 4. La preuve Kiro
+
+- **Specs** `.kiro/specs/{extract,truth,resolve,registry,report}/`, exigences EARS ; un lot = une spec.
+- **Propriétés (fast-check)** : `résoudre(r) ≠ indéterminé ⇒ le nœud existe dans la vérité` ; `extraire ∘ résoudre` idempotent ; registre déterministe à commit fixé. Un contre-exemple réel, avec propriété + graine + correctif, sera consigné dans `KIRO_JOURNAL.md` **le jour où il survient** — rien de pré-rédigé ; si aucun n'a surgi au gel, la fiche le dit noir sur blanc.
+- **Hook `ghost-path-guard`** : garde un **vrai dépôt tiers open-source** (pas nos fixtures) ; incident raconté avec capture et lien de CI. S'il n'a jamais bloqué, on le retire de la fiche.
+- **Steering** : avant/après sur un exemple précis — la consigne « ne citer que des chemins vérifiés » mesurée en fantômes par session, `[cible]` → `[cible]`.
+- **Agents** : un relecteur en lecture seule et un testeur, permissions restreintes, commits visibles.
+- **Spec vs vibe coding** sur une fonction nommée (`resolvePath`) : durée, allers-retours, défauts = `[cible]`, mesuré au jalon 1, publié même si défavorable.
+- **MCP** : serveur minimal `ghost-truth` livré **dans la v1** seulement si le lot tient ; sinon absence justifiée en une phrase, et aucune séquence vidéo ne le montre.
+
+## 5. Corpus externe (anti-circularité)
+
+Cinq dépôts open-source **non choisis pour le test** (tirage aléatoire documenté parmi les 20 premiers résultats d'une requête GitHub fixée à l'avance) + journaux d'agents publics. Protocole, tirage et résultats versionnés. Objectif affiché : **précision plutôt que rappel**.
+
+## 6. Le concurrent le plus proche
+
+`eslint-plugin-import/no-unresolved` — et derrière lui `tsc` TS2307, `dependency-cruiser`, Serena/LSP-MCP. Différence **structurelle**, pas cosmétique :
+
+| | no-unresolved / tsc | Ghost Path |
+|---|---|---|
+| Entrée | fichier `.ts` sur disque | session d'agent, avant écriture du code |
+| Objet | code compilable | toute affirmation : chemin, symbole, route, table, var d'env |
+| Sortie | erreur de build | référence + étape d'agent + citation horodatée |
+| Métrique | aucune dans le temps | taux de fantômes par session, par modèle, rejouable |
+| Preuve | non | registre hashé, daté, imprimable |
+
+Un linter ne peut pas produire la colonne « étape d'agent » : il n'a ni auteur ni horodatage.
+
+## 7. Interface et artefact durable
+
+**Vide** : « aucun journal trouvé — voici le mode démo », bouton vers le corpus inclus. **Chargement** : progression par lot (extract → truth → resolve) avec pourcentage réel, pas un spinner. **Erreur** : format inconnu ou dépôt hors périmètre → message nommant la cause et l'adaptateur manquant, code de sortie non nul. **Succès** : registre à citations cliquables, chaque fantôme lié à son étape d'agent. Le tout vérifié par axe-core en CI à **0 violation `[cible]`**, navigation clavier complète, fantôme signalé par icône + texte (jamais la couleur seule), `prefers-reduced-motion` respecté, thème clair/sombre.
+
+**Artefact durable** : le *Registre des mensonges* — page imprimable datée, extraits cités façon pièce à conviction, hash du registre en pied de page. **Mode démo verrouillé** : journal + dépôt inclus, zéro réseau.
+
+## 8. Les 15 premières secondes de la vidéo
+
+1. `0:00–0:04` — plein écran, une citation d'agent : « je modifie `src/db/session.ts` ».
+2. `0:04–0:08` — la même ligne frappée d'un tampon **FANTÔME** + `ls src/db/` qui renvoie `No such file`.
+3. `0:08–0:15` — le registre imprimé : 3 fantômes, l'étape d'agent, le hash, la date.
+
+Aucune narration avant `0:15`, pas de musique, pas de marque tierce. Plan principal = le **rapport HTML**, pas le terminal. Aucune séquence ne montre une fonctionnalité absente du dépôt au moment du gel. Vidéo < 3 min, de bout en bout sur l'appareil visé.
+
+## 9. La limite honnête
+
+Ghost Path **ne prouve pas** que l'agent a menti délibérément ; **ne** vérifie **pas** la prose libre (exclue par décision explicite, non-objectif chiffré : `[cible]` % de la prose ignorée) ; **ne** résout **pas** chemins dynamiques, alias, barrels et workspaces en v1 — tout cela sort en `indéterminé`, jamais en `résolu`. L'outil ne prouve pas la correction du code, seulement l'existence ou l'inexistence des références citées. Un dépôt sain peut produire des `indéterminés` en nombre : c'est assumé.
+
+## 10. Les deux jalons
+
+**v1 — avant le 28 novembre** : TypeScript sans alias, chemins de fichiers uniquement, JSON brut + page HTML minimale générée, un adaptateur de journal, mode démo verrouillé, specs Kiro écrites dès le jour 1.
+**Version complète — avant le 29 janvier** : symboles, routes, tables SQL, vars d'env ; 3 adaptateurs testés en CI sur un dépôt open-source réel de `[cible]` k+ lignes ; corpus externe et intervalles publiés ; MCP minimal si le lot tient. Le gel publie l'état atteint **avec les défauts restants écrits noir sur blanc**.
+
+## Les cinq cases 20/20
+
+- **Impact** : utilisateur nommé (Baptiste, sous-agents en parallèle), perte mesurée par un protocole versionné `mesure/perte.md` — chiffre `[cible]` jusqu'à exécution ; adoption sans friction : CLI + page HTML statique, aucun compte, aucun serveur, première valeur en moins de 60 secondes sur le corpus de démo inclus.
+- **Kiro** : specs EARS par lot, propriétés fast-check sur `resolve`, journal écrit au fil des incidents réels (rien de pré-rédigé), hook gardant un dépôt tiers, steering avant/après, relecteur + testeur restreints, comparaison spec/vibe chiffrée `[cible]`, MCP justifié ou absent.
+- **Design** : quatre états implémentés et montrés, axe-core 0 violation en CI `[cible]`, clavier, pas de couleur seule, reduced-motion, thème double, *Registre des mensonges* imprimable, mode démo hors réseau.
+- **Innovation** : concurrent nommé (`no-unresolved`), différence structurelle en une ligne et en tableau (§6) ; combinaison inédite **graphe de dépôt × journal d'agent × preuve horodatée rejouable** ; limite honnête écrite (§9).
+- **Présentation** : 15 premières secondes = problème + tampon + registre, sans narration (§8) ; vidéo < 3 min de bout en bout sur le rapport HTML ; démo en ligne < 30 s, sans compte ni installation, résultat visible sans clic ; texte Devpost répondant aux huit questions avec les chiffres que l'outil publie, `[cible]` compris.
+
+## Objections traitées
+
+- **« C'est un linter d'imports / le LSP le fait déjà »** (AT-01, AT-02) → l'entrée n'est pas un fichier sur disque mais une session d'agent ; la sortie n'est pas une erreur de build mais une attribution d'étape + citation horodatée + registre hashé. Périmètre étendu au non-compilable (routes, tables, vars d'env) en v2. La différenciation tient en une ligne et résiste au tableau §6.
+- **« La v1 en 8 jours est une fiction »** (AT-03) → périmètre coupé : TypeScript sans alias, chemins seulement, JSON + HTML minimal, un seul adaptateur ; specs Kiro dès le jour 1 pour que les preuves existent au gel.
+- **« Mesure circulaire »** (AT-04) → corpus externe : 5 dépôts tirés au sort selon protocole versionné, journaux publics, faux positifs et faux négatifs avec intervalles ; aucune mesure passée inventée, tout chiffre est `[cible]`.
+- **« La vidéo montre l'inexistant »** (AT-05) → aucune séquence MCP tant que le lot n'est pas livré ; plan principal = rapport HTML.
+- **« Récit Kiro prévu, pas vécu »** (AT-06) → journal écrit au fil de l'eau, hook sur dépôt tiers avec capture ; si rien n'a échoué au gel, la fiche le déclare.
+- **« Dans six mois le problème est résolu par les agents »** (AT-07) → repositionnement sur **l'audit et la conformité** : preuve datée et rejouable pour les revues de code, le régulateur, les équipes qui n'ont pas le droit de faire confiance à l'agent — utile même quand l'agent se corrigera tout seul.
+- **« Angle mort : chemins dynamiques, prose »** (AT-08) → sortie ternaire, `indéterminé` assumé, prose exclue comme non-objectif chiffré, précision préférée au rappel dans la phrase de différenciation.
+- **« Énième IA-qui-vérifie-une-IA »** (AT-09) → l'artefact est un registre imprimable, daté et hashé, pièce à conviction — pas un score de faithfulness façon DeepEval/LangSmith.
+- **« En démo directe ça casse sur le dépôt du juge »** (AT-10) → mode démo verrouillé hors réseau par défaut, adaptateurs testés en CI sur dépôt open-source réel, et `indéterminé` plutôt qu'une cascade de faux positifs sur `@org/*`.
+
+---
+
 # V2-03 · Ver — *Dette de mutation* (catégorie : Frankenstein)
 
 **Différenciation en une ligne :** Stryker, PIT et mutmut publient un **score agrégé non vérifiable** ; Ver publie, pour chaque ligne du diff, un **verdict muni d'un témoin rejouable en < 10 s** que la CI re-vérifie elle-même — un rapport *proof-carrying*, pas un chiffre de plus.
