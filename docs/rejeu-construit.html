@@ -199,6 +199,14 @@ avait fait passer la démo cassée pendant une heure).</p>
 <td><code>docs/CONCURRENTS.md</code> : 20 concurrents sourcés ; elle a fait trouver un défaut de stockage (<code>git gc --prune=now</code> effaçait les arbres), corrigé par une ref par checkpoint</td>
 </tr>
 <tr>
+<td><strong>La perte, mesurée</strong></td>
+<td>étude à trois bras (5 + 9 + 9 sujets, dépôts réels, PR squashée) : sans capture, l'itération se retrouve 4/5 mais coûte <strong>19 à 73 min</strong> d'archéologie <code>git fsck</code> ; avec capture, <strong>9/9</strong>. Notre outil n'est pas plus rapide qu'un agent qui refait la boucle : <strong>il supprime le travail, pas la latence</strong> (<code>docs/PERTES-resultats.md</code>)</td>
+</tr>
+<tr>
+<td><strong>Fréquence du problème</strong></td>
+<td><strong>616 PRs mergées</strong> analysées sur 10 dépôts réels : <strong>615 (99,8 %)</strong> squashées, <strong>204 (33,1 %)</strong> portaient une histoire d'itération effacée (<code>scripts/measure-frequency.mjs</code>)</td>
+</tr>
+<tr>
 <td><strong>Capture non coopérative</strong></td>
 <td><code>packages/proxy/</code> : un proxy MCP enveloppe le serveur d'outils de l'agent et capture chaque changement d'état. Prouvé sur un agent réel : <strong>3 appels → 2 checkpoints</strong>, l'appel de lecture n'en produit aucun. 4 tests dédiés</td>
 </tr>
@@ -216,6 +224,8 @@ avait fait passer la démo cassée pendant une heure).</p>
 <ul>
 <li>Le banc de 20 sessions a des <strong>défauts injectés par script</strong> ; les arbres,
   les exécutions et les temps, eux, sont réels.</li>
+<li>L'étude de perte a des <strong>sujets agents</strong>, pas humains : la comparaison entre
+  bras est valide, le temps humain reste à chronométrer.</li>
 <li>La capture non coopérative suppose que l'agent passe par un serveur MCP
   enveloppé.</li>
 <li>L'agent personnalisé en lecture seule, la comparaison spec/vibe coding

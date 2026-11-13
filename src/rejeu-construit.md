@@ -50,6 +50,8 @@ avait fait passer la démo cassée pendant une heure).
 | **Relecteur / testeur** | `tools/relecteur.mjs` (lecture seule) et `tools/testeur.mjs` ; le relecteur a trouvé une exigence sans vérificateur |
 | **Comparaison spec / vibe coding** | `experiments/spec-vibe/` : deux sous-agents, même fonction, suite partagée de 14 cas |
 | **Comparaison des concurrents** | `docs/CONCURRENTS.md` : 20 concurrents sourcés ; elle a fait trouver un défaut de stockage (`git gc --prune=now` effaçait les arbres), corrigé par une ref par checkpoint |
+| **La perte, mesurée** | étude à trois bras (5 + 9 + 9 sujets, dépôts réels, PR squashée) : sans capture, l'itération se retrouve 4/5 mais coûte **19 à 73 min** d'archéologie `git fsck` ; avec capture, **9/9**. Notre outil n'est pas plus rapide qu'un agent qui refait la boucle : **il supprime le travail, pas la latence** (`docs/PERTES-resultats.md`) |
+| **Fréquence du problème** | **616 PRs mergées** analysées sur 10 dépôts réels : **615 (99,8 %)** squashées, **204 (33,1 %)** portaient une histoire d'itération effacée (`scripts/measure-frequency.mjs`) |
 | **Capture non coopérative** | `packages/proxy/` : un proxy MCP enveloppe le serveur d'outils de l'agent et capture chaque changement d'état. Prouvé sur un agent réel : **3 appels → 2 checkpoints**, l'appel de lecture n'en produit aucun. 4 tests dédiés |
 | Session réelle d'agent | `fixtures/session-agent/` (opencode + broker) : régression localisée à l'**itération #0 en 3,0 s** |
 | Session proxy | `fixtures/session-proxy/` (opencode + proxy) : capture automatique, sans coopération |
@@ -58,6 +60,8 @@ avait fait passer la démo cassée pendant une heure).
 
 - Le banc de 20 sessions a des **défauts injectés par script** ; les arbres,
   les exécutions et les temps, eux, sont réels.
+- L'étude de perte a des **sujets agents**, pas humains : la comparaison entre
+  bras est valide, le temps humain reste à chronométrer.
 - La capture non coopérative suppose que l'agent passe par un serveur MCP
   enveloppé.
 - L'agent personnalisé en lecture seule, la comparaison spec/vibe coding
