@@ -16,6 +16,7 @@ charges complets dans **[Cahiers devs — 10](cahiers-devs.html)**.
 | Page | Contenu |
 |---|---|
 | **[La barre des 100](grille-100.html)** | La grille où 100/100 est défini case par case, les jugements indépendants, et **la démonstration qu'aucune fiche écrite ne dépasse ~77/100** — les 23 points restants sont du code, pas du texte. |
+| **[Rejeu — construit](rejeu-construit.html)** | La meilleure fiche jugée (73/100) est devenue un dépôt qui tourne : mêmes promesses, **chiffres mesurés** (20/20 localisations, médiane 1,90 s, axe 0 violation, session réelle d'agent localisée en 3,0 s). C'est la démonstration de la thèse du dossier : les points qui manquent sont du code. |
 | [Attaques et fiches V2](boucle-100.html) | Les 120 objections (48 bloqueurs) portées contre les douze idées de tête, et les fiches réécrites pour les neutraliser. |
 | **[Classement devs — 50](classement-devs.html)** | Les 50 meilleures idées pour un public 100 % développeur, notées sur la reconnaissance immédiate du problème, la profondeur technique, le chiffre mesuré et la démonstration. |
 | **[Cahiers devs — 10](cahiers-devs.html)** | Les dix premières développées en cahier des charges complet : problème exact, mécanique, exigences EARS, propriétés à tester, architecture, stratégie Kiro, plan de réalisation, script vidéo minuté, recette. |

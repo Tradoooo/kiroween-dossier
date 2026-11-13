@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rejeu — construit — Dossier Kiroween — Hackathon 2026</title>
+<style>
+:root{--fg:#e8e6e3;--bg:#111014;--card:#1b1a20;--acc:#e08b3c;--acc2:#8fd3c7;
+ --mut:#9b968f;--bd:#2c2a33}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+ font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+header{padding:1.4rem 1.2rem;border-bottom:1px solid var(--bd);background:var(--card)}
+header h1{margin:0;font-size:1.25rem}
+header p{margin:.3rem 0 0;color:var(--mut);font-size:.9rem}
+nav{display:flex;flex-wrap:wrap;gap:.4rem;padding:.8rem 1.2rem;border-bottom:1px solid var(--bd)}
+nav a{color:var(--mut);text-decoration:none;font-size:.85rem;padding:.3rem .6rem;
+ border:1px solid var(--bd);border-radius:999px}
+nav a:hover{color:var(--fg)}
+nav a.actif{color:#111014;background:var(--acc);border-color:var(--acc);font-weight:600}
+main{padding:1.2rem;max-width:64rem;margin:0 auto}
+main h1{font-size:1.6rem;border-bottom:1px solid var(--bd);padding-bottom:.4rem}
+main h2{font-size:1.25rem;margin-top:2rem;color:var(--acc)}
+main h3{font-size:1.05rem;margin-top:1.6rem;color:var(--acc2)}
+a{color:var(--acc2)}
+code{background:#0c0b0f;padding:.1rem .35rem;border-radius:4px;font-size:.88em}
+pre{background:#0c0b0f;padding:.9rem;border-radius:8px;overflow-x:auto;border:1px solid var(--bd)}
+pre code{background:none;padding:0}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.9rem;display:block;overflow-x:auto}
+th,td{border:1px solid var(--bd);padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{background:var(--card);white-space:nowrap}
+blockquote{border-left:3px solid var(--acc);margin:1rem 0;padding:.2rem 1rem;color:var(--mut)}
+hr{border:0;border-top:1px solid var(--bd);margin:2rem 0}
+footer{padding:1.2rem;color:var(--mut);font-size:.85rem;border-top:1px solid var(--bd);text-align:center}
+@media (prefers-reduced-motion:no-preference){nav a{transition:color .15s,background .15s}}
+</style>
+</head>
+<body>
+<header>
+<h1>Dossier Kiroween — Hackathon 2026</h1>
+<p>2 400 idées, quatre classements, douze idées passées au banc d'attaque, quatorze cahiers des charges.</p>
+</header>
+<nav>
+<a href="index.html">Accueil</a>
+<a href="classement-usage.html">Classement usage — 39</a>
+<a href="classement-2mois.html">Classement 2 mois — 39</a>
+<a href="classement-technique.html">Classement technique — 39</a>
+<a href="idees-usage.html">Idées · usage réel (250)</a>
+<a href="idees-2mois.html">Idées · horizon 2 mois (400)</a>
+<a href="idees-semaine.html">Idées · 15 filons (750)</a>
+<a href="idees-devs.html">Idées · développeurs (1 000)</a>
+<a href="classement-devs.html">Classement devs — 50</a>
+<a href="grille-100.html">La barre des 100</a>
+<a href="boucle-100.html">Attaques et fiches V2</a>
+<a href="cahiers-devs.html">Cahiers devs — 10</a>
+<a href="rejeu-construit.html" class="actif">Rejeu — construit</a>
+<a href="disquette.html">Cahier · Disquette</a>
+<a href="rota.html">Cahier · Rota</a>
+<a href="partie-double.html">Cahier · Partie double</a>
+<a href="seance.html">Cahier · Séance</a>
+<a href="cadre.html">Cadre du concours</a>
+<a href="consigne.html">Consigne de génération</a>
+<a href="grille.html">Grille de notation</a>
+</nav>
+<main>
+<h1 id="rejeu-la-fiche-qui-est-devenue-du-code">Rejeu — la fiche qui est devenue du code</h1>
+<p>Les quatre jugements de ce dossier disent la même chose : <strong>une fiche écrite
+ne dépasse pas ~77/100</strong>, parce que quatre critères sur cinq exigent des
+artefacts qui n'existent que construits. Le 13 novembre 2026, la meilleure
+fiche jugée (Rejeu, 73/100) a donc été <strong>construite</strong> — et les chiffres qu'elle
+annonçait ont été remplacés par des chiffres <strong>mesurés</strong>.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Fiche V2-05 (12 nov.)</th>
+<th>Dépôt (13 nov.)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Artefacts Kiro</td>
+<td>racontés</td>
+<td><code>.kiro/specs/replay/requirements.md</code> (exigences EARS, chacune avec son vérificateur nommé), <code>KIRO_JOURNAL.md</code>, hook <code>checkpoint-guard</code> <strong>éprouvé par un script en CI</strong></td>
+</tr>
+<tr>
+<td>Contre-exemple fast-check</td>
+<td>« graine 20261104 »</td>
+<td><strong>contre-exemple réel</strong> : la capture se capturait elle-même (<code>.replay/</code> dans l'arbre), donc deux captures du même état donnaient deux arbres — détecté par un test, corrigé, verrouillé</td>
+</tr>
+<tr>
+<td>Localisation</td>
+<td>« 18/20 »</td>
+<td><strong>20/20</strong> sur le banc, et une <strong>session réelle d'agent</strong> (opencode + broker MCP) où la régression est localisée en 3,0 s</td>
+</tr>
+<tr>
+<td>Temps</td>
+<td>« 41 s »</td>
+<td><strong>médiane 1,90 s</strong> par session (min 0,74 s, max 3,30 s)</td>
+</tr>
+<tr>
+<td>Accessibilité</td>
+<td>« axe 0 violation » (affirmé)</td>
+<td><strong>0 violation</strong> sur quatre pages, mesuré par <code>scripts/a11y.mjs</code> dans la CI</td>
+</tr>
+<tr>
+<td>Preuve durable</td>
+<td>—</td>
+<td><code>chain.json</code> (chaîne d'attestation à digest chaîné), <code>report.html</code> imprimable A4, démo hors ligne sur Pages</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ce-qui-reste-a-faire-ecrit-noir-sur-blanc">Ce qui reste à faire, écrit noir sur blanc</h2>
+<ul>
+<li>La <strong>vidéo</strong> n'est pas tournée.</li>
+<li>La capture est <strong>coopérative</strong> : l'agent appelle <code>replay_checkpoint</code> parce
+  que le prompt le lui demande. Un proxy qui interpose les outils de l'agent
+  (capture sans coopération) n'est pas fait.</li>
+<li>Le banc de 20 sessions a des <strong>défauts injectés par script</strong> ; les arbres,
+  les exécutions et les temps, eux, sont réels.</li>
+</ul>
+<h2 id="ou-le-voir">Où le voir</h2>
+<ul>
+<li>Dépôt : <a href="https://github.com/Tradoooo/rejeu">https://github.com/Tradoooo/rejeu</a></li>
+<li>Démonstration hors ligne : <a href="https://tradoooo.github.io/rejeu/">https://tradoooo.github.io/rejeu/</a></li>
+<li>Rapport de la session réelle : <a href="https://tradoooo.github.io/rejeu/report-agent.html">https://tradoooo.github.io/rejeu/report-agent.html</a></li>
+<li>Mesures : <a href="https://github.com/Tradoooo/rejeu/blob/main/docs/MESURES.md">https://github.com/Tradoooo/rejeu/blob/main/docs/MESURES.md</a></li>
+</ul>
+<h2 id="ce-que-la-fiche-annoncait-et-que-le-depot-ne-tient-pas-encore">Ce que la fiche annonçait et que le dépôt ne tient pas encore</h2>
+<p>La fiche V2-05 annonçait un « taux d'accord de décision de 78 % (14/18) » en
+mode re-run : <strong>rien dans le dépôt ne produit ce chiffre</strong>. Il n'est donc pas
+repris. De même, la comparaison « spec vs vibe coding » (3 h 20 / 1 h 05) et
+les 18 chiffres non prouvés de la fiche <strong>ne sont pas repris</strong> : le dépôt ne
+les honore pas encore.</p>
+</main>
+<footer>Généré depuis les sources Markdown du dépôt, vérifié sans dérive en CI. Licence MIT.</footer>
+</body>
+</html>

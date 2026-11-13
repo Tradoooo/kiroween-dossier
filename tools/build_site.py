@@ -37,6 +37,7 @@ PAGES = [
     ("src/grille-100.md", "grille-100", "La barre des 100"),
     ("src/boucle-100.md", "boucle-100", "Attaques et fiches V2"),
     ("src/cahiers-developpeurs.md", "cahiers-devs", "Cahiers devs — 10"),
+    ("src/rejeu-construit.md", "rejeu-construit", "Rejeu — construit"),
     ("src/DISQUETTE-cahier.md", "disquette", "Cahier · Disquette"),
     ("src/ROTA-cahier.md", "rota", "Cahier · Rota"),
     ("src/PARTIE-DOUBLE-cahier.md", "partie-double", "Cahier · Partie double"),
