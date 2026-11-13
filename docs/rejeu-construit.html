@@ -115,6 +115,60 @@ annonçait ont été remplacés par des chiffres <strong>mesurés</strong>.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="les-deux-jugements-du-depot-construit">Les deux jugements du dépôt construit</h2>
+<p>Un juge indépendant (la grille seule, sans la fiche d'origine ni les attaques) a
+noté le <strong>dépôt</strong> : <strong>60/100</strong> au premier passage, <strong>78/100</strong> au second, après
+les corrections listées plus bas. Les deux verdicts sont publiés en entier dans
+le dépôt du projet : <a href="https://github.com/Tradoooo/rejeu/blob/main/docs/jugements.md"><code>docs/jugements.md</code></a>.</p>
+<table>
+<thead>
+<tr>
+<th>Critère</th>
+<th>Jugement 1</th>
+<th>Jugement 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Impact</td>
+<td>8/20</td>
+<td>13/20</td>
+</tr>
+<tr>
+<td>Kiro</td>
+<td>11/20</td>
+<td>15/20</td>
+</tr>
+<tr>
+<td>Design</td>
+<td>14/20</td>
+<td>19/20</td>
+</tr>
+<tr>
+<td>Innovation</td>
+<td>14/20</td>
+<td>16/20</td>
+</tr>
+<tr>
+<td>Présentation</td>
+<td>13/20</td>
+<td>15/20</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>60/100</strong></td>
+<td><strong>78/100</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Le premier jugement a nommé 19 défauts ; presque tous ont été corrigés dans la
+demi-heure suivante : contre-exemple <strong>trouvé par une propriété fast-check</strong>
+(graine 20261104, échec sur le code d'avant le correctif), effet du steering
+<strong>mesuré</strong> (6 faux écarts → 0), « moins de 30 s » et « moins de 60 s »
+<strong>chronométrés</strong> (0,38 s et 0,77 s), chiffres <strong>unifiés</strong> dans un tableau unique,
+chaîne <strong>exportable</strong> pour être versionnée, trace d'axe jointe — et un garde-fou
+qui refuse désormais de valider une page qui ne rend rien (un bug de syntaxe
+avait fait passer la démo cassée pendant une heure).</p>
 <h2 id="ce-qui-a-ete-fait-depuis-13-nov-16-h">Ce qui a été fait depuis (13 nov., 16 h)</h2>
 <table>
 <thead>
@@ -125,8 +179,24 @@ annonçait ont été remplacés par des chiffres <strong>mesurés</strong>.</p>
 </thead>
 <tbody>
 <tr>
-<td><strong>Vidéo</strong> (66 s, H.264, sans narration)</td>
-<td><code>docs/demo/rejeu-demo.mp4</code> ; toutes les sorties affichées sont produites par <code>scripts/capture-reel.mjs</code> (vraies exécutions)</td>
+<td><strong>Vidéo</strong> (69 s, H.264, sans audio)</td>
+<td><code>docs/demo/rejeu-demo.mp4</code> ; toutes les sorties affichées sont produites par <code>scripts/capture-reel.mjs</code> (vraies exécutions) ; les 15 premières secondes montrent le problème <strong>et</strong> le chiffre</td>
+</tr>
+<tr>
+<td><strong>Incident réel du hook</strong></td>
+<td>un agent a tenté <code>git commit --amend</code> pendant une session capturée : le hook a refusé, la commande n'a jamais atteint <code>git</code> (<code>fixtures/session-hook/incident.md</code>)</td>
+</tr>
+<tr>
+<td><strong>Relecteur / testeur</strong></td>
+<td><code>tools/relecteur.mjs</code> (lecture seule) et <code>tools/testeur.mjs</code> ; le relecteur a trouvé une exigence sans vérificateur</td>
+</tr>
+<tr>
+<td><strong>Comparaison spec / vibe coding</strong></td>
+<td><code>experiments/spec-vibe/</code> : deux sous-agents, même fonction, suite partagée de 14 cas</td>
+</tr>
+<tr>
+<td><strong>Comparaison des concurrents</strong></td>
+<td><code>docs/CONCURRENTS.md</code> : 20 concurrents sourcés ; elle a fait trouver un défaut de stockage (<code>git gc --prune=now</code> effaçait les arbres), corrigé par une ref par checkpoint</td>
 </tr>
 <tr>
 <td><strong>Capture non coopérative</strong></td>

@@ -16,11 +16,40 @@ annonçait ont été remplacés par des chiffres **mesurés**.
 | Preuve durable | — | `chain.json` (chaîne d'attestation à digest chaîné), `report.html` imprimable A4, démo hors ligne sur Pages |
 | Vidéo | « plan minuté » | **66 s enregistrée**, sans narration, sorties réelles |
 
+## Les deux jugements du dépôt construit
+
+Un juge indépendant (la grille seule, sans la fiche d'origine ni les attaques) a
+noté le **dépôt** : **60/100** au premier passage, **78/100** au second, après
+les corrections listées plus bas. Les deux verdicts sont publiés en entier dans
+le dépôt du projet : [`docs/jugements.md`](https://github.com/Tradoooo/rejeu/blob/main/docs/jugements.md).
+
+| Critère | Jugement 1 | Jugement 2 |
+|---|---|---|
+| Impact | 8/20 | 13/20 |
+| Kiro | 11/20 | 15/20 |
+| Design | 14/20 | 19/20 |
+| Innovation | 14/20 | 16/20 |
+| Présentation | 13/20 | 15/20 |
+| **Total** | **60/100** | **78/100** |
+
+Le premier jugement a nommé 19 défauts ; presque tous ont été corrigés dans la
+demi-heure suivante : contre-exemple **trouvé par une propriété fast-check**
+(graine 20261104, échec sur le code d'avant le correctif), effet du steering
+**mesuré** (6 faux écarts → 0), « moins de 30 s » et « moins de 60 s »
+**chronométrés** (0,38 s et 0,77 s), chiffres **unifiés** dans un tableau unique,
+chaîne **exportable** pour être versionnée, trace d'axe jointe — et un garde-fou
+qui refuse désormais de valider une page qui ne rend rien (un bug de syntaxe
+avait fait passer la démo cassée pendant une heure).
+
 ## Ce qui a été fait depuis (13 nov., 16 h)
 
 | Ajout | Preuve |
 |---|---|
-| **Vidéo** (66 s, H.264, sans narration) | `docs/demo/rejeu-demo.mp4` ; toutes les sorties affichées sont produites par `scripts/capture-reel.mjs` (vraies exécutions) |
+| **Vidéo** (69 s, H.264, sans audio) | `docs/demo/rejeu-demo.mp4` ; toutes les sorties affichées sont produites par `scripts/capture-reel.mjs` (vraies exécutions) ; les 15 premières secondes montrent le problème **et** le chiffre |
+| **Incident réel du hook** | un agent a tenté `git commit --amend` pendant une session capturée : le hook a refusé, la commande n'a jamais atteint `git` (`fixtures/session-hook/incident.md`) |
+| **Relecteur / testeur** | `tools/relecteur.mjs` (lecture seule) et `tools/testeur.mjs` ; le relecteur a trouvé une exigence sans vérificateur |
+| **Comparaison spec / vibe coding** | `experiments/spec-vibe/` : deux sous-agents, même fonction, suite partagée de 14 cas |
+| **Comparaison des concurrents** | `docs/CONCURRENTS.md` : 20 concurrents sourcés ; elle a fait trouver un défaut de stockage (`git gc --prune=now` effaçait les arbres), corrigé par une ref par checkpoint |
 | **Capture non coopérative** | `packages/proxy/` : un proxy MCP enveloppe le serveur d'outils de l'agent et capture chaque changement d'état. Prouvé sur un agent réel : **3 appels → 2 checkpoints**, l'appel de lecture n'en produit aucun. 4 tests dédiés |
 | Session réelle d'agent | `fixtures/session-agent/` (opencode + broker) : régression localisée à l'**itération #0 en 3,0 s** |
 | Session proxy | `fixtures/session-proxy/` (opencode + proxy) : capture automatique, sans coopération |
