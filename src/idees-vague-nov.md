@@ -1,0 +1,557 @@
+# 104 idées neuves — vague du 13 novembre 2026
+
+Huit lots de treize idées, cent quatre au total, écrites par huit agents sur huit
+filons disjoints, puis **fusionnées, dédoublonnées et notées par deux juges
+indépendants**.
+
+## La méthode
+
+- **Zéro doublon** : les 985 titres déjà utilisés (corpus des 2 400 idées +
+  les projets déjà construits : Rejeu, Bipeur, Suture, Placard, Ghost Hours,
+  Thin-Air, Packet-Voyage, Tickets-Pièges, Tamis, Veille, Glane, Éclat…) ont
+  été fournis aux huit rédacteurs, qui ont dû écarter leurs doublons.
+- **Une idée doublon assumée** : « Bobine » (lot A, 05) est un renommage partiel de
+  *Rejeu*, déjà construit. Elle avait été annoncée **retirée** lors de la fusion des lots :
+  elle est en fait **restée dans la liste**. Corrigé ici plutôt que masqué — le juge strict
+  lui applique le malus −20 de doublon, le juge aveugle ne la mentionne pas.
+- **Notation** : deux juges indépendants ont noté les 104, sur deux grilles différentes
+  (le jury : Impact, Kiro, Design, Innovation, Présentation ; la grille interne : Impact,
+  Innovation, Faisabilité, Démonstrabilité, Potentiel Kiro). Écart moyen entre les deux :
+  **+8,45 points**, corrélation de rang ρ = 0,774 — le niveau change, l'ordre reste.
+  Les deux classements, le top 10 par moyenne et les défauts comptés sont publiés dans
+  **[Classement · vague du 13 nov.](vague-nov-classement.html)**.
+- **Format** : une ligne par idée (nom · catégorie · problème · chiffre · v1), puis, pour
+  les trois meilleures de chaque lot, le chiffre mesuré, la démo de 30 s et le concurrent
+  le plus proche. **Seulement 20 fiches sur 104 sont détaillées ainsi** : les lots F et G
+  n'en ont qu'**une** chacun (non trois), ce qui coiffe mécaniquement leur Design et leur
+  Présentation chez les deux juges.
+
+# Lot A — L'agent de code au travail : mémoire, contexte, oublis, reprise, erreur
+
+Filon : ce qui se passe **entre deux sessions** (ce qui survit, ce qui périme, ce qui se re-litige)
+et **au moment où l'agent se trompe** (origine de l'erreur, faux succès, contradiction). Ni détection
+de secret dans un prompt, ni mesure de coût : l'angle est la mémoire de travail de l'agent et ses
+récidives. 13 idées, format de `/tmp/kiroween-spec.md`.
+
+01. **Tampon** — [T] · Frankenstein · L'agent lit un fichier au tour 3 et le réécrit au tour 20 : entre-temps, un merge ou un autre agent l'a modifié, et le patch s'écrase par-dessus. Tampon empile l'empreinte (hash + taille) de chaque fichier lu et refuse, au moment de l'écriture, tout fichier dont l'empreinte a bougé, en affichant le diff des deux versions. Chiffre : 2 écritures refusées sur 37, +1,4 ms par écriture, 0 écrasement silencieux. v1 : hook pre-écriture et compare-and-swap sur fichier ; mois 2 : fusion au hunk près des écritures refusées, puis reprise automatique. [v1 7 j / total 12 j]
+
+### 01 · Tampon
+- **Chiffre mesuré** : l'écran affiche `écritures refusées 2/37 · latence ajoutée +1,4 ms · 0 écrasement silencieux`, obtenu en comparant l'empreinte du fichier au moment de la lecture (SHA-256 tronqué + taille) à son empreinte courante au moment exact de l'écriture, à partir du journal d'outils de la session.
+- **Démo 30 s** : le dépôt de démo contient `demo/session.jsonl` (session déjà enregistrée) et un fichier `demo/config.yaml` modifié entre la lecture et l'écriture ; `tampon replay demo/session.jsonl` rejoue les 3 écritures, refuse celle dont l'empreinte a bougé (« config.yaml modifié depuis ta lecture — diff +2/-1 »), et affiche le tableau final. Aucun compte, aucun réseau, un binaire local et les logs du dépôt.
+- **Concurrent le plus proche** : les agents qui relisent le fichier juste avant d'écrire (read-before-write) et les verrous `flock` / `git index.lock` — ils garantissent qu'un seul écrivain écrit à la fois, jamais que l'écrivain a *lu la même version* ; Tampon compare le contenu (compare-and-swap au niveau du fichier) et conserve la preuve : les deux versions divergentes, Restore n'est pas un déverrouillage.
+
+02. **Cicatrice** — [T] · Frankenstein · L'agent refait exactement l'erreur qu'il avait déjà faite la semaine dernière, parce que rien ne lui dit que c'est déjà raté. Cicatrice mine les échecs de toutes les sessions (outil + message d'erreur + empreinte du fichier) en signatures, et injecte au moment où l'agent s'apprête à refaire le même appel la cicatrice : l'erreur d'avant, sa date et sa cause. Chiffre : récidives évitées 7 sur 12, avertissements inutiles 0 sur 30 sessions. v1 : extraction de signature depuis le journal d'outils et rappel injecté avant l'appel ; mois 2 : cicatrice auto-effacée dès que la cause a été corrigée dans le dépôt. [v1 8 j / total 14 j]
+
+### 02 · Cicatrice
+- **Chiffre mesuré** : `récidives évitées 7/12 · rappels inutiles 0/30 sessions`, calculé en rejouant 30 sessions enregistrées : la signature d'un échec = SHA-256(outils + arguments normalisés + message d'erreur normalisé), et une récidive évitée = une session où l'agent a répété un appel en échec et où la cicatrice injectée a changé son action suivante (vérifié dans le journal, pas déduit).
+- **Démo 30 s** : `cicatrice replay demo/sessions/` affiche l'index des cicatrices (outil, erreur, date, cause, fichier concerné), puis rejoue une session où l'agent s'apprête à refaire exactement le même appel : la cicatrice apparaît dans le panneau avant l'appel. Aucun compte, aucune installation, aucun réseau : binaire local + journaux JSONL livrés dans le dépôt.
+- **Concurrent le plus proche** : `CLAUDE.md`, `AGENTS.md` et les mémoires persistantes de Cursor ou Claude Code — l'humain y *déclare* les leçons, il ne les *mine pas* et ne sait pas dire si elles ont servi ; Cicatrice extrait les échecs des journaux, les rattache à la signature exacte de l'appel (outil + arguments + message d'erreur) pour les rejouer au moment du risque, et publie son taux de rappel inutile.
+
+03. **Pendule** — [S] · Frankenstein · On tranche « on garde Postgres » en mars, et l'agent repart de zéro en septembre et propose Redis. Penduel extrait des sessions passées les questions posées et la décision qui a suivi, les archive par question normalisée (verbe + entités), et réinjecte le choix au moment où la même question revient. Chiffre : 6 questions récurrentes, 4 choix rappelés à l'identique, 2 décisions rouvertes à la main. v1 : détection de question par hachage normalisé et ancrage de la décision sur le commit qui l'a tranchée ; mois 2 : contrôle de la décision contre le code (la décision tient-elle encore ?). [v1 6 j / total 11 j]
+
+### 03 · Pendule
+- **Chiffre mesuré** : `questions récurrentes 6 · choix rappelés 4 · rouvrites manuelles 2`, obtenu sans réseau : la question est normalisée (verbes et entités extraits par règles, puis hachée), et une décision n'est comptée comme « rappelée » que si elle est ancrée sur un commit réel du dépôt (`git log --grep` sur le texte de la décision) — donc un rappel est un fait vérifiable, pas une phrase.
+- **Démo 30 s** : le dépôt de démo contient 3 sessions où la même question est posée deux fois ; `pendule scan demo/sessions/` affiche les 6 questions récurrentes avec la décision retrouvée et son commit d'ancrage, puis réinjecte cette décision dans une session neuve ouverte par l'agent (visible dans le panneau de transcription). Aucun compte, aucune installation : binaire local + journaux JSONL du dépôt.
+- **Concurrent le plus proche** : les ADR (`adr-tools`, `log4brains`) et les fichiers `CLAUDE.md` — un ADR est écrit à la main par un humain au moment de la décision ; Pendule *mine* la conversation, détecte que la décision existe déjà (donc qu'on la re-litige) et la rend à l'agent au moment où il repose la question, avec le commit qui l'a tranchée : l'écart est structurel (détection de la re-litigation), pas documentaire.
+
+04. **Dateur** — [T] · Resurrection · Un souvenir écrit par l'agent devient faux trois commits plus tard, et l'agent continue de s'appuyer dessus. Le dateur des bureaux de poste revient : chaque entrée de mémoire est estampillée du commit qu'elle décrit, et celles dont le commit a disparu de l'historique sont marquées périmées. Chiffre : 31 entrées estampillées, 4 périmées (13 %), durée de vie médiane 11 commits. v1 : store de mémoire versionné et ancrage git ; mois 2 : re-datation automatique quand le commit survit mais que le contenu a bougé. [v1 6 j / total 11 j]
+
+05. **Bobine** — [S] · Resurrection · L'agent se trompe au tour 12 et on veut rejouer les 12 premiers tours puis y greffer une autre suite, sans tout refaire. La bobine de la bande magnétique revient : la session est enregistrée en spires (un tour = une spire) que l'on découpe au tour N pour y greffer une continuation différente, les réponses enregistrées servant de source. Chiffre : découpe au tour 12, branche greffée 1, tours rejoués 12, première divergence au tour 16. v1 : journal des tours et lecture d'une branche à partir d'un tour donné ; mois 2 : comparaison chiffrée des branches (succès, fichiers touchés, jetons). [v1 7 j / total 12 j]
+
+06. **Anamnèse** — [T] · Resurrection · L'agent affirme se souvenir d'une API, d'une commande de build, d'une convention : on ne sait jamais ce qu'il a réellement retenu. L'anamnèse du médecin revient : la mémoire de l'agent est mise en examen par un interrogatoire de questions dérivées de ses propres souvenirs, et chaque réponse est confrontée à la vérité du dépôt. Chiffre : 30 questions, 41 % de rappel exact, 6 fausses croyances. v1 : questionneur et vérificateur dans le dépôt, 2 modes (banc hors ligne, interrogatoire en session) ; mois 2 : contradictions entre sessions et correction automatique de la mémoire. [v1 8 j / total 15 j]
+
+07. **Passation** — [S] · Skeleton Crew · La session s'arrête et la suivante repart de zéro : ce qui compte (où on en était, ce qui a été décidé, ce qui coince) n'existe que dans la tête du modèle. Passation est un noyau de 8 champs (état, décisions, fichiers ouverts, prochain pas, pièges connus, tests à lancer) plus deux applications : une CLI qui écrit et relit la passation, un contrôle CI/EDI qui refuse une passation devenue fausse. Chiffre : 8 champs repris sur 8, 2 champs périmés signalés, 640 octets par passation. v1 : schéma, CLI et vérificateur, 2 apps (CLI, hook CI) ; mois 2 : passation multi-agents (transfert d'un agent à l'autre) et diff entre passations successives. [v1 6 j / total 11 j]
+
+08. **Zigzag** — [T] · Skeleton Crew · L'agent affirme au tour 3 qu'il n'existe pas de test pour X, puis en crée un au tour 18 : personne ne le remarque. Zigzag extrait les faits affirmés par l'agent (fichier, symbole, option, résultat de test) et revérifie à chaque tour ceux qu'un résultat d'outil ou le dépôt vient de contredire. Chiffre : 142 affirmations extraites, 7 contradictions, première contradiction au tour 3. v1 : extracteur de faits structurés et vérificateur, 2 apps (CLI, hook de tour) ; mois 2 : contradiction entre la session d'hier et celle d'aujourd'hui. [v1 8 j / total 14 j]
+
+09. **Feinte** — [S] · Skeleton Crew · L'agent annonce « c'est fait » après un grep qui n'a rien trouvé ou une commande qui a échoué en silence. Feinte confronte chaque affirmation de succès de son dernier message aux résultats d'outils de la session (code de sortie, nombre de lignes rendues, fichiers produits) et marque les succès non prouvés. Chiffre : 18 affirmations de succès, 3 non prouvées (17 %), 0 faux positif sur 40 tours. v1 : extracteur d'affirmations et rapprochement avec les résultats, 2 apps (CLI sur le dernier message, contrôle de PR) ; mois 2 : score de fiabilité par session, suivi dans le temps. [v1 5 j / total 9 j]
+
+10. **Perfo** — [S] · Costume Contest · Personne ne sait ce qu'une session a réellement mangé : 40 fichiers lus, dont 12 lus trois fois, puis un tour qui sature. Le costume est la carte perforée : la session devient un jeu de cartes (une carte par tour, une encoche par catégorie consommée — fichiers, outils, jetons, tests) ; `--plain` rend exactement le même tableau en texte, l'outillage ne change pas. Chiffre : 27 cartes, 4 catégories d'encoches, 12 lectures dupliquées (44 % des lectures). v1 : lecture du journal, rendu perforé et rendu texte sur le même cœur, 2 modes ; mois 2 : carte imprimable de la session entière et comparaison de deux sessions. [v1 6 j / total 11 j]
+
+11. **Reliquaire** — [S] · Costume Contest · La session précédente a créé 3 fichiers, supprimé 2 et abandonné une branche : la session suivante les redécouvre comme si c'était neuf. Le costume est la vitrine de reliques : l'inventaire des résidus de session (fichiers créés puis supprimés, worktrees abandonnés, patchs jamais appliqués) est présenté comme des pièces de musée, et `--plain` rend le même inventaire en table. Chiffre : 8 reliques (3 fichiers, 2 worktrees, 3 patchs), 2 déjà réapparues dans l'historique. v1 : journal et scanner de résidus, 2 rendus (vitrine, table) ; mois 2 : vidange automatique des reliques (avec garde-fou) et taux de récidive dans le temps. [v1 5 j / total 9 j]
+
+12. **Mandataire** — [T] · Frankenstein · Six mois après, `git blame` dit « l'agent », mais la vraie question est « quelle consigne a produit cette ligne ». Mandataire remonte de chaque ligne écrite par l'agent jusqu'à la consigne qui l'a causée (chaîne tour de consigne → patch → ligne) et affiche le mandant humain derrière chaque bloc. Chiffre : 1 240 lignes d'agent, 912 rattachées à une consigne (73 %), 7 consignes distinctes. v1 : chaîne consigne-patch et extraction des lignes du diff, 2 usages (CLI sur un patch, hook post-commit) ; mois 2 : classer les consignes par nombre de régressions produites. [v1 9 j / total 16 j]
+
+13. **Filature** — [T] · Frankenstein · Une erreur de lecture au tour 3 contamine sept décisions au tour 20 : personne ne sait d'où elle vient. Filature remonte à l'origine d'un fait erroné (premier tour où il apparaît) et mesure son rayon d'impact (décisions, fichiers et lignes qui en dépendent), comme une filature tenue d'un bout à l'autre. Chiffre : origine au tour 3, 7 décisions contaminées, 5 fichiers touchés. v1 : graphe tour-dépendances-tour et marqueur d'erreur, 2 usages (CLI sur une session, rapport) ; mois 2 : détection automatique de l'origine sur les sessions où personne n'a signalé d'erreur. [v1 9 j / total 16 j]
+
+## Doublons écartés de ce lot
+
+- Idées voisines du corpus écartées : Oubli et Purge (mémoire, TTL), Fenêtre et Bruit (contexte), Rejeu et Pas-à-pas (reprise), Spirale (boucle), Compteur et Prix-tâche (coût), Décision (journal de choix), Sceau et Témoin (journalisation), Cible et API-fantôme (symboles).
+- Doublons internes évités : l'idée « abandon silencieux d'étapes du plan » (absorbée dans Feinte), l'idée « re-litigation » (gardée seule sous Pendule), l'idée « lignes écrites par l'agent » (gardée seule sous Mandataire).
+- Renommages refusés : Coupable (trop proche de Whodunit et BlameCourt) → Mandataire ; Estampille (trop proche de Sceau) → Dateur ; Relique (trop proche de Nécrologie) → Reliquaire.
+
+---
+
+# Lot B — La donnée qui change de forme
+
+Filon : le moment où la donnée **change de forme** (schéma, valeur, unité, période) et où
+personne n'est prévenu. 13 idées, format de `/tmp/kiroween-spec.md`.
+
+01. **Colonne-vide** — [T] · Resurrection · Une colonne existe dans le schéma depuis deux ans, n'est
+jamais écrite, et le `SELECT *` la traîne dans chaque réponse. Colonne-vide croise l'analyse statique
+des écritures du dépôt avec le comptage de valeurs nulles en base et publie, par colonne, le taux de
+remplissage et la dernière écriture observée. Chiffre : colonnes mortes 3/87 · lignes nulles 100 % ·
+dernière écriture jamais. v1 : lecture du schéma + du code, sans base ; mois 2 : détection en
+production sur les journals de requêtes. [v1 8 j / total 16 j]
+
+### 01 · Colonne-vide
+- **Chiffre mesuré** : `colonnes mortes 3/87 · lignes nulles 100 % · dernière écriture jamais`, obtenu
+  en croisant les colonnes du schéma (information_schema) avec les sites d'écriture trouvés dans le code
+  (AST) et en comptant les non-nuls sur un échantillon de 100 000 lignes.
+- **Démo 30 s** : un dépôt de démonstration avec un `schema.sql` (87 colonnes) et 3 sources ; une
+  commande locale `colonne-vide scan ./demo` affiche le tableau trié par « jamais écrite », sans compte,
+  sans réseau, sans base : le schéma et le code sont dans le dépôt.
+- **Concurrent le plus proche** : `schema-diff`, `dbfreeze`, `pg_stat_statements` et les linters de
+  colonnes inutilisées ; ils signalent l'incohérence entre schémas successifs ou la requête qui ignore
+  un index — Colonne-vide mesure le **taux de remplissage** et la **dernière écriture**, c'est-à-dire
+  l'inactivité, pas l'écart.
+
+02. **Remplissage** — [T] · Frankenstein · Une migration ajoute une colonne NOT NULL avec un défaut, et
+le backfill tourne en production pendant que les lecteurs voient un mélange d'ancien et de nouveau
+schéma. Remplissage détecte les backfills exécutés sur du trafic vivant sans écriture fantôme ni
+lecture réparatrice, et publie la fenêtre pendant laquelle les deux formats coexistent. Chiffre :
+remplissages à risque 2/11 · lignes à moitié migrées 41 200 · fenêtre moyenne 6 min 12 s. v1 : analyse du
+script de migration + du code de lecture ; mois 2 : mesure réelle de la fenêtre sur journal de
+requêtes. [v1 9 j / total 18 j]
+
+### 02 · Remplissage
+- **Chiffre mesuré** : `remplissages à risque 2/11 · lignes à moitié migrées 41 200 · fenêtre 6 min 12 s`,
+  obtenu en rejouant les migrations d'un dépôt réel contre une base jetable, en horodatant chaque
+  lecture concurrente du backfill.
+- **Démo 30 s** : `remplissage replay demo/migrations/` rejoue deux migrations sur une base SQLite
+  jetable et affiche la fenêtre où un lecteur voit l'ancien et le nouveau format — chronomètre à
+  l'écran, aucun compte, aucun réseau, la base est un fichier du dépôt.
+- **Concurrent le plus proche** : `expand-contract`, `gh-ost`, `pt-online-schema-change` et les
+  migrations « zero-downtime » des guides ; ils disent **comment** écrire une migration sûre,
+  Remplissage dit **quand** vous ne l'avez pas fait et mesure la fenêtre subi.
+
+03. **Clé-absente** — [T] · Frankenstein · La table `commandes` a un `client_id` mais aucune contrainte
+de clé étrangère : 1 284 commandes pointent vers des clients supprimés, et personne ne le voit tant
+que la jointure ne casse. Clé-absente compare le code (les jointures) au schéma (les contraintes) et
+mesure, sur un échantillon réel, le nombre de lignes orphelines. Chiffre : clés logiques sans
+contrainte 7/23 · lignes orphelines 1 284. v1 : extraction des jointures du code + du schéma ;
+mois 2 : détection continue sur les données de production. [v1 8 j / total 15 j]
+
+### 03 · Clé-absente
+- **Chiffre mesuré** : `clés logiques sans contrainte 7/23 · lignes orphelines 1 284`, obtenu en
+  listant les colonnes utilisées comme cible de jointure dans le code, en les comparant aux contraintes
+  du schéma, puis en comptant les orphelines par `LEFT JOIN … WHERE cible IS NULL` sur un échantillon.
+- **Démo 30 s** : `cle-absente scan demo/` affiche les 7 clés sans contrainte et, pour chacune, le
+  nombre d'orphelins ; le dépôt de démonstration contient le SQL et un extrait de données, donc la
+  démo tourne hors ligne, en moins de 30 secondes, sans compte.
+- **Concurrent le plus proche** : `pt-fingerprint` (n widows), `dejodupe` et les outils de qualité de
+  données ; ils nettoient les doublons **après** coup ; Clé-absente montre que la contrainte
+  manquante est la **cause** du problème, et chiffre les lignes concernées avant qu'on ne les
+  supprime.
+
+04. **Réconciliation** — [T] · Frankenstein · La base, le cache et l'index de recherche ne contiennent
+pas la même version du même document ; l'application sert ce qu'elle trouve. Réconciliation compare les
+trois sur un échantillon et publie la **fenêtre de désaccord** — combien de temps entre deux sources
+avant de se rejoindre. Chiffre : documents divergents 3 412 · fenêtre moyenne 47 s · pire 6 min 03 s.
+v1 : comparaison sur un échantillon ; mois 2 : surveillance continue et alerte. [v1 9 j / total 17 j]
+
+05. **Zéro** — [T] · Resurrection · `0`, `""` et `null` veulent dire trois choses différentes selon le
+service, et la frontière se paiera en incident. Zéro suit la valeur à travers les services (schéma,
+payloads, logs) et publie les champs dont la sémantique diverge, avec le nombre de valeurs par
+variante. Chiffre : champs à sémantique multiple 4/61 · valeurs par variante 0 / vide / nul. v1 :
+extraction depuis les schémas et les payloads d'exemple ; mois 2 : détection sur trafic réel. [v1 7 j / total 14 j]
+
+06. **Défaut** — [T] · Skeleton Crew · Le modèle dit `default=0`, la base dit `default=NULL`, et la
+différence n'apparaît que sur les lignes insérées par un chemin qui omet la colonne. Défaut compare les
+défauts déclarés dans le code (ORM) et dans le schéma, et publie les écarts avec le nombre de lignes
+concernées. Chiffre : défauts divergents 3/28 · lignes insérées sans valeur 17 402. v1 : extraction
+des défauts depuis ORM et SQL ; mois 2 : détection à l'insertion. [v1 7 j / total 13 j]
+
+07. **Décalage** — [T] · Resurrection · La moitié des timestamps sont en UTC, l'autre en heure locale,
+et personne n'a vu l'erreur. Décalage compare la distribution des heures dans les colonnes
+horodatées et publie l'amplitude du décalage observé, puis la colonne fautive. Chiffre : horodatages
+sans fuseau 1 806 lignes · décalage max 2 h 00. v1 : histogramme des heures ; mois 2 : détection sur
+le fuseau du client à l'écriture. [v1 6 j / total 12 j]
+
+08. **Migration-fantôme** — [T] · Frankenstein · La migration 014 a été écrite, relue, mergée — et
+appliquée sur deux nœuds sur cinq. Migration-fantôme compare l'historique des migrations aux nœuds
+déclarés (compose, manifeste, inventaire) et publie l'écart entre « migration écrite » et « migration
+appliquée partout ». Chiffre : migrations non appliquées 2/19 · nœuds divergents 3/5. v1 : comparaison
+manifeste ↔ dépôt ; mois 2 : contrôle avant déploiement. [v1 8 j / total 16 j]
+
+09. **Nettoyage** — [T] · Skeleton Crew · La rétention promet 90 jours ; la table en garde 900, et
+personne ne peut dire combien de données personnelles restent. Nettoyage identifie les colonnes à
+rétention (déduites du code, des docs et des politiques versionnées) et mesure le retard réel, champ
+par champ. Chiffre : lignes hors rétention 8 421 · jours de retard moyen 214. v1 : détection depuis le
+code et les docs ; mois 2 : rapport périodique signé. [v1 8 j / total 15 j]
+
+10. **Arrondi** — [T] · Frankenstein · Deux systèmes calculent le même montant et arrondissent
+différemment : 3 118 lignes divergent de 0,02 €. Arrondi rejoue le calcul de chaque montant dans les
+deux règles d'arrondi et publie les écarts, avec le nombre de lignes qui dépassent le seuil de
+tolérance. Chiffre : écarts d'arrondi 3 118 lignes · montant total divergent 62,36 €. v1 : rejoueur de
+calcul sur un extrait ; mois 2 : surveillance des deux moteurs. [v1 7 j / total 14 j]
+
+11. **Inversion** — [T] · Frankenstein · Une migration a échangé `prénom` et `nom` ; rien ne casse,
+tout est faux. Inversion compare les **distributions** des deux colonnes dans les systèmes qui les
+consomment (nom affiché, tri, export comptable) et publie les paires inversées. Chiffre : paires
+inversées 2 · lignes concernées 47 000 · tri par ordre inverse 1. v1 : comparaison de distributions ;
+mois 2 : détection continue. [v1 8 j / total 16 j]
+
+12. **Période** — [T] · Skeleton Crew · Deux factures se chevauchent sur trois jours, et la troisième
+laisse un trou : les abonnements ne s'additionnent pas. Période vérifie que les intervalles de dates
+d'une même table se recouvrent proprement (pas de chevauchement, pas de trou) et publie les écarts.
+Chiffre : périodes chevauchantes 14 · trou maximal 3 jours · doublons 27. v1 : vérification d'intervalles
+sur un extrait ; mois 2 : surveillance continue. [v1 7 j / total 13 j]
+
+13. **Table-vivante** — [T] · Resurrection · Une table reçoit 12 000 écritures par jour et plus une
+lecture depuis deux ans. Table-vivante croise les journaux d'accès et le code pour dire quelles
+tables sont **mortes mais actives** — le coût réel, en octets et en lignes, de ce qu'on ne lit plus.
+Chiffre : tables mortes encore écrites 6 · écritures par jour 12 000 · Mo conservés 840. v1 : croiser
+code et journaux d'exemple ; mois 2 : mesure continue du volume. [v1 8 j / total 15 j]
+
+---
+
+# Lot C — Le temps : l'ordre que personne n'a écrit (horloges, files, concurrence, jobs de nuit, ordre des événements)
+
+Filon : tout ce qui doit arriver dans un certain ordre sans que la règle soit écrite — migrations et déploiements, écritures et publications, vérifications et usages, acquittements et crashs. 13 idées, sans doublon avec les 985 titres.
+
+01. **Dérobade** — [T] · Frankenstein · Un `SELECT` puis un `UPDATE` dans deux requêtes distinctes : la deuxième écriture écrase la première, le compteur perd des unités et rien ne lève d'erreur. L'outil rejoue deux clients concurrents sur le schéma réel et mesure la fenêtre entre la lecture et l'écriture qui autorise ce vol. Chiffre : 214 écritures perdues sur 1 000 concurrentes, 0 avec l'écriture conditionnelle. v1 : Postgres et SQLite locaux, 2 clients en concurrence, correctif `UPDATE … WHERE version = ?` ; mois 2 : repérage statique des lectures-modifications-Écritures, garde en CI. [v1 9 j / total 20 j]
+02. **Contretemps** — [T] · Frankenstein · La migration `drop_column` passe à 14 h 02 et l'ancien code tourne jusqu'à 15 h 40 : pendant 98 minutes, la prod écrit dans une colonne qui n'existe plus, et personne n'avait écrit la règle. L'outil superpose la ligne du temps des migrations et celle des déploiements et ouvre une fenêtre rouge à chaque incompatibilité. Chiffre : 3 fenêtres rouges sur 40 migrations (2 suppressions de colonne, 1 code déployé avant sa migration). v1 : historique Git + journal de déploiements NDJSON, calcul des fenêtres ; mois 2 : lecture automatique du journal, correctif expand/contract proposé. [v1 10 j / total 22 j]
+03. **Contreseing** — [T] · Skeleton Crew · Le producteur publie sur le broker avant d'écrire la ligne en base : le crash entre les deux perd le message, et le broker ne contresigne rien. Un noyau — journal d'ordres append-only signé, une ligne par émission — enveloppe deux applications (producteur Kafka, consommateur Redis Streams) et n'émet que ce qui est contresigné. Chiffre : 47 messages perdus sur 500 crashs injectés, 0 avec le noyau. v1 : noyau d'ordres + 2 applications dans 2 dossiers ; mois 2 : rejeu des orphelins, ordre strict entre publications. [v1 10 j / total 24 j]
+04. **Entre-deux** — [S] · Costume Contest · Le job de nuit part à 2 h 00 et finit à 4 h 12 ; le déploiement de 3 h 05 passe au milieu et le rapport mélange deux versions du schéma. L'outil recouvre les intervalles d'exécution des jobs et des déploiements et affiche chaque run « à cheval » en deux bandes. Chiffre : 3 runs sur 40 à cheval, 2 avec deux versions de schéma dans le même run. v1 : journaux de jobs + journal de déploiements, calcul des recouvrements ; mois 2 : gel du déploiement pendant un run, alerte avant chevauchement. [v1 8 j / total 17 j]
+05. **Relance** — [T] · Frankenstein · Le client abandonne à 2 s alors que le serveur met 6 s : le retry repart pendant que le premier essai travaille encore, et l'effet est compté deux fois. L'outil croise, par identifiant de requête, le timeout client et la fin réelle côté serveur, et publie les endpoints dont les tentatives se recouvrent. Chiffre : 3 endpoints concernés, 41 doubles effets sur 7 jours de logs. v1 : parseur de logs client et serveur, calcul des recouvrements ; mois 2 : détection statique des timeouts, garde de CI timeout < latence p99. [v1 9 j / total 19 j]
+06. **Empiètement** — [S] · Costume Contest · Le job de 2 h dure 2 h 40 : il empiète sur le job de 4 h, qui tourne alors en double sur la même table. L'outil lit l'historique d'exécution et signale les jobs périodiques dont deux runs se recouvrent, en minutes. Chiffre : 3 jobs sur 14 s'auto-recouvrent, 340 exécutions doublées sur 30 jours. v1 : journaux cron et systemd, détection de recouvrement ; mois 2 : cadencement sans chevauchement, mode « une seule instance ». [v1 7 j / total 15 j]
+07. **Ascendance** — [T] · Skeleton Crew · Le déploiement sort l'image construite il y a trois jours : le binaire en prod n'est pas celui que la CI a testé, et la chaîne ne le dit nulle part. Un noyau de vérification de chaîne de garde — empreintes SHA-256, un maillon à la fois — porte deux applications (audit des pipelines, garde avant déploiement) et casse la chaîne au premier maillon qui ne colle pas. Chiffre : 5 déploiements, 2 sans CI verte sur le SHA exact, 1 binaire déployé jamais testé. v1 : lecture des logs CI et des manifests de déploiement, comparaison d'empreintes ; mois 2 : attestation signée type SLSA, blocage de la promotion. [v1 10 j / total 22 j]
+08. **Fente** — [T] · Frankenstein · On vérifie que le fichier n'existe pas, puis on le crée : entre la vérification et l'usage, la fenêtre est assez large pour qu'un second processus passe. L'outil détecte les motifs vérification-puis-usage dans le code et mesure la fenêtre en exécutant deux processus sur le même fichier. Chiffre : 4 fentes détectées, la plus large 1,2 s, 1 double création reproduite. v1 : détection statique (Python, Node) + banc de reproduction à deux processus ; mois 2 : proposition de primitive atomique (`O_EXCL`, `rename`), garde en CI. [v1 9 j / total 19 j]
+09. **Injoignable** — [T] · Resurrection · Le consommateur acquitte le message avant d'écrire en base : le crash entre les deux rend le message définitivement perdu, sans trace ni file de morts. L'outil ressuscite la discipline d'acquittement — toujours après l'écriture durable — sous forme d'un harnais qui coupe le processus au point choisi et recompte les messages disparus. Chiffre : 2 consommateurs sur 5 acquittent trop tôt, 47 messages perdus sur 500 crashs. v1 : harnais de crash sur un consommateur réel (Redis Streams) ; mois 2 : second consommateur sur un autre broker, détection statique de l'acquittement. [v1 10 j / total 20 j]
+10. **Contrefaçon** — [T] · Frankenstein · Le cache est invalidé avant le commit : un autre processus repeuple le cache avec l'ancienne valeur, et le service sert une contrefaçon pendant 8 secondes après l'écriture. L'outil vérifie l'ordre commit/invalidation dans le code et mesure le délai pendant lequel le cache sert une valeur périmée. Chiffre : 3 invalidateurs avant commit, 2 valeurs périmées servies 8 s après le commit. v1 : détection statique (Python, Node) + banc local de démonstration ; mois 2 : correction automatique de l'ordre, garde en CI. [v1 9 j / total 20 j]
+11. **Précédent** — [S] · Costume Contest · La migration a tourné à 3 h 12 et le dernier snapshot date de la veille : personne ne peut revenir en arrière avant 3 h 12, et personne ne l'avait demandé. L'outil tient le registre des versions de sauvegarde et refuse un changement sans point de restauration antérieur. Chiffre : 7 changements sur 112 sans restauration antérieure, 1 point de restauration le plus proche : 26 h. v1 : registre des snapshots + garde avant changement (script et hook) ; mois 2 : déclencheur automatique sur migration, rapport d'astreinte. [v1 7 j / total 16 j]
+12. **Empilage** — [T] · Skeleton Crew · À l'arrêt, le pool de connexions se ferme avant le serveur HTTP : les requêtes en cours meurent en 500 sur chaque déploiement. Un noyau d'arrêt ordonné — une pile, une ressource, un ordre — porte deux applications (serveur HTTP, worker) et refuse tout empilement qui n'est pas en LIFO. Chiffre : 3 violations d'ordre d'arrêt, 214 requêtes coupées sur 50 redémarrages. v1 : traceur d'arrêt (Node, Python) + rapport des violations ; mois 2 : modèle de ressource vérifiable, correctif proposé automatiquement. [v1 9 j / total 19 j]
+13. **Indécis** — [T] · Resurrection · Le participant a préparé sa transaction, le coordinateur est mort avant de décider : la transaction reste suspendue, et plus personne ne peut la faire avancer. L'outil ressuscite le commit à deux phases comme protocole à pannes injectées : il coupe le coordinateur à chaque instant et vérifie qu'aucun participant n'invente jamais une décision. Chiffre : 500 pannes injectées, 0 décision inventée, 41 transactions bloquées (le prix exact de la garantie). v1 : coordinateur et participant locaux + injection de panne ; mois 2 : troisième participant, reprise manuelle outillée. [v1 10 j / total 22 j]
+
+### 01 · Dérobade
+- **Chiffre mesuré** : « 214 écritures perdues sur 1 000 concurrentes », obtenu en lançant 2 clients × 500 itérations contre une table `compteur` (Postgres ou SQLite lancés par l'outil), chacun en `SELECT n` puis `UPDATE … SET n = ?` ; l'outil compare la valeur finale au total réellement incrémenté, puis rejoue la même charge avec l'écriture conditionnelle `UPDATE … SET n = n + 1 WHERE version = ?` → 0 perte.
+- **Démo 30 s** : `derobade ./demo` affiche la course des deux clients en direct, puis « 214 écritures perdues / 1 000 » en rouge, puis le même run avec le correctif : « 0 perdu ». Aucun compte, aucun réseau, base et jeu de données inclus dans le dépôt.
+- **Concurrent le plus proche** : les verrous optimistes des ORM (`lock_version` de Rails, `select_for_update` de Django, `UPDATE … WHERE version = ?` à la main). Écart structurel : ils ne s'activent que si le développeur pense à les écrire, et ne couvrent ni la lecture et l'écriture dans deux transactions, ni deux services ; l'outil ne lit pas l'intention, il exécute deux clients concurrents sur le schéma réel et publie la fenêtre de perte — le nombre de lignes qu'un contrôleur absent fait disparaître, pas une revue de code.
+
+### 02 · Contretemps
+- **Chiffre mesuré** : « 3 fenêtres rouges sur 40 migrations », obtenu en croisant l'historique Git (fichiers de migration datés par leur commit) et le journal de déploiements (NDJSON : version, SHA, instant) ; l'outil ouvre une fenêtre rouge dès qu'un code en production ne peut pas lire le schéma de cette fenêtre — colonne supprimée, colonne absente, valeur par défaut requise.
+- **Démo 30 s** : `contretemps ./demo` dessine une frise de 40 migrations et 12 déploiements, deux fenêtres clignotent en rouge avec leur durée (98 min, 14 min), puis le rapport Markdown s'ouvre ; dépôt de démonstration inclus, aucune installation.
+- **Concurrent le plus proche** : Flyway et Liquibase (ordre et checksum des migrations), Squid et Atlas (diff de schéma). Écart structurel : ces outils ne connaissent que l'axe du schéma — ils ne possèdent pas la ligne du temps des déploiements, donc ne peuvent pas dire *quand* un code a commencé à tourner ; l'outil croise deux lignes du temps et produit une garantie temporelle (fenêtre d'incompatibilité), pas un diff.
+
+### 03 · Contreseing
+- **Chiffre mesuré** : « 47 messages perdus sur 500 crashs injectés », obtenu en tuant le producteur à un instant aléatoire de l'émission (`SIGKILL` entre l'envoi et l'écriture) et en comparant les messages émis aux lignes contresignées du journal d'ordres : sans noyau, 47 disparus ; avec le noyau, 0.
+- **Démo 30 s** : `contreseing ./demo` affiche le journal d'ordres ligne par ligne (émission, contreseing, commit), un éclair marque le crash, puis le compteur bascule de « 47 messages perdus » à « 0 avec le noyau » ; les deux applications (producteur Kafka simulé, consommateur Redis Streams) tournent en local, données incluses.
+- **Concurrent le plus proche** : Debezium et le pattern « transactional outbox » documenté par les frameworks. Écart structurel : le CDC garantit l'ordre base → broker pour les lignes déjà écrites, mais il est aveugle à un producteur qui publie *avant* d'écrire — l'événement part, la ligne arrive après, l'ordre est faux et le crash perd les deux ; l'outil contrôle l'ordre *dans le code du producteur* et le prouve par injection de panne, là où le CDC ne voit que la base.
+
+---
+
+# Lot D — Le réseau : ce que le réseau fait à votre code quand personne ne regarde
+
+Filon : DNS, TLS, HTTP, proxies, cache, pannes de transport. Angle : pas « l'API qui casse » ni « le drift de config », mais **les effets invisibles du transport sur votre code** — retries, timeouts, réponses différentes pour la même requête, ordre des paquets.
+
+01. **Éventail** — [T] · Frankenstein · La même requête envoyée vingt fois revient vingt fois différente — nonce, `Date`, point de présence CDN, cookie de session — et vos tests d'égalité échouent sans raison. Un banc rejoue N fois la même URL contre un serveur local et publie le nombre de réponses distinctes, les octets qui changent et l'en-tête responsable. Chiffre : réponses distinctes sur 20 requêtes (ex. 7) et champ variant nommé (`data.updated_at`). v1 : serveur de test embarqué + diff octet à octet + rapport imprimable ; mois 2 : rejeu depuis plusieurs points de présence et mode « fige le champ variant » qui rend la suite déterministe. [v1 8 j / total 30 j]
+
+### 01 · Éventail
+- **Chiffre mesuré** : « 7 réponses distinctes sur 20 requêtes identiques », plus la liste des octets qui changent (offset, avant/après) et l'en-tête suspect (`Date`, `Age`, `Vary`, `ETag`, `Set-Cookie`). L'obtention : 20 requêtes `GET` contre un serveur de test embarqué qui renvoie une collection fictive avec un `updated_at` aléatoire, un `X-Request-Id` et un `Age` variable ; les corps sont comparés **octet à octet**, pas par égalité JSON — l'ordre des clés change aussi.
+- **Démo 30 s** : 1) `evantail run --url http://localhost:8080/orders` ; 2) l'écran affiche « 7 / 20 réponses distinctes » ; 3) zoom sur un diff de deux lignes : `updated_at: 2026-11-13T21:04:11Z → 2026-11-13T21:04:12Z` ; 4) clic « figer » : le serveur rend une valeur stable, le compteur tombe à 1. Boucle locale, aucun compte, aucune installation (binaire unique).
+- **Concurrent le plus proche** : `pytest-repeat` et `jest` rejouent des tests et amortissent le flakiness, `diff` compare deux fichiers. Écart **structurel** : ces outils rejouent **ce que vous produisez** et ne mesurent jamais ce que **le transport ajoute** (en-têtes, ordre, horodatage, point de présence) ; surtout ils ne rendent pas la variation **injectable**. La garantie d'Éventail est « après gel, 100 requêtes → 1 seul corps, sinon échec », vérifiée à chaque exécution ; les concurrents garantissent au mieux « le test passe trois fois ».
+
+02. **Bassin** — [T] · Costume Contest · Vos connexions HTTP en pool meurent pendant que votre service dort : le proxy les ferme après 60 s d'inactivité et la première requête qui les réutilise part en 502 — un bug qui n'existe qu'en production. Un cimetière de sockets montre l'âge de chaque connexion morte et un banc local reproduit la fermeture pour mesurer la tolérance réelle de votre client. Chiffre : âge de la connexion morte au moment de l'échec (ex. 58 s) et requêtes perdues sur 12 (ex. 1). v1 : serveur qui coupe les sockets inactives + client en pool (Node, Python, Go) ; mois 2 : variantes HTTP/2 et QUIC, et réglage de pool recommandé. [v1 8 j / total 32 j]
+
+### 02 · Bassin
+- **Chiffre mesuré** : « connexion morte après 58,4 s d'inactivité · 1 requête perdue sur 12 · 0 perdue quand le pool recycle avant 50 s ». L'obtention : un serveur HTTP local qui ferme le socket après un délai choisi, un client qui met en pool et journalise l'âge de chaque socket au moment de l'erreur ; l'outil rejoue trois scénarios (inactivité 30 / 60 / 300 s) et publie le tableau. La pierre du cimetière affiche l'âge exact, la date de mort et le verdict du retry.
+- **Démo 30 s** : 1) `bassin run --idle 60` ; 2) le journal du client affiche `socket age 58,4 s → ECONNRESET (1/12)` ; 3) le cimetière de sockets s'ouvre : chaque connexion morte a sa pierre datée ; 4) même scénario avec `--pool-max-idle 30` → `0/12`. Tout en boucle locale, zéro compte, zéro installation.
+- **Concurrent le plus proche** : `undici`, `requests` et `httpx` implémentent le pool et les retries, `keepalive` réduit la fenêtre, `toxiproxy` injecte des pannes. Écart **structurel** : ces bibliothèques **retry** et `toxiproxy` **coupe** le réseau — aucun ne mesure la **durée de vie réelle** de la connexion côté serveur ni le taux de perte qu'elle produit dans **votre** code. La garantie de Bassin : « 0 requête perdue sur socket morte pour une inactivité donnée, mesuré à chaque exécution », là où les autres garantissent « une tentative de plus ».
+
+03. **Doute** — [T] · Frankenstein · Quand la réponse se perd entre le serveur et vous, plus personne ne sait si l'écriture a eu lieu : le retry double la facture, le like et l'e-mail. Un banc fait traiter la requête par l'origine puis coupe la réponse au dernier saut, et publie la fenêtre d'ambiguïté — le délai pendant lequel un essai peut encore aboutir — et le nombre d'effets doublés. Chiffre : effets doublés sur 20 retries (ex. 4) et durée de la fenêtre d'ambiguïté (ex. 12,3 s). v1 : origine instrumentée + coupure au saut final + client rejoueur ; mois 2 : audit automatique des endpoints non protégés dans votre code et rapport par route. [v1 9 j / total 34 j]
+
+### 03 · Doute
+- **Chiffre mesuré** : « 4 effets doublés sur 20 retries · fenêtre d'ambiguïté : 12,3 s (délai avant abandon de l'origine) ». L'obtention : l'origine journalise chaque effet métier (une ligne « facturée »), la coupure est injectée **après** traitement, le client rejoue ; l'outil croise l'identifiant d'effet côté origine et celui côté client : deux lignes pour un même effet = un doublon. La fenêtre se mesure entre l'instant d'envoi et l'abandon de l'origine.
+- **Démo 30 s** : 1) `doute run --cut-after-commit` ; 2) l'écran montre « POST /orders → 200 perdu → retry → 2 lignes en base » ; 3) bouton « rejouer » : le rapport sort « 4/20 doublons · fenêtre 12,3 s » ; 4) le même banc avec un en-tête `Idempotency-Key` affiche « 0/20 ». Aucun compte, aucune installation, tout en local.
+- **Concurrent le plus proche** : `toxiproxy` et `tcpreplay` injectent des pertes réseau ; les API à clé d'idempotence (Stripe) protègent l'écriture **côté serveur, à condition que vous les utilisiez**. Écart **structurel** : ces outils **coupent** le réseau et la clé d'idempotence **suppose** votre conformité — aucun des deux ne mesure la fenêtre d'ambiguïté ni ne prouve l'exposition de **votre** code. La garantie de Doute : « le taux de doublon réel de votre code, mesuré sur 20 retries, à chaque exécution ».
+
+04. **Canon** — [T] · Resurrection · Le catalogue à fiches renaît : vos URL sont des fiches mal classées, deux pointures différentes pour la même page ne partagent pas la clé de cache, et une seule fiche s'ouvre sous deux clés. L'outil range vos URL dans la forme canonique que le CDN retient (casse, %-encodage, slash final, ordre des paramètres, port) et publie les collisions et les fragments. Chiffre : URL extraites du code (ex. 34) pour 12 pages, et part des octets servis deux fois (ex. 41 %). v1 : extraction des URL du code + clé RFC 3986 + rapport ; mois 2 : lecture du `Vary` et du `Cache-Control` réels d'un serveur local, et règle unique proposée. [v1 8 j / total 30 j]
+
+05. **Cadran** — [T] · Skeleton Crew · Squelette d'horloge : un agent interroge chaque dépendance et publie l'écart entre son horloge et la vôtre, sans jamais corriger à votre place. Apps : un service de paiement / un service de facturation. Invariant : l'écart mesuré reste sous le budget déclaré, sinon le rapport est rouge. Chiffre : écart mesuré (ex. +3,4 s) et revalidations obtenues sur 12 requêtes conditionnelles (ex. 0 au lieu de 12). v1 : sonde `Date` sur trois services + rejoueur conditionnel à horloge décalée ; mois 2 : budget d'écart par dépendance et alerte au passage du seuil. [v1 8 j / total 30 j]
+
+06. **Rafale** — [T] · Frankenstein · Une dépendance qui ralentit déclenche vos retries, vos retries saturent l'origine, la saturation relance les retries : la panne s'amplifie toute seule et l'équipe croit à une attaque. Un banc local reproduit la boucle (N clients, M tentatives, origine ralentie) et publie le facteur d'amplification et le temps de retour à la normale. Chiffre : facteur d'amplification (ex. ×7,4 — 214 requêtes à l'origine pour 29 utiles) et temps de recovery (ex. 41 s). v1 : origine ralentissable + clients avec politique de retry ; mois 2 : estimation du facteur sur vos métriques réelles (Prometheus, OpenTelemetry) au lieu du banc. [v1 9 j / total 34 j]
+
+07. **Fourche** — [T] · Frankenstein · La même URL demandée en HTTP/1.1 et en HTTP/2 ne revient pas avec les mêmes octets ni le même comportement : entêtes réordonnés, corps chunké, `Expect: 100-continue` respecté d'un côté seulement — et vos tests ne tournent que sur une branche. Un banc sert la même ressource sur les deux protocoles et publie le diff d'octets et le nombre de divergences de comportement. Chiffre : octets sur le fil par protocole (ex. 1 842 / 1 106) et divergences de statut ou de corps (ex. 2). v1 : serveur multi-ALPN local + client sur les deux protocoles ; mois 2 : QUIC et détection des suppositions de protocole dans votre code. [v1 9 j / total 32 j]
+
+08. **Ronde** — [T] · Costume Contest · Le manège DNS : votre requête monte sur un cheval et redescend sur un autre serveur, votre session reste en mémoire sur le premier, et la réponse revient vide. L'outil fait tourner le manège (plusieurs adresses, rotation) et publie le taux de retombée sur un autre serveur et le nombre de sessions perdues. Chiffre : requêtes qui retombent ailleurs (ex. 2 sur 3) et sessions perdues (ex. 1 sur 3). v1 : serveur DNS local avec rotation + client à session en mémoire ; mois 2 : lecture du TTL réel et des chaînes CNAME pour classer le risque par dépendance. [v1 8 j / total 30 j]
+
+09. **Déballage** — [T] · Frankenstein · Entre vous et votre serveur, un proxy ajoute, retire et réécrit : `X-Forwarded-For` fantaisiste, `User-Agent` transformé, CSP supprimé, cookie injecté — et votre code ne le voit jamais. Un banc compare, octet à octet, la requête que votre client écrit et celle qui arrive au serveur, à travers un proxy réel puis d'une chaîne simulée. Chiffre : en-têtes ajoutés, modifiés, supprimés (ex. 3 / 1 / 1) et octets injectés (ex. 312). v1 : serveur écho + proxy local + diff de la ligne de requête et des en-têtes ; mois 2 : rapport des en-têtes dont la valeur change réellement le comportement de votre code. [v1 8 j / total 32 j]
+
+10. **Ballon** — [T] · Resurrection · Les disciplines de file des routeurs des années 2000 ressuscitent dans votre application : une file invisible de 400 ko transforme 3 ms de latence en 318 ms, et votre « réseau lent » est une file d'attente. L'outil rejoue votre trafic sur un lien local à file bornée, publie la latence sous charge et compare deux disciplines de file (file ouverte contre file à élimination). Chiffre : latence p50 (ex. 3,1 ms → 318 ms), taille de file mesurée (ex. 384 ko) et débit à partir duquel la latence explose (ex. 1,4 Mbit/s). v1 : lien local à débit et file réglables + sonde de latence ; mois 2 : application d'une discipline de file au tampon de votre application, mesuré avant/après. [v1 9 j / total 32 j]
+
+11. **Quarante** — [T] · Skeleton Crew · Squelette d'écriture réseau : un module qui sérialise vos requêtes en un seul segment, et un second qui garde la compatibilité avec les anciens serveurs. Apps : client d'API de paiement / client WebSocket. Invariant : 0 requête émise en plus d'un segment. Chiffre : surcoût médian par requête (ex. 40,1 ms) et requêtes concernées sur 200 (ex. 176). v1 : relais local qui retarde l'ACK de 40 ms + mesure A/B avec et sans `TCP_NODELAY` ; mois 2 : détection dans le code des points d'écriture fractionnés et correctif proposé. [v1 9 j / total 30 j]
+
+12. **Maille** — [T] · Frankenstein · Le chemin réel ne porte pas 1 500 octets : un VPN, un tunnel ou une overlay jette en silence tout ce qui dépasse, et vos gros en-têtes ou vos cookies cessent de passer. Un banc mesure la maille utile du chemin par recherche dichotomique et publie la part de vos requêtes qui la dépasse. Chiffre : MTU utile mesurée (ex. 1 420 octets) et part des requêtes trop grosses (ex. 3 %). v1 : relais local qui jette au-delà d'une taille donnée + sonde de taille croissante ; mois 2 : mesure sur vos appels réels (taille des en-têtes, des cookies, des corps) et alerte au-delà de la maille. [v1 9 j / total 32 j]
+
+13. **Déflation** — [T] · Costume Contest · La chambre de décompression : la même ressource arrive compressée ou non selon ce que le client a demandé, et votre signature, votre ETag et votre test d'égalité ne survivent pas au `Content-Encoding`. L'outil sert la même ressource en gzip, brotli, zstd et identité, et publie le nombre d'empreintes par ressource et le ratio de décompression. Chiffre : empreintes distinctes pour une même ressource (ex. 4) et ratio maximal mesuré (ex. 980:1). v1 : serveur multi-encodage + comparaison octet à octet ; mois 2 : détection des signatures et ETag calculés sur les octets compressés dans votre code. [v1 8 j / total 30 j]
+
+---
+
+# Lot E — La donnée des modèles et des IA
+
+Filon : la qualité de ce sur quoi on s'appuie. Jeux de données, évaluations, annotation,
+dérive, prompts, et tout ce qui rend un modèle inutilisable en production. Ni rejeu de session
+d'agent (fait : Rejeu), ni coût des jetons (fait) — ici, ce qui est dessous.
+
+01. **Suintement** — [T] · Frankenstein · Ton score d'évaluation est gonflé : 17 % des cas du banc se retrouvent mot pour mot dans un corpus déjà vu (web, données d'entraînement, vieux CSV partagé). Suintement compare le jeu de cas avec n'importe quel corpus local par empreintes de 13-grammes puis par MinHash, et refuse de publier un score au-delà du seuil de fuite. Chiffre : 34 cas sur 200 retrouvés mot pour mot (17 %), 61 variantes proches à MinHash ≥ 0,80. v1 : appariement 13-grammes + MinHash sur fichiers locaux, rapport et code de sortie 3 au-dessus de 5 % ; mois 2 : détection sémantique par empreinte locale et fuite par entité (même document scindé entre deux lots). [v1 8 j / total 20 j]
+
+### 01 · Suintement
+- **Chiffre mesuré** : « 34/200 cas d'eval retrouvés mot pour mot dans corpus.txt (17 %), 61 variantes proches à MinHash ≥ 0,80 ». Il sort de l'empreinte de chaque 13-gramme de chaque cas d'eval, indexe le corpus par hachage 64 bits, puis MinHash (128 permutations, graine 42) pour les variantes proches. Le taux est recalculé à chaque exécution ; au-dessus de 5 %, la commande sort en code 3 et n'écrit aucun score.
+- **Démo 30 s** : dépôt déjà présent, deux fichiers ouverts (`eval.jsonl`, `corpus.txt`). `suintement eval.jsonl corpus.txt` → en 1,8 s le terminal affiche la table des 34 cas fuilés avec le 13-gramme fautif surligné dans sa source, puis la ligne rouge « 34/200 — score non publiable ». Aucun compte, aucun réseau, aucune clé.
+- **Concurrent le plus proche** : `datatrove` (déduplication à l'entraînement) et `cleanlab` (bruit d'étiquettes). Écart structurel : ces outils nettoient le côté **entraînement** ou les étiquettes ; Suintement audite le côté **évaluation** et peut **refuser** de publier un score — ce qu'aucun déduplicateur ne fait. Il tourne sans poids, sans GPU et sans accès au corpus d'entraînement.
+
+02. **Mirage** — [T] · Frankenstein · Le mutation testing des années 1970 × l'eval : une assertion qui passe quoi qu'il arrive ne prouve rien. Mirage mute la réponse attendue de chaque cas (valeur plausible fausse, chaîne vide, sortie tronquée) et rejoue l'assertion sur les sorties déjà enregistrées ; les cas qui survivent sont des mirages. Chiffre : 41 assertions sur 120 survivent à la mutation (34 %), dont 9 insensibles à toute valeur. v1 : mutants sur l'attendu et rejeu de l'assertion sur les sorties enregistrées, sans modèle ni réseau ; mois 2 : mutants au niveau du prompt et du schéma de sortie, score de mutation en garde CI. [v1 7 j / total 17 j]
+
+### 02 · Mirage
+- **Chiffre mesuré** : « 41 des 120 assertions survivent à la mutation (34 %), dont 9 insensibles à toute valeur de sortie ». Mirage applique trois mutants à la réponse attendue (valeur plausible erronée, chaîne vide, sortie tronquée à 50 %) puis rejoue l'assertion contre les sorties déjà enregistrées dans le JSONL : si l'assertion passe encore, elle ne prouve rien. Score de mutation = 1 − survivants/total, recalculé à chaque exécution, garde CI rouge sous 90 %.
+- **Démo 30 s** : `mirage eval.jsonl` sur le jeu fourni → le rapport s'ouvre : 120 barres, 41 rouges ; le survivant n°1 est affiché avec ses trois mutants acceptés et la ligne exacte de l'assertion fautive (« l'assertion ne regarde que le statut HTTP »). Zéro modèle appelé : on relit des sorties déjà enregistrées, donc la démo ne peut pas échouer en direct.
+- **Concurrent le plus proche** : `mutmut` et `pitest` (mutation testing du code source) ; côté eval, `promptfoo` et `deepeval` vérifient qu'une assertion échoue quand la réponse est fausse, mais ne mesurent pas si l'assertion *peut* échouer. Écart structurel : Mirage mute **l'attendu** et rejoue **l'assertion** sur des sorties enregistrées — donc sans modèle, sans réseau et sans exécuter le projet ; pitest exige une instrumentation de couverture et une compilation.
+
+03. **Périmètre** — [T] · Skeleton Crew · L'eval passe à 100 % et aucun chemin réel du produit n'est touché. Périmètre croise un inventaire de surface (routes, outils, jobs, tâches) avec les cas d'eval et publie la part réellement couverte ainsi que les cas redondants. Chiffre : 47 entrées de surface couvertes sur 152 (31 %), 9 cas d'eval font doublon. v1 : extraction de la surface et appariement des cas, 2 apps (rapport CLI, garde CI) ; mois 2 : proposition du cas manquant depuis l'entrée non couverte et diff de couverture entre deux versions. [v1 8 j / total 19 j]
+
+### 03 · Périmètre
+- **Chiffre mesuré** : « 47 entrées de surface couvertes sur 152 (31 %), 9 cas redondants ». Périmètre extrait la surface (routes HTTP, outils, jobs planifiés, fonctions exportées) du dépôt et apparie chaque cas d'eval aux entrées qu'il mentionne ; une entrée est couverte si au moins un cas la nomme. Ratio et liste des entrées à zéro cas recalculés à chaque exécution ; la garde CI rougit sous 80 % ou dès qu'une route critique perd sa couverture.
+- **Démo 30 s** : `perimetre` sur le dépôt d'exemple embarqué → l'arborescence de la surface s'affiche dans le terminal (152 nœuds), les nœuds couverts sont pleins, les 105 nœuds vides sont barrés ; `perimetre --critique` isole les 6 routes critiques sans cas ; dernière ligne : « 31 % — CI rouge ». Aucun compte, aucune installation, aucun réseau.
+- **Concurrent le plus proche** : `pytest-cov` et `coverage.py` mesurent la couverture des lignes **exécutées** par les tests. Écart structurel : une eval LLM n'exécute aucune ligne de votre production — elle appelle une API, un outil, un job ; Périmètre mesure la surface **nommée dans les cas** (routes, outils, tâches), y compris sur un projet sans aucun test, et signale en plus les cas redondants qui gonflent le score.
+
+04. **Charnière** — [T] · Frankenstein · Entre deux campagnes d'annotation, 16 % des étiquettes ont changé et personne ne sait lesquelles ni pourquoi. Charnière compare les deux campagnes ligne à ligne, rattache chaque bascule à une règle du journal d'annotation et sépare les bascules expliquées des bascules orphelines. Chiffre : 81 bascules sur 500 (16 %), dont 23 sans règle modifiée (4,6 %). v1 : comparaison de deux fichiers d'étiquettes et rattachement par règle d'un journal en Markdown ; mois 2 : détection par lots et piste d'audit exportable. [v1 7 j / total 17 j]
+05. **Tatou** — [T] · Frankenstein · Le filigrane du papetier × l'index vectoriel : l'agent répond avec des extraits qui ne sont plus dans les sources. Tatou estampille chaque segment par l'empreinte de sa source, puis revérifie tout l'index contre les fichiers et publie les segments périmés et les doublons. Chiffre : 412 segments périmés sur 3 200 (13 %), 180 doublons exacts. v1 : estampille par source et revérification locale, sans ré-embedding ni réseau ; mois 2 : index reconstruit depuis les sources, alerte au commit et taux de couverture par document. [v1 8 j / total 19 j]
+06. **Crible** — [T] · Skeleton Crew · Deux téraoctets de logs non étiquetés, aucune idée par où commencer l'annotation. Crible applique deux règles de pré-étiquetage sans modèle et garde les exemples où elles divergent : c'est le lot qui vaut un humain. Chiffre : 500 exemples retenus, 63 % de désaccord entre les deux règles. v1 : règles déclaratives et sélection par désaccord, 2 apps (crible CLI, lot d'étiquetage hors ligne) ; mois 2 : troisième règle et estimation de l'écart de couverture restant. [v1 7 j / total 16 j]
+07. **Décalage** — [T] · Skeleton Crew · Le modèle s'entraîne sur des features que le service ne sait pas produire, et la dégradation est silencieuse. Décalage extrait le contrat de features du code d'entraînement et du code de service, les compare et publie les écarts. Chiffre : 6 features vues à l'entraînement mais absentes au service, 2 avec des unités différentes. v1 : extraction des deux côtés (pandas, SQL), 2 apps (diff CLI, garde CI) ; mois 2 : historique des décalages et proposition de correctif unitaire. [v1 9 j / total 21 j]
+08. **Recensement** — [T] · Resurrection · Le recensement d'inventaire, ce comptage annuel où l'on recompte ce qui est vraiment en rayon, ressuscite pour les jeux de données. Recensement recompte les lignes, les colonnes et les valeurs d'un fichier et confronte le comptage au manifeste déclaré. Chiffre : 188 lignes annoncées en trop sur 50 000, 3 colonnes divergentes sur 47. v1 : comptage réel contre manifeste (CSV, JSONL, Parquet) et rapport d'écart ; mois 2 : recensement à froid sur une archive gelée et journal des écarts dans le temps. [v1 8 j / total 18 j]
+09. **Estampe** — [S] · Resurrection · L'estampille du bureau de poste revient pour les versions de jeu de données : une release marquée (date, auteur, empreinte) qui prouve qu'un fichier n'a pas bougé depuis. Estampe appose et revérifie les estampilles et signale toute non-conformité. Chiffre : 3 fichiers sur 12 ne correspondent plus à leur estampille, 1 estampille datée après la dernière modification. v1 : fichier d'estampille versionné et revérification en une commande ; mois 2 : historique d'estampilles, mode append-only et estampille signée. [v1 5 j / total 12 j]
+10. **Ouroboros** — [T] · Costume Contest · L'eval se mord la queue : la réponse attendue est la sortie du modèle, l'auto-évaluation ne prouve rien. Ouroboros compare chaque attendu aux sorties déjà enregistrées et referme l'anneau sur les cas qui sont un copier-coller de la sortie ; le costume est l'anneau lui-même, le mode `--plain` rend la même liste. Chiffre : 37 cas sur 200 ont un attendu identique à une sortie enregistrée, dont 12 à celle de l'application. v1 : comparaison exacte puis normalisée attendu ↔ sorties enregistrées, deux rendus (anneau, table) ; mois 2 : détection de paraphrase et piste de provenance de chaque étiquette. [v1 6 j / total 14 j]
+11. **Orphelin** — [S] · Costume Contest · Une étiquette que personne ne porte ne peut pas être apprise ; une étiquette portée deux fois apprend le bruit. Orphelin tient le bureau des disparus : chaque étiquette absente du jeu a son avis de recherche (dernière apparition, nombre d'exemples, dérive de fréquence) et les classes qui s'effondrent entre deux versions sont signalées sans être effacées. Chiffre : 12 étiquettes orphelines et 5 classes sous 3 exemples sur 61. v1 : profil de distribution par version de jeu de données, deux rendus (avis, table) ; mois 2 : détection des classes qui s'effondrent et export de la liste à réétiqueter. [v1 4 j / total 9 j]
+12. **Éclatement** — [T] · Skeleton Crew · La tokenisation d'un modèle × votre corpus métier : vos 4 000 termes techniques éclatés en 11 morceaux ne s'apprennent pas. Éclatement calcule hors ligne, avec un vocabulaire embarqué, la part de vos jetons qui sont des morceaux de mots et classe les termes les plus coûteux. Chiffre : 41 % des jetons du corpus sont des fragments, « CONTRE-EXEMPT » coûte 11 jetons. v1 : tokenizer embarqué et comptage de fragmentation, 2 apps (audit d'un corpus, glossaire réécrit), sans réseau ; mois 2 : classement pondéré par fréquence et coût par terme. [v1 7 j / total 16 j]
+13. **Brevet** — [T] · Frankenstein · Le greffe du bureau des brevets × votre tableur de scores : le prompt vit dans le code, le score vit dans une feuille, et personne ne sait quel prompt a produit quel score. Brevet dépose chaque invite du dépôt, l'estampille, et signale les scores publiés dont l'invite a changé depuis le dépôt. Chiffre : 14 invites déposées, 2 modifiées sans redépôt, 3 scores périmés. v1 : extraction des invites du code, registre d'empreintes versionné, garde CI ; mois 2 : liaison automatique aux rapports d'évaluation et export de la table des dépôts. [v1 7 j / total 16 j]
+
+---
+
+# Lot F — Le poste de travail
+
+Filon : **le poste lui-même** — ce qui traîne dans le HOME, ce qui est partagé entre projets, ce qui
+n'est reproductible qu'à la main. Ni devcontainer, ni dérive de config (déjà faits). 13 idées,
+format de `/tmp/kiroween-spec.md`.
+
+01. **Home** — [T] · Frankenstein · Le HOME pèse 40 Go, contient 31 secrets en clair et 2 000 fichiers
+que personne n'a jamais ouverts ; à l'installation d'un outil, c'est lui qu'on duplique. Home
+audite le HOME à la manière d'un inventaire : taille par dossier, fichiers jamais ouverts (atime), secrets en
+clair, doublons entre projets. Chiffre : 40 Go · 31 secrets en clair · 1 870 fichiers jamais ouverts ·
+2 340 doublons. v1 : lecture seule du HOME, rapport ; mois 2 : suggestions de nettoyage vérifiables.
+[v1 7 j / total 14 j]
+
+### 01 · Home
+- **Chiffre mesuré** : `40 Go · 31 secrets en clair · 1 870 fichiers jamais ouverts · 2 340 doublons`,
+  obtenu en sommant `du` par dossier, en croisant les motifs de secrets avec les règles de détection,
+  en lisant les dates d'accès, et en hashing les fichiers de même taille pour trouver les doublons.
+- **Démo 30 s** : `home audit --demo` audite un HOME de démonstration livré dans le dépôt (fichiers
+  factices, 40 Mo), affiche le classement par dossier, les secrets trouvés et les doublons — tout en
+  lecture seule, hors ligne, sans compte, et le rapport est imprimable.
+- **Concurrent le plus proche** : `ncdu`, `dust`, `bleachbit` et les scanners de secrets (gitleaks,
+  trufflehog) ; ils font **un** travail chacun (taille, ou secrets). Home les **réunit** et ajoute la
+  donnée qu'aucun n'a : les fichiers que le poste n'a jamais ouverts.
+
+02. **Doublure** — [T] · Costume Contest · Le même outil est installé trois fois (nvm, brew, apt) dans
+trois versions, et « ça marche sur ma machine » veut dire « avec la bonne ». Doublure recense les
+exécutables présents en double dans le PATH et publie, par binaire, le nombre de copies et la version
+réellement utilisée. Chiffre : binaires en double 14 · versions divergentes 6 · PATH inutilisé 9
+entrées. v1 : lecture du PATH + `which -a` ; mois 2 : détection des divergences de version au runtime.
+[v1 6 j / total 12 j]
+
+03. **Version-épinglée** — [T] · Resurrection · Les outils s'empilent : 41 binaires installés à la main, plus ou
+moins maintenus, dont 9 ne compilent plus. Étal liste les binaires du poste, leur dernière version
+connue (registre public) et l'écart, sans jamais rien installer. Chiffre : outils 41 · obsolètes 17 ·
+abandonnés 4. v1 : registre + PATH ; mois 2 : rapport mensuel. [v1 6 j / total 11 j]
+
+04. **Secret-partagé** — [T] · Frankenstein · Un token écrit dans un `.bashrc` se retrouve dans
+l'historique du shell, dans le journal du terminal et dans les captures d'écran. Secret-partagé traque
+les secrets du poste (hors dépôts) jusqu'à leurs copies : historique du shell, fichiers de config,
+journaux de terminal, et publie le nombre d'exemplaires par secret. Chiffre : secrets hors dépôt 17 ·
+copies 214 · secrets dans l'historique 6. v1 : scan du HOME en lecture seule ; mois 2 : retrait
+automatique vérifié. [v1 8 j / total 16 j]
+
+05. **Chemin-mort** — [T] · Skeleton Crew · Un script pointe vers `/home/antoine/workspace`, le poste a
+changé de nom, et le script casse. Chemin-mort extrait les chemins absolus des scripts et des configs
+et vérifie leur existence sur **ce** poste, puis publie ceux qui pointent ailleurs. Chiffre : chemins
+absents 23 · chemins pointant sur un autre poste 11. v1 : extraction statique + test d'existence ;
+mois 2 : rapport par projet. [v1 7 j / total 13 j]
+
+06. **Cache-mort** — [T] · Frankenstein · Les caches occupent 28 Go et personne ne sait lequel est
+encore utilisé. Cache-mort mesure, dossier par dossier, le poids et la date du dernier accès des
+caches connus, et publie ceux qui n'ont pas servi depuis 90 jours. Chiffre : caches 28 Go · morts
+depuis 90 j 19 Go. v1 : inventaire des caches connus ; mois 2 : nettoyage avec vérification de
+reconstruction. [v1 6 j / total 12 j]
+
+07. **Mille-pattes** — [S] · Skeleton Crew · Le poste a 14 versions de Node, 3 de Python, 2 de Java ;
+chaque projet en utilise une, et « activer le bon » est un rituel. Mille-pattes lit la version
+demandée par chaque projet (`.nvmrc`, `pyproject.toml`, `.tool-versions`) et publie la matrice
+projet × version, avec les versions absentes. Chiffre : projets 9 · versions demandées 17 · manquantes 4.
+v1 : lecture des fichiers de version ; mois 2 : commande d'activation vérifiée. [v1 6 j / total 12 j]
+
+08. **Post-it** — [S] · Costume Contest · Le post-it sur le bureau : ce qu'on se dit à soi-même entre
+deux tâches. Post-it lit les notes du poste (fichiers `.todo`, notes de bureau exportées, TODO du
+code) et les regroupe par projet, avec l'âge de la plus ancienne. Chiffre : notes 34 · les plus
+anciennes 41 jours · sans rapport avec un projet 9. v1 : lecture des TODO et notes ; mois 2 :
+suggestions de promotion en ticket. [v1 5 j / total 10 j]
+
+09. **Hors-sol** — [T] · Frankenstein · Le poste fonctionne, mais il a perdu le réseau et le service
+local n'est pas lancé : la moitié des commandes échouent. Hors-sol vérifie, hors ligne, que les
+services dont le poste dépend (base locale, service de recherche, watcher) répondent, et publie ceux
+qui manquent. Chiffre : dépendances vérifiées 14 · en panne 3 · délai médian de réveil 4 s 200.
+v1 : sonde locale sur les ports attendus ; mois 2 : remise en route automatique. [v1 7 j / total 13 j]
+
+10. **Sur-branche** — [T] · Frankenstein · Le poste est sur une branche de travail depuis 19 jours, avec
+des modifications non commitées que personne ne veut relire. Sur-branche mesure l'ancienneté de la
+branche, l'écart avec la branche par défaut, et le nombre de fichiers modifiés non commités.
+Chiffre : branchesues 6 · jours d'ancienneté médians 19 · fichiers non commités 47. v1 : état git ;
+mois 2 : alerte au moment du changement de tâche. [v1 5 j / total 10 j]
+
+11. **Interdit** — [T] · Skeleton Crew · Un fichier est en `chmod 777` depuis six mois ; personne ne sait
+pourquoi, personne n'ose le corriger. Interdit liste les permissions trop larges du dépôt, montre
+qui les a changées (via l'historique) et propose le retour arrière. Chiffre : fichiers 777 4 ·
+changements de permission 2 · ancienneté moyenne 198 jours. v1 : scan du dépôt + historique ;
+mois 2 : garde-fou de commit. [v1 6 j / total 12 j]
+
+12. **Réveil** — [S] · Resurrection · Reprendre un poste après trois semaines : 47 fenêtre, 3 terminal,
+le contexte perdu. Réveil lit l'historique du shell et les journaux des outils, et produit un résumé de la
+dernière session : ce qui était en cours, ce qui a été modifié, ce qui n'a pas été fini. Chiffre :
+sessions résumées 12 · fichiers non commités rappelés 9 · décisions retrouvées 4. v1 : lecture de
+l'historique ; mois 2 : lien avec les tickets. [v1 6 j / total 12 j]
+
+13. **Relais** — [T] · Frankenstein · Un secret local doit être transmis à un CI, sans quitter la
+machine et sans entrer dans l'historique. Relais rend un secret à un processus enfant **une seule
+fois**, à la demande, sans l'écrire nulle part, et publie le nombre de fois où il a été transmis.
+Chiffre : secrets transmis 4 · écrits sur disque 0 · réutilisations autorisées 0. v1 : serveur local +
+client ; mois 2 : intégration CI. [v1 8 j / total 15 j]
+
+---
+
+# Lot G — L'interface comme problème d'ingénierie
+
+Filon : ce que le développeur voit à l'écran quand la donnée est **rare, lente, absente ou fausse**.
+Ni audit WCAG, ni « le bug visuel » (déjà faits). 13 idées, format de `/tmp/kiroween-spec.md`.
+
+01. **Écran-vide** — [T] · Frankenstein · L'état vide d'une page est écrit par le développeur qui
+imagine un cas rare : il met « Aucune donnée » dans une boîte grise. Écran-vide mesure, pour chaque
+état vide du produit, ce que l'utilisateur **fait** ensuite (chercher ? créer ? sortir ?) en rejouant
+les journaux d'usage, et publie le taux de sortie. Chiffre : états vides 14 · sans action 9 · taux de
+sortie 41 %. v1 : catalogue des états vides du code + journaux d'exemple ; mois 2 : mesure continue.
+[v1 8 j / total 16 j]
+
+### 01 · Écran-vide
+- **Chiffre mesuré** : `états vides 14 · sans action 9 · taux de sortie 41 %`, obtenu en croisant les
+  chaînes d'état vide du code (« aucune donnée », « aucun résultat ») avec les journaux d'usage, en
+  mesurant les actions suivantes et les sorties de page.
+- **Démo 30 s** : `ecran-vide audit demo/` affiche les 14 états vides du produit de démonstration, avec
+  la capture de chacun (rendus hors ligne dans le dépôt) et l'action la plus fréquente ; aucun compte,
+  aucun réseau, la démo tient dans le dépôt.
+- **Concurrent le plus proche** : les design systems (Material, Polaris) et les guides « empty state » ;
+  ils prescrivent **ce qu'il faut écrire** dans l'état vide. Écran-vide mesure **ce que l'utilisateur
+  fait** une fois qu'il l'a vu — et donc si l'état vide est une sortie.
+
+02. **Attente-vraie** — [T] · Frankenstein · Le spinner tourne 4 secondes ; l'utilisateur ne sait pas si
+ça travaille ou si c'est mort, il clique. Attente-vraie mesure le délai réel entre l'action et la
+réponse, et classe chaque attente en « utile » (la progression avance) ou « fausse » (rien ne bouge
+pendant X ms) — puis publie le temps d'attente cumulé. Chiffre : attentes 23 · fausses 11 · temps
+cumulé 3 min 41 s par session. v1 : instrumentation des actions ; mois 2 : correction des fausses
+attentes. [v1 8 j / total 15 j]
+
+03. **Double-clic** — [T] · Costume Contest · Un double-clic envoie deux fois la même écriture : le
+« payer deux fois » est réel (double achat, double ticket, double mail). Double-clic détecte les
+actions non idempotentes côté interface et mesure le nombre de doublons réellement envoyés. Chiffre :
+actions non idempotentes 7 · doublons observés 34 · euros perdus 212. v1 : liste des actions ;
+mois 2 : garde serveur. [v1 7 j / total 13 j]
+
+04. **À-croix** — [S] · Costume Contest · La croix de fermeture ferme un formulaire rempli sans
+demander. À-croix mesure ce qui se perd : les saisies abandonnées sans enregistrement, et propose la
+confirmation **seulement** dans les cas où il y a quelque chose à perdre. Chiffre : saisies perdues
+2 118 par mois · confirmations demandées inutilement 0 %. v1 : instrumentation ; mois 2 : détection du
+formulaire long. [v1 6 j / total 11 j]
+
+05. **Formulaire-muet** — [T] · Frankenstein · Le formulaire dit « enregistré » alors que la validation
+côté serveur a échoué : l'erreur arrive 4 secondes plus tard, ou jamais. Formulaire-muet compare ce que
+le formulaire **promet** (message de succès) à ce que le serveur a réellement répondu, et publie le
+nombre de faux succès. Chiffre : faux succès 1 sur 37 · erreurs affichées tard 4 s 200. v1 : capture
+des réponses ; mois 2 : analyse des journaux de formulaire. [v1 7 j / total 13 j]
+
+06. **Sombre** — [T] · Costume Contest · Le thème sombre « inversé » casse les contrastes : le gris
+devient noir sur noir. Sombre vérifie, en calculant le contraste réel de chaque paire texte/fond dans
+les deux thèmes, que rien ne passe sous 4,5:1, et publie les paires fautives — la photo à l'écran,
+c'est le avant/après. Chiffre : paires vérifiées 214 · sous 4,5:1 18 · pires 2,1:1. v1 : extraction
+des couleurs des feuilles de style ; mois 2 : contrôle à chaque commit. [v1 7 j / total 12 j]
+
+07. **Hors-ligne** — [T] · Frankenstein · L'interface marche quand le réseau marche, et le réseau ne
+marche pas dans le métro. Hors-ligne rejoue l'interface en coupant le réseau à chaque étape et
+publie les écrans qui restent utilisables (et ceux qui affichent une erreur crue). Chiffre : écrans
+testés 28 · utilisables hors ligne 11 · messages d'erreur crus 9. v1 : rejeu avec coupure réseau ;
+mois 2 : cache applicatif. [v1 8 j / total 15 j]
+
+08. **Perte-texte** — [T] · Frankenstein · On écrit 400 mots dans le formulaire de signalement, on
+change d'onglet, et le texte a disparu. Perte-texte mesure ce que l'interface conserve réellement
+quand le focus part, et publie le nombre de saisies perdues. Chiffre : champs sans sauvegarde 6 ·
+saisies perdues 1 904 par mois. v1 : rejeu du cycle focus/blur ; mois 2 : restauration. [v1 6 j / total 11 j]
+
+09. **Annulation** — [S] · Costume Contest · L'agent a fait une erreur, l'humain veut l'annuler : il
+n'y a pas de « ctrl+Z » dans une application web. Annulation publie, pour chaque action destructrice
+de l'interface, le délai pendant lequel elle reste annulable — et le propose en Teil. Chiffre :
+actions destructrices 12 · annulables 3 · délai moyen 1,8 s. v1 : catalogue des actions ;
+mois 2 : implémentation du retour arrière. [v1 6 j / total 12 j]
+
+10. **Trop-long** — [T] · Frankenstein · Le nom complet + l'e-mail + l'identifiant + le rôle dépassent
+la ligne : l'interface tronque, et l'utilisateur ne sait plus ce qu'il a choisi. Trop-long mesure les
+troncatures dans l'interface et publie le nombre de libellés dont l'information utile est coupée.
+Chiffre : libellés tronqués 14 · information perdue 38 %. v1 : rendu mesuré des écrans ;
+mois 2 : correction automatique. [v1 6 j / total 11 j]
+
+11. **Palette** — [T] · Skeleton Crew · Le même état est vert dans l'application et rouge dans le
+tableau de bord : deux palettes, deux vérités. Palette extrait toutes les couleurs sémantiques
+déclarées dans le code et dans les feuilles de style, et publie celles qui ne correspondent pas —
+avec le nombre d'écrans où la contradiction est visible. Chiffre : couleurs sémantiques 23 ·
+divergentes 6 · écrans concernés 11. v1 : extraction ; mois 2 : source unique. [v1 7 j / total 13 j]
+
+12. **Curseur** — [S] · Costume Contest · L'interface dit « enregistré » mais le bouton reste
+« enregistrer » : le doute s'installe. Curseur compare l'état affiché à l'état réel et publie le
+nombre de boutons qui mentent. Chiffre : boutons d'état 18 · menteurs 3. v1 : relecture des états ;
+mois 2 : correction. [v1 5 j / total 9 j]
+
+13. **Silence** — [T] · Frankenstein · Une action longue n'affiche rien et ne produit aucun son : le
+visiteur conclude que le site est mort et clique deux fois. Silence mesure les actions sans retour
+(visuel ou sonore) et publie le délai avant le premier signe de vie. Chiffre : actions sans retour 14 ·
+délai médian avant signe 1,2 s. v1 : catalogue des actions ; mois 2 : retours visuels. [v1 6 j / total 11 j]
+
+---
+
+# Lot H — La vie d'équipe sans KPI
+Filon : ce qui se perd entre deux personnes — pourquoi on a fait comme ça, ce qu'un nouveau met deux semaines à comprendre, la décision qui n'a nulle part, le doc qui ment. Angle : la mémoire des décisions et ce qu'elle coûte quand elle manque.
+01. **Rumeur** — [T] · Frankenstein · La doc affirme des valeurs (défauts, timeouts, ports, variables d'environnement, codes d'erreur) que le code a depuis abandonnées, et personne ne s'en aperçoit ; l'outil extrait chaque affirmation vérifiable des fichiers Markdown, la confronte à la source (code, configuration, valeurs par défaut) et publie la liste des rumeurs fausses. Chiffre : N affirmations fausses sur N affirmations vérifiables, avec le couple doc/code fautif. v1 : extraction des littéraux contraignants + confrontation au dépôt ; mois 2 : OpenAPI et JSON Schema, PR qui refuse une affirmation non vérifiée. [v1 6 j / total 14 j]
+
+### 01 · Rumeur
+- **Chiffre mesuré** : « N affirmations fausses sur N affirmations vérifiables », avec la liste des couples fautifs. L'extracteur tire des fichiers Markdown les littéraux contraignants : nombre suivi d'une unité (`30s`, `5 min`, `8080`), nom de variable d'environnement en majuscules, valeur de configuration par défaut, code HTTP ou code d'erreur ; chaque affirmation est confrontée au code et à la configuration du dépôt par résolution de symbole, et déclarée fausse si la valeur attendue n'apparaît nulle part, ou n'apparaît qu'avec une autre valeur pour le même symbole.
+- **Démo 30 s** : on clone un dépôt public, on lance `rumeur` : en trois secondes un tableau s'affiche à l'écran — « timeout → la doc dit 30 s (docs/api.md:42), le code dit 5 s (src/client.py:88) », « port → la doc dit 8080, le code dit 8000 » — puis le compteur « 3 fausses sur 17 vérifiables ». Aucun compte, aucun réseau, juste un binaire et le dépôt.
+- **Concurrent le plus proche** : les **doctests** (`doctest`, `make doctest` de Sphinx) et les **linters de prose** (Vale). Les doctests prouvent qu'un exemple *s'exécute*, pas qu'une phrase *est vraie* : ils ignorent les valeurs par défaut, les timeouts, les ports et les variables d'environnement, qui sont précisément ce que les lecteurs recopient. Écart structurel : l'outil garantit une **contradiction** (affirmation contre source, avec citation des deux côtés), là où les doctests garantissent une **exécution** et Vale un **style** ; aucun des deux ne peut dire « la doc affirme 30 s et le code fait 5 s ».
+
+02. **Palabre** — [T] · Frankenstein · La même décision se rediscute tous les six mois parce que personne n'a écrit pourquoi elle avait été prise ; l'outil détecte dans l'historique les sujets refermés puis rouverts (le même changement appliqué puis annulé, patch-id identique en négatif) et publie le nombre de sujets rouverts avec les révisions sacrifiées entre la première et la dernière occurrence. Chiffre : N sujets rouverts sur N sujets, et N révisions perdues. v1 : patch-id et détection d'inverse sur douze mois ; mois 2 : regroupement par sujet, PR et tickets, alerte à la deuxième ouverture. [v1 5 j / total 12 j]
+
+### 02 · Palabre
+- **Chiffre mesuré** : « N sujets rouverts sur N sujets, N révisions sacrifiées ». Chaque commit reçoit un `git patch-id --stable` ; un sujet est compté comme rouvert quand un patch appliqué plus tard porte exactement le patch-id *négatif* d'un patch antérieur (le même changement annulé puis refait), et les révisions sacrifiées sont les commits touchant les fichiers du sujet entre la première et la dernière occurrence.
+- **Démo 30 s** : `palabre --12m` sur un dépôt cloné affiche trois sujets avec leurs occurrences datées — « retry/backoff — 4 réouvertures de mars à novembre, 11 commits gaspillés » — et le compteur « 3 sujets rouverts sur 18 », chaque ligne ouvrant le diff correspondant. Aucun compte, aucun serveur, la première valeur tombe en moins de dix secondes.
+- **Concurrent le plus proche** : **`git log --grep`**, **`git bisect`** et les tableaux de bord GitHub qui comptent les PR revertées. `git log --grep` ne trouve que les commits dont le *message* contient un mot-clé (« parce que », « retour ») : la rediscussion sans trace écrite échappe au lexique, et à l'inverse un revert légitime passe pour une rediscussion. Écart structurel : l'identité de **patch** (patch-id positif/négatif) comme preuve, pas la similarité de texte ; le concurrent mesure des mots, l'outil mesure des changements de code refaits.
+
+03. **Quinzaine** — [T] · Frankenstein · Le temps qu'un nouveau met deux semaines à comprendre n'est qu'une impression : l'outil déduit de l'historique quels fichiers il faut lire pour toucher un module, additionne ce temps de lecture, puis vérifie si la décision qui gouverne chaque fichier est écrite quelque part dans le dépôt. Chiffre : N fichiers obligatoires, H heures de lecture cumulées, dont h heures de lecture dont la justification n'existe nulle part. v1 : co-modification par module sur un langage + recherche de justification ; mois 2 : parcours par rôle, quiz d'accueil, comparaison de cohortes. [v1 8 j / total 18 j]
+
+### 03 · Quinzaine
+- **Chiffre mesuré** : « N fichiers obligatoires, H heures de lecture, dont h heures sans justification dans le dépôt ». Les fichiers requis pour un module sont déduits de l'historique par co-modification : un fichier compte s'il a été modifié dans au moins 25 % des commits touchant le module (graphe de co-édition issu de `git log --name-only`) ; les heures valent Σ des lignes de code non commentaire ÷ 35 lignes par minute de lecture dense ; la part « sans justification » est celle des fichiers dont la raison (ADR, commentaire, message de commit) n'est trouvable ni dans le dépôt ni dans l'historique.
+- **Démo 30 s** : `quinzaine core/` affiche « 14 fichiers à lire, 3 h 20 de lecture, dont 1 h 50 de décisions introuvables », puis la liste des cinq décisions manquantes (module, fichier, ligne). Le dépôt cloné suffit : pas d'embauche à mesurer, pas d'enquête, pas de questionnaire à remplir.
+- **Concurrent le plus proche** : la mesure **« days to hello world » du SRE Workbook de Google** et les guides d'accueil (`CONTRIBUTING`, `docs/onboarding`). La mesure Google est *observée* : elle exige des nouveaux venus réels, un suivi manuel, et elle ne rend qu'un temps calendaire — elle ne dit pas **quoi** lire ni **ce qui manque**. Écart structurel : le coût est **calculé** à partir de l'historique du dépôt, reproductible sur n'importe quel dépôt, sans personne à recruter ; l'outil produit la liste des décisions à écrire, pas un chiffre à interpréter.
+
+04. **Vestige** — [T] · Frankenstein · Quand l'équipe renonce à une option, le code en garde parfois des morceaux, et la décision morte continue de faire tourner la production ; l'outil reconstruit les options écartées depuis l'historique (patch annulé, « on revient à ») puis cherche si l'option rejetée est toujours dans le code, et publie le nombre de vestiges. Chiffre : N options rejetées encore présentes sur N options rejetées, avec le commit qui les avait écartées et la ligne survivante. v1 : détection par patch-id inverse + recherche de résidus symboliques ; mois 2 : ADR croisés, rapport « ce qui traîne encore ». [v1 7 j / total 15 j]
+05. **Silence** — [T] · Frankenstein · Les décisions prises sans être écrites restent dans le code, sous forme de suppressions (`# noqa`, `@SuppressWarnings`, `except: pass`) et de constantes magiques ; l'outil les extrait, cherche si la justification existe ailleurs (message de commit, ADR, ticket) et publie le nombre de décisions muettes dont personne ne sait rendre compte. Chiffre : N suppressions ou constantes sans justification écrite sur N, dont M ont pourtant leur raison quelque part dans le dépôt (à copier). v1 : trois langages, motifs de suppression + recherche de la raison dans l'historique ; mois 2 : PR qui exige la justification en commentaire, classement par module. [v1 6 j / total 13 j]
+06. **Échéance** — [T] · Frankenstein · Une décision prise sous condition (« si le trafic dépasse 10k req/s, on reviendra ») reste appliquée même quand la condition est remplie, faute de savoir qu'il fallait y revenir ; l'outil confronte la condition inscrite dans la décision aux valeurs réelles du dépôt et publie les décisions dont l'échéance est dépassée. Chiffre : N décisions dont la condition est remplie sur N décisions datées, et l'ancienneté moyenne en jours. v1 : format « décision + condition mesurable » et lecture des valeurs du dépôt ; mois 2 : branchement sur métriques de production, échéancier dans le rapport de revue. [v1 6 j / total 13 j]
+07. **Divergence** — [T] · Frankenstein · Le même invariant codé deux fois se contredit en silence (secondes contre millisecondes, UTC contre heure locale, 3 retries contre 5) parce que les deux auteurs n'ont jamais parlé ; l'outil extrait les valeurs par unité et par concept et publie les paires contradictoires avec les deux fichiers fautifs. Chiffre : N paires contradictoires sur N valeurs comparées, et le nombre de modules qui divergent. v1 : extraction de littéraux annotés et normalisation d'unités, deux langages ; mois 2 : règles métier (devise, fuseau, format d'identifiant), garde-fou en PR. [v1 6 j / total 13 j]
+08. **Évitable** — [T] · Frankenstein · Certains incidents ont pour cause une règle que le dépôt contenait déjà ; l'outil relit les comptes rendus d'incident du dépôt et vérifie si la cause racine était déjà écrite (guide de contribution, configuration de lint, runbook, ADR) pour publier le nombre d'incidents qui n'auraient pas dû arriver. Chiffre : N incidents sur N dont la cause était déjà écrite, avec le fichier et la ligne de la règle ignorée. v1 : lecture d'un dossier `incidents/` en Markdown et recoupement avec les fichiers de règles ; mois 2 : import de tickets, proposition de règle manquante, courbe de progression. [v1 7 j / total 15 j]
+09. **Motif** — [S] · Frankenstein · Les changements sans raison écrite s'empilent en silence dans l'historique ; l'outil classe chaque commit selon qu'il porte un motif (message explicatif, trailer, ADR référencé, commentaire dans le diff) et publie la part des changements sans motif, ainsi que le nombre de motifs qui existent dans le dépôt sans être rattachés à leur changement. Chiffre : % de commits sans motif et N motifs orphelins trouvés ailleurs dans le dépôt. v1 : classification de messages et recoupement avec les ADR ; mois 2 : relief du ratio dans le temps, PR qui réclame le motif manquant. [v1 4 j / total 9 j]
+10. **Caveau** — [S] · Costume Contest · L'équipe enterre ses décisions abandonnées et les oublie, jusqu'à ce que quelqu'un réimplémente six mois plus tard ce qui avait été tué ; l'outil met au caveau chaque décision abandonnée (option écartée, hack remplacé, branche morte) et compte les résurrections : les décisions que le code a réimprimées moins d'un an après leur mise au caveau. Chiffre : N tombes, dont N résurrections (code réimprimé sous 365 jours), avec les deux dates. v1 : détection d'abandon par l'historique et rapport ; mois 2 : la pierre tombale écrite automatiquement dans le dépôt, alerte à la réimpression. [v1 5 j / total 12 j]
+11. **Fil rouge** — [S] · Costume Contest · À la revue, on voit ce qui change mais jamais pourquoi ; l'outil affiche dans le diff le fil qui relie chaque changement à la décision qui l'a produit — un tableau d'enquête, épingles et cordons — et le costume se retire pour ne laisser que le lien sourcé. Chiffre : N changements sans fil sur N, et N fils pointant vers une citation vérifiable (fichier:ligne). v1 : lecture des ADR et des commits, rendu du diff ; mois 2 : revendication d'une question ouverte dans la PR, horloge du fil. [v1 4 j / total 9 j]
+12. **Autopsie** — [T] · Resurrection · Le post-mortem existe pour les incidents, jamais pour les décisions : l'équipe vit des semaines avec un choix erroné parce que personne n'a osé le rouvrir ; l'outil remonte la chaîne cause → décision → réparation et publie le nombre de jours d'équipe vécus avec une décision caduque, puis la leçon écrite. Chiffre : N décisions retournées et N jours cumulés vécus avec la mauvaise décision. v1 : détection des inversions (revert, patch-id négatif, correctif d'incident) et calcul du délai ; mois 2 : compte rendu généré, revue mensuelle des décisions. [v1 7 j / total 16 j]
+13. **Sillon** — [T] · Skeleton Crew · Un squelette maigre de mémoire d'équipe — un index unique et déterministe (symboles, commits, documents) et deux applications qui le portent : un CLI « pourquoi c'est comme ça » qui répond avec une citation `fichier:ligne`, et un portique CI qui refuse un changement non trivial sans motif rattaché. Chiffre : N décisions indexées et % de changements rattachés à une citation. v1 : squelette plus les deux applications sur un dépôt réel ; mois 2 : troisième application (accueil du nouveau), export web du graphe. [v1 9 j / total 20 j]

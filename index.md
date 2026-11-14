@@ -1,4 +1,4 @@
-# Dossier Kiroween — 2 400 idées, quatre classements, quatorze cahiers
+# Dossier Kiroween — 2 504 idées, quatre classements, quatorze cahiers
 
 Dossier de travail ouvert du hackathon **Kiroween 2026** (Kiro, clôture des soumissions le
 4 décembre 2026, fin du jugement le 29 janvier 2027). Il contient tout ce qui a servi à choisir
@@ -21,6 +21,8 @@ charges complets dans **[Cahiers devs — 10](cahiers-devs.html)**.
 | **[Classement devs — 50](classement-devs.html)** | Les 50 meilleures idées pour un public 100 % développeur, notées sur la reconnaissance immédiate du problème, la profondeur technique, le chiffre mesuré et la démonstration. |
 | **[Cahiers devs — 10](cahiers-devs.html)** | Les dix premières développées en cahier des charges complet : problème exact, mécanique, exigences EARS, propriétés à tester, architecture, stratégie Kiro, plan de réalisation, script vidéo minuté, recette. |
 | [Idées · développeurs (1 000)](idees-devs.html) | Vingt filons techniques : outillage du quotidien, agents IA, données, sécurité, performance, tests, exploitation, langages, legacy, API, Git, interface, local d'abord, mesure, documentation, diagnostic, déploiement, architecture, CLI, coût. Chaque idée est marquée **[T]** technique ou **[S]** simple. |
+| **[Idées · vague du 13 nov. (104)](idees-vague-nov.html)** | La cinquième vague, huit filons nouveaux : mémoire d'agent, données qui changent de forme, ordre temporel, réseau, données des modèles, poste de travail, interface, vie d'équipe. |
+| **[Classement · vague du 13 nov.](vague-nov-classement.html)** | Les **deux classements indépendants** des 104 idées (juge aveugle sur la grille du jury, juge strict avec les 120 objections), le top 10 par moyenne, et les cinq défauts récurrents **comptés** sur les fiches : +8,45 points d'écart entre les deux juges, même ordre (ρ = 0,774). |
 | [Classement usage — 39](classement-usage.html) | Le classement précédent : 75 points sur 100 venaient de la réalité de l'usage (obligations légales, argent, fréquence). Toujours valable pour un public non développeur. |
 | [Classement 2 mois — 39](classement-2mois.html) | L'étape intermédiaire, à l'horizon deux mois mais encore dominée par l'élégance technique. |
 | [Classement technique — 39](classement-technique.html) | Le premier classement, à l'échelle d'une semaine. Conservé pour la traçabilité. |
@@ -120,6 +122,10 @@ rigueur du juge**, et l'écart résiduel vers 100 est du code, pas du texte.
 - **Vague 3** — recentrage sur les obligations légales des publics non développeurs : **250 idées**.
 - **Vague 4** — recentrage sur le public réel du concours, les développeurs : **1 000 idées** sur vingt
   filons techniques, plus les dix cahiers des charges des dix premières, et douze nouveaux entrants relevés après coup.
+- **Vague 5** — huit filons ouverts après le classement : mémoire d'agent, données qui changent de forme,
+  ordre temporel, réseau, données des modèles, poste de travail, interface, vie d'équipe :
+  **104 idées**, notées par deux juges indépendants dont les deux classements sont publiés
+  ([vague du 13 nov.](idees-vague-nov.html)).
 
 Chaque idée tient en une ligne avec son utilisateur, sa douleur, le chiffre mesuré et sa charge estimée
 en jours-agent. Les doublons avec les sept projets déjà soumis au concours sont écartés à la génération.

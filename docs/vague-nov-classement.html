@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Classement · vague du 13 nov. — Dossier Kiroween — Hackathon 2026</title>
+<style>
+:root{--fg:#e8e6e3;--bg:#111014;--card:#1b1a20;--acc:#e08b3c;--acc2:#8fd3c7;
+ --mut:#9b968f;--bd:#2c2a33}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+ font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+header{padding:1.4rem 1.2rem;border-bottom:1px solid var(--bd);background:var(--card)}
+header h1{margin:0;font-size:1.25rem}
+header p{margin:.3rem 0 0;color:var(--mut);font-size:.9rem}
+nav{display:flex;flex-wrap:wrap;gap:.4rem;padding:.8rem 1.2rem;border-bottom:1px solid var(--bd)}
+nav a{color:var(--mut);text-decoration:none;font-size:.85rem;padding:.3rem .6rem;
+ border:1px solid var(--bd);border-radius:999px}
+nav a:hover{color:var(--fg)}
+nav a.actif{color:#111014;background:var(--acc);border-color:var(--acc);font-weight:600}
+main{padding:1.2rem;max-width:64rem;margin:0 auto}
+main h1{font-size:1.6rem;border-bottom:1px solid var(--bd);padding-bottom:.4rem}
+main h2{font-size:1.25rem;margin-top:2rem;color:var(--acc)}
+main h3{font-size:1.05rem;margin-top:1.6rem;color:var(--acc2)}
+a{color:var(--acc2)}
+code{background:#0c0b0f;padding:.1rem .35rem;border-radius:4px;font-size:.88em}
+pre{background:#0c0b0f;padding:.9rem;border-radius:8px;overflow-x:auto;border:1px solid var(--bd)}
+pre code{background:none;padding:0}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.9rem;display:block;overflow-x:auto}
+th,td{border:1px solid var(--bd);padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{background:var(--card);white-space:nowrap}
+blockquote{border-left:3px solid var(--acc);margin:1rem 0;padding:.2rem 1rem;color:var(--mut)}
+hr{border:0;border-top:1px solid var(--bd);margin:2rem 0}
+footer{padding:1.2rem;color:var(--mut);font-size:.85rem;border-top:1px solid var(--bd);text-align:center}
+@media (prefers-reduced-motion:no-preference){nav a{transition:color .15s,background .15s}}
+</style>
+</head>
+<body>
+<header>
+<h1>Dossier Kiroween — Hackathon 2026</h1>
+<p>2 504 idées, quatre classements, douze idées passées au banc d'attaque, quatorze cahiers des charges.</p>
+</header>
+<nav>
+<a href="index.html">Accueil</a>
+<a href="classement-usage.html">Classement usage — 39</a>
+<a href="classement-2mois.html">Classement 2 mois — 39</a>
+<a href="classement-technique.html">Classement technique — 39</a>
+<a href="idees-usage.html">Idées · usage réel (250)</a>
+<a href="idees-2mois.html">Idées · horizon 2 mois (400)</a>
+<a href="idees-semaine.html">Idées · 15 filons (750)</a>
+<a href="idees-devs.html">Idées · développeurs (1 000)</a>
+<a href="classement-devs.html">Classement devs — 50</a>
+<a href="grille-100.html">La barre des 100</a>
+<a href="boucle-100.html">Attaques et fiches V2</a>
+<a href="cahiers-devs.html">Cahiers devs — 10</a>
+<a href="rejeu-construit.html">Rejeu — construit</a>
+<a href="idees-vague-nov.html">Idées · vague du 13 nov. (104)</a>
+<a href="vague-nov-classement.html" class="actif">Classement · vague du 13 nov.</a>
+<a href="disquette.html">Cahier · Disquette</a>
+<a href="rota.html">Cahier · Rota</a>
+<a href="partie-double.html">Cahier · Partie double</a>
+<a href="seance.html">Cahier · Séance</a>
+<a href="cadre.html">Cadre du concours</a>
+<a href="consigne.html">Consigne de génération</a>
+<a href="grille.html">Grille de notation</a>
+</nav>
+<main>
+<h1 id="classement-de-la-vague-du-13-novembre-deux-juges-independants">Classement de la vague du 13 novembre — deux juges indépendants</h1>
+<p>Les <strong>104 idées</strong> de la vague du 13 novembre ont été notées par deux agents qui ne se
+sont pas lus et qui n'ont pas accès au même document :</p>
+<ul>
+<li><strong>Juge A — juge aveugle</strong> : ne lit que <code>grille-100.md</code> (la grille du jury : Impact /25,
+  Kiro /15, Design /20, Innovation /20, Présentation /20) et les fiches. Aucune attaque,
+  aucun classement antérieur.</li>
+<li><strong>Juge B — juge strict</strong> : lit <code>grille-notation.md</code> (Impact /25, Innovation /20,
+  Faisabilité /20, Démonstrabilité /20, Potentiel Kiro /15, avec malus et bonus) <strong>et</strong>
+  les 120 objections déjà portées contre le corpus dans <code>boucle-100.md</code>.</li>
+</ul>
+<p>Chaque juge a rendu un top 15, un top 3 par lot et cinq défauts récurrents. Les deux
+classements sont publiés ci-dessous <strong>tels quels</strong>, sans fusion préalable ni effacement.</p>
+<h2 id="ce-que-le-croisement-apprend">Ce que le croisement apprend</h2>
+<p><strong>22 idées ont été notées par les deux juges.</strong> Leur désaccord porte sur le <strong>niveau</strong>,
+leur accord sur l'<strong>ordre</strong> :</p>
+<table>
+<thead>
+<tr>
+<th>Mesure</th>
+<th>Valeur</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Écart moyen de note (juge B − juge A)</td>
+<td><strong>+8,45 points</strong></td>
+</tr>
+<tr>
+<td>Corrélation de rang (ρ de Spearman, 22 idées)</td>
+<td><strong>0,774</strong></td>
+</tr>
+<tr>
+<td>Plus grand déplacement de rang</td>
+<td>10 places (<strong>Doute</strong> : 6ᵉ chez A, 16ᵉ chez B)</td>
+</tr>
+<tr>
+<td>Idées au-dessus de 85</td>
+<td><strong>0</strong> chez les deux juges</td>
+</tr>
+<tr>
+<td>Moyenne du top du juge A</td>
+<td>69,7 (max 74)</td>
+</tr>
+<tr>
+<td>Moyenne du top du juge B</td>
+<td>79,2 (max 84)</td>
+</tr>
+</tbody>
+</table>
+<p>Le juge à qui l'on demandait la plus grande sévérité a fini <strong>8,45 points au-dessus</strong> de
+l'autre en moyenne. La raison n'est pas l'humeur du modèle, c'est la <strong>grille</strong> : le juge
+aveugle notait sur les critères du jury (Design et Présentation, où un artefact manquant
+coûte cher), le juge strict sur une grille où Faisabilité et Démontrabilité pèsent
+davantage et où le périmètre « 8 jours-agent » est crédité. <strong>Deux grilles différentes sur
+des fiches identiques produisent un décalage systématique et un ordre proche.</strong> C'est la
+même leçon que la fiche Reprise jugée trois fois (45, 62, 78) : la note est un avis
+conditionné par la grille, pas une mesure.</p>
+<p>Ce qui ne bouge pas d'un juge à l'autre :</p>
+<ul>
+<li><strong>Aucune idée au-dessus de 85.</strong> Le plafond de la boucle « 100/100 » tient sur un corpus
+  de 104 fiches écrites, non sur les quatre seules fiches V2.</li>
+<li><strong>Le lot H est coiffé en dessous de tous les autres</strong> (66–68 chez les deux juges) pour
+  la même raison : ses chiffres sont écrits « N sur N », c'est-à-dire une promesse de
+  mesure, pas une mesure.</li>
+<li><strong>Les trois mêmes lots dominent</strong> (A, C, E) avec les mêmes idées en tête.</li>
+</ul>
+<h2 id="top-10-par-moyenne-des-deux-juges">Top 10 par moyenne des deux juges</h2>
+<table>
+<thead>
+<tr>
+<th>Rang</th>
+<th>Moy.</th>
+<th>Idée</th>
+<th>Lot</th>
+<th>Juge A</th>
+<th>Juge B</th>
+<th>Nerf</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>78,0</strong></td>
+<td><strong>Tampon</strong></td>
+<td>A</td>
+<td>73</td>
+<td>83</td>
+<td>Compare-and-swap au niveau du fichier : l'écrivain a-t-il <em>lu la même version</em>, et non seulement « écrit en premier ». <code>flock</code> et <code>git index.lock</code> ne répondent pas à cette question.</td>
+</tr>
+<tr>
+<td>1</td>
+<td><strong>78,0</strong></td>
+<td><strong>Mirage</strong></td>
+<td>E</td>
+<td>74</td>
+<td>82</td>
+<td>Mute l'attendu et rejoue l'assertion sur des sorties déjà enregistrées : <strong>zéro modèle appelé</strong>, donc la démo ne peut pas échouer en direct.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>77,5</strong></td>
+<td><strong>Suintement</strong></td>
+<td>E</td>
+<td>71</td>
+<td>84</td>
+<td>Audite l'éval et non l'entraînement, et <strong>refuse de publier un score</strong> (code sortie 3) — ce que ni <code>datatrove</code> ni <code>cleanlab</code> ne font.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>76,5</strong></td>
+<td><strong>Dérobade</strong></td>
+<td>C</td>
+<td>70</td>
+<td>83</td>
+<td>Mesure la fenêtre de perte en exécutant deux clients concurrents : 214 écritures perdues sur 1 000, puis 0 avec le correctif.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>75,5</strong></td>
+<td><strong>Contretemps</strong></td>
+<td>C</td>
+<td>71</td>
+<td>80</td>
+<td>Croise deux lignes du temps (migrations × déploiements) que ni Flyway ni Liquibase ne possèdent ; fenêtre rouge de 98 min à l'écran.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>75,5</strong></td>
+<td><strong>Cicatrice</strong></td>
+<td>A</td>
+<td>70</td>
+<td>81</td>
+<td>Mine les échecs des journaux au lieu de les déclarer (<code>CLAUDE.md</code>, <code>AGENTS.md</code>) et publie son propre taux de rappel inutile.</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>73,5</strong></td>
+<td><strong>Périmètre</strong></td>
+<td>E</td>
+<td>69</td>
+<td>78</td>
+<td>Couverture de la surface <em>nommée</em> par les cas : une eval LLM n'exécute aucune ligne de production, donc <code>pytest-cov</code> est aveugle.</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>73,5</strong></td>
+<td><strong>Pendule</strong></td>
+<td>A</td>
+<td>68</td>
+<td>79</td>
+<td>Un rappel n'est compté que s'il est ancré sur un commit réel ; la re-litigation est détectée, ce qu'un ADR écrit à la main ne fait pas.</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>73,0</strong></td>
+<td><strong>Contreseing</strong></td>
+<td>C</td>
+<td>69</td>
+<td>77</td>
+<td>Journal d'ordres append-only : le CDC (Debezium) est aveugle à un producteur qui publie avant d'écrire.</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>73,0</strong></td>
+<td><strong>Colonne-vide</strong></td>
+<td>B</td>
+<td>68</td>
+<td>78</td>
+<td>Mesure l'inactivité (taux de remplissage, dernière écriture) là où <code>pg_stat_statements</code> mesure l'écart.</td>
+</tr>
+</tbody>
+</table>
+<p>Les dix premières sont toutes des <strong>Frankenstein</strong> ou des outils à <strong>garantie
+structurelle</strong> (une propriété que le concurrent ne peut pas énoncer), jamais une
+amélioration de degré. Aucune n'est un Costume Contest.</p>
+<h2 id="juge-a-aveugle-grille-du-jury">Juge A — aveugle, grille du jury</h2>
+<table>
+<thead>
+<tr>
+<th>Rang</th>
+<th>Note</th>
+<th>Lot</th>
+<th>Idée</th>
+<th>Détail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>74</td>
+<td>E</td>
+<td><strong>Mirage</strong></td>
+<td>I:15 K:13 D:15 In:17 P:14 — boucle problème/garantie la plus serrée du corpus.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>73</td>
+<td>A</td>
+<td><strong>Tampon</strong></td>
+<td>I:14 K:13 D:15 In:16 P:15 — démo replay hors ligne impeccable ; « 2 sur 37 » reste revendiqué sans dépôt.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>71</td>
+<td>C</td>
+<td><strong>Contretemps</strong></td>
+<td>I:15 K:13 D:14 In:16 P:13 — garantie nette, mais v1 à 10 j contredit la friction nulle.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>71</td>
+<td>E</td>
+<td><strong>Suintement</strong></td>
+<td>I:15 K:13 D:14 In:16 P:13 — 34/200 annoncé sans artefact.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>70</td>
+<td>C</td>
+<td><strong>Dérobade</strong></td>
+<td>I:15 K:13 D:14 In:15 P:13 — chiffre affirmé, aucun corpus réel nommé.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>70</td>
+<td>D</td>
+<td><strong>Doute</strong></td>
+<td>I:15 K:12 D:14 In:16 P:13 — la démo repose sur un banc construit, pas livré.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>70</td>
+<td>A</td>
+<td><strong>Cicatrice</strong></td>
+<td>I:14 K:13 D:13 In:16 P:14 — « 7/12 » sur 30 sessions rejouées sans journal.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>69</td>
+<td>C</td>
+<td><strong>Contreseing</strong></td>
+<td>I:14 K:12 D:13 In:16 P:14 — 24 j de total pèsent sur la faisabilité.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>69</td>
+<td>B</td>
+<td><strong>Remplissage</strong></td>
+<td>I:15 K:12 D:14 In:15 P:13 — la fenêtre « 6 min 12 s » vient d'un rejouage non spécifié.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>69</td>
+<td>E</td>
+<td><strong>Périmètre</strong></td>
+<td>I:14 K:13 D:14 In:15 P:13 — la frontière « cas mentionne l'entrée » reste fragile.</td>
+</tr>
+<tr>
+<td>11</td>
+<td>68</td>
+<td>D</td>
+<td><strong>Éventail</strong></td>
+<td>I:14 K:12 D:14 In:15 P:13 — 30 j et un serveur de test qui fabrique la variation visée.</td>
+</tr>
+<tr>
+<td>12</td>
+<td>68</td>
+<td>D</td>
+<td><strong>Bassin</strong></td>
+<td>I:14 K:12 D:14 In:15 P:13 — le cimetière de sockets est du costume.</td>
+</tr>
+<tr>
+<td>13</td>
+<td>68</td>
+<td>G</td>
+<td><strong>Écran-vide</strong></td>
+<td>I:14 K:12 D:14 In:15 P:13 — « 41 % de sortie » sans journal d'usage source.</td>
+</tr>
+<tr>
+<td>14</td>
+<td>68</td>
+<td>B</td>
+<td><strong>Colonne-vide</strong></td>
+<td>I:14 K:12 D:14 In:15 P:13 — concurrents « pt-fingerprint, dejodupe » invérifiables.</td>
+</tr>
+<tr>
+<td>15</td>
+<td>67</td>
+<td>H</td>
+<td><strong>Palabre</strong></td>
+<td>I:14 K:12 D:12 In:17 P:12 — meilleure innovation du lot, note coiffée par « N sur N ».</td>
+</tr>
+</tbody>
+</table>
+<h2 id="juge-b-strict-grille-de-notation-120-objections">Juge B — strict, grille de notation + 120 objections</h2>
+<table>
+<thead>
+<tr>
+<th>Rang</th>
+<th>Note</th>
+<th>Lot</th>
+<th>Idée</th>
+<th>Détail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>84</td>
+<td>E</td>
+<td><strong>Suintement</strong></td>
+<td>I:21 In:17 F:16 D:17 K:13 — démo « aucun compte, aucun réseau, aucune clé ».</td>
+</tr>
+<tr>
+<td>2</td>
+<td>83</td>
+<td>C</td>
+<td><strong>Dérobade</strong></td>
+<td>I:21 In:16 F:16 D:17 K:13 — avant/après mesuré, base embarquée dans le dépôt.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>83</td>
+<td>A</td>
+<td><strong>Tampon</strong></td>
+<td>I:20 In:17 F:16 D:17 K:13 — « 2 refusées sur 37, +1,4 ms » rejouable hors ligne.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>82</td>
+<td>E</td>
+<td><strong>Mirage</strong></td>
+<td>I:19 In:18 F:16 D:16 K:13 — rare dans le corpus : la démo ne peut pas échouer en direct.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>81</td>
+<td>A</td>
+<td><strong>Cicatrice</strong></td>
+<td>I:20 In:17 F:15 D:16 K:13 — la leçon est extraite, pas déclarée.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>80</td>
+<td>C</td>
+<td><strong>Contretemps</strong></td>
+<td>I:21 In:16 F:15 D:15 K:13 — le journal NDJSON doit exister chez l'utilisateur.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>79</td>
+<td>B</td>
+<td><strong>Clé-absente</strong></td>
+<td>I:20 In:15 F:16 D:15 K:13 — causalité (contrainte absente), pas nettoyage à posteriori.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>79</td>
+<td>A</td>
+<td><strong>Pendule</strong></td>
+<td>I:19 In:16 F:15 D:15 K:14 — normalisation des questions = angle mort assumé.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>78</td>
+<td>B</td>
+<td><strong>Colonne-vide</strong></td>
+<td>I:20 In:15 F:16 D:14 K:13 — la démo v1 tourne sans base.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>78</td>
+<td>E</td>
+<td><strong>Périmètre</strong></td>
+<td>I:19 In:16 F:15 D:15 K:13 — « 47 entrées sur 152 (31 %) » frappe juste.</td>
+</tr>
+<tr>
+<td>11</td>
+<td>77</td>
+<td>C</td>
+<td><strong>Contreseing</strong></td>
+<td>I:19 In:16 F:14 D:15 K:13 — deux brokers simulés en local, point fragile.</td>
+</tr>
+<tr>
+<td>11</td>
+<td>77</td>
+<td>F</td>
+<td><strong>Home</strong></td>
+<td>I:20 In:13 F:16 D:14 K:11 (+5 non-dev, imprimable) — innovation d'agrégation.</td>
+</tr>
+<tr>
+<td>13</td>
+<td>76</td>
+<td>A</td>
+<td><strong>Feinte</strong></td>
+<td>I:19 In:15 F:17 D:14 K:11 — plus petit noyau du corpus, portée étroite.</td>
+</tr>
+<tr>
+<td>13</td>
+<td>76</td>
+<td>D</td>
+<td><strong>Éventail</strong></td>
+<td>I:19 In:16 F:14 D:15 K:12 — la v1 doit tenir sans le mode multi-point.</td>
+</tr>
+<tr>
+<td>15</td>
+<td>75</td>
+<td>C</td>
+<td><strong>Injoignable</strong></td>
+<td>I:19 In:15 F:14 D:15 K:12 — la discipline d'acquittement prouvée par panne.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="top-3-par-lot-chez-chaque-juge">Top 3 par lot, chez chaque juge</h2>
+<table>
+<thead>
+<tr>
+<th>Lot</th>
+<th>Juge A</th>
+<th>Juge B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A — agent de code</td>
+<td>Tampon 73 · Cicatrice 70 · Pendule 68</td>
+<td>Tampon 83 · Cicatrice 81 · Pendule 79</td>
+</tr>
+<tr>
+<td>B — donnée qui change de forme</td>
+<td>Remplissage 69 · Colonne-vide 68 · Clé-absente 66</td>
+<td>Clé-absente 79 · Colonne-vide 78 · Remplissage 76</td>
+</tr>
+<tr>
+<td>C — le temps</td>
+<td>Contretemps 71 · Dérobade 70 · Contreseing 69</td>
+<td>Dérobade 83 · Contretemps 80 · Contreseing 77</td>
+</tr>
+<tr>
+<td>D — le réseau</td>
+<td>Doute 70 · Éventail 68 · Bassin 68</td>
+<td>Éventail 76 · Doute 74 · Rafale 72</td>
+</tr>
+<tr>
+<td>E — données des modèles</td>
+<td>Mirage 74 · Suintement 71 · Périmètre 69</td>
+<td>Suintement 84 · Mirage 82 · Périmètre 78</td>
+</tr>
+<tr>
+<td>F — le poste</td>
+<td>Home 65 · Relais 63 · Secret-partagé 62</td>
+<td>Home 77 · Secret-partagé 73 · Chemin-mort 72</td>
+</tr>
+<tr>
+<td>G — l'interface</td>
+<td>Écran-vide 68 · Double-clic 63 · Perte-texte 62</td>
+<td>Écran-vide 75 · Double-clic 72 · Perte-texte 71</td>
+</tr>
+<tr>
+<td>H — vie d'équipe</td>
+<td>Palabre 67 · Rumeur 66 · Quinzaine 64</td>
+<td>Rumeur 68 · Palabre 67 · Quinzaine 66</td>
+</tr>
+</tbody>
+</table>
+<p>Trois lots se détachent chez <strong>les deux</strong> juges : A, C, E. Deux s'effondrent chez <strong>les
+deux</strong> : F et G (aucune idée au-dessus de 77, parce que 12 idées sur 13 y sont sans fiche
+détaillée) et H (coiffé à 68 par le chiffre « N sur N »).</p>
+<h2 id="les-cinq-defauts-recurrents-comptes-dans-le-fichier">Les cinq défauts récurrents, comptés dans le fichier</h2>
+<p>Les deux juges ont listé cinq défauts chacun. Recoupés et <strong>comptés à la main sur les 104
+fiches</strong> (et non estimés par le juge) :</p>
+<table>
+<thead>
+<tr>
+<th>Défaut</th>
+<th>Idées touchées</th>
+<th>Preuve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chiffre écrit « N sur N » (promesse de mesure, pas une mesure)</td>
+<td><strong>16</strong></td>
+<td>les <strong>13 du lot H</strong> (tous), plus Bobine (A), Éventail et Rafale (D)</td>
+</tr>
+<tr>
+<td>Fiche sans « chiffre mesuré / démo 30 s / concurrent nommé »</td>
+<td><strong>84 sur 104</strong></td>
+<td>20 fiches détaillées seulement ; lots F et G n'en ont <strong>qu'une</strong> chacun, non trois</td>
+</tr>
+<tr>
+<td>Périmètre total ≥ 30 jours-agent</td>
+<td><strong>13</strong></td>
+<td>les 13 du lot D — la v1 est crédible, le chiffre promis arrive au mois 2</td>
+</tr>
+<tr>
+<td>v1 ≥ 9 jours-agent (contre la promesse « 8 jours »)</td>
+<td><strong>20</strong></td>
+<td>concentrée sur les lots C et D</td>
+</tr>
+<tr>
+<td>Métaphore décorative (retirez-la, l'outil n'est ni meilleur ni différent)</td>
+<td><strong>~18 sur 19</strong></td>
+<td>le juge B qualifie presque tout <strong>Costume Contest</strong> — l'idée en contient 19 : Perfo, Reliquaire, Bassin, Ballon, Ronde, Ouroboros, Orphelin, Caveau, Fil rouge, Post-it, Entre-deux, Doublure… Malus −10 appliqué.</td>
+</tr>
+</tbody>
+</table>
+<p>Et <strong>un défaut du dossier lui-même</strong>, trouvé par le juge strict : la page annonce que
+« Bobine » a été retirée de la liste comme renommage de <em>Rejeu</em> — <strong>elle y est toujours</strong>
+(lot A, idée 05). Le juge B lui applique le malus −20 de doublon ; le juge A ne la
+mentionne pas dans son top. La contradiction est corrigée dans la page d'origine :
+l'idée est conservée et marquée comme doublon assumé de <em>Rejeu</em>, avec le malus écrit en
+clair, au lieu d'être annoncée retirée.</p>
+<h2 id="ce-que-ca-change-pour-la-suite">Ce que ça change pour la suite</h2>
+<ul>
+<li><strong>Rien au podium</strong> : les trois mêmes idées (Tampon, Mirage, Suintement) gagnent chez les
+  deux juges, avec ou sans accès aux 120 objections. Le classement devs antérieur
+  (Chemin-fantôme 95 → 59 chez un juge) ne se répète pas ici : les fiches de cette vague
+  étaient déjà écrites contre la grille, pas contre l'enthousiasme.</li>
+<li><strong>Le levier le plus rentable n'est pas une nouvelle idée</strong> : 84 fiches sur 104 n'ont ni
+  démo de 30 s, ni concurrent nommé, ni limite honnête. Les écrire ferait bouger plus de
+  notes que n'importe quel ajout d'idées.</li>
+<li><strong>Le lot H ne sera pas construit tel quel</strong> : ses 13 chiffres sont des « N sur N ». Avant
+  d'en bâtir un, il faut un dépôt réel à mesurer — c'est du code, pas de la fiche.</li>
+</ul>
+</main>
+<footer>Généré depuis les sources Markdown du dépôt, vérifié sans dérive en CI. Licence MIT.</footer>
+</body>
+</html>
